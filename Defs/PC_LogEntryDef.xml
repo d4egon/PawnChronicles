@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    LogEntryDef for ember consequence work incidents.
+    PC_LogEntry is instantiated directly from C# - LogEntryDef in 1.6 does not
+    have a logEntryClass field, so no class binding goes here.
+    The def exists purely so PC_LogEntry can call base(DefDatabase<LogEntryDef>
+    .GetNamedSilentFail("PC_WorkIncident")) for a clean label.
+  -->
+  <Verse.LogEntryDef>
+    <defName>PC_WorkIncident</defName>
+    <label>Work incident</label>
+  </Verse.LogEntryDef>
+
+</Defs>

@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    ═══════════════════════════════════════════════════════════════════════════
+    PC_HediffDefs - Narrative Hediffs
+    ═══════════════════════════════════════════════════════════════════════════
+
+    These hediffs are applied by arc stages and incidents to give arcs ongoing
+    mechanical weight between stages. They are not wounds - they are conditions.
+    Some fade on their own. Some require the arc to resolve them.
+
+    Applied via:
+      <onStartIncident><type>HediffApply</type><hediffDef>PC_Hediff_Haunted</hediffDef></onStartIncident>
+    Removed via:
+      <onStartIncident><type>HediffRemove</type><hediffDef>PC_Hediff_Haunted</hediffDef></onStartIncident>
+
+    All use HediffComp_NarrativePulse for periodic thought injection.
+    ═══════════════════════════════════════════════════════════════════════════
+  -->
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       PC_Hediff_Haunted
+       "Something followed them home from the ruins."
+       Fades slowly on its own. Pulses dread thoughts. At high severity can
+       trigger sad wandering. Arc removal gives a relief thought.
+  ─────────────────────────────────────────────────────────────────────────── -->
+  <HediffDef>
+    <defName>PC_Hediff_Haunted</defName>
+    <label>haunted</label>
+    <labelNoun>a haunting</labelNoun>
+    <description>Something followed this pawn back from wherever they went. A presence - not quite a ghost, not quite a memory. It watches. It waits. It does not appear to mean anything specific by it.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+    <initialSeverity>0.25</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>uneasy</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets></statOffsets>
+      </li>
+      <li>
+        <label>followed</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets></statOffsets>
+      </li>
+      <li>
+        <label>overwhelmed</label>
+        <minSeverity>0.7</minSeverity>
+        <statOffsets></statOffsets>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.05</offset></li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Verse.HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.04</severityPerDay>
+      </li>
+      <li Class="PawnChronicles.HediffCompProperties_NarrativePulse">
+        <mtbDaysBetweenThoughts>1.5</mtbDaysBetweenThoughts>
+        <thoughtDefs>
+          <li>PC_Thought_HauntedUnease</li>
+          <li>PC_Thought_HauntedDread</li>
+        </thoughtDefs>
+        <mentalStateDef>Wander_Sad</mentalStateDef>
+        <mentalStateMinSeverity>0.65</mentalStateMinSeverity>
+        <mentalStateMtbDays>6</mentalStateMtbDays>
+        <recoveryThoughtDef>PC_Thought_HauntedLifted</recoveryThoughtDef>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       PC_Hediff_VoidEcho
+       "They looked at something they shouldn't have."
+       A psychic imprint from a place, wreckage, or experience of deep wrongness.
+       Heightens psychic sensitivity. Fades slowly. Pulses intrusive memories.
+  ─────────────────────────────────────────────────────────────────────────── -->
+  <HediffDef>
+    <defName>PC_Hediff_VoidEcho</defName>
+    <label>void echo</label>
+    <labelNoun>a void echo</labelNoun>
+    <description>Something looked back. Whatever this pawn saw in that place - deep ruins, an old crash site, something that should not have been there - left a resonance behind. The void does not forget faces.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+    <initialSeverity>0.3</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>distant</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.1</PsychicSensitivity>
+        </statOffsets>
+      </li>
+      <li>
+        <label>vivid</label>
+        <minSeverity>0.45</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.2</PsychicSensitivity>
+        </statOffsets>
+      </li>
+      <li>
+        <label>consuming</label>
+        <minSeverity>0.75</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.35</PsychicSensitivity>
+        </statOffsets>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.08</offset></li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Verse.HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.03</severityPerDay>
+      </li>
+      <li Class="PawnChronicles.HediffCompProperties_NarrativePulse">
+        <mtbDaysBetweenThoughts>2</mtbDaysBetweenThoughts>
+        <thoughtDefs>
+          <li>PC_Thought_VoidMemory</li>
+        </thoughtDefs>
+        <mentalStateDef>Wander_Psychically</mentalStateDef>
+        <mentalStateMinSeverity>0.6</mentalStateMinSeverity>
+        <mentalStateMtbDays>7</mentalStateMtbDays>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       PC_Hediff_StarFever
+       "The sky won't leave their mind."
+       Obsession with what's above the atmosphere. Could be a crashed ship,
+       an orbital encounter, an old life. Wander urge builds at high severity.
+  ─────────────────────────────────────────────────────────────────────────── -->
+  <HediffDef>
+    <defName>PC_Hediff_StarFever</defName>
+    <label>star fever</label>
+    <labelNoun>star fever</labelNoun>
+    <description>The sky won't stop pulling at this pawn. Whatever happened up there - or whatever they lost to it - has left a compulsion they can't fully ignore. They keep looking up. They keep thinking about leaving.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+    <initialSeverity>0.2</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>restless</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets></statOffsets>
+      </li>
+      <li>
+        <label>yearning</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <GlobalLearningFactor>0.1</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+      <li>
+        <label>burning</label>
+        <minSeverity>0.7</minSeverity>
+        <statOffsets></statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Verse.HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.025</severityPerDay>
+      </li>
+      <li Class="PawnChronicles.HediffCompProperties_NarrativePulse">
+        <mtbDaysBetweenThoughts>1.8</mtbDaysBetweenThoughts>
+        <thoughtDefs>
+          <li>PC_Thought_StarCall</li>
+        </thoughtDefs>
+        <mentalStateDef>Wander_Sad</mentalStateDef>
+        <mentalStateMinSeverity>0.65</mentalStateMinSeverity>
+        <mentalStateMtbDays>5</mentalStateMtbDays>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       PC_Hediff_BloodGuilt
+       "The count won't stop."
+       For violence-dominant pawns confronting their kill record. Flashbacks,
+       shaking hands, the body remembering what the mind won't.
+  ─────────────────────────────────────────────────────────────────────────── -->
+  <HediffDef>
+    <defName>PC_Hediff_BloodGuilt</defName>
+    <label>blood guilt</label>
+    <labelNoun>blood guilt</labelNoun>
+    <description>The faces come back. This pawn has killed enough that the count stopped being abstract - it became specific. Specific faces, specific moments. The hands remember every one of them.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+    <initialSeverity>0.25</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>remembering</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets></statOffsets>
+      </li>
+      <li>
+        <label>haunted by it</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <ShootingAccuracyPawn>-0.05</ShootingAccuracyPawn>
+          <MeleeHitChance>-0.05</MeleeHitChance>
+        </statOffsets>
+      </li>
+      <li>
+        <label>the count won't stop</label>
+        <minSeverity>0.7</minSeverity>
+        <statOffsets>
+          <ShootingAccuracyPawn>-0.1</ShootingAccuracyPawn>
+          <MeleeHitChance>-0.1</MeleeHitChance>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Verse.HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.02</severityPerDay>
+      </li>
+      <li Class="PawnChronicles.HediffCompProperties_NarrativePulse">
+        <mtbDaysBetweenThoughts>1.2</mtbDaysBetweenThoughts>
+        <thoughtDefs>
+          <li>PC_Thought_BloodFlash</li>
+        </thoughtDefs>
+        <mentalStateDef>Wander_Sad</mentalStateDef>
+        <mentalStateMinSeverity>0.6</mentalStateMinSeverity>
+        <mentalStateMtbDays>6</mentalStateMtbDays>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       PC_Hediff_GhostBound
+       "A presence lingers."
+       Not hostile. Not helpful. Just there. Rest is disrupted. The pawn is
+       never quite alone. Arc resolution can lift it or make it permanent.
+  ─────────────────────────────────────────────────────────────────────────── -->
+  <HediffDef>
+    <defName>PC_Hediff_GhostBound</defName>
+    <label>ghost-bound</label>
+    <labelNoun>a ghost-binding</labelNoun>
+    <description>Something that should have moved on did not. It follows this pawn from room to room, present in peripheral vision, in the wrong sounds at night, in the feeling of being watched by something that knows you.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+    <initialSeverity>0.2</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>presence</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <RestRateMultiplier>-0.05</RestRateMultiplier>
+        </statOffsets>
+      </li>
+      <li>
+        <label>bound</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <RestRateMultiplier>-0.12</RestRateMultiplier>
+        </statOffsets>
+      </li>
+      <li>
+        <label>inseparable</label>
+        <minSeverity>0.7</minSeverity>
+        <statOffsets>
+          <RestRateMultiplier>-0.2</RestRateMultiplier>
+        </statOffsets>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>-0.06</offset></li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Verse.HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.015</severityPerDay>
+      </li>
+      <li Class="PawnChronicles.HediffCompProperties_NarrativePulse">
+        <mtbDaysBetweenThoughts>1.5</mtbDaysBetweenThoughts>
+        <thoughtDefs>
+          <li>PC_Thought_GhostPresence</li>
+        </thoughtDefs>
+        <recoveryThoughtDef>PC_Thought_HauntedLifted</recoveryThoughtDef>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       PC_Hediff_ProphetsMark
+       "The burden of belief." (Ideology-flavoured)
+       Something in this pawn has been recognised - by their meme, their
+       community, or themselves - as carrying a truth worth speaking.
+       Social bonus. Preaching urge. A specific kind of pressure.
+  ─────────────────────────────────────────────────────────────────────────── -->
+  <HediffDef>
+    <defName>PC_Hediff_ProphetsMark</defName>
+    <label>prophet's mark</label>
+    <labelNoun>a prophet's mark</labelNoun>
+    <description>Something in this pawn has been recognised - by their community, their belief system, or some internal reckoning - as carrying a message. The mark comes with certainty. Certainty comes with weight.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <initialSeverity>0.3</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>called</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <SocialImpact>0.08</SocialImpact>
+        </statOffsets>
+      </li>
+      <li>
+        <label>marked</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <SocialImpact>0.15</SocialImpact>
+          <NegotiationAbility>0.1</NegotiationAbility>
+        </statOffsets>
+      </li>
+      <li>
+        <label>chosen</label>
+        <minSeverity>0.7</minSeverity>
+        <statOffsets>
+          <SocialImpact>0.25</SocialImpact>
+          <NegotiationAbility>0.2</NegotiationAbility>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Verse.HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.02</severityPerDay>
+      </li>
+      <li Class="PawnChronicles.HediffCompProperties_NarrativePulse">
+        <mtbDaysBetweenThoughts>2</mtbDaysBetweenThoughts>
+        <thoughtDefs>
+          <li>PC_Thought_ProphetUrge</li>
+        </thoughtDefs>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       PC_Hediff_AlienMark
+       "Something out there noticed them."
+       A mark of attention from something non-human and non-hostile. Curious
+       rather than threatening. Minor psychic sensitivity buff. The pawn is
+       changed in ways neither they nor anyone else can fully explain.
+  ─────────────────────────────────────────────────────────────────────────── -->
+  <HediffDef>
+    <defName>PC_Hediff_AlienMark</defName>
+    <label>alien mark</label>
+    <labelNoun>an alien mark</labelNoun>
+    <description>Something that didn't belong here noticed this pawn. What it left behind isn't a wound or a blessing - it's more like a notation. This pawn has been filed somewhere. In some system they will never have access to, their existence has been recorded.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <initialSeverity>0.4</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>noted</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.08</PsychicSensitivity>
+          <GlobalLearningFactor>0.05</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+      <li>
+        <label>marked</label>
+        <minSeverity>0.5</minSeverity>
+        <statOffsets>
+          <PsychicSensitivity>0.15</PsychicSensitivity>
+          <GlobalLearningFactor>0.1</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Verse.HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.01</severityPerDay>
+      </li>
+      <li Class="PawnChronicles.HediffCompProperties_NarrativePulse">
+        <mtbDaysBetweenThoughts>3</mtbDaysBetweenThoughts>
+        <thoughtDefs>
+          <li>PC_Thought_AlienCuriosity</li>
+        </thoughtDefs>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       PC_Hediff_MachineEmpathy
+       "They hear the machine rhythms." (Biotech-flavoured)
+       Deep attunement with mechanical systems. Useful. Disquieting.
+       Crafting and construction bonus. Mechanoid-adjacent thoughts.
+  ─────────────────────────────────────────────────────────────────────────── -->
+  <HediffDef>
+    <defName>PC_Hediff_MachineEmpathy</defName>
+    <label>machine empathy</label>
+    <labelNoun>machine empathy</labelNoun>
+    <description>This pawn hears the machines differently now. Heat cycles, pressure rhythms, the sub-bass hum of a functioning system. Something in their extended contact with mechanical processes - or something in their genetics - has tuned them to a frequency others don't catch.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <initialSeverity>0.3</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>attuned</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <GeneralLaborSpeed>0.05</GeneralLaborSpeed>
+          <ConstructionSpeed>0.08</ConstructionSpeed>
+        </statOffsets>
+      </li>
+      <li>
+        <label>resonant</label>
+        <minSeverity>0.45</minSeverity>
+        <statOffsets>
+          <GeneralLaborSpeed>0.1</GeneralLaborSpeed>
+          <ConstructionSpeed>0.15</ConstructionSpeed>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Verse.HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.015</severityPerDay>
+      </li>
+      <li Class="PawnChronicles.HediffCompProperties_NarrativePulse">
+        <mtbDaysBetweenThoughts>2.5</mtbDaysBetweenThoughts>
+        <thoughtDefs>
+          <li>PC_Thought_MachineWhisper</li>
+        </thoughtDefs>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       PC_Hediff_BrokenFaith
+       "The certainty is gone." (Ideology-flavoured)
+       Ideological crisis. The belief system that structured their world has
+       cracked. They still function, but the conviction behind it is hollow.
+  ─────────────────────────────────────────────────────────────────────────── -->
+  <HediffDef>
+    <defName>PC_Hediff_BrokenFaith</defName>
+    <label>broken faith</label>
+    <labelNoun>broken faith</labelNoun>
+    <description>Something shook this pawn's beliefs to their foundation. They haven't abandoned them - not yet. But the conviction [PAWN_pronoun] had is absent. Every choice [PAWN_nameDef] used make, now requires much more effort.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+    <initialSeverity>0.3</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <stages>
+      <li>
+        <label>wavering</label>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <SocialImpact>-0.05</SocialImpact>
+        </statOffsets>
+      </li>
+      <li>
+        <label>adrift</label>
+        <minSeverity>0.4</minSeverity>
+        <statOffsets>
+          <SocialImpact>-0.12</SocialImpact>
+          <NegotiationAbility>-0.1</NegotiationAbility>
+        </statOffsets>
+      </li>
+      <li>
+        <label>hollow</label>
+        <minSeverity>0.7</minSeverity>
+        <statOffsets>
+          <SocialImpact>-0.2</SocialImpact>
+          <NegotiationAbility>-0.15</NegotiationAbility>
+          <GlobalLearningFactor>-0.1</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="Verse.HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.025</severityPerDay>
+      </li>
+      <li Class="PawnChronicles.HediffCompProperties_NarrativePulse">
+        <mtbDaysBetweenThoughts>1.5</mtbDaysBetweenThoughts>
+        <thoughtDefs>
+          <li>PC_Thought_FaithVoid</li>
+        </thoughtDefs>
+        <recoveryThoughtDef>PC_Thought_FaithReturned</recoveryThoughtDef>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       PC_Hediff_CelestialSickness
+       "Orbital exposure / ship residue."
+       Physical. Can be tended. Fades with immune response. Left by contact
+       with a crashed ship, orbital debris, or strange alien material.
+  ─────────────────────────────────────────────────────────────────────────── -->
+  <HediffDef>
+    <defName>PC_Hediff_CelestialSickness</defName>
+    <label>celestial sickness</label>
+    <labelNoun>celestial sickness</labelNoun>
+    <description>Whatever came down with the ship - the materials, the radiation, the residue - is working through this pawn's system. The body is fighting it. The body will probably win. The process is not comfortable.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+    <makesSickThought>true</makesSickThought>
+    <makesAlert>false</makesAlert>
+    <tendable>true</tendable>
+    <minSeverity>0.001</minSeverity>
+    <initialSeverity>0.1</initialSeverity>
+    <maxSeverity>1.0</maxSeverity>
+    <!-- No lethalSeverity - this condition is survivable. High tending quality drives it to zero. -->
+    <stages>
+      <li>
+        <label>mild exposure</label>
+        <minSeverity>0</minSeverity>
+        <painOffset>0.1</painOffset>
+        <statOffsets>
+          <MoveSpeed>-0.05</MoveSpeed>
+        </statOffsets>
+      </li>
+      <li>
+        <label>systemic exposure</label>
+        <minSeverity>0.4</minSeverity>
+        <painOffset>0.3</painOffset>
+        <statOffsets>
+          <MoveSpeed>-0.12</MoveSpeed>
+          <GeneralLaborSpeed>-0.1</GeneralLaborSpeed>
+        </statOffsets>
+        <capMods>
+          <li><capacity>BloodFiltration</capacity><offset>-0.1</offset></li>
+        </capMods>
+      </li>
+      <li>
+        <label>severe exposure</label>
+        <minSeverity>0.7</minSeverity>
+        <painOffset>0.5</painOffset>
+        <statOffsets>
+          <MoveSpeed>-0.2</MoveSpeed>
+          <GeneralLaborSpeed>-0.25</GeneralLaborSpeed>
+        </statOffsets>
+        <capMods>
+          <li><capacity>BloodFiltration</capacity><offset>-0.2</offset></li>
+          <li><capacity>Consciousness</capacity><offset>-0.1</offset></li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <!-- Fades naturally over time even without treatment (15–30 days) -->
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>900000~1800000</disappearsAfterTicks>
+      </li>
+      <!-- Tending actively drives severity down; quality matters -->
+      <li Class="HediffCompProperties_TendDuration">
+        <baseTendDurationHours>48</baseTendDurationHours>
+        <severityPerDayTended>-0.8</severityPerDayTended>
+      </li>
+      <!-- Rises if not yet immune - gives players a reason to tend promptly -->
+      <li Class="HediffCompProperties_Immunizable">
+        <severityPerDayNotImmune>0.15</severityPerDayNotImmune>
+      </li>
+      <li Class="PawnChronicles.HediffCompProperties_NarrativePulse">
+        <mtbDaysBetweenThoughts>1.5</mtbDaysBetweenThoughts>
+        <thoughtDefs>
+          <li>PC_Thought_OrbitalNausea</li>
+        </thoughtDefs>
+        <recoveryThoughtDef>PC_Thought_CelestialCleared</recoveryThoughtDef>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    All signal wiring, site spawning, drop pods, and letter generation
+    is handled entirely inside QuestNode_EpicStage.RunInt() in C#.
+    These XML scripts just invoke that node with the correct role/signal.
+    expireDaysRange gives the player a window before the quest auto-expires.
+  -->
+
+  <QuestScriptDef>
+    <defName>PC_Quest_EpicStage</defName>
+    <expireDaysRange>30~30</expireDaysRange>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="PawnChronicles.QuestNode_EpicStage">
+          <signal>PawnEpic_StageComplete</signal>
+          <stageRole>$epicStageRole</stageRole>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+  <QuestScriptDef>
+    <defName>PC_Quest_EpicSuccess</defName>
+    <expireDaysRange>15~15</expireDaysRange>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="PawnChronicles.QuestNode_EpicStage">
+          <signal>PawnEpic_Success</signal>
+          <stageRole>success</stageRole>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+  <QuestScriptDef>
+    <defName>PC_Quest_EpicFailure</defName>
+    <expireDaysRange>15~15</expireDaysRange>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="PawnChronicles.QuestNode_EpicStage">
+          <signal>PawnEpic_Failure</signal>
+          <stageRole>failure</stageRole>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

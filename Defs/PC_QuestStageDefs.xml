@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    ═══════════════════════════════════════════════════════════════════════════
+    UNIVERSAL QUEST STAGE DEFS - Modular Thematic Actions
+    ═══════════════════════════════════════════════════════════════════════════
+
+    These are verbs, not nouns. "A contact arrives" not "the pirate contact."
+    Each stage is tagged so the selector picks the right ones for any pawn
+    based on their current narrative profile.
+
+    DESIGN RULES:
+    - No plot-specific names or scenarios
+    - Tags determine which stages a pawn gets, not which epic they're in
+    - Every stage works for any pawn who scores high enough on its tags
+    - Opening stages introduce; middle stages complicate; climax stages resolve
+    ═══════════════════════════════════════════════════════════════════════════
+  -->
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       OPENINGS - The inciting moment. Something arrives.
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Universal opener: works for any pawn -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_Rumour</defName>
+    <label>A Rumour</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements />
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Body/suffering opener -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_OldWound</defName>
+    <label>An Old Wound Speaks</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Trauma</tag><minScore>20</minScore><weight>2.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Criminal/shady opener -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_CodedMessage</defName>
+    <label>A Coded Message</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Underworld</tag><minScore>25</minScore><weight>2.0</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>SmallRaid</type>
+      <chance>0.25</chance>
+      <incidentPoints>120</incidentPoints>
+      <bridgeRole>underworld_consequence</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Loss/grief opener -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_NameOnManifest</defName>
+    <label>A Name That Shouldn't Exist</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Loss</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Grief</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Duty/military opener -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_FormalSummons</defName>
+    <label>A Formal Summons</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Duty</tag><minScore>20</minScore><weight>2.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Faith/devotion opener -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_SignReceived</defName>
+    <label>A Sign Received</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Devotion</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Faith</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Kinship opener -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_FamilySignal</defName>
+    <label>A Signal From Someone Lost</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Kinship</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Loss</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Curiosity/scholar opener -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_CorruptedData</defName>
+    <label>A Corrupted Fragment</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Curiosity</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Scholar</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Violence opener -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_FaceFromThePast</defName>
+    <label>A Face From the Past</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Violence</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Trauma</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HostileArrives</type>
+      <chance>0.30</chance>
+      <incidentPoints>150</incidentPoints>
+      <bridgeRole>violence_confrontation</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Survival/refugee opener -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_OldCrest</defName>
+    <label>A Familiar Crest</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Survival</tag><minScore>20</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Refugee</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>SmallRaid</type>
+      <chance>0.25</chance>
+      <incidentPoints>120</incidentPoints>
+      <bridgeRole>survival_threat</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_HauntedMemory</defName>
+    <label>A Memory That Refuses Silence</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Trauma</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Grief</tag><minScore>10</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_GhostSignal</defName>
+    <label>A Ghost in the Datastream</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Curiosity</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Scholar</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_BloodOath</defName>
+    <label>An Old Blood Debt</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Violence</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Underworld</tag><minScore>10</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HostileArrives</type>
+      <chance>0.30</chance>
+      <incidentPoints>150</incidentPoints>
+      <bridgeRole>underworld_consequence</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_DistantFlame</defName>
+    <label>A Distant Flame Calls</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Devotion</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Faith</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_WanderingCrest</defName>
+    <label>The Road Remembers</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Wandering</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Survival</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>SmallRaid</type>
+      <chance>0.25</chance>
+      <incidentPoints>100</incidentPoints>
+      <bridgeRole>survival_threat</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Open_BrokenMirror</defName>
+    <label>The Reflection Lies</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Noble</tag><minScore>20</minScore><weight>1.8</weight></li>
+      <li><tag>PC_Tag_Betrayal</tag><minScore>10</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MIDDLES - Complications. Costs. The arc deepens.
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Universal middle: any pawn -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_TrailContinues</defName>
+    <label>The Trail Continues</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements />
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Contact/information broker -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_ContactArrives</defName>
+    <label>A Contact Arrives</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Underworld</tag><minScore>20</minScore><weight>2.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Physical cost -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_BodyPaysPrice</defName>
+    <label>The Body Pays</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Trauma</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Decay</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HediffApply</type>
+      <chance>0.7</chance>
+      <hediffDef>Cut</hediffDef>
+      <bodyPartDef>Torso</bodyPartDef>
+      <hediffSeverity>0.18</hediffSeverity>
+      <bridgeRole>body_pays</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Emotional discovery -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_UnexpectedDiscovery</defName>
+    <label>Something Unexpected</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Grief</tag><minScore>15</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Loss</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>ThoughtApply</type>
+      <chance>0.9</chance>
+      <thoughtDef>PC_Thought_HauntedUnease</thoughtDef>
+      <bridgeRole>unexpected_grief</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Old comrade/obligation -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_OldComrade</defName>
+    <label>Someone Who Was There</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Duty</tag><minScore>20</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Kinship</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Confrontation -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_FaceToFace</defName>
+    <label>Face to Face</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Violence</tag><minScore>20</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Betrayal</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Dependency/needing help -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_UnwantedHelp</defName>
+    <label>An Unwanted Dependency</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Isolation</tag><minScore>20</minScore><weight>2.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Faith/conviction tested -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_ConvictionTested</defName>
+    <label>The Conviction Was Tested</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Devotion</tag><minScore>20</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Faith</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HediffApply</type>
+      <chance>0.75</chance>
+      <hediffDef>PC_Hediff_BrokenFaith</hediffDef>
+      <hediffSeverity>0.25</hediffSeverity>
+      <bridgeRole>faith_fracture</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Technical/craft obstacle -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_MissingPiece</defName>
+    <label>The Missing Piece</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Craft</tag><minScore>20</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Curiosity</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- People at risk -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_PeopleAtRisk</defName>
+    <label>People at Risk</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Kinship</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Nurture</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Addiction/habit at the worst time -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_OldHabit</defName>
+    <label>An Old Habit</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Decay</tag><minScore>25</minScore><weight>2.0</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HediffApply</type>
+      <chance>0.75</chance>
+      <hediffDef>Cut</hediffDef>
+      <bodyPartDef>Hand</bodyPartDef>
+      <hediffSeverity>0.12</hediffSeverity>
+      <bridgeRole>old_habit_toll</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- The past is closer than expected -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_CloserThanExpected</defName>
+    <label>Closer Than Expected</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Survival</tag><minScore>20</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Wandering</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>ThoughtApply</type>
+      <chance>0.8</chance>
+      <thoughtDef>PC_Thought_StarCall</thoughtDef>
+      <bridgeRole>star_call</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Leadership burden -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_WeightOfCommand</defName>
+    <label>Bare Necessities</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Leadership</tag><minScore>25</minScore><weight>2.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Power stirs -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_PowerStirs</defName>
+    <label>What Lurks Beneath The Surface</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Power</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Augmentation</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HediffApply</type>
+      <chance>0.7</chance>
+      <hediffDef>PC_Hediff_VoidEcho</hediffDef>
+      <hediffSeverity>0.28</hediffSeverity>
+      <bridgeRole>power_resonance</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Noble weight -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_NameCarriesWeight</defName>
+    <label>The Name That Carries Weight</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Noble</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Duty</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Pacifist tested -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_EveryOtherWay</defName>
+    <label>Try All Alternatives</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Pacifism</tag><minScore>30</minScore><weight>2.0</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+    <!-- New Middles -->
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_WhispersReturn</defName>
+    <label>The Returning Whispers</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Trauma</tag><minScore>15</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Grief</tag><minScore>10</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HediffApply</type>
+      <chance>0.8</chance>
+      <hediffDef>PC_Hediff_Haunted</hediffDef>
+      <hediffSeverity>0.25</hediffSeverity>
+      <bridgeRole>ghost_encounter</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_ThreadPullsTighter</defName>
+    <label>The Knot Tightens</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Curiosity</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Scholar</tag><minScore>10</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_BloodCallsBlood</defName>
+    <label>An Eye For An Eye</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Violence</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Underworld</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HediffApply</type>
+      <chance>0.85</chance>
+      <hediffDef>PC_Hediff_BloodGuilt</hediffDef>
+      <hediffSeverity>0.3</hediffSeverity>
+      <bridgeRole>blood_guilt</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_FaithDemandsProof</defName>
+    <label>A Faith Demands That Proof</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Devotion</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Faith</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HediffApply</type>
+      <chance>0.65</chance>
+      <hediffDef>PC_Hediff_ProphetsMark</hediffDef>
+      <hediffSeverity>0.3</hediffSeverity>
+      <bridgeRole>prophet_mark</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_TheHorizonMoves</defName>
+    <label>The Moving Horizon</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Wandering</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Survival</tag><minScore>10</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HediffApply</type>
+      <chance>0.8</chance>
+      <hediffDef>PC_Hediff_StarFever</hediffDef>
+      <hediffSeverity>0.25</hediffSeverity>
+      <bridgeRole>star_call</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_NameBecomesBurden</defName>
+    <label>The Title That Became a Burden</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Noble</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Duty</tag><minScore>10</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_HandsRemember</defName>
+    <label>Muscle-memory</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Craft</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Curiosity</tag><minScore>10</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HediffApply</type>
+      <chance>0.6</chance>
+      <hediffDef>PC_Hediff_MachineEmpathy</hediffDef>
+      <hediffSeverity>0.3</hediffSeverity>
+      <bridgeRole>machine_resonance</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Mid_ThePriceOfQuiet</defName>
+    <label>The Price of Silence</label>
+    <isMiddle>true</isMiddle>
+    <tagRequirements>
+      <li><tag>PC_Tag_Isolation</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Resilience</tag><minScore>10</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <onStartIncident>
+      <type>HediffApply</type>
+      <chance>0.7</chance>
+      <hediffDef>PC_Hediff_GhostBound</hediffDef>
+      <hediffSeverity>0.2</hediffSeverity>
+      <bridgeRole>ghost_encounter</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       CLIMAX: SUCCESS - Resolution. Changed but not destroyed.
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Universal success -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_Resolved</defName>
+    <label>Resolution</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Resilience</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <successOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
+      <bestSkillXP>2500</bestSkillXP>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.2</inspirationChance>
+    </successOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Restored/healed success -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_Restored</defName>
+    <label>What Was Restored</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Trauma</tag><minScore>20</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Resilience</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <successOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Restored</moodThought>
+      <removeOneBadHediff>true</removeOneBadHediff>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.25</inspirationChance>
+    </successOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Connection/kinship success -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_Found</defName>
+    <label>Found</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Kinship</tag><minScore>20</minScore><weight>2.0</weight></li>
+    </tagRequirements>
+    <successOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Found</moodThought>
+      <itemDrops><li><thingDef>Silver</thingDef><count>75</count></li></itemDrops>
+    </successOutcome>
+      <onStartIncident>
+      <type>FriendlyArrives</type>
+      <chance>0.6</chance>
+      <bridgeRole>kinship_contact</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Craft/creation success -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_Built</defName>
+    <label>The Thing That Was Made</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Craft</tag><minScore>25</minScore><weight>2.0</weight></li>
+    </tagRequirements>
+    <successOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Built</moodThought>
+      <skillGains><li><skill>Crafting</skill><xp>3500</xp></li></skillGains>
+      <bestSkillXP>3500</bestSkillXP>
+      <itemDrops><li><thingDef>ComponentIndustrial</thingDef><count>5</count></li></itemDrops>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.35</inspirationChance>
+    </successOutcome>
+      <onStartIncident>
+      <type>TraderArrives</type>
+      <chance>0.5</chance>
+      <bridgeRole>craft_opportunity</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Knowledge/answer success -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_Answered</defName>
+    <label>The Answer</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Curiosity</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Scholar</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <successOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Answered</moodThought>
+      <skillGains><li><skill>Intellectual</skill><xp>4000</xp></li></skillGains>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.2</inspirationChance>
+    </successOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Debt cleared success -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_DebtCleared</defName>
+    <label>Accounts Settled</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Underworld</tag><minScore>20</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Duty</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <successOutcome>
+      <moodThought>PC_Thought_ArcSuccess_DebtCleared</moodThought>
+      <itemDrops><li><thingDef>Silver</thingDef><count>150</count></li></itemDrops>
+    </successOutcome>
+  </PawnChronicles.QuestStageDef>
+
+    <!-- New Success Climaxes -->
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_GhostLaid</defName>
+    <label>The Ghost Laid to Rest</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Trauma</tag><minScore>20</minScore><weight>1.8</weight></li>
+      <li><tag>PC_Tag_Resilience</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <successOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
+      <removeOneBadHediff>true</removeOneBadHediff>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.3</inspirationChance>
+    </successOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_PatternRevealed</defName>
+    <label>The Pattern Revealed</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Curiosity</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Scholar</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <successOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Answered</moodThought>
+      <skillGains><li><skill>Intellectual</skill><xp>4200</xp></li></skillGains>
+      <bestSkillXP>4200</bestSkillXP>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.35</inspirationChance>
+    </successOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_NameReclaimed</defName>
+    <label>The Name Reclaimed</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Noble</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Duty</tag><minScore>10</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <successOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
+      <itemDrops><li><thingDef>Silver</thingDef><count>120</count></li></itemDrops>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.25</inspirationChance>
+    </successOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_FaithAnswered</defName>
+    <label>Faith Answered</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Devotion</tag><minScore>25</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Faith</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <successOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Restored</moodThought>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.4</inspirationChance>
+    </successOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       CLIMAX: FAILURE - Cost, not punishment.
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Universal failure -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_PricePaid</defName>
+    <label>The Price Paid</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Isolation</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <failureOutcome>
+      <moodThought>PC_Thought_ArcFail_PricePaid</moodThought>
+    </failureOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Loss/grief failure -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_TooLate</defName>
+    <label>Too Late</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Grief</tag><minScore>15</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Loss</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <failureOutcome>
+      <moodThought>PC_Thought_ArcFail_TooLate</moodThought>
+    </failureOutcome>
+      <onStartIncident>
+      <type>MentalBreak</type>
+      <chance>0.9</chance>
+      <bridgeRole>grief_collapse</bridgeRole>
+      <mentalStateDef>Wander_Sad</mentalStateDef>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Violence/trauma failure -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_WeightRemains</defName>
+    <label>The Weight Remains</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Violence</tag><minScore>20</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Trauma</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <failureOutcome>
+      <moodThought>PC_Thought_ArcFail_WeightRemains</moodThought>
+    </failureOutcome>
+      <onStartIncident>
+      <type>SmallRaid</type>
+      <chance>0.8</chance>
+      <bridgeRole>violence_confrontation</bridgeRole>
+      <incidentPoints>350</incidentPoints>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Underworld/decay failure -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_DeeperIn</defName>
+    <label>Deeper In</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Underworld</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Decay</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <failureOutcome>
+      <moodThought>PC_Thought_ArcFail_DeeperIn</moodThought>
+    </failureOutcome>
+      <onStartIncident>
+      <type>SmallRaid</type>
+      <chance>0.7</chance>
+      <bridgeRole>underworld_consequence</bridgeRole>
+      <incidentPoints>400</incidentPoints>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Craft/knowledge failure -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_NothingLeft</defName>
+    <label>Nothing Left</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Curiosity</tag><minScore>20</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Isolation</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <failureOutcome>
+      <moodThought>PC_Thought_ArcFail_NothingLeft</moodThought>
+    </failureOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- Betrayal/noble failure -->
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_DebtUnpaid</defName>
+    <label>The Debt Unpaid</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Betrayal</tag><minScore>15</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Loss</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <failureOutcome>
+      <moodThought>PC_Thought_ArcFail_DebtUnpaid</moodThought>
+    </failureOutcome>
+  </PawnChronicles.QuestStageDef>
+
+    <!-- New Failure Climaxes -->
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_ShadowDeeper</defName>
+    <label>The Shadow Grows Deeper</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Trauma</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Grief</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <failureOutcome>
+      <moodThought>PC_Thought_ArcFail_WeightRemains</moodThought>
+    </failureOutcome>
+    <onStartIncident>
+      <type>MentalBreak</type>
+      <chance>0.85</chance>
+      <bridgeRole>trauma_break</bridgeRole>
+      <mentalStateDef>Wander_Sad</mentalStateDef>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_RoadEndsEmpty</defName>
+    <label>The Road Ends Empty</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Wandering</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Survival</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <failureOutcome>
+      <moodThought>PC_Thought_ArcFail_PricePaid</moodThought>
+    </failureOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_NameLost</defName>
+    <label>The Name is Lost</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Noble</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Betrayal</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <failureOutcome>
+      <moodThought>PC_Thought_ArcFail_DebtUnpaid</moodThought>
+    </failureOutcome>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_Stage_Climax_HandsFail</defName>
+    <label>The Hands Fail</label>
+    <isClimax>true</isClimax>
+    <isMiddle>false</isMiddle>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <tagRequirements>
+      <li><tag>PC_Tag_Craft</tag><minScore>20</minScore><weight>2.0</weight></li>
+      <li><tag>PC_Tag_Curiosity</tag><minScore>15</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <failureOutcome>
+      <moodThought>PC_Thought_ArcFail_NothingLeft</moodThought>
+    </failureOutcome>
+  </PawnChronicles.QuestStageDef>
+
+</Defs>

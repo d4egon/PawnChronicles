@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Pawn Chronicles: Personal Epics</name>
+  <author>D4egon</author>
+  <packageId>D4egon.PawnChronicles</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+
+  <description>
+Every pawn carries an unfinished story. Pawn Chronicles reads who they actually are - their traits, skills, history, relationships, and the state of the world around them - and builds a living narrative around them in real time.
+
+No two arcs are the same. Everything is composed at runtime from the pawn's actual data.
+
+HOW IT WORKS
+(I went with a fire theme for flavor, ecause I like fire and D, C, B, A, SS seems boring ^^)
+
+Sparks and Embers fire quietly throughout the day - small moments of texture the game noticed. A first kill. A pain spike. A bond forming. These stamp a chronicle entry and may leave a mood memory, but ask nothing of you.
+
+When the weight accumulates, an Arc begins.
+
+Arcs are personal quest chains. They appear in the quest tab with a timer, demand real decisions, and resolve with permanent consequences. The pawn is changed - their adulthood backstory can be rewritten on success or failure, world events can follow, factions can shift.
+
+ARC TIERS
+
+Kindle - 3 stages. The first real demand. Mood consequences only.
+Flame - 4 stages. Minor faction touches.
+Fire - 5 stages. The pawn is permanently changed. Backstory rewritten, so be careful.
+Inferno - 5 stages with a mid-arc branch driven by the pawn's dominant tag.
+Hellfire - A chain of linked epics, escalating.
+
+ENTANGLED ARCS
+
+Some stories belong to two people. Rivalry. Mentorship. Grief shared between survivors. Entangled arcs bind two colonists into a single shared quest - one story, two protagonists, one outcome.
+
+PLAYER CHOICES
+
+At key moments, the arc offers branching choices shaped by the pawn's dominant tags. Who they are determines what options appear. What you choose shapes what they become.
+
+FULL TRANSPARENCY
+
+Every mechanical consequence announces itself plainly. Nothing fires invisibly.
+"The arc sparked an inspiration - Inspired Shooting."
+"The weight broke them. They've entered a sad wandering state."
+"Something fell near the pawn."
+
+REQUIREMENTS
+
+Harmony (required). Nothing else.
+
+COMPATIBILITY
+
+Compatible with most mods. The scraper reads any content registered in RimWorld's DefDatabases - custom traits, genes, factions, world objects, and backstories from other mods are incorporated into arc grammar automatically.
+
+Made for people who want even more depth to their colonists.
+
+
+SETTINGS:
+
+You can adjust everything to your liking in the mod settings.
+  </description>
+
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>Ludeon.RimWorld</li>
+  </loadAfter>
+</ModMetaData>

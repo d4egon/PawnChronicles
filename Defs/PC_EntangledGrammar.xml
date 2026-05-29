@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--
+    PC_EntangledGrammar - Narrative rules for two-pawn entangled arcs.
+
+    AVAILABLE SYMBOLS (injected at resolve time):
+      [pawn_*]          - standard RimWorld pawn grammar for the initiator
+      [partner_*]       - standard RimWorld pawn grammar for the partner
+      [entangled_arc_type]  - "rivalry", "romance", "mentorapprentice", etc.
+      [entangled_arc_label] - human-readable label ("rivalry", "love", etc.)
+      [pc_*]            - all PawnDataScraper symbols for the initiator
+      [partner_pc_*]    - all PawnDataScraper symbols for the partner
+
+    CASCADE (most specific first):
+      entangled_{arcType}_{role}_{type}
+      entangled_{role}_{type}
+      {role}_{type}        ← falls back to solo grammar in PC_NarrativeGrammar
+      default_{type}
+  -->
+  <RulePackDef>
+    <defName>PC_EntangledGrammar</defName>
+    <rulePack>
+      <rulesStrings>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             SHARED COMPOSITION POOLS
+             Both pawn symbols are available - use [pawn_nameDef] and
+             [partner_nameDef] to reference each by name.
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <!-- Relational openers -->
+        <li>pc_ent_between->between [pawn_nameDef] and [partner_nameDef]</li>
+        <li>pc_ent_between->the two of them</li>
+        <li>pc_ent_between->what had grown between them</li>
+        <li>pc_ent_between->what they had become to each other</li>
+
+        <!-- Tension phrases -->
+        <li>pc_ent_tension->a [AdjectiveAngsty] silence</li>
+        <li>pc_ent_tension->something unresolved</li>
+        <li>pc_ent_tension->a weight neither could name</li>
+        <li>pc_ent_tension->the pull of old friction</li>
+        <li>pc_ent_tension->an old argument that never died</li>
+
+        <!-- Bond phrases -->
+        <li>pc_ent_bond->something forged in shared hardship</li>
+        <li>pc_ent_bond->the kind of trust that only survives fire</li>
+        <li>pc_ent_bond->a quiet understanding between them</li>
+        <li>pc_ent_bond->the particular loyalty of people who have seen each other fail</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             RELATIONAL DEEP COMPOSITION LAYERS
+
+             [pc_ent_moment] assembles a complete physical relational beat.
+             Draws from three relational pools + the existing pc_ent_between.
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <!-- Relational body language - physical subtext between two people -->
+        <li>pc_ent_body->their eyes meeting for half a second too long</li>
+        <li>pc_ent_body->standing closer than either intended</li>
+        <li>pc_ent_body->one of them with a hand near a [Weapon] they had no reason to touch</li>
+        <li>pc_ent_body->one reaching while the other hesitated</li>
+        <li>pc_ent_body->mirroring each other's posture without realizing</li>
+        <li>pc_ent_body->both reaching for the same thing at the same moment, then neither completing the motion</li>
+        <li>pc_ent_body->both very deliberately looking somewhere else</li>
+        <li>pc_ent_body->an argument that finished too quickly to have ended</li>
+        <li>pc_ent_body->the silence after something was almost said</li>
+        <li>pc_ent_body->a [Weapon] left on the table between them, not the reason either of them came</li>
+        <li>pc_ent_body->neither of them sitting, even though the chairs were right there</li>
+        <li>pc_ent_body->one of them holding a piece of [Apparel] that belonged to the other and not mentioning it</li>
+
+        <!-- Relational subtext - what is not being said -->
+        <li>pc_ent_subtext->something neither was ready to name</li>
+        <li>pc_ent_subtext->the question both of them kept finding reasons not to ask</li>
+        <li>pc_ent_subtext->what [PersonAlly] on the other side of the room had almost certainly already noticed</li>
+        <li>pc_ent_subtext->the part of every conversation both of them kept leaving out</li>
+        <li>pc_ent_subtext->the thing one of them had done that the other had not yet addressed</li>
+        <li>pc_ent_subtext->how much one of them had worked out about the other without being told</li>
+        <li>pc_ent_subtext->neither willing to be the one who said it first</li>
+        <li>pc_ent_subtext->the gap between what was said and what was meant</li>
+        <li>pc_ent_subtext->the question only one of them had actually asked</li>
+
+        <!-- Relational sensory - the environment that holds the space between them -->
+        <li>pc_ent_sensory->the colony moving around them</li>
+        <li>pc_ent_sensory->[pc_friend_name] laughing in the next room</li>
+        <li>pc_ent_sensory->the ordinary sounds of people</li>
+        <li>pc_ent_sensory->the thin walls</li>
+        <li>pc_ent_sensory->a meal going cold between them on the table</li>
+        <li>pc_ent_sensory->generators humming in the background</li>
+        <li>pc_ent_sensory->a passing-by [Animal] outside the walls, going about its business</li>
+        <li>pc_ent_sensory->the wind off the [TerrainFeature]</li>
+        <li>pc_ent_sensory->the sound of a [PersonJob] working nearby</li>
+
+        <!-- Relational moment assembler - a complete physical beat between two pawns -->
+        <li>pc_ent_moment->[pawn_nameDef] and [partner_nameDef] - [pc_ent_body]. [pc_ent_sensory]. [pc_ent_subtext].</li>
+        <li>pc_ent_moment->[pc_ent_sensory]. [pawn_nameDef] and [partner_nameDef]: [pc_ent_body]. [pc_ent_subtext].</li>
+        <li>pc_ent_moment->[pc_ent_subtext], [pc_ent_between]. [pc_ent_body]. [pc_ent_sensory].</li>
+        <li>pc_ent_moment->[pc_ent_body], [pc_ent_between]. [pc_ent_sensory]. [pc_ent_subtext].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             RIVALRY - OPENING
+        ═══════════════════════════════════════════════════════════════════ -->
+        <li>entangled_rivalry_opening_body->[pc_ent_moment]\n\n[pawn_nameDef] and [partner_nameDef] had been circling [pc_ent_tension] for long enough that the colony had stopped pretending not to notice. It had not broken yet. It would.</li>
+
+        <li>entangled_rivalry_opening_title->[pawn_nameDef] and [partner_nameDef]: the first cut</li>
+        <li>entangled_rivalry_opening_title->the friction between [pawn_nameDef] and [partner_nameDef]</li>
+        <li>entangled_rivalry_opening_title->two forces, one colony</li>
+
+        <li>entangled_rivalry_opening_body->It started the way these things always do - not with a declaration, but with a look. [pawn_nameDef] noticed [partner_nameDef] the way one might notice a splinter: small, persistent, impossible to ignore. [pc_ent_tension] had settled [pc_ent_between], and neither seemed inclined to resolve it.</li>
+        <li>entangled_rivalry_opening_body->[pawn_nameDef] and [partner_nameDef] had worked alongside each other for [pc_world_season_label] now. The colony had noticed [pc_ent_tension] between them. Whether it sharpens them or breaks something is not yet clear.</li>
+        <li>entangled_rivalry_opening_body->In a colony this size, [pc_ent_tension] between two people poisoned everything eventually. [pawn_nameDef] and [partner_nameDef] had not spoken of it. They did not need to. The air between them says enough.</li>
+        <li>entangled_rivalry_opening_body->[pawn_nameDef] found [partner_nameDef]'s presence as grating as the hum of a failing generator.</li>
+        <li>entangled_rivalry_opening_body->The kitchen felt smaller when they were both in it. [pawn_nameDef] sharpened a tool, but their eyes stayed on [partner_nameDef].</li>
+        <li>entangled_rivalry_opening_body->It was a contest of silence. [pawn_nameDef] refused to speak first, and [partner_nameDef] was happy to let the cold grow.</li>
+        <li>entangled_rivalry_opening_body->[pawn_nameDef] found [partner_nameDef] difficult to be around. [pawn_nameDef] had not fully examined why.</li>
+        <li>entangled_rivalry_opening_body->Something about [partner_nameDef] got under [pawn_nameDef]'s skin before a word was spoken. [pawn_nameDef] had started taking the long way around to avoid crossing paths.</li>
+        <li>entangled_rivalry_opening_body->[pawn_nameDef] did not dislike many people. [partner_nameDef] was the exception.</li>
+        <li>entangled_rivalry_opening_body->[pawn_nameDef] watched [partner_nameDef] work the way one watches a [partner_pc_animal_label] that might bolt. Patient. Measuring.</li>
+        <li>entangled_rivalry_opening_body->They shared meals in the same room without speaking. The silence had its own texture by then.</li>
+        <li>entangled_rivalry_opening_body->[pawn_nameDef] knew exactly what [partner_nameDef]'s name sounded like in different people's mouths - [pc_friend_name]'s, especially. That was not something one tracked about someone they were indifferent to.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             RIVALRY - MIDDLE
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_rivalry_middle_title->the wound between them</li>
+        <li>entangled_rivalry_middle_title->[pawn_nameDef] and [partner_nameDef]: escalation</li>
+        <li>entangled_rivalry_middle_title->pressure, and what it reveals</li>
+
+        <li>entangled_rivalry_middle_body->The thing about [pc_ent_tension] was that it only ever built. [pawn_nameDef] and [partner_nameDef] had reached a moment the colony had been quietly dreading - the point where something had to give. Whether that is the friction between them, or one of them entirely, remains to be seen.</li>
+        <li>entangled_rivalry_middle_body->It came out sideways, as these things do. [pawn_nameDef] said one thing. [partner_nameDef] heard another. And in the space between what was said and what was meant, [pc_ent_tension] found room to grow. The colony watched, as colonies do.</li>
+        <li>entangled_rivalry_middle_body->The argument was not about the meal, or the cleaning, or the schedule. It was about everything [pawn_nameDef] saw in [partner_nameDef] that they despised in themselves.</li>
+        <li>entangled_rivalry_middle_body->The friction was no longer a secret. The colony waited for the first punch or the first breakdown.</li>
+        <li>entangled_rivalry_middle_body->[pawn_nameDef] was keeping score. Every mistake [partner_nameDef] made was a victory, and every victory felt like ash.</li>
+        <li>entangled_rivalry_middle_body->The [pc_ent_tension] between them had become a structural problem. Other colonists routed around them at meals, at work, in conversation.</li>
+        <li>entangled_rivalry_middle_body->[pawn_nameDef] dreamt about [partner_nameDef] and woke up annoyed about it.</li>
+        <li>entangled_rivalry_middle_body->Even the [pc_pawn_animal_label]s seemed to prefer other rooms when both of them were in the same one.</li>
+        <li>entangled_rivalry_middle_body->The colony's [pc_pawn_animal_label]s had developed a sense for when to leave the room. They were not wrong.</li>
+        <li>entangled_rivalry_middle_body->[pawn_nameDef] had started cataloguing [partner_nameDef]'s mistakes. [pc_friend_name] told [pawn_objective] to stop. It was a long list. It was not helping.</li>
+        <li>entangled_rivalry_middle_body->[partner_nameDef] said something at dinner. [pawn_nameDef] was still thinking about it hours later, which [pawn_nameDef] would have preferred not to be doing.</li>
+        <li>entangled_rivalry_middle_body->Something was going to happen between them. The only question was which [pc_world_season_label] it would wait until.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             RIVALRY - SUCCESS (resolution through respect)
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_rivalry_success_title->enemies who became something harder to name</li>
+        <li>entangled_rivalry_success_title->[pawn_nameDef] and [partner_nameDef]: the reckoning</li>
+        <li>entangled_rivalry_success_title->what survives the heat</li>
+
+        <li>entangled_rivalry_success_body->No one watching would have called it a resolution. There was no handshake, no declaration. But [pawn_nameDef] and [partner_nameDef] had reached some private understanding - the kind that only forms between people who have genuinely tried to destroy each other and failed. [pc_ent_bond] sat where [pc_ent_tension] used to be. The colony noticed without remarking on it.</li>
+        <li>entangled_rivalry_success_body->They still argued. They probably always would. But [pawn_nameDef] and [partner_nameDef] argued the way people argue who are not afraid of each other - without the edge that used to make the room go quiet. Something had settled [pc_ent_between]. Not peace exactly. Something more durable than peace.</li>
+        <li>entangled_rivalry_success_body->[pawn_nameDef] realized that in a raid, [partner_nameDef] was the only one who actually knew where the flank was. Survival demanded respect.</li>
+        <li>entangled_rivalry_success_body->They did not like each other, but they recognized the work. [pawn_nameDef] stopped expecting [partner_nameDef] to fail.</li>
+        <li>entangled_rivalry_success_body->[pawn_nameDef] and [partner_nameDef] still irritated each other. They had simply stopped pretending they were going to do anything about it.</li>
+        <li>entangled_rivalry_success_body->What remained [pc_ent_between] after everything burned through was harder to name, but harder to break too.</li>
+        <li>entangled_rivalry_success_body->[pawn_nameDef] covered [partner_nameDef] in the raid without thinking about it. Neither of them had mentioned it. That was probably for the best.</li>
+        <li>entangled_rivalry_success_body->[pawn_nameDef] saved [partner_nameDef]'s life, not out of affection, but because no one else was allowed to end this particular story.</li>
+        <li>entangled_rivalry_success_body->They found respect. [pc_lex_mechanical_success_reason].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             RIVALRY - FAILURE (fracture)
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_rivalry_failure_title->the split</li>
+        <li>entangled_rivalry_failure_title->what [pawn_nameDef] and [partner_nameDef] could not survive</li>
+        <li>entangled_rivalry_failure_title->the rivalry that ended badly</li>
+
+        <li>entangled_rivalry_failure_body->Some things cannot be resolved. [pawn_nameDef] and [partner_nameDef] had discovered this. The colony had been changed by the break - not dramatically, but in the way that all ruptures change the ground they occur on. People stepped around where they used to walk freely.</li>
+        <li>entangled_rivalry_failure_body->It ended without ceremony, which is how most endings go. [pawn_nameDef] and [partner_nameDef] would keep working. They would avoid each other where they could. And [pc_ent_tension] that used to be between them was now inside each of them, separately, looking for somewhere to go.</li>
+        <li>entangled_rivalry_failure_body->[pawn_nameDef] now viewed [partner_nameDef] as a liability. The trust didn't just break; it was dismantled piece by piece.</li>
+        <li>entangled_rivalry_failure_body->There was a line drawn in the dirt of the colony. [pawn_nameDef] stayed on one side, [partner_nameDef] on the other.</li>
+        <li>entangled_rivalry_failure_body->Something closed in [pawn_nameDef]'s expression. [partner_nameDef] stopped existing in any social sense [pawn_nameDef] bothered to participate in.</li>
+        <li>entangled_rivalry_failure_body->[pawn_nameDef] had stopped acknowledging [partner_nameDef] in shared spaces. [partner_nameDef] had become furniture that breathed.</li>
+        <li>entangled_rivalry_failure_body->The rivalry had curdled into something quieter and worse. [pawn_nameDef] no longer argued with [partner_nameDef]. They just waited.</li>
+        <li>entangled_rivalry_failure_body->The rivalry ended badly. [pc_lex_mechanical_failure_reason].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             ROMANCE - OPENING
+        ═══════════════════════════════════════════════════════════════════ -->
+        <li>entangled_romance_opening_body->[pc_ent_moment]\n\nNo one had said anything. No one needed to. Something had begun [pc_ent_between], quiet as weather that had not been forecast yet.</li>
+
+        <li>entangled_romance_opening_title->something shifting between [pawn_nameDef] and [partner_nameDef]</li>
+        <li>entangled_romance_opening_title->the beginning of something unnamed</li>
+        <li>entangled_romance_opening_title->what grows in the margins of survival</li>
+
+        <li>entangled_romance_opening_body->No one had said anything. No one needed to. The colony had noticed the particular way [pawn_nameDef] paid attention when [partner_nameDef] spoke - a fraction of a second longer than necessary. Something had begun [pc_ent_between], quiet as weather changing before anyone had checked the sky.</li>
+        <li>entangled_romance_opening_body->Surviving this place required attention to what mattered. [pawn_nameDef] had found that [partner_nameDef] mattered - in ways that arrived without announcement and had shown no sign of leaving. Whether this is the beginning of something good, or simply the beginning, remains to be seen.</li>
+        <li>entangled_romance_opening_body->[pawn_nameDef] noticed the way [partner_nameDef] hummed while working. It was a small sound, but it was the only thing [pawn_nameDef] could hear.</li>
+        <li>entangled_romance_opening_body->A shared glance over a mediocre meal lasted a second too long. The world outside the walls felt slightly less lethal for a moment.</li>
+        <li>entangled_romance_opening_body->[pawn_nameDef] found themselves making excuses to walk past wherever [partner_nameDef] was working. Just to see [partner_nameDef] for a moment.</li>
+        <li>entangled_romance_opening_body->[pawn_nameDef] kept finding small excuses to be in the same room as [partner_nameDef]. They had not examined this too closely.</li>
+        <li>entangled_romance_opening_body->[pawn_nameDef] could tell [partner_nameDef] was in the building by some atmospheric shift that probably was not real. [pawn_nameDef] chose not to think too hard about that.</li>
+        <li>entangled_romance_opening_body->[pawn_nameDef] and [partner_nameDef] ended up outside at the same time during [pc_world_time_of_day]. Neither of them went back inside for a while.</li>
+        <li>entangled_romance_opening_body->[pawn_nameDef] had dreamt about [partner_nameDef] twice that [pc_world_season_label]. Neither dream was memorable. [pawn_nameDef] remembered them anyway.</li>
+        <li>entangled_romance_opening_body->They reached for the same thing at the same moment and their hands touched. Neither of them pulled away immediately. A beat passed.</li>
+        <li>entangled_romance_opening_body->[pawn_nameDef] found [partner_nameDef]'s jacket on a chair and did not move it for two days. [pc_friend_name] noticed. [pawn_nameDef] had not explained.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             ROMANCE - MIDDLE
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_romance_middle_title->the distance that grows inside closeness</li>
+        <li>entangled_romance_middle_title->[pawn_nameDef] and [partner_nameDef]: the test</li>
+
+        <li>entangled_romance_middle_body->What grew between people in hard places was real. It was also fragile in ways that nothing else was. [pawn_nameDef] and [partner_nameDef] were learning this - that [pc_ent_bond] was not the same as permanence, and that the distance between two people who cared about each other could be harder to cross than the distance between strangers.</li>
+        <li>entangled_romance_middle_body->The fear was not of the raiders anymore. It was the fear [pawn_nameDef] felt when [partner_nameDef] looked away during a conversation.</li>
+        <li>entangled_romance_middle_body->They were trying to build something in an emotional wasteland. [pawn_nameDef] wondered if [pc_ent_bond] was enough to keep the relationship drying out entirely.</li>
+        <li>entangled_romance_middle_body->[pawn_nameDef] reached for [partner_nameDef]'s hand in the dark, wondering if the weight of the Rim would crush this too.</li>
+        <li>entangled_romance_middle_body->What they had was inconvenient and probably fragile. [pawn_nameDef] and [partner_nameDef] were making it work it anyway.</li>
+        <li>entangled_romance_middle_body->[pawn_nameDef] had considered that [pc_ent_bond] might be a trauma response. [pawn_nameDef] had considered this while making [partner_nameDef] a second cup of whatever passed for tea in this colony. [pc_friend_name] walked in on this. Nobody said anything.</li>
+        <li>entangled_romance_middle_body->[pawn_nameDef] was aware of the mathematics involved in caring about someone in a place like this. [pawn_nameDef] had done the calculation. [pawn_nameDef] was still here.</li>
+        <li>entangled_romance_middle_body->[pawn_nameDef] and [partner_nameDef] were each carrying things the other did not fully know yet. That was the middle of something. Both were aware of it.</li>
+        <li>entangled_romance_middle_body->[pawn_nameDef] told [partner_nameDef] something they hadn't told anyone else. Not strategic. Not planned. It just came out. [partner_nameDef] did not use it against them, which meant something.</li>
+        <li>entangled_romance_middle_body->The [pc_ent_tension] had not disappeared. It had changed shape. [pawn_nameDef] was not sure it was better.</li>
+        <li>entangled_romance_middle_body->[pawn_nameDef] looked over at [partner_nameDef] during a raid briefing and lost track of the briefing. This was probably not a great sign for their tactical awareness.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             ROMANCE - SUCCESS
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_romance_success_title->two lives, one story</li>
+        <li>entangled_romance_success_title->what [pawn_nameDef] and [partner_nameDef] chose to keep</li>
+        <li>entangled_romance_success_title->[pc_ent_bond]</li>
+
+        <li>entangled_romance_success_body->[pawn_nameDef] and [partner_nameDef] had not had an easy time of it. Survival rarely left room for what grew in the margins of it. But [pc_ent_bond] had survived everything the Rim had sent their way, which was not nothing. The colony had noticed. Quietly, in the way colonies notice the things that made them more than a collection of people trying not to die.</li>
+        <li>entangled_romance_success_body->There were things the Rim took from people with both hands. [pawn_nameDef] and [partner_nameDef] had found something it could not touch - not because it was hidden, but because [pc_ent_bond] did not diminish under pressure. It was tested. It held. The rest of the colony knew without having to be told.</li>
+        <li>entangled_romance_success_body->In the quiet between the storms, [pawn_nameDef] and [partner_nameDef] had found a rhythm that belonged only to them.</li>
+        <li>entangled_romance_success_body->[pawn_nameDef] no longer dreamed of escaping the Rim alone. Wherever they went, [partner_nameDef] was already there.</li>
+        <li>entangled_romance_success_body->[pawn_nameDef] and [partner_nameDef] had developed a shorthand. The colony sometimes had to wait for them to finish a conversation that did not happen out loud.</li>
+        <li>entangled_romance_success_body->[pc_ent_bond] had become something the colony factored into its plans automatically. [pawn_nameDef] and [partner_nameDef] moved better when they were near each other. Everyone had noticed.</li>
+        <li>entangled_romance_success_body->[pawn_nameDef] and [partner_nameDef] still argued. Differently than before, though - without the edge that suggested someone was going to leave.</li>
+        <li>entangled_romance_success_body->[pc_ent_bond] had become a fact of the colony, quiet and structural, like a well-placed wall.</li>
+        <li>entangled_romance_success_body->They chose each other. [pc_lex_mechanical_success_reason].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             ROMANCE - FAILURE
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_romance_failure_title->what could not be kept</li>
+        <li>entangled_romance_failure_title->[pawn_nameDef] and [partner_nameDef]: the fracture</li>
+
+        <li>entangled_romance_failure_body->It did not end with a scene. Most things do not. [pawn_nameDef] and [partner_nameDef] had simply arrived at the point where what was [pc_ent_between] had closed. Not violently. Not with speeches. Just - shut. The colony moved around the absence of it the way people move around furniture that used to be somewhere else.</li>
+        <li>entangled_romance_failure_body->The warmth didn't leave all at once. It leaked out until [pawn_nameDef] realized they were sitting in a cold room with a stranger.</li>
+        <li>entangled_romance_failure_body->[pawn_nameDef] looked at [partner_nameDef] and saw only the remains of what they almost had.</li>
+        <li>entangled_romance_failure_body->[pawn_nameDef] tried, and then stopped trying, and then had to keep living alongside [partner_nameDef] anyway. The Rim was not sentimental about timing.</li>
+        <li>entangled_romance_failure_body->[pawn_nameDef] and [partner_nameDef] had learned to work the same shifts again. It took a while. The colony did not push.</li>
+        <li>entangled_romance_failure_body->[pawn_nameDef] still cared what happened to [partner_nameDef]. That was different from what it had been, but it was not nothing.</li>
+        <li>entangled_romance_failure_body->What grew between them could not be kept. [pc_lex_mechanical_failure_reason].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             MENTOR/APPRENTICE - OPENING
+        ═══════════════════════════════════════════════════════════════════ -->
+        <li>entangled_mentorapprentice_opening_body->[pc_ent_moment]\n\n[pawn_nameDef] had what [partner_nameDef] needed. The gap [pc_ent_between] was not insurmountable. Whether either of them was willing to do what closing it required was the question that had not been asked out loud yet.</li>
+
+        <li>entangled_mentorapprentice_opening_title->[pawn_nameDef] and [partner_nameDef]: the teaching begins</li>
+        <li>entangled_mentorapprentice_opening_title->the older hand, the younger eye</li>
+        <li>entangled_mentorapprentice_opening_title->what [pawn_nameDef] has to give</li>
+
+        <li>entangled_mentorapprentice_opening_body->[pawn_nameDef] had been doing this long enough to teach [partner_nameDef] what they did not know yet. This was the particular burden of mastery - one carried it alone until someone came along who was hungry enough to take some of it. [partner_nameDef] had that hunger. [pawn_nameDef] had recognised it. Something was beginning [pc_ent_between].</li>
+        <li>entangled_mentorapprentice_opening_body->Experience is not wisdom. It is the raw material. [pawn_nameDef] had spent [pc_pawn_agebiologicalyears] years converting one into the other. [partner_nameDef] was at the start of that road. The gap [pc_ent_between] was either an opportunity or a problem, depending on what both of them did next.</li>
+        <li>entangled_mentorapprentice_opening_body->[pawn_nameDef] watched [partner_nameDef] struggle with a simple task and saw a younger version of themselves, equally stubborn.</li>
+        <li>entangled_mentorapprentice_opening_body->"Watch my hands," [pawn_nameDef] said. And for the first time, [partner_nameDef] actually did.</li>
+        <li>entangled_mentorapprentice_opening_body->Knowledge was the only thing that did not weigh anything when running. [pawn_nameDef] decided to start unloading.</li>
+        <li>entangled_mentorapprentice_opening_body->[pawn_nameDef] had been doing this long enough to spot someone who could be better at it. [partner_nameDef] could be better at it.</li>
+        <li>entangled_mentorapprentice_opening_body->"Stop doing that," [pawn_nameDef] told [partner_nameDef]. "Here. Do it like this."</li>
+        <li>entangled_mentorapprentice_opening_body->[partner_nameDef] had started asking [pawn_nameDef] questions before asking anyone else. [pawn_nameDef] had not stopped answering them.</li>
+        <li>entangled_mentorapprentice_opening_body->[pawn_nameDef] noticed [partner_nameDef] studying the [pc_pawn_weapon_label] with more attention than it warranted. [pawn_nameDef] knew that look.</li>
+        <li>entangled_mentorapprentice_opening_body->[pawn_nameDef] stopped [partner_nameDef] mid-task and pointed at what they'd missed. "Again," [pawn_nameDef] said. "Slower."</li>
+        <li>entangled_mentorapprentice_opening_body->[partner_nameDef] was early in the learning. [pawn_nameDef] remembered being that early. [pc_parent_name] had more patience about it than [pawn_nameDef] was likely to.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             MENTOR/APPRENTICE - MIDDLE
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_mentorapprentice_middle_title->the trial by doing</li>
+        <li>entangled_mentorapprentice_middle_title->what [partner_nameDef] is becoming</li>
+
+        <li>entangled_mentorapprentice_middle_body->There was a point in any apprenticeship where the student discovered that knowing a thing and doing a thing were entirely different territories. [partner_nameDef] had reached that border. [pawn_nameDef] remembered what it cost to cross it. Whether [pawn_nameDef] could show the way without walking it for [partner_nameDef] was the question the next stretch of time would answer.</li>
+        <li>entangled_mentorapprentice_middle_body->[partner_nameDef] made a mistake that morning. [pawn_nameDef] did not shout; the disappointment in their eyes was far heavier.</li>
+        <li>entangled_mentorapprentice_middle_body->[partner_nameDef] had started asking questions [pawn_nameDef] had not thought about in years. The teaching was cutting both ways.</li>
+        <li>entangled_mentorapprentice_middle_body->[partner_nameDef] was tired, but [pawn_nameDef] kept pushing. This was not about being kind; it was about being ready.</li>
+        <li>entangled_mentorapprentice_middle_body->[partner_nameDef] got hurt doing something [pawn_nameDef] had specifically warned them about. [pawn_nameDef] did not say anything. [partner_nameDef] understood.</li>
+        <li>entangled_mentorapprentice_middle_body->[pawn_nameDef] was tired more often now. Teaching took something out of a person that the work itself did not.</li>
+        <li>entangled_mentorapprentice_middle_body->[partner_nameDef] had started catching things [pawn_nameDef] would have caught. [pawn_nameDef] was not sure how to feel about that.</li>
+        <li>entangled_mentorapprentice_middle_body->The training had moved beyond skills; [pawn_nameDef] was teaching [partner_nameDef] how to stop feeling the cold.</li>
+        <li>entangled_mentorapprentice_middle_body->[partner_nameDef] surpassed [pawn_nameDef] in one small, specific way that day. [pawn_nameDef] noted it without pleasure.</li>
+        <li>entangled_mentorapprentice_middle_body->[pawn_nameDef] had been weaving their own failures into [partner_nameDef]'s education, hoping the result would be thicker this time.</li>
+        <li>entangled_mentorapprentice_middle_body->[partner_nameDef] was exhausted by the end of every session. [pawn_nameDef] had been too, once. Neither said it.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             MENTOR/APPRENTICE - SUCCESS
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_mentorapprentice_success_title->the student becomes</li>
+        <li>entangled_mentorapprentice_success_title->what [pawn_nameDef] passed on</li>
+        <li>entangled_mentorapprentice_success_title->[partner_nameDef]: made</li>
+
+        <li>entangled_mentorapprentice_success_body->[pawn_nameDef] did not say they were proud. That was not the kind of thing people said in a place like this. But the colony had seen [partner_nameDef] work lately - the particular confidence of someone who had been properly taught - and the shape of what [pawn_nameDef] gave them was recognisable in it. [pc_ent_bond] of a particular kind had formed [pc_ent_between]. Not equal yet. But closer than it was.</li>
+        <li>entangled_mentorapprentice_success_body->The thing about teaching was that a person discovered what they knew by explaining it. [pawn_nameDef] knew this now. [partner_nameDef] had learned what was offered, and in the teaching of it, [pawn_nameDef] had learned something too - about what they had been carrying, and what it weighed. The colony was the better for what passed [pc_ent_between].</li>
+        <li>entangled_mentorapprentice_success_body->[pawn_nameDef] stepped back and let [partner_nameDef] finish the work. It was done correctly. It was enough.</li>
+        <li>entangled_mentorapprentice_success_body->[partner_nameDef] now carried the tools with the same weary competence as [pawn_nameDef]. The lineage continued.</li>
+        <li>entangled_mentorapprentice_success_body->[partner_nameDef] did the thing [pawn_nameDef] was going to do, faster and cleaner. [pawn_nameDef] did not feel threatened by this. Much.</li>
+        <li>entangled_mentorapprentice_success_body->[pawn_nameDef] watched [partner_nameDef] handle the [pc_pawn_weapon_label] and recognized the grip. Something had passed [pc_ent_between] them.</li>
+        <li>entangled_mentorapprentice_success_body->[partner_nameDef] did it exactly the way [pawn_nameDef] taught them. [pawn_nameDef] noticed. Neither of them mentioned it.</li>
+        <li>entangled_mentorapprentice_success_body->The [pc_ent_bond] was the silence after a clean shot. [pawn_nameDef] had nothing left to say.</li>
+        <li>entangled_mentorapprentice_success_body->The lesson was passed on. [pc_lex_mechanical_success_reason].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             MENTOR/APPRENTICE - FAILURE
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_mentorapprentice_failure_title->the lesson that could not be taught</li>
+        <li>entangled_mentorapprentice_failure_title->what [pawn_nameDef] could not give [partner_nameDef]</li>
+
+        <li>entangled_mentorapprentice_failure_body->Not every gap can be bridged. [pawn_nameDef] reached across it. [partner_nameDef] reached back. But the distance [pc_ent_between] turned out to be wider than either of them knew - not in skill, exactly, but in something harder to measure. The colony would not speak of it. [pawn_nameDef] and [partner_nameDef] would simply go back to being separate people, carrying separately what they almost managed to share.</li>
+        <li>entangled_mentorapprentice_failure_body->[pawn_nameDef] realized some things could not be taught; they had to be lived. And [partner_nameDef] was not living them.</li>
+        <li>entangled_mentorapprentice_failure_body->The gap between [pawn_nameDef]'s experience and [partner_nameDef]'s potential had finally proven too wide.</li>
+        <li>entangled_mentorapprentice_failure_body->[pawn_nameDef] was not sure whether [partner_nameDef] failed to learn, or [pawn_nameDef] failed to teach. Both felt dishonest. One felt worse. [pc_friend_name] had an opinion on this. [pawn_nameDef] had not asked.</li>
+        <li>entangled_mentorapprentice_failure_body->[pawn_nameDef] stopped trying. Not all apprenticeships ended well. This one had ended without explanation.</li>
+        <li>entangled_mentorapprentice_failure_body->[partner_nameDef] took what [pawn_nameDef] taught and applied it in a way [pawn_nameDef] did not intend. [pawn_nameDef] was thinking about that.</li>
+        <li>entangled_mentorapprentice_failure_body->The lesson could not be taught. [pc_lex_mechanical_failure_reason].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             UNLIKELY ALLIES - OPENING
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_unlikelyallies_opening_title->the pairing no one expected</li>
+        <li>entangled_unlikelyallies_opening_title->[pawn_nameDef] and [partner_nameDef]: forced together</li>
+        <li>entangled_unlikelyallies_opening_title->necessity makes strange arrangements</li>
+
+        <li>entangled_unlikelyallies_opening_body->The Rim did not care what anyone preferred. It put people next to whoever was also surviving, and left them to sort out the rest. [pawn_nameDef] and [partner_nameDef] would not have chosen each other. The colony had put them in each other's orbit anyway. What they made of it - or failed to make of it - was a story being written by circumstance.</li>
+        <li>entangled_unlikelyallies_opening_body->On the surface, [pawn_nameDef] and [partner_nameDef] had nothing in common. Which was not unusual. The Rim was made of people who had nothing in common except that they were still alive. Something had pushed them into a shared space, and [pc_ent_tension] was already gathering there. Whether it became [pc_ent_bond] was the question.</li>
+        <li>entangled_unlikelyallies_opening_body->[pawn_nameDef] was a scholar of the old world; [partner_nameDef] was a butcher of the new. The Rim found the irony delicious.</li>
+        <li>entangled_unlikelyallies_opening_body->They had been placed in each other's way and were still figuring out whether that was the colony's mistake or an opportunity.</li>
+        <li>entangled_unlikelyallies_opening_body->A [pc_pawn_animal_label] wandered into the space between [pawn_nameDef] and [partner_nameDef] and seemed entirely unconcerned. They both watched it leave. A pause. An almost-conversation.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             UNLIKELY ALLIES - MIDDLE
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_unlikelyallies_middle_title->the cost of trust</li>
+        <li>entangled_unlikelyallies_middle_title->what [pawn_nameDef] and [partner_nameDef] owe each other</li>
+
+        <li>entangled_unlikelyallies_middle_body->Trusting someone one did not choose was harder than trusting a friend. It required letting them be wrong about things without that meaning the other person was wrong about them. [pawn_nameDef] and [partner_nameDef] were learning this. The colony watched without saying anything, which was the colony's way of saying a great deal.</li>
+        <li>entangled_unlikelyallies_middle_body->[pawn_nameDef] provided the logic; [partner_nameDef] provided the violence. It was a terrifying symmetry.</li>
+        <li>entangled_unlikelyallies_middle_body->They did not share a language, but they shared a hatred for the mechanoids. That was enough for now.</li>
+        <li>entangled_unlikelyallies_middle_body->[pawn_nameDef] caught [partner_nameDef] looking at their neck. The alliance was a series of held breaths.</li>
+        <li>entangled_unlikelyallies_middle_body->The colony called them "The Omen." Wherever [pawn_nameDef] and [partner_nameDef] went, trouble followed.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             UNLIKELY ALLIES - SUCCESS
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_unlikelyallies_success_title->forged by necessity</li>
+        <li>entangled_unlikelyallies_success_title->what the Rim made of [pawn_nameDef] and [partner_nameDef]</li>
+        <li>entangled_unlikelyallies_success_title->the alliance that shouldn't have worked</li>
+
+        <li>entangled_unlikelyallies_success_body->No one would have predicted this. Possibly not even [pawn_nameDef] and [partner_nameDef] themselves. But [pc_ent_bond] had formed in the space [pc_ent_between] - slowly, without ceremony, in the way that things formed when they were not being forced. The colony was stronger for it. And both of them were, quietly, different.</li>
+        <li>entangled_unlikelyallies_success_body->[pawn_nameDef] and [partner_nameDef] were put together by necessity and kept together by something that grew out of it. The colony had seen what they could do when they trusted each other. [pc_ent_bond] looked different from outside than the people inside it might expect. It looked like reliability. It looked like the kind of thing a colony needed in a place like this.</li>
+        <li>entangled_unlikelyallies_success_body->They were two different kinds of survivor who had found a common language in the sound of gunfire.</li>
+        <li>entangled_unlikelyallies_success_body->[pawn_nameDef] and [partner_nameDef] worked together in a way that neither worked alone. The colony had noticed.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             UNLIKELY ALLIES - FAILURE
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_unlikelyallies_failure_title->some things cannot be bridged</li>
+        <li>entangled_unlikelyallies_failure_title->the alliance that fell apart</li>
+
+        <li>entangled_unlikelyallies_failure_body->The experiment was over. [pawn_nameDef] and [partner_nameDef] had discovered the particular limit of people who were never meant to depend on each other - not because they were bad, but because the gap [pc_ent_between] was real, and the circumstances that pushed them together were not enough to close it. The colony would move them apart where it could. Sometimes that was the most kindness available.</li>
+        <li>entangled_unlikelyallies_failure_body->The necessity passed, and without it, [pawn_nameDef] and [partner_nameDef] discovered they had very little to say to each other. There was nothing wrong with this, technically.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             GENERIC ENTANGLED FALLBACKS
+             Used when arcType-specific rules don't exist.
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>entangled_opening_title->a story between [pawn_nameDef] and [partner_nameDef] begins</li>
+        <li>entangled_opening_title->two paths, converging</li>
+
+        <li>entangled_opening_body->Every colony was also a collection of relationships - most unremarkable, some that left marks. Something had begun [pc_ent_between], and the Rim would decide what it became.</li>
+        <li>entangled_opening_body->Something had brought [pawn_nameDef] and [partner_nameDef] into each other's orbit. Probably the colony. The colony was good at that.</li>
+        <li>entangled_opening_body->[pawn_nameDef] found something that belonged to [partner_nameDef] and returned it. A small thing. It started something.</li>
+
+        <li>entangled_middle_title->the shared chapter continues</li>
+
+        <li>entangled_middle_body->[pawn_nameDef] and [partner_nameDef] were in the middle of something neither of them fully understood yet. The colony continued around them.</li>
+        <li>entangled_middle_body->[pawn_nameDef] and [partner_nameDef] were being watched by something in the tall grass. It seemed to enjoy the drama.</li>
+        <li>entangled_middle_body->[pawn_nameDef] had started reading [partner_nameDef]'s face in briefings. The information was useful. The habit was notable.</li>
+        <li>entangled_middle_body->They were eating a meal of [pc_pawn_animal_label] meat and discussing how they wanted to be buried. That was closeness on the Rim.</li>
+        <li>entangled_middle_body->[pawn_nameDef] came across [partner_nameDef] alone in the [pc_world_time_of_day] and thought about leaving. Didn't.</li>
+
+        <li>entangled_success_title->what [pawn_nameDef] and [partner_nameDef] resolved</li>
+
+        <li>entangled_success_body->The shared story between [pawn_nameDef] and [partner_nameDef] had reached its end - or what counted as an end on the Rim, which was more accurately called a pause. [pc_ent_bond] was real. The colony would not forget it.</li>
+        <li>entangled_success_body->[pawn_nameDef] and [partner_nameDef] had been through enough that the colony had stopped wondering about them. They were simply part of how things worked now.</li>
+        <li>entangled_success_body->[pc_ent_bond] had held. It was enough.</li>
+        <li>entangled_success_body->The shared story resolved well. [pc_lex_mechanical_success_reason].</li>
+
+        <li>entangled_failure_title->what [pawn_nameDef] and [partner_nameDef] could not resolve</li>
+
+        <li>entangled_failure_body->The shared story between [pawn_nameDef] and [partner_nameDef] had closed without resolving. This happened. The Rim did not guarantee endings. Only more Rim.</li>
+        <li>entangled_failure_body->The story ended when [pawn_nameDef] forgot [partner_nameDef]'s name for a full minute. The Rim erased them.</li>
+        <li>entangled_failure_body->They were two people who had run out of things to say to each other. The colony moved on.</li>
+        <li>entangled_failure_body->The shared story ended. [pc_lex_mechanical_failure_reason].</li>
+
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+</Defs>

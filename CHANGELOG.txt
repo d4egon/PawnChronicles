@@ -1,0 +1,83 @@
+PawnChronicles — Changelog
+==========================
+
+[Unreleased]
+------------
+ADDED
+  - New Harmony patch (Patch 13): tracks every social interaction a colonist
+    completes. Both initiator and recipient get credited. Count persists in
+    save data (socialInteractionCount, save version 4).
+  - New Harmony patch (Patch 14): tracks ritual participation. When a ritual
+    lord concludes (LordJob_Ritual.Cleanup), every colonist in the lord has
+    their ritualParticipationCount incremented. Only fires when Ideology is
+    active. Count persists in save data (save version 4).
+  - PC_EntangledGrammar.xml: full style pass - all verb forms converted to
+    past tense, second-person removed, literary/abstract entries replaced with
+    grounded RimWorld-flavored alternatives using [Weapon], [Animal],
+    [Apparel], [TerrainFeature], [PersonJob], [PersonAlly] tags.
+
+FIXED
+  - Wait condition "social": was comparing record values (~0-100) against a
+    tick-based target (~millions) and could never trigger. Now uses
+    socialInteractionCount; arc continues after 10 social interactions.
+  - Wait condition "ritual"/"prayer": was a time + mood check, not actual
+    ritual involvement. Now uses ritualParticipationCount; arc continues after
+    the pawn participates in one ritual. Falls back to time condition if
+    Ideology is not active.
+  - Wait condition "injured" and "healed": CountBadHediffs now filters out
+    permanent hediffs (!h.IsPermanent()), so only temporary wounds and
+    ailments count. Permanent scars and missing parts no longer block the
+    healed condition from ever firing.
+  - Wait condition "time": all BuildTimeCondition calls changed from 2-5 days
+    to 15 days (one RimWorld season), matching the grammar text "a season
+    passes."
+  - Wait condition grammar: trailing ".." corrected to "..." on kills, injured,
+    healed, and crafted entries.
+  - Wait condition grammar: typo "recieves" corrected to "receives."
+  - Wait condition grammar: social entry now states the 10-interaction
+    requirement explicitly.
+  - Wait condition grammar: ritual entry now says "participates in a ritual"
+    rather than "observes" one.
+  - Save version bumped from 3 to 4 (new counters load as 0 on old saves;
+    one migration log message fires per session).
+
+  - Medieval Mode setting (Settings -> Narrative Mode -> Medieval mode).
+    When enabled, any sci-fi or industrial-era phrases in narrative text are
+    replaced with era-neutral alternatives. Overrides live in
+    PC_NarrativeGrammar_Medieval.xml — add new keys there to extend coverage.
+    Zero overhead when the setting is off (main pack added by Include as before).
+
+FIXED
+  - Pawns with chronicles disabled (chroniclesDisabled = true) were still
+    being selected as initiator or partner for entangled/shared arcs.
+    TryEvaluateNewPairs now filters them out before pair evaluation runs.
+  - Autopilot setting was not applied to shared arcs. Entangled arc entries
+    awaiting a player choice now auto-pick via the initiator's narrative
+    profile (stat-based mode) or randomly (random mode), matching solo arc
+    behaviour. Condition-met stage advances also fire automatically under
+    autopilot rather than waiting for the player to click.
+
+REMOVED
+  - WorldDataScraper removed entirely. It was generating hundreds of grammar
+    rules that nothing consumed, its TTL logic was broken, and it cost
+    250-370 ms per scrape with 25 colonists on map. World-level narrative
+    context will return as a dedicated WorldChronicles system later.
+  - Debug viewer WorldData sub-tab removed (no data to show).
+  - Settings performance panel World Scraper section removed.
+
+----
+ADDED
+  - Translation infrastructure: Languages/English/Keyed/PC_Keyed.xml
+    All player-facing UI strings are now keyed so community members can
+    create translation mods. Covers settings window, debug panel, ITab
+    chrome, arc progression UI, wait condition labels, seed choices (28),
+    middle-stage choices (29), tradeoff pool (10 pools), and climax UI.
+  - All four C# UI files patched to use .Translate() calls:
+      PawnChroniclesSettingsWindow.cs, StageWaitCondition.cs,
+      CompPersonalChronicles.cs, ITab_Pawn_Chronicles.cs
+  - DefInjected translations already supported by RimWorld for Def labels
+    (PersonalEpicDef, NarrativeTagDef, EntangledArcDef labels/descriptions).
+  NOTE: Lexicon.cs narrative grammar phrases are intentionally NOT keyed
+        in this pass — they feed the grammar resolver directly and require
+        a larger refactor. Translators can handle grammar via DefInjected
+        (PC_NarrativeGrammar.xml, PC_EntangledGrammar.xml).

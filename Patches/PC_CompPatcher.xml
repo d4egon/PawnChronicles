@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[@Name="BasePawn"]/comps</xpath>
+    <value>
+      <li Class="PawnChronicles.CompProperties_PersonalChronicles" />
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[@Name="BasePawn"]/inspectorTabs</xpath>
+    <value>
+      <li>PawnChronicles.ITab_Pawn_Chronicles</li>
+    </value>
+  </Operation>
+</Patch>

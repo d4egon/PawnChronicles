@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    PC_ThoughtDefs - Mood consequences for epic arc resolution + daily moments.
+    Applied by EpicOutcomeApplicator when a climax stage resolves,
+    and by FireSparkFallback / FireEmberFallback for daily moments.
+  -->
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SUCCESS THOUGHTS
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcSuccess_Resolved</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>something lifted</label>
+        <description>Something that had been weighing on me for a long time has finally been resolved. I feel lighter than I have in a while.</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcSuccess_Restored</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>15</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>an old wound healed</label>
+        <description>Something I had been carrying for years has finally been put to rest. I didn't know how much it weighed until it was gone.</description>
+        <baseMoodEffect>20</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcSuccess_Found</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>12</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>found what I was looking for</label>
+        <description>The thing I went looking for - I found it. It isn't exactly what I expected. But it's real, and it's mine.</description>
+        <baseMoodEffect>18</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcSuccess_Built</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>8</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>made something I'm genuinely proud of</label>
+        <description>I built something that works - not just technically, but in the way that matters. Something that will outlast the circumstances it came out of.</description>
+        <baseMoodEffect>20</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcSuccess_Answered</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>15</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>uncovered the truth</label>
+        <description>The question I had been pulling at finally gave way. What I found changes the shape of what I understood before.</description>
+        <baseMoodEffect>12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcSuccess_DebtCleared</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>clear of old debts</label>
+        <description>The arrangement is done. I walked out of it with what I came for and nothing extra trailing behind me. That's as good as it gets.</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HARD ROAD COST
+       Applied every time a player resolves a climax via Hard Road.
+       This is the guaranteed price - separate from the incident.
+       The incident is the drama. This is the weight.
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThoughtDef>
+    <defName>PC_Thought_HardRoadCost</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>paid a heavy price</label>
+        <description>The path I chose demanded something real. I came through it - but not unchanged, and not without cost. The weight of it will take a few days to settle.</description>
+        <baseMoodEffect>-15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FAILURE THOUGHTS
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcFail_PricePaid</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>8</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>something I tried to do went wrong</label>
+        <description>It didn't go the way I needed it to. I came out the other side, but not unchanged, and not with what I went for.</description>
+        <baseMoodEffect>-12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcFail_TooLate</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>20</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>I was too late</label>
+        <description>There was nothing left to find. Or the trail had gone cold long before I got there. Either way - I was too late. That is the specific weight of it.</description>
+        <baseMoodEffect>-25</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcFail_WeightRemains</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>12</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>still carrying it</label>
+        <description>The thing I went to settle is still there. The weight hasn't shifted. I came back, which counts for something. But it doesn't count for that.</description>
+        <baseMoodEffect>-15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcFail_DeeperIn</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>15</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>made things worse, not better</label>
+        <description>The arrangement went sideways. I came out of it, which is something. But whatever I went in to resolve is now more complicated, not less.</description>
+        <baseMoodEffect>-20</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcFail_NothingLeft</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>12</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>some questions are better as questions</label>
+        <description>I found the answer. I didn't expect to wish I hadn't. Some things are better left as questions - this was one of them.</description>
+        <baseMoodEffect>-18</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_ArcFail_DebtUnpaid</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>the debt is still there</label>
+        <description>I couldn't clear it. The debt is still there, attached to me, specific and heavy. I don't know yet what that costs going forward.</description>
+        <baseMoodEffect>-18</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SPARK / EMBER MOMENT THOUGHTS
+       Spark: +3 mood for 8 hours. Barely noticeable. Just real.
+       Ember: +6 mood for 1.5 days. A bit more present.
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <!--
+    PC_Thought_SparkMoment / PC_Thought_EmberMoment - 6 stages, one per tag family.
+    Stage index is chosen at runtime based on the pawn's last player-chosen arc tag
+    (or their dominant profile tag as fallback). All stages share the same moodEffect.
+
+    Stage index -> tag family:
+      0  violence / predator / primal
+      1  social / nurture / healer
+      2  craft / artisan / builder
+      3  curiosity / scholar / intellectual
+      4  animalfriend / wilderness / wanderer
+      5  generic fallback
+  -->
+
+  <ThoughtDef>
+    <defName>PC_Thought_SparkMoment</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.33</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <!-- 0: violence -->
+      <li>
+        <label>surprise</label>
+        <description>Booh! I was surprised. Woah, my body is almost spinning! Who would DO such a thing?</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <!-- 1: social / nurture / healer -->
+      <li>
+        <label>someone needed something</label>
+        <description>A small thing was asked for and I gave it away without much thought. It left a trace in my heart.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <!-- 2: craft -->
+      <li>
+        <label>the hands knew what to do</label>
+        <description>It felt good to do something practical today!</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <!-- 3: curiosity / intellectual -->
+      <li>
+        <label>a thread came loose</label>
+        <description>There was a thought in the back of my head today - It didn't solve, but I had a little breakthrough.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <!-- 4: wilderness / animal -->
+      <li>
+        <label>the world was quiet for a moment</label>
+        <description>A small animal crossed my path. I stopped. It didn't. But for a moment all the noise was gone!</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <!-- 5: generic fallback -->
+      <li>
+        <label>a breath of wind passed through</label>
+        <description>Huh?.. What was that?!</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_EmberMoment</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>1.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <!-- 0: violence -->
+      <li>
+        <label>earned peace</label>
+        <description>The aftermath of a hard day settled in - peace at last! Standing in that quiet, this place felt briefly survivable.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+      <!-- 1: social / nurture / healer -->
+      <li>
+        <label>not alone</label>
+        <description>Someone leaned on them today - or they leaned on someone else. Either way, the weight was shared for a moment. That kind of thing doesn't last, but it doesn't need to. It did what it needed to do.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+      <!-- 2: craft -->
+      <li>
+        <label>made something that holds</label>
+        <description>They stood back and looked at what they'd made. Not for long. Long enough to know it was solid. Something finished and working right is its own argument against everything the Rim throws.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+      <!-- 3: curiosity / intellectual -->
+      <li>
+        <label>something clicked</label>
+        <description>I had an issue, but then the old question answered itself. Didn't see that one coming!</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+      <!-- 4: wilderness / animal -->
+      <li>
+        <label>the land gave something back</label>
+        <description>Time spent away from home, or just a moment where the land and the sky were the only things in the frame. This place is indifferent to everything, which is sometimes exactly what I need.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+      <!-- 5: generic fallback -->
+      <li>
+        <label>a moment of stillness</label>
+        <description>I had moment of quiet clarity today. It felt good.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       NARRATIVE HEDIFF PULSE THOUGHTS
+       Injected periodically by HediffComp_NarrativePulse.
+       Short duration - they flash through and fade. That's the point.
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <!-- PC_Hediff_Haunted -->
+  <ThoughtDef>
+    <defName>PC_Thought_HauntedUnease</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.4</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>something follows me</label>
+      <description>A presence at the edge of sight. A sound that stops when I turn around. Something followed me home and I don't know how to make it leave.</description>
+      <baseMoodEffect>-3</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_HauntedDread</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>it's still there</label>
+      <description>I can feel it watching. Not hostile exactly. But aware. It knows my name. It has been following me for longer than I realised. Or am I just imagining things?</description>
+      <baseMoodEffect>-8</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_HauntedLifted</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>3</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>whatever that was, it's gone</label>
+      <description>The weight lifted. The edges of rooms feel normal again. I don't know what resolved it, but it feels lighter now.</description>
+      <baseMoodEffect>8</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <!-- PC_Hediff_VoidEcho -->
+  <ThoughtDef>
+    <defName>PC_Thought_VoidMemory</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.3</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>I remember what I saw</label>
+      <description>The image surfaces again. Whatever I looked at in that place - it left a copy of itself behind my eyes. It's really disturbing!</description>
+      <baseMoodEffect>-5</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <!-- PC_Hediff_StarFever -->
+  <ThoughtDef>
+    <defName>PC_Thought_StarCall</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>the stars are calling</label>
+      <description>I keep finding myself looking up. Not at anything specific. Just up. The feeling that something out there is waiting for a reply I haven't sent yet.</description>
+      <baseMoodEffect>-2</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <!-- PC_Hediff_BloodGuilt -->
+  <ThoughtDef>
+    <defName>PC_Thought_BloodFlash</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.3</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>another face in the dark</label>
+      <description>A face surfaced without warning. Someone I killed...? I'm not sure.. The mind keeps counting bodies even when I stopped.</description>
+      <baseMoodEffect>-4</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <!-- PC_Hediff_GhostBound -->
+  <ThoughtDef>
+    <defName>PC_Thought_GhostPresence</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>something watches me sleep</label>
+      <description>I woke at the wrong hour and couldn't find peace again. The room felt occupied. I counted my breaths until the feeling passed. It took a long time.</description>
+      <baseMoodEffect>-5</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <!-- PC_Hediff_ProphetsMark -->
+  <ThoughtDef>
+    <defName>PC_Thought_ProphetUrge</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.4</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>I should tell them</label>
+      <description>The certainty comes and goes. Right now it's here: I know something true that the others don't, and the gap between knowing and saying it is starting to feel wrong.</description>
+      <baseMoodEffect>2</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <!-- PC_Hediff_AlienMark -->
+  <ThoughtDef>
+    <defName>PC_Thought_AlienCuriosity</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.4</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>I wonder what it wanted</label>
+      <description>Whatever left this mark was not hostile. I've thought about it more than I should have. The attention felt almost deliberate. Like being studied by something patient.</description>
+      <baseMoodEffect>0</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <!-- PC_Hediff_MachineEmpathy -->
+  <ThoughtDef>
+    <defName>PC_Thought_MachineWhisper</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.3</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>the machines speak if you listen</label>
+      <description>There's a rhythm in the equipment. Heat cycles. Pressure shifts. I started hearing it as language. I don't know what it's saying. I'm not sure it's saying anything. I keep listening anyway.</description>
+      <baseMoodEffect>1</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <!-- PC_Hediff_BrokenFaith -->
+  <ThoughtDef>
+    <defName>PC_Thought_FaithVoid</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>what do I believe in</label>
+      <description>The certainty I used to have about everything - ideology, purpose, direction - has gone quiet. I still go through the motions. But the conviction behind them has become a black hole.</description>
+      <baseMoodEffect>-6</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_FaithReturned</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>4</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>I know what I believe again</label>
+      <description>The void closed. Whatever I went through cleared out the doubt along with everything else. What's left is a rock solid faith.</description>
+      <baseMoodEffect>10</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <!-- PC_Hediff_CelestialSickness -->
+  <ThoughtDef>
+    <defName>PC_Thought_OrbitalNausea</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>0.4</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>something from the sky is in me</label>
+      <description>Whatever came down with the ship - the light, the residue, whatever it was - it's still working its way through. I can feel it at the edges. The body knows something is wrong even when I can't name it.</description>
+      <baseMoodEffect>-4</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_CelestialCleared</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>3</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages><li>
+      <label>the sky is out of me</label>
+      <description>Whatever the ship left behind has finally cleared. The body did its work. Everything feels a little lighter than it did before - like the difference between carrying weight you'd forgotten about and not carrying it anymore.</description>
+      <baseMoodEffect>6</baseMoodEffect>
+    </li></stages>
+  </ThoughtDef>
+
+
+</Defs>

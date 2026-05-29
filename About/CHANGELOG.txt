@@ -1,0 +1,115 @@
+PAWN CHRONICLES - CHANGELOG
+===========================
+
+--- [current build] ---
+
+PERFORMANCE
+  - Removed WorldDataScraper entirely. The scraper generated hundreds of rules
+    covering factions, storyteller state, tales, battles, history events, and
+    def databases - none of which were referenced in any grammar XML. The cost
+    was 250-370 ms per cold scrape with no narrative benefit. World scraping
+    will return as a dedicated WorldChronicles system in a future update.
+
+  - World scraper cache TTL was broken. The old tick-based TTL (6000 ticks ~
+    6 game-minutes) always expired before arc events fired, producing 0% cache
+    hits regardless of the setting in Settings -> Scraper. Removed along with
+    the scraper itself.
+
+  - Grammar resolver no longer allocates a world rules cache on every resolve
+    pass. The s_worldRulesCache block has been removed from BuildGrammarContext.
+
+DEBUG VIEWER
+  - World Data sub-tab removed from the Debug Viewer. The tab bar is now
+    PawnData / Tales & Log / Perf (3 tabs instead of 4).
+
+  - Perf panel World Scraper section removed. The remaining panels are
+    CompTick, Grammar Resolver, and Pawn Scraper.
+
+SAVE / LOAD
+  - Migration log no longer repeats once per pawn. On a colony with 98 pawns,
+    the old code printed the migration line 98 times. It now fires once per session.
+
+  - Deep-saved collections (arc entries, chronicle log, hellfire chain) are now
+    wrapped in try-catch during ExposeData. World pawns and dead pawns that aren't
+    fully serialised no longer risk corrupting the collection on load.
+
+UI
+  - Settings window now null-guards on the first render frame, preventing a rare
+    null-reference before the mod constructor has fully initialised.
+
+  - Settings scroll views are now dynamically sized. Canvas height is measured
+    from actual content after each draw, so no settings are ever clipped regardless
+    of how many are added in future updates.
+
+  - Debug Viewer raw symbol panels now use taller rows and a wider key column
+    (65% / 35% split) so long keys no longer clip into the value column.
+
+GRAMMAR
+  - Climax stage letters now have dedicated grammar rules (climax_body,
+    climax_title, and tag-specific variants for violence, craft, curiosity,
+    animalfriend, social, loss, and trauma). Previously the climax fell through
+    to default_body, producing a bare separator line with no narrative content.
+    All new rules use the full Lexicon vocabulary: [pc_lex_scene], [pc_lex_tone],
+    [pc_lex_identity_echo], tag verbs, [pc_lex_wound_summary], etc.
+
+  - Climax letter composition is now robust against empty parts. Title, body, and
+    condition label are joined with a single separator only when each part is
+    non-empty, preventing stacked visual dividers when grammar falls back.
+
+BUGFIXES
+  - Removed invalid <logEntryClass> field from PC_LogEntryDef.xml. LogEntryDef
+    in RimWorld 1.6 does not have this field; its presence caused an XML error
+    on every load without preventing the combat log from working.
+
+COMBAT LOG
+  - Ember consequences now appear in the combat log.
+    Every physical ripple from work - a bruised finger, a lucky ore seam,
+    a flash of inspiration - is recorded with the pawn's name, what happened,
+    the hediff, severity, and body part where applicable.
+    Clicking a pawn portrait in the log filters to only their entries.
+
+UI
+  - Chronicles window edge resizing improved. Drag the right or top edge
+    to resize. Both edges highlight on hover so they're easy to find.
+    Corner grabber removed in favour of the cleaner edge-drag approach.
+
+  - Inner content panes are now borderless, matching RimWorld's visual style.
+
+--- [1.0.0] --- (first Workshop release)
+
+GRAMMAR
+  - Narrative grammar system fully rebuilt around dynamic atoms.
+    Every output is now grounded in the pawn's actual state: their best skill,
+    the current weather, biome, season, time of day, colony name, weapon,
+    kill record, strongest mood thought, hediff body part, backstory title, age.
+  - All five composition layers now use RimWorld's globally available grammar
+    tags ([BodyPart], [AdjectiveAngsty], [ConceptAngsty], [TerrainFeature],
+    [NaturalObject], [Animal], [PersonFamily], [Community], etc.) as atomic
+    building blocks instead of static word lists.
+  - Result: 200,000+ unique moment combinations before themed variants,
+    every one of them specific to this pawn in this world right now.
+
+BUGFIXES
+  - Celestial Sickness no longer kills colonists.
+    It was incorrectly flagged as lethal at max severity and was actively
+    climbing in severity with no ceiling. It now behaves like fibrous/sensory
+    mechanites: rises until the immune system catches up, can be tended down,
+    and fades naturally over 15-30 days. Recovery now fires a mood thought.
+
+  - Ember job injuries now land on a specific body part instead of the whole body.
+    Burns, cuts, bruises and scratches from ember consequences are now applied to
+    a random external body part, weighted toward smaller parts (fingers, toes,
+    hands, feet). Worst case from a bad roll is an infected finger that needs
+    amputation - not a dead colonist.
+
+UI
+  - Narrative Profile tag rows now show tooltips on hover.
+    Hovering a tag displays its description (e.g. "A history of killing.
+    Bloodlust, high kill counts, berserker tendencies.") and a click hint.
+    Players now know the bars are interactive.
+
+  - More breathing room between the outer frame and the inner content panes.
+    The close button in the top-right corner is no longer clipped.
+
+  - Chronicles window is now resizable. Drag the grip in the bottom-right
+    corner to resize between 720x450 and 1600x950. Size is saved between sessions.

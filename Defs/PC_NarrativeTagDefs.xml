@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- DARK / STRUGGLE -->
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Trauma</defName><label>trauma</label><description>Physical suffering - missing parts, deep scars, chronic pain.</description><scorerClass>PawnChronicles.TagScorer_Trauma</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Loss</defName><label>loss</label><description>Dead relations, destroyed homes, severed bonds.</description><scorerClass>PawnChronicles.TagScorer_Loss</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Grief</defName><label>grief</label><description>Loss that hasn't been processed. The wound still open.</description><scorerClass>PawnChronicles.TagScorer_Grief</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Decay</defName><label>decay</label><description>Addiction, dementia, age - the body or mind wearing down.</description><scorerClass>PawnChronicles.TagScorer_Decay</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Isolation</defName><label>isolation</label><description>A pawn who stands apart - by choice, nature, or circumstance.</description><scorerClass>PawnChronicles.TagScorer_Isolation</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Violence</defName><label>violence</label><description>A history of killing. Bloodlust, high kill counts, berserker tendencies.</description><scorerClass>PawnChronicles.TagScorer_Violence</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Underworld</defName><label>underworld</label><description>Criminal background, addiction, shady origins.</description><scorerClass>PawnChronicles.TagScorer_Underworld</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Betrayal</defName><label>betrayal</label><description>Trust was broken - by others or by [pawn_pronoun]self.</description><scorerClass>PawnChronicles.TagScorer_Betrayal</scorerClass></PawnChronicles.NarrativeTagDef>
+
+  <!-- POWER / IDENTITY -->
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Augmentation</defName><label>augmentation</label><description>Bionics and implants - the line between flesh and machine blurring.</description><scorerClass>PawnChronicles.TagScorer_Augmentation</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Power</defName><label>power</label><description>Psycasts, royal authority, deep spiritual bonds.</description><scorerClass>PawnChronicles.TagScorer_Power</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Duty</defName><label>duty</label><description>Military training, royal title, loyalty above self.</description><scorerClass>PawnChronicles.TagScorer_Duty</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Devotion</defName><label>devotion</label><description>Ideological conviction. Beliefs that shape every action.</description><scorerClass>PawnChronicles.TagScorer_Devotion</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Faith</defName><label>faith</label><description>Deep religious commitment. The true believer, the moralist, the shepherd.</description><scorerClass>PawnChronicles.TagScorer_Faith</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Noble</defName><label>noble</label><description>High-born blood, royal lineage, or the ghost of a fallen empire.</description><scorerClass>PawnChronicles.TagScorer_Noble</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Leadership</defName><label>leadership</label><description>Natural commander, someone others instinctively follow.</description><scorerClass>PawnChronicles.TagScorer_Leadership</scorerClass></PawnChronicles.NarrativeTagDef>
+
+  <!-- SURVIVAL / WANDERING -->
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Survival</defName><label>survival</label><description>Refugee origins, starvation, someone who fought just to exist.</description><scorerClass>PawnChronicles.TagScorer_Survival</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Wandering</defName><label>wandering</label><description>No fixed home, no lasting roots. Still looking for something.</description><scorerClass>PawnChronicles.TagScorer_Wandering</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Refugee</defName><label>refugee</label><description>Driven from home by war, disaster, or persecution.</description><scorerClass>PawnChronicles.TagScorer_Refugee</scorerClass></PawnChronicles.NarrativeTagDef>
+
+  <!-- POSITIVE / NEUTRAL -->
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Pacifism</defName><label>pacifism</label><description>A refusal of violence - principled, traumatised, or simply gentle.</description><scorerClass>PawnChronicles.TagScorer_Pacifism</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Kinship</defName><label>kinship</label><description>Strong bonds, living family, something worth protecting.</description><scorerClass>PawnChronicles.TagScorer_Kinship</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Craft</defName><label>craft</label><description>A maker - expresses themselves through building and creating.</description><scorerClass>PawnChronicles.TagScorer_Craft</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Curiosity</defName><label>curiosity</label><description>High intellect, multiple passions, the drive to understand.</description><scorerClass>PawnChronicles.TagScorer_Curiosity</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Nurture</defName><label>nurture</label><description>A healer, a carer - tends to people, animals, and trees.</description><scorerClass>PawnChronicles.TagScorer_Nurture</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Resilience</defName><label>resilience</label><description>Still standing after mental breaks, near-death, and long years.</description><scorerClass>PawnChronicles.TagScorer_Resilience</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Scholar</defName><label>scholar</label><description>A seeker of knowledge, researcher, or intellectual.</description><scorerClass>PawnChronicles.TagScorer_Scholar</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Artist</defName><label>artist</label><description>Expresses themselves through beauty, music, or creation.</description><scorerClass>PawnChronicles.TagScorer_Artist</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_AnimalFriend</defName><label>animal friend</label><description>Deep bond with animals - handler, trainer, or beast whisperer.</description><scorerClass>PawnChronicles.TagScorer_AnimalFriend</scorerClass></PawnChronicles.NarrativeTagDef>
+  <PawnChronicles.NarrativeTagDef><defName>PC_Tag_Healer</defName><label>healer</label><description>A doctor, medic, or natural caretaker of the injured.</description><scorerClass>PawnChronicles.TagScorer_Healer</scorerClass></PawnChronicles.NarrativeTagDef>
+
+</Defs>

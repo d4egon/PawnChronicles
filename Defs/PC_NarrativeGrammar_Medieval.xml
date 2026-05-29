@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--
+  ╔══════════════════════════════════════════════════════════════════════════════╗
+  ║               PC_NarrativeGrammar_Medieval                                   ║
+  ║   Loaded by NarrativeGrammarResolver when Settings -> Medieval Mode is ON.   ║
+  ║                                                                              ║
+  ║   Every rule keyword listed here is REMOVED from the main grammar pack       ║
+  ║   and replaced with the version below. The resolver filters by keyword       ║
+  ║   so only exact matches are replaced — everything else carries over.         ║
+  ║                                                                              ║
+  ║   To add a new override: paste the key from PC_NarrativeGrammar.xml here     ║
+  ║   and rewrite the value. The old entry disappears automatically.             ║
+  ╚══════════════════════════════════════════════════════════════════════════════╝
+  -->
+  <RulePackDef>
+    <defName>PC_NarrativeGrammar_Medieval</defName>
+    <rulePack>
+      <rulesStrings>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             OVERRIDES
+             These keys had language that assumes a sci-fi / industrial era.
+             Rewrites use phrasing that fits any period.
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <!-- Original: "recovered data - a partial file referencing..." -->
+        <li>curiosity_opening_body->It arrives in scattered records — a partial text referencing something that should not exist. [pawn_nameDef], whose best skill is [pc_skill_best_label] at level [pc_skill_best_level], [pc_lex_verb_curiosity].\n\n[pc_lex_scene].</li>
+
+        <!-- Original: "The schematic arrived without a sender." -->
+        <li>craft_opening_body->The design arrived without a name attached. [pawn_nameDef] — former [pc_backstory_adult_title], [pc_skill_best_label] at [pc_skill_best_level] — has been thinking about exactly this.\n\n[pawn_pronoun] [pc_lex_verb_craft], [pc_lex_scene].</li>
+
+        <!-- Original: "In recovered data is a single fragment" -->
+        <li>scholar_opening_body->Among old records is a single fragment — referencing a body of work [pawn_nameDef] has spent years trying to locate. [pc_lex_identity_echo], with [pc_skill_best_label] at [pc_skill_best_level].\n\n[pawn_pronoun] [pc_lex_verb_curiosity].</li>
+
+        <!-- Original: "did not exhale until the readings stabilised" -->
+        <li>healer_success_body->The treatment worked. [pawn_nameDef] did not exhale until the patient stabilised.\n\n[pc_skill_best_label] at [pc_skill_best_level] was enough, this time.\n\n[pawn_namedef] sat beside the bed, [pc_lex_scene], and watched the saved patients breath.</li>
+
+        <!-- Original: "get to work on the documentation" -->
+        <li>craft_success_body->The final piece goes in. [pawn_nameDef] steps back and looks.\n\nIt works. [pc_skill_best_label] at [pc_skill_best_level] made manifest.\n\n[pawn_pronoun] gets to work on the account of it. Someone else should be able to build this too.</li>
+
+        <!-- Original: "The documentation will be thorough" -->
+        <li>craft_failure_body->Something was wrong at a level [pawn_nameDef] did not catch in time. [pc_skill_best_label] at [pc_skill_best_level] was not enough.\n\nThe record will be thorough — [pawn_pronoun] is very thorough when [pawn_pronoun] is angry at [pawn_possessive]self.\n\n[pawn_pronoun] returns to [pc_colony_name], [pc_lex_scene].</li>
+
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+</Defs>

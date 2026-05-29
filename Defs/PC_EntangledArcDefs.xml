@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       ENTANGLED STAGE DEFS
+       Each stage is a top-level def referenced by name in the arc's stagePool.
+       Opening stages fire first. Middle stages fill the gap. Climax stages end it.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       RIVALRY STAGES
+  ─────────────────────────────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Rivalry_Opening</defName>
+    <label>the spark of conflict</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <conditionMode>InitiatorOnly</conditionMode>
+    <initiatorTagRequirements>
+      <li>
+        <tag>PC_Tag_Violence</tag>
+        <minScore>15</minScore>
+        <weight>1.5</weight>
+      </li>
+    </initiatorTagRequirements>
+    <partnerTagRequirements>
+      <li>
+        <tag>PC_Tag_Duty</tag>
+        <minScore>10</minScore>
+        <weight>1.0</weight>
+      </li>
+    </partnerTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Rivalry_Middle_Escalation</defName>
+    <label>the wound between them deepens</label>
+    <isMiddle>true</isMiddle>
+    <conditionMode>EitherMeets</conditionMode>
+    <initiatorTagRequirements>
+      <li>
+        <tag>PC_Tag_Violence</tag>
+        <minScore>15</minScore>
+        <weight>1.0</weight>
+      </li>
+    </initiatorTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Rivalry_Climax_Confront</defName>
+    <label>a reckoning</label>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <conditionMode>BothMustMeet</conditionMode>
+    <initiatorTagRequirements>
+      <li>
+        <tag>PC_Tag_Violence</tag>
+        <minScore>15</minScore>
+        <weight>1.0</weight>
+      </li>
+    </initiatorTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Rivalry_Climax_Collapse</defName>
+    <label>the rivalry ends in ruin</label>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <conditionMode>EitherMeets</conditionMode>
+    <initiatorTagRequirements>
+      <li>
+        <tag>PC_Tag_Betrayal</tag>
+        <minScore>10</minScore>
+        <weight>1.0</weight>
+      </li>
+    </initiatorTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       ROMANCE STAGES
+  ─────────────────────────────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Romance_Opening</defName>
+    <label>something shifts between them</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <conditionMode>EitherMeets</conditionMode>
+    <initiatorTagRequirements>
+      <li>
+        <tag>PC_Tag_Kinship</tag>
+        <minScore>20</minScore>
+        <weight>2.0</weight>
+      </li>
+    </initiatorTagRequirements>
+    <partnerTagRequirements>
+      <li>
+        <tag>PC_Tag_Kinship</tag>
+        <minScore>15</minScore>
+        <weight>1.5</weight>
+      </li>
+    </partnerTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Romance_Middle_Distance</defName>
+    <label>the distance between them grows</label>
+    <isMiddle>true</isMiddle>
+    <conditionMode>InitiatorOnly</conditionMode>
+    <initiatorTagRequirements>
+      <li>
+        <tag>PC_Tag_Loss</tag>
+        <minScore>10</minScore>
+        <weight>1.0</weight>
+      </li>
+    </initiatorTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Romance_Climax_Bond</defName>
+    <label>two lives, one story</label>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <conditionMode>BothMustMeet</conditionMode>
+    <initiatorTagRequirements>
+      <li>
+        <tag>PC_Tag_Kinship</tag>
+        <minScore>20</minScore>
+        <weight>1.5</weight>
+      </li>
+    </initiatorTagRequirements>
+    <partnerTagRequirements>
+      <li>
+        <tag>PC_Tag_Kinship</tag>
+        <minScore>20</minScore>
+        <weight>1.5</weight>
+      </li>
+    </partnerTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Romance_Climax_Loss</defName>
+    <label>what was almost whole, broken</label>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <conditionMode>EitherMeets</conditionMode>
+    <partnerTagRequirements>
+      <li>
+        <tag>PC_Tag_Grief</tag>
+        <minScore>10</minScore>
+        <weight>1.0</weight>
+      </li>
+    </partnerTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       MENTOR / APPRENTICE STAGES
+  ─────────────────────────────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Mentor_Opening</defName>
+    <label>the older hand reaches out</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <conditionMode>InitiatorOnly</conditionMode>
+    <initiatorTagRequirements>
+      <li>
+        <tag>PC_Tag_Craft</tag>
+        <minScore>30</minScore>
+        <weight>2.0</weight>
+      </li>
+    </initiatorTagRequirements>
+    <partnerTagRequirements>
+      <li>
+        <tag>PC_Tag_Curiosity</tag>
+        <minScore>15</minScore>
+        <weight>1.0</weight>
+      </li>
+    </partnerTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Mentor_Middle_Trial</defName>
+    <label>the trial by doing</label>
+    <isMiddle>true</isMiddle>
+    <conditionMode>PartnerOnly</conditionMode>
+    <partnerTagRequirements>
+      <li>
+        <tag>PC_Tag_Curiosity</tag>
+        <minScore>10</minScore>
+        <weight>1.0</weight>
+      </li>
+    </partnerTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Mentor_Climax_Mastery</defName>
+    <label>the student becomes</label>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <conditionMode>PartnerOnly</conditionMode>
+    <partnerTagRequirements>
+      <li>
+        <tag>PC_Tag_Craft</tag>
+        <minScore>20</minScore>
+        <weight>2.0</weight>
+      </li>
+    </partnerTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Mentor_Climax_Failure</defName>
+    <label>the lesson that could not be taught</label>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <conditionMode>InitiatorOnly</conditionMode>
+    <initiatorTagRequirements>
+      <li>
+        <tag>PC_Tag_Loss</tag>
+        <minScore>5</minScore>
+        <weight>1.0</weight>
+      </li>
+    </initiatorTagRequirements>
+  </PawnChronicles.EntangledStageDef>
+
+  <!-- ───────────────────────────────────────────────────────────────────────
+       UNLIKELY ALLIES STAGES
+  ─────────────────────────────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Allies_Opening</defName>
+    <label>forced into the same foxhole</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <conditionMode>EitherMeets</conditionMode>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Allies_Middle_Friction</defName>
+    <label>the cost of trust</label>
+    <isMiddle>true</isMiddle>
+    <conditionMode>BothMustMeet</conditionMode>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Allies_Climax_United</defName>
+    <label>forged by necessity</label>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <conditionMode>BothMustMeet</conditionMode>
+  </PawnChronicles.EntangledStageDef>
+
+  <PawnChronicles.EntangledStageDef>
+    <defName>PC_EStage_Allies_Climax_Apart</defName>
+    <label>some things cannot be bridged</label>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>false</outcomeSetsSuccess>
+    <conditionMode>EitherMeets</conditionMode>
+  </PawnChronicles.EntangledStageDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       ENTANGLED ARC DEFS
+  ═══════════════════════════════════════════════════════════════════════════ -->
+
+  <!-- ── RIVALRY ─────────────────────────────────────────────────────────── -->
+  <PawnChronicles.EntangledArcDef>
+    <defName>PC_Entangled_Rivalry</defName>
+    <label>The Rivalry</label>
+    <description>Two colonists whose natures put them in opposition. Whether it ends in grudging respect or mutual destruction depends on what they do.</description>
+    <arcType>Rivalry</arcType>
+    <stageCount>3</stageCount>
+    <activationChance>30</activationChance>
+    <generationWeight>12</generationWeight>
+    <initiatorRequirements>
+      <li>
+        <tag>PC_Tag_Violence</tag>
+        <minScore>20</minScore>
+        <weight>2.0</weight>
+      </li>
+    </initiatorRequirements>
+    <partnerRequirements>
+      <li>
+        <tag>PC_Tag_Duty</tag>
+        <minScore>15</minScore>
+        <weight>1.5</weight>
+      </li>
+    </partnerRequirements>
+    <stagePool>
+      <li>PC_EStage_Rivalry_Opening</li>
+      <li>PC_EStage_Rivalry_Middle_Escalation</li>
+      <li>PC_EStage_Rivalry_Climax_Confront</li>
+      <li>PC_EStage_Rivalry_Climax_Collapse</li>
+    </stagePool>
+    <!-- Outcomes: applied by EpicOutcomeApplicator when the climax resolves -->
+    <initiatorSuccessOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
+      <skillGains>
+        <li><skill>Melee</skill><xp>18000</xp></li>
+        <li><skill>Shooting</skill><xp>6000</xp></li>
+      </skillGains>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.23</inspirationChance>
+    </initiatorSuccessOutcome>
+    <partnerSuccessOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
+      <skillGains>
+        <li><skill>Melee</skill><xp>6000</xp></li>
+      </skillGains>
+    </partnerSuccessOutcome>
+    <initiatorFailureOutcome>
+      <moodThought>PC_Thought_ArcFail_WeightRemains</moodThought>
+    </initiatorFailureOutcome>
+    <partnerFailureOutcome>
+      <moodThought>PC_Thought_ArcFail_PricePaid</moodThought>
+    </partnerFailureOutcome>
+  </PawnChronicles.EntangledArcDef>
+
+  <!-- ── ROMANCE ──────────────────────────────────────────────────────────── -->
+  <PawnChronicles.EntangledArcDef>
+    <defName>PC_Entangled_Romance</defName>
+    <label>The Bond</label>
+    <description>Something has grown between these two. It may become a foundation - or a wound.</description>
+    <arcType>Romance</arcType>
+    <stageCount>3</stageCount>
+    <activationChance>25</activationChance>
+    <generationWeight>10</generationWeight>
+    <initiatorRequirements>
+      <li>
+        <tag>PC_Tag_Kinship</tag>
+        <minScore>25</minScore>
+        <weight>2.0</weight>
+      </li>
+    </initiatorRequirements>
+    <partnerRequirements>
+      <li>
+        <tag>PC_Tag_Kinship</tag>
+        <minScore>20</minScore>
+        <weight>1.5</weight>
+      </li>
+    </partnerRequirements>
+    <stagePool>
+      <li>PC_EStage_Romance_Opening</li>
+      <li>PC_EStage_Romance_Middle_Distance</li>
+      <li>PC_EStage_Romance_Climax_Bond</li>
+      <li>PC_EStage_Romance_Climax_Loss</li>
+    </stagePool>
+    <initiatorSuccessOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Restored</moodThought>
+      <skillGains>
+        <li><skill>Social</skill><xp>18000</xp></li>
+      </skillGains>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.45</inspirationChance>
+    </initiatorSuccessOutcome>
+    <partnerSuccessOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Restored</moodThought>
+      <skillGains>
+        <li><skill>Social</skill><xp>18000</xp></li>
+      </skillGains>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.45</inspirationChance>
+    </partnerSuccessOutcome>
+    <initiatorFailureOutcome>
+      <moodThought>PC_Thought_ArcFail_TooLate</moodThought>
+    </initiatorFailureOutcome>
+    <partnerFailureOutcome>
+      <moodThought>PC_Thought_ArcFail_WeightRemains</moodThought>
+    </partnerFailureOutcome>
+  </PawnChronicles.EntangledArcDef>
+
+  <!-- ── MENTOR / APPRENTICE ─────────────────────────────────────────────── -->
+  <PawnChronicles.EntangledArcDef>
+    <defName>PC_Entangled_MentorApprentice</defName>
+    <label>The Teaching</label>
+    <description>One who has mastered something, and one who hungers for it. The gap between them is either a bridge or a cliff.</description>
+    <arcType>MentorApprentice</arcType>
+    <stageCount>3</stageCount>
+    <activationChance>35</activationChance>
+    <generationWeight>11</generationWeight>
+    <initiatorRequirements>
+      <li>
+        <tag>PC_Tag_Craft</tag>
+        <minScore>35</minScore>
+        <weight>2.5</weight>
+      </li>
+    </initiatorRequirements>
+    <partnerRequirements>
+      <li>
+        <tag>PC_Tag_Curiosity</tag>
+        <minScore>20</minScore>
+        <weight>1.5</weight>
+      </li>
+    </partnerRequirements>
+    <stagePool>
+      <li>PC_EStage_Mentor_Opening</li>
+      <li>PC_EStage_Mentor_Middle_Trial</li>
+      <li>PC_EStage_Mentor_Climax_Mastery</li>
+      <li>PC_EStage_Mentor_Climax_Failure</li>
+    </stagePool>
+    <!-- Initiator = mentor. Partner = apprentice. Apprentice gets the bigger reward. -->
+    <initiatorSuccessOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Built</moodThought>
+      <skillGains>
+        <li><skill>Intellectual</skill><xp>12000</xp></li>
+      </skillGains>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.30</inspirationChance>
+    </initiatorSuccessOutcome>
+    <partnerSuccessOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Found</moodThought>
+      <bestSkillXP>6750</bestSkillXP>
+      <inspirationDef>Inspired_Creativity</inspirationDef>
+      <inspirationChance>0.60</inspirationChance>
+    </partnerSuccessOutcome>
+    <initiatorFailureOutcome>
+      <moodThought>PC_Thought_ArcFail_PricePaid</moodThought>
+    </initiatorFailureOutcome>
+    <partnerFailureOutcome>
+      <moodThought>PC_Thought_ArcFail_WeightRemains</moodThought>
+    </partnerFailureOutcome>
+  </PawnChronicles.EntangledArcDef>
+
+  <!-- ── UNLIKELY ALLIES ─────────────────────────────────────────────────── -->
+  <PawnChronicles.EntangledArcDef>
+    <defName>PC_Entangled_UnlikelyAllies</defName>
+    <label>The Unlikely Alliance</label>
+    <description>Two people the world would never have put together. Necessity has done what choice never would.</description>
+    <arcType>UnlikelyAllies</arcType>
+    <stageCount>3</stageCount>
+    <activationChance>20</activationChance>
+    <generationWeight>8</generationWeight>
+    <initiatorRequirements />
+    <partnerRequirements />
+    <stagePool>
+      <li>PC_EStage_Allies_Opening</li>
+      <li>PC_EStage_Allies_Middle_Friction</li>
+      <li>PC_EStage_Allies_Climax_United</li>
+      <li>PC_EStage_Allies_Climax_Apart</li>
+    </stagePool>
+    <initiatorSuccessOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
+      <skillGains>
+        <li><skill>Social</skill><xp>18000</xp></li>
+      </skillGains>
+    </initiatorSuccessOutcome>
+    <partnerSuccessOutcome>
+      <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
+      <skillGains>
+        <li><skill>Social</skill><xp>18000</xp></li>
+      </skillGains>
+    </partnerSuccessOutcome>
+    <initiatorFailureOutcome>
+      <moodThought>PC_Thought_ArcFail_PricePaid</moodThought>
+    </initiatorFailureOutcome>
+    <partnerFailureOutcome>
+      <moodThought>PC_Thought_ArcFail_PricePaid</moodThought>
+    </partnerFailureOutcome>
+  </PawnChronicles.EntangledArcDef>
+
+</Defs>

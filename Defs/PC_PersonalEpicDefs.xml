@@ -1,0 +1,1502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    ═══════════════════════════════════════════════════════════════════════════
+    PERSONAL EPIC DEFS - The full cohesive library
+    ═══════════════════════════════════════════════════════════════════════════
+
+    Stage pool is identical across all epics (60 stages total):
+      16 Openings · 24 Middles · 20 Climaxes
+    The pawn's tag profile determines which stages are selected by the engine.
+    Tag-specific epics carry appropriate backstory pairs for their theme.
+
+    EPICS:
+      Universal_Short  - 3 stages, no tag bias, fallback redeemed/corrupted
+      Universal_Long   - 5 stages, no tag bias, fallback redeemed/corrupted
+      PC_Epic_Violence - Violence + Trauma
+      PC_Epic_Scholar  - Curiosity + Scholar
+      PC_Epic_Craft    - Craft
+      PC_Epic_Kinship  - Kinship
+      PC_Epic_Underworld - Underworld + Betrayal
+      PC_Epic_Noble    - Noble + Duty
+      PC_Epic_Wanderer - Wandering + Survival
+      PC_Epic_Grief    - Grief + Loss
+      PC_Epic_Devotion - Devotion + Faith
+      PC_Epic_Healer   - Nurture + Healer
+      PC_Epic_Artist   - Artist
+      PC_Epic_AnimalFriend - AnimalFriend
+      PC_Epic_Pacifist - Pacifism
+      PC_Epic_Hunter   - AnimalFriend + Survival  (RedeemedHunter / GhostHunter)
+      PC_Epic_Captive  - Isolation + Refugee      (RedeemedFreedSlave / BrokenSlave)
+      PC_Epic_Foundling - Grief + Kinship         (RedeemedFoundling / ScarredOrphan)
+    ═══════════════════════════════════════════════════════════════════════════
+  -->
+  <!-- ════════════════════════════════════════════════════════════
+       UNIVERSAL - Short Arc (3 stages) - fallback for any pawn
+  ════════════════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Universal_Short</defName>
+    <modus>Kindle</modus>
+    <label>A Personal Reckoning</label>
+    
+    <tagRequirements />
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Road Reclaimed</redeemedEpithet>
+    <corruptedEpithet>The Hollow</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <!-- ════════════════════════════════════════════════════════════
+       UNIVERSAL - Long Arc (5 stages) - Inferno tier fallback
+  ════════════════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Universal_Long</defName>
+    <modus>Inferno</modus>
+    <label>An Unfinished Story</label>
+    
+    <tagRequirements />
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>5</stageCount>
+    <redeemedEpithet>The Road Reclaimed</redeemedEpithet>
+    <corruptedEpithet>The Hollow</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <!-- ════════════════════════════════════════════════════════════
+       TAG-SPECIFIC EPICS - 16 themed arcs, BestTagMatch picks them
+  ════════════════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Violence</defName>
+    <label>Blood Memory</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Violence</tag><minScore>0</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Trauma</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Peacekeeper</redeemedEpithet>
+    <corruptedEpithet>The Warmonger</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Scholar</defName>
+    <modus>Flame</modus>
+    <label>The Shape of a Question</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Curiosity</tag><minScore>0</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Scholar</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Enlightened</redeemedEpithet>
+    <corruptedEpithet>The Broken Scholar</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Craft</defName>
+    <modus>Flame</modus>
+    <label>What the Hands Remember</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Craft</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Mended</redeemedEpithet>
+    <corruptedEpithet>The Haunted</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Kinship</defName>
+    <modus>Flame</modus>
+    <label>Blood and Name</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Kinship</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>Kin Reborn</redeemedEpithet>
+    <corruptedEpithet>The Griefbound</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Underworld</defName>
+    <label>The Shadow Keeps Receipts</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Underworld</tag><minScore>0</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Betrayal</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Reformed</redeemedEpithet>
+    <corruptedEpithet>The Shadowed</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Noble</defName>
+    <label>The Name and the Burden</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Noble</tag><minScore>0</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Duty</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Restored</redeemedEpithet>
+    <corruptedEpithet>The Bitter Exile</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Wanderer</defName>
+    <label>The Road and What It Cost</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Wandering</tag><minScore>0</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Survival</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>Roots Found</redeemedEpithet>
+    <corruptedEpithet>The Scarred Drifter</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Grief</defName>
+    <label>The Weight of the Absent</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Grief</tag><minScore>0</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Loss</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>Survivor Reborn</redeemedEpithet>
+    <corruptedEpithet>The Hollow Survivor</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Devotion</defName>
+    <label>What Was Sworn</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Devotion</tag><minScore>0</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Faith</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Reconnected</redeemedEpithet>
+    <corruptedEpithet>The Severed</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Healer</defName>
+    <label>The Cost of Care</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Nurture</tag><minScore>0</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Healer</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The True Healer</redeemedEpithet>
+    <corruptedEpithet>The Tormented</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Artist</defName>
+    <modus>Flame</modus>
+    <label>The Work That Will Not Leave</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Artist</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Work Complete</redeemedEpithet>
+    <corruptedEpithet>The Unfinished</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_AnimalFriend</defName>
+    <modus>Flame</modus>
+    <label>The Creature and the Keeper</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_AnimalFriend</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Bonded</redeemedEpithet>
+    <corruptedEpithet>The Broken Handler</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Pacifist</defName>
+    <modus>Flame</modus>
+    <label>The Line They Will Not Cross</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Pacifism</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Reformed Pacifist</redeemedEpithet>
+    <corruptedEpithet>The Shattered</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Hunter</defName>
+    <label>The Last Hunt</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_AnimalFriend</tag><minScore>0</minScore><weight>1.0</weight></li>
+      <li><tag>PC_Tag_Survival</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Hunter Whole</redeemedEpithet>
+    <corruptedEpithet>The Ghost Hunter</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Captive</defName>
+    <label>The First Free Year</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Isolation</tag><minScore>0</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Refugee</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>Truly Free</redeemedEpithet>
+    <corruptedEpithet>Still Shackled</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Epic_Foundling</defName>
+    <label>Who They Were Before</label>
+    
+    <tagRequirements>
+      <li><tag>PC_Tag_Grief</tag><minScore>0</minScore><weight>1.0</weight></li>
+      <li><tag>PC_Tag_Kinship</tag><minScore>0</minScore><weight>1.5</weight></li>
+    </tagRequirements>
+    <stagePool>
+
+      <!-- ── Openings ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Open_Rumour</li>
+      <li>PC_Stage_Open_OldWound</li>
+      <li>PC_Stage_Open_CodedMessage</li>
+      <li>PC_Stage_Open_NameOnManifest</li>
+      <li>PC_Stage_Open_FormalSummons</li>
+      <li>PC_Stage_Open_SignReceived</li>
+      <li>PC_Stage_Open_FamilySignal</li>
+      <li>PC_Stage_Open_CorruptedData</li>
+      <li>PC_Stage_Open_FaceFromThePast</li>
+      <li>PC_Stage_Open_OldCrest</li>
+      <li>PC_Stage_Open_BloodOath</li>
+      <li>PC_Stage_Open_BrokenMirror</li>
+      <li>PC_Stage_Open_DistantFlame</li>
+      <li>PC_Stage_Open_GhostSignal</li>
+      <li>PC_Stage_Open_HauntedMemory</li>
+      <li>PC_Stage_Open_WanderingCrest</li>
+      <!-- ── Middles ──────────────────────────────────────────────── -->
+      <li>PC_Stage_Mid_TrailContinues</li>
+      <li>PC_Stage_Mid_ContactArrives</li>
+      <li>PC_Stage_Mid_BodyPaysPrice</li>
+      <li>PC_Stage_Mid_UnexpectedDiscovery</li>
+      <li>PC_Stage_Mid_OldComrade</li>
+      <li>PC_Stage_Mid_FaceToFace</li>
+      <li>PC_Stage_Mid_UnwantedHelp</li>
+      <li>PC_Stage_Mid_ConvictionTested</li>
+      <li>PC_Stage_Mid_MissingPiece</li>
+      <li>PC_Stage_Mid_PeopleAtRisk</li>
+      <li>PC_Stage_Mid_OldHabit</li>
+      <li>PC_Stage_Mid_CloserThanExpected</li>
+      <li>PC_Stage_Mid_WeightOfCommand</li>
+      <li>PC_Stage_Mid_PowerStirs</li>
+      <li>PC_Stage_Mid_NameCarriesWeight</li>
+      <li>PC_Stage_Mid_EveryOtherWay</li>
+      <li>PC_Stage_Mid_BloodCallsBlood</li>
+      <li>PC_Stage_Mid_FaithDemandsProof</li>
+      <li>PC_Stage_Mid_HandsRemember</li>
+      <li>PC_Stage_Mid_NameBecomesBurden</li>
+      <li>PC_Stage_Mid_TheHorizonMoves</li>
+      <li>PC_Stage_Mid_ThePriceOfQuiet</li>
+      <li>PC_Stage_Mid_ThreadPullsTighter</li>
+      <li>PC_Stage_Mid_WhispersReturn</li>
+      <!-- ── Climaxes ─────────────────────────────────────────────── -->
+      <li>PC_Stage_Climax_Resolved</li>
+      <li>PC_Stage_Climax_Restored</li>
+      <li>PC_Stage_Climax_Found</li>
+      <li>PC_Stage_Climax_Built</li>
+      <li>PC_Stage_Climax_Answered</li>
+      <li>PC_Stage_Climax_DebtCleared</li>
+      <li>PC_Stage_Climax_PricePaid</li>
+      <li>PC_Stage_Climax_TooLate</li>
+      <li>PC_Stage_Climax_WeightRemains</li>
+      <li>PC_Stage_Climax_DeeperIn</li>
+      <li>PC_Stage_Climax_NothingLeft</li>
+      <li>PC_Stage_Climax_DebtUnpaid</li>
+      <li>PC_Stage_Climax_FaithAnswered</li>
+      <li>PC_Stage_Climax_GhostLaid</li>
+      <li>PC_Stage_Climax_HandsFail</li>
+      <li>PC_Stage_Climax_NameLost</li>
+      <li>PC_Stage_Climax_NameReclaimed</li>
+      <li>PC_Stage_Climax_PatternRevealed</li>
+      <li>PC_Stage_Climax_RoadEndsEmpty</li>
+      <li>PC_Stage_Climax_ShadowDeeper</li>
+    </stagePool>
+    <stageCount>3</stageCount>
+    <redeemedEpithet>The Named</redeemedEpithet>
+    <corruptedEpithet>The Unclaimed</corruptedEpithet>
+    <generationWeight>50</generationWeight>
+    <dynamicProfile>true</dynamicProfile>
+  </PawnChronicles.PersonalEpicDef>
+
+</Defs>

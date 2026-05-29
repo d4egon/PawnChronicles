@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════
+       ORIGINAL CORE BACKSTORIES
+       ══════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedDrifter</defName>
+    <title>Redeemed Drifter</title>
+    <titleShort>Drifter</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] was abandoned as a child but found a new family through grit and machines. The scars remain, but they no longer define [PAWN_objective].</baseDesc>
+    <skillGains>
+      <Social>2</Social>
+      <Construction>1</Construction>
+      <Crafting>1</Crafting>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_ScarredGhost</defName>
+    <title>Scarred Ghost</title>
+    <titleShort>Ghost</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] never escaped the abandonment. The machines that once saved [PAWN_objective] now feel like another kind of cage. [PAWN_pronoun] keeps moving because stopping is worse.</baseDesc>
+    <skillGains>
+      <Social>-4</Social>
+      <Crafting>-2</Crafting>
+      <Shooting>1</Shooting>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       ABANDONED CHILD ARC - PC_Epic_LostFamily
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedFoundling</defName>
+    <title>Redeemed Foundling</title>
+    <titleShort>Foundling</titleShort>
+    <slot>Childhood</slot>
+    <baseDesc>[PAWN_nameDef] was abandoned long ago, but has finally built the family [PAWN_pronoun] never had. The wound is still there, yet it no longer bleeds.</baseDesc>
+    <skillGains>
+      <Social>3</Social>
+      <Construction>1</Construction>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_ScarredOrphan</defName>
+    <title>Scarred Orphan</title>
+    <titleShort>Orphan</titleShort>
+    <slot>Childhood</slot>
+    <baseDesc>[PAWN_nameDef] was abandoned and never truly found a home. The emptiness inside has only grown deeper with time. [PAWN_pronoun] trusts no one easily, and perhaps never will.</baseDesc>
+    <skillGains>
+      <Social>-5</Social>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       NOBLE ARC - PC_Epic_ReclaimHeritage
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_NobleRestored</defName>
+    <title>Restored Noble</title>
+    <titleShort>Restored</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] has reclaimed [PAWN_possessive] lineage - not only as a birthright, but as something [PAWN_nameDef] earned through sacrifice. The title sits differently now. Lighter, somehow, and more real.</baseDesc>
+    <skillGains>
+      <Social>4</Social>
+      <Melee>2</Melee>
+      <Intellectual>1</Intellectual>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_BitterExile</defName>
+    <title>Bitter Exile</title>
+    <titleShort>Exile</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The house is gone. The name carries nothing now but old enemies and older debts. [PAWN_nameDef] walks the Rim without title or purpose, wearing the silence of someone who has lost everything they were raised to be.</baseDesc>
+    <skillGains>
+      <Social>-4</Social>
+      <Melee>1</Melee>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SOLDIER ARC - PC_Epic_SoldiersPenance
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_Peacekeeper</defName>
+    <title>Peacekeeper</title>
+    <titleShort>Keeper</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] has finally made peace with what the war made [PAWN_objective]. The rifle is still close at hand - but now it is held in defence of something, not just in service of someone. The difference matters more than [PAWN_pronoun] can say.</baseDesc>
+    <skillGains>
+      <Shooting>3</Shooting>
+      <Melee>2</Melee>
+      <Social>2</Social>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_Warmonger</defName>
+    <title>Warmonger</title>
+    <titleShort>Warmonger</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The penance didn't take. [PAWN_nameDef] tried to face what [PAWN_pronoun] did and found only one conclusion: [PAWN_pronoun] was good at it. The war didn't break [PAWN_objective]. It finished [PAWN_objective].</baseDesc>
+    <skillGains>
+      <Shooting>3</Shooting>
+      <Melee>3</Melee>
+      <Social>-4</Social>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MECHANIC / CRASHLANDED ARC - PC_Epic_BionicCacheLocation (variant)
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedMechanic</defName>
+    <title>Redeemed Mechanic</title>
+    <titleShort>Mechanic</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] finally made peace with the wreck that nearly killed [PAWN_objective]. The machines no longer haunt [PAWN_pronoun] - they obey. [PAWN_pronoun] builds now without flinching at the sound of metal on metal.</baseDesc>
+    <skillGains>
+      <Crafting>4</Crafting>
+      <Construction>2</Construction>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_HauntedWreckSurvivor</defName>
+    <title>Haunted Wreck Survivor</title>
+    <titleShort>Wrecked</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] survived the crash, but the machines [PAWN_pronoun] once loved now feel like ghosts that refuse to stay dead. Every panel [PAWN_pronoun] opens, every circuit [PAWN_pronoun] repairs - something watches from inside the metal.</baseDesc>
+    <skillGains>
+      <Crafting>-3</Crafting>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TRIBAL ARC - PC_Epic_AncestralRite
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedTribesman</defName>
+    <title>Reconciled Tribesman</title>
+    <titleShort>Reconciled</titleShort>
+    <slot>Childhood</slot>
+    <baseDesc>[PAWN_nameDef] has made peace between the old ways and the new. The spirits no longer demand [PAWN_pronoun] choose sides. [PAWN_pronoun] carries both worlds now - and finds they are not as incompatible as [PAWN_pronoun] once feared.</baseDesc>
+    <skillGains>
+      <Melee>3</Melee>
+      <Plants>2</Plants>
+      <Social>1</Social>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_BrokenTribesman</defName>
+    <title>Broken Tribesman</title>
+    <titleShort>Outcast</titleShort>
+    <slot>Childhood</slot>
+    <baseDesc>The old gods turned their backs on [PAWN_nameDef]. [PAWN_pronoun] walks the Rim carrying the shame of a warrior who failed [PAWN_possessive] people. The rites were performed correctly. They simply did not answer.</baseDesc>
+    <skillGains>
+      <Melee>-3</Melee>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       PACIFIST ARC - PC_Epic_PacifistRedemption
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_ReformedPacifist</defName>
+    <title>Guardian of the Peace</title>
+    <titleShort>Guardian</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] once refused all violence. After facing true horror, [PAWN_pronoun] learned to protect what matters - though the guilt of that transition lingers. [PAWN_pronoun] still hopes violence will be the last resort. It has not always been.</baseDesc>
+    <skillGains>
+      <Shooting>3</Shooting>
+      <Melee>2</Melee>
+      <Medicine>1</Medicine>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_ShatteredPacifist</defName>
+    <title>Shattered Pacifist</title>
+    <titleShort>Shattered</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The conviction is gone. [PAWN_nameDef] held to their principles until the world broke them against it. What remains isn't peace - it's exhaustion wearing peace's face. [PAWN_pronoun] no longer argues about violence. [PAWN_pronoun] simply does what is asked.</baseDesc>
+    <skillGains>
+      <Social>-3</Social>
+      <Medicine>-2</Medicine>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCHOLAR / KNOWLEDGE ARC - PC_Epic_KnowledgeQuest
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedScholar</defName>
+    <title>Redeemed Scholar</title>
+    <titleShort>Scholar</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The question [PAWN_nameDef] spent a lifetime chasing has finally been answered. The hunger that drove [PAWN_objective] from world to world is quiet now - not satisfied exactly, but stilled. [PAWN_pronoun] can sit in silence without it feeling like failure.</baseDesc>
+    <skillGains>
+      <Intellectual>4</Intellectual>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_BrokenScholar</defName>
+    <title>Broken Scholar</title>
+    <titleShort>Broken</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The last archive burned. The knowledge [PAWN_nameDef] spent a lifetime chasing is gone forever, and something inside [PAWN_pronoun] burned with it. [PAWN_pronoun] still reads - but the hunger is gone, replaced by something colder and less useful.</baseDesc>
+    <skillGains>
+      <Intellectual>-4</Intellectual>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       PIRATE / UNDERWORLD ARC - PC_Epic_OldScore
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedRogue</defName>
+    <title>Redeemed Rogue</title>
+    <titleShort>Rogue</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The last debt is paid. [PAWN_nameDef] has walked away from the underworld with [PAWN_possessive] soul mostly intact. The contacts are still there. The skills are still sharp. [PAWN_pronoun] simply chooses not to use them the way [PAWN_pronoun] once did.</baseDesc>
+    <skillGains>
+      <Shooting>2</Shooting>
+      <Social>2</Social>
+      <Crafting>1</Crafting>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_ShadowedCriminal</defName>
+    <title>Shadowed Criminal</title>
+    <titleShort>Shadow</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The past refuses to stay buried. Every shadow still feels like someone coming to collect what [PAWN_nameDef] owes. [PAWN_pronoun] has stopped pretending otherwise. The only advantage the underworld ever gave [PAWN_objective] was knowing what it looked like from inside.</baseDesc>
+    <skillGains>
+      <Social>-3</Social>
+      <Shooting>1</Shooting>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SLAVE SURVIVOR ARC - PC_Epic_BreakingChains
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedFreedSlave</defName>
+    <title>Redeemed Freed Slave</title>
+    <titleShort>Freed</titleShort>
+    <slot>Childhood</slot>
+    <baseDesc>The chains are gone. [PAWN_nameDef] has finally learned what it truly means to be free - not just from the slavers, but from the fear that followed [PAWN_objective] long after the collar came off. [PAWN_pronoun] builds things now. Walls. Roofs. Things that belong to [PAWN_objective].</baseDesc>
+    <skillGains>
+      <Construction>3</Construction>
+      <Social>2</Social>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_BrokenSlave</defName>
+    <title>Broken Slave</title>
+    <titleShort>Broken</titleShort>
+    <slot>Childhood</slot>
+    <baseDesc>Freedom came too late or cost too much. [PAWN_nameDef] is no longer owned - but the habits of captivity run deeper than any collar. [PAWN_pronoun] defers when [PAWN_pronoun] should resist. [PAWN_pronoun] apologises for existing. The ring around [PAWN_possessive] neck is invisible now and heavier for it.</baseDesc>
+    <skillGains>
+      <Social>-4</Social>
+      <Construction>-2</Construction>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       GRIEF / SURVIVOR ARC - PC_Epic_BurdenOfMemory
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedSurvivor</defName>
+    <title>Reconciled Survivor</title>
+    <titleShort>Survivor</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] is the only one left. That used to feel like a sentence. Somewhere along the way it became a responsibility instead. [PAWN_pronoun] carries the others in the way [PAWN_pronoun] works - carefully, without waste, as though someone is still watching to see if [PAWN_pronoun] makes it count.</baseDesc>
+    <skillGains>
+      <Social>2</Social>
+      <Medicine>2</Medicine>
+      <Construction>1</Construction>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_HollowSurvivor</defName>
+    <title>Hollow Survivor</title>
+    <titleShort>Hollow</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] survived. [PAWN_pronoun] is still not sure why. The others were better - kinder, braver, more deserving of a future. [PAWN_pronoun] moves through the days because stopping would require a reason, and [PAWN_pronoun] hasn't found one yet that satisfies.</baseDesc>
+    <skillGains>
+      <Social>-4</Social>
+      <Intellectual>-2</Intellectual>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       KINSHIP / LOST FAMILY ARC - PC_Epic_LostFamily / PC_Epic_LoveBeyondStars
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedKinbound</defName>
+    <title>Reunited</title>
+    <titleShort>Reunited</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] found them. Or found what remained. Either way, the not-knowing is over - and with it, a particular kind of loneliness that [PAWN_pronoun] had carried so long [PAWN_pronoun] had stopped noticing its weight. [PAWN_pronoun] is lighter now. It shows.</baseDesc>
+    <skillGains>
+      <Social>4</Social>
+      <Medicine>1</Medicine>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_GriefBound</defName>
+    <title>Grief-Bound</title>
+    <titleShort>Grieving</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The search ended. What [PAWN_nameDef] found was not what [PAWN_pronoun] hoped for. [PAWN_pronoun] returned from it changed in ways [PAWN_pronoun] cannot fully explain to people who weren't there. [PAWN_pronoun] is still functioning. [PAWN_pronoun] does not always know why.</baseDesc>
+    <skillGains>
+      <Social>-5</Social>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HEALER / DOCTOR ARC
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedHealer</defName>
+    <title>Redeemed Healer</title>
+    <titleShort>Healer</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] has finally made peace with the lives [PAWN_pronoun] could not save. [PAWN_pronoun] heals with steadier hands now. The dead are still with [PAWN_objective] - but they no longer shake [PAWN_possessive] grip when it matters.</baseDesc>
+    <skillGains>
+      <Medicine>4</Medicine>
+      <Social>2</Social>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_TormentedHealer</defName>
+    <title>Tormented Healer</title>
+    <titleShort>Tormented</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>Every patient [PAWN_nameDef] loses leaves another scar. The guilt has grown heavier than any wound [PAWN_pronoun] has ever treated. [PAWN_pronoun] still heals - because what else is there - but [PAWN_pronoun] no longer believes it is enough.</baseDesc>
+    <skillGains>
+      <Medicine>-3</Medicine>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       ARTIST ARC
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedArtist</defName>
+    <title>Redeemed Artist</title>
+    <titleShort>Artist</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The blank canvas no longer terrifies [PAWN_nameDef]. [PAWN_pronoun] has finally found the courage to create again - not for approval, not for survival, but because something inside [PAWN_objective] demands expression and [PAWN_pronoun] has stopped fighting it.</baseDesc>
+    <skillGains>
+      <Artistic>4</Artistic>
+      <Social>1</Social>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_TormentedArtist</defName>
+    <title>Tormented Artist</title>
+    <titleShort>Tormented</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The muse left long ago. Now every brushstroke feels like a lie [PAWN_nameDef] can no longer sell - even to [PAWN_possessive]self. [PAWN_pronoun] makes things because [PAWN_pronoun] was trained to. None of it means what it once did.</baseDesc>
+    <skillGains>
+      <Artistic>-4</Artistic>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       ANIMAL HANDLER ARC
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedBeastmaster</defName>
+    <title>Redeemed Beastmaster</title>
+    <titleShort>Beastmaster</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The animals trust [PAWN_nameDef] again. After years of fear and pain, [PAWN_pronoun] has finally become the handler [PAWN_pronoun] always wanted to be. The bond is quieter now than it once was - less desperate. More honest.</baseDesc>
+    <skillGains>
+      <Animals>4</Animals>
+      <Plants>1</Plants>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_BrokenHandler</defName>
+    <title>Broken Handler</title>
+    <titleShort>Broken</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The animals sense the fear in [PAWN_nameDef] now. The bond [PAWN_pronoun] once had is gone, replaced by something colder and more careful. [PAWN_pronoun] works with them because [PAWN_pronoun] has to. They tolerate [PAWN_objective] for the same reason.</baseDesc>
+    <skillGains>
+      <Animals>-3</Animals>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HUNTER ARC
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedHunter</defName>
+    <title>Redeemed Hunter</title>
+    <titleShort>Hunter</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] no longer hunts only to survive. [PAWN_pronoun] has learned the difference between taking life and respecting it. The rifle is still accurate. The hand behind it has simply grown more deliberate.</baseDesc>
+    <skillGains>
+      <Shooting>3</Shooting>
+      <Animals>2</Animals>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_GhostHunter</defName>
+    <title>Ghost Hunter</title>
+    <titleShort>Ghost</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>The prey [PAWN_nameDef] once tracked now hunts [PAWN_pronoun] in [PAWN_possessive] dreams. The rifle feels heavier every season. [PAWN_pronoun] still goes out. [PAWN_pronoun] just takes longer to pull the trigger than [PAWN_pronoun] used to.</baseDesc>
+    <skillGains>
+      <Shooting>-2</Shooting>
+      <Animals>-1</Animals>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       WANDERER ARC
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <BackstoryDef>
+    <defName>PC_RedeemedWanderer</defName>
+    <title>Settled Wanderer</title>
+    <titleShort>Settled</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] has walked the Rim for years with no home. [PAWN_pronoun] has finally found a place worth staying - and people worth staying for. The road still calls sometimes. [PAWN_pronoun] has learned to let it call without answering.</baseDesc>
+    <skillGains>
+      <Plants>3</Plants>
+      <Social>2</Social>
+    </skillGains>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>PC_ScarredDrifter</defName>
+    <title>Scarred Drifter</title>
+    <titleShort>Drifter</titleShort>
+    <slot>Adulthood</slot>
+    <baseDesc>[PAWN_nameDef] has walked too many roads and left too many things behind. The Rim has taken more from [PAWN_objective] than it has given. [PAWN_pronoun] keeps moving because it is the only thing [PAWN_pronoun] has ever been any good at.</baseDesc>
+    <skillGains>
+      <Plants>-2</Plants>
+      <Social>-3</Social>
+    </skillGains>
+    <forcedTraits>
+      <Nerves>1</Nerves>
+    </forcedTraits>
+    <spawnCategories><li>Humanlike</li></spawnCategories>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+</Defs>

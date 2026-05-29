@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       SETTINGS WINDOW — Tabs
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <PC_Tab_Settings>⚙  Settings</PC_Tab_Settings>
+  <PC_Tab_UI>🎨  UI</PC_Tab_UI>
+  <PC_Tab_Debug>🔍  Debug Viewer</PC_Tab_Debug>
+
+  <PC_Debug_Sub_PawnData>Pawn Data</PC_Debug_Sub_PawnData>
+  <PC_Debug_Sub_WorldData>World Data</PC_Debug_Sub_WorldData>
+  <PC_Debug_Sub_TalesLog>Tales &amp; Log</PC_Debug_Sub_TalesLog>
+  <PC_Debug_Sub_Perf>Performance</PC_Debug_Sub_Perf>
+
+  <!-- Settings — Section headers -->
+  <PC_Settings_Section_DailyMoments>Daily Moments — Sparks &amp; Embers</PC_Settings_Section_DailyMoments>
+  <PC_Settings_Section_ModusThresholds>Modus Thresholds  (tag weight required)</PC_Settings_Section_ModusThresholds>
+  <PC_Settings_Section_ArcTiming>Arc Timing &amp; Colony Scale</PC_Settings_Section_ArcTiming>
+  <PC_Settings_Section_WorldConsequences>World Consequences</PC_Settings_Section_WorldConsequences>
+  <PC_Settings_Section_Scraper>Scraper</PC_Settings_Section_Scraper>
+  <PC_Settings_Section_Autopilot>Autopilot</PC_Settings_Section_Autopilot>
+
+  <!-- Settings — Autopilot -->
+  <PC_Settings_AutopilotEnabled>Enable autopilot</PC_Settings_AutopilotEnabled>
+  <PC_Settings_AutopilotEnabled_Tip>When enabled, pawns make their own arc choices automatically. Individual pawns can still be set to manual via the Chronicles tab.</PC_Settings_AutopilotEnabled_Tip>
+  <PC_Settings_AutopilotMode>Autopilot mode</PC_Settings_AutopilotMode>
+  <PC_Settings_AutopilotRandom>Roll a dice (random)</PC_Settings_AutopilotRandom>
+  <PC_Settings_AutopilotRandom_Tip>Each choice is picked at random.</PC_Settings_AutopilotRandom_Tip>
+  <PC_Settings_AutopilotStatBased>Based on stats</PC_Settings_AutopilotStatBased>
+  <PC_Settings_AutopilotStatBased_Tip>Choices are weighted toward the pawn's strongest narrative tags and skills.</PC_Settings_AutopilotStatBased_Tip>
+  <PC_Settings_Section_NarrativeMode>Narrative Mode</PC_Settings_Section_NarrativeMode>
+  <PC_Settings_MedievalMode>Medieval mode</PC_Settings_MedievalMode>
+  <PC_Settings_MedievalMode_Tip>Replaces any sci-fi or industrial phrases in narrative text with era-neutral alternatives. Turn this on for medieval, tribal, or low-tech runs. Adding new overrides is done in PC_NarrativeGrammar_Medieval.xml.</PC_Settings_MedievalMode_Tip>
+  <PC_Settings_Section_Chronicle>Chronicle</PC_Settings_Section_Chronicle>
+  <PC_Settings_Section_WindowSize>Window Size</PC_Settings_Section_WindowSize>
+  <PC_Settings_Section_Layout>Layout</PC_Settings_Section_Layout>
+  <PC_Settings_Section_Typography>Typography</PC_Settings_Section_Typography>
+  <PC_Settings_Section_Colors>Colors</PC_Settings_Section_Colors>
+
+  <!-- Settings — Checkboxes -->
+  <PC_Settings_EnableSparks>Enable sparks</PC_Settings_EnableSparks>
+  <PC_Settings_EnableSparks_Tip>Sparks are short diary-style moments logged to the chronicle.</PC_Settings_EnableSparks_Tip>
+  <PC_Settings_EnableEmbers>Enable embers</PC_Settings_EnableEmbers>
+  <PC_Settings_EnableEmbers_Tip>Embers are slightly more meaningful moments with a small mood benefit.</PC_Settings_EnableEmbers_Tip>
+  <PC_Settings_EnableWorldConsequences>Enable world consequences</PC_Settings_EnableWorldConsequences>
+  <PC_Settings_EnableWorldConsequences_Tip>Master switch for all world-touching arc outcomes.</PC_Settings_EnableWorldConsequences_Tip>
+  <PC_Settings_FactionRelationShifts>Faction relation shifts</PC_Settings_FactionRelationShifts>
+  <PC_Settings_SiteSpawns>Site spawns</PC_Settings_SiteSpawns>
+  <PC_Settings_MapEvents>Map events (raids etc.)</PC_Settings_MapEvents>
+  <PC_Settings_EnableChronicle>Enable chronicle entries</PC_Settings_EnableChronicle>
+  <PC_Settings_LogScraperCount>Log scraper rule count to console</PC_Settings_LogScraperCount>
+
+  <!-- Settings — Slider labels ({0}, {1} = formatted values) -->
+  <PC_Settings_EmberConsequenceChance>Ember consequence chance:  {0}%  (chance each ember spawns a small physical ripple)</PC_Settings_EmberConsequenceChance>
+  <PC_Settings_ConsequenceBalance>Consequence balance:  {0}% good  /  {1}% bad</PC_Settings_ConsequenceBalance>
+  <PC_Settings_EventCooldown>Event cooldown:  {0} days  (min gap between moments per pawn)</PC_Settings_EventCooldown>
+  <PC_Settings_DailyChance>Daily chance:  {0}%  (chance each day the cooldown is up)</PC_Settings_DailyChance>
+  <PC_Settings_SparkRatio>Spark ratio:  {0}% sparks / {1}% embers</PC_Settings_SparkRatio>
+  <PC_Settings_Estimate>-> Estimate: {0}</PC_Settings_Estimate>
+  <PC_Settings_MomentsDisabled>moments disabled</PC_Settings_MomentsDisabled>
+  <PC_Settings_MomentsPerDay>~{0} moments/day per pawn</PC_Settings_MomentsPerDay>
+  <PC_Settings_MomentsEvery>~1 moment every {0} days per pawn</PC_Settings_MomentsEvery>
+
+  <PC_Settings_KindleMin>Kindle minimum: {0}</PC_Settings_KindleMin>
+  <PC_Settings_FlameMin>Flame minimum:  {0}</PC_Settings_FlameMin>
+  <PC_Settings_FireMin>Fire minimum:   {0}</PC_Settings_FireMin>
+  <PC_Settings_InfernoMin>Inferno minimum: {0}</PC_Settings_InfernoMin>
+  <PC_Settings_HellfireMin>Hellfire minimum: {0}</PC_Settings_HellfireMin>
+
+  <PC_Settings_ArcStartDelayMin>Start delay min: {0} days</PC_Settings_ArcStartDelayMin>
+  <PC_Settings_ArcStartDelayMax>Start delay max: {0} days</PC_Settings_ArcStartDelayMax>
+  <PC_Settings_ArcTimeout>Arc timeout: {0} days</PC_Settings_ArcTimeout>
+  <PC_Settings_StageWaitTimes>Stage wait times  (how long each choice sits before the Next button appears)</PC_Settings_StageWaitTimes>
+  <PC_Settings_SeedWait>  Seed wait: {0} days</PC_Settings_SeedWait>
+  <PC_Settings_SeedWait_Tip>After the player picks a path, this many days pass before the arc advances. Short = snappy; long = more weight to the commitment.</PC_Settings_SeedWait_Tip>
+  <PC_Settings_MiddleWait>  Middle stage wait: {0} days</PC_Settings_MiddleWait>
+  <PC_Settings_MiddleWait_Tip>Base wait for time-based tradeoff stages. Tag-specific conditions (kills, crafts, etc.) use their own triggers.</PC_Settings_MiddleWait_Tip>
+  <PC_Settings_HardRoadWait>  Hard Road wait: {0} days</PC_Settings_HardRoadWait>
+  <PC_Settings_HardRoadWait_Tip>After committing to the Hard Road climax, this long until the Next button appears. The incident fires when the player clicks.</PC_Settings_HardRoadWait_Tip>
+
+  <PC_Settings_MaxActiveArcs>Max active arcs per colony: {0}  (prevents overwhelming with large colonies)</PC_Settings_MaxActiveArcs>
+  <PC_Settings_MaxActiveArcs_Unlimited>unlimited</PC_Settings_MaxActiveArcs_Unlimited>
+
+  <PC_Settings_ScraperDepthLabel>Scrape depth:  {0}</PC_Settings_ScraperDepthLabel>
+  <PC_Settings_ScraperDepth_0>0 — Minimal  (base identity / skills / health, ~100 symbols)</PC_Settings_ScraperDepth_0>
+  <PC_Settings_ScraperDepth_1>1 — Standard (+ current job phrase &amp; room location, ~150 symbols)</PC_Settings_ScraperDepth_1>
+  <PC_Settings_ScraperDepth_2>2 — Deep     (+ season / time / atmosphere / mood / pain, ~200+ symbols)</PC_Settings_ScraperDepth_2>
+  <PC_Settings_PawnCache>Pawn scraper cache:  {0} minutes  (how long pawn data is reused without re-scraping)</PC_Settings_PawnCache>
+  <PC_Settings_WorldCache>World scraper cache: {0}h</PC_Settings_WorldCache>
+  <PC_Settings_MaxRules>Max rules per pawn:  {0}  (hard cap on grammar symbols emitted per resolve pass)</PC_Settings_MaxRules>
+  <PC_Settings_MaxRules_Unlimited>unlimited</PC_Settings_MaxRules_Unlimited>
+  <PC_Settings_MaxRules_Count>{0} rules</PC_Settings_MaxRules_Count>
+
+  <PC_Settings_NarrativeModeQuestion>How much does the mod explain itself?</PC_Settings_NarrativeModeQuestion>
+  <PC_Settings_NarrativeExplicit>Explicit  —  full letter fires with every incident</PC_Settings_NarrativeExplicit>
+  <PC_Settings_NarrativeExplicit_Tip>The narrative letter and the world event arrive together. You always know why something happened.</PC_Settings_NarrativeExplicit_Tip>
+  <PC_Settings_NarrativeSuggestive>Suggestive  —  small hint now, explanation arrives days later</PC_Settings_NarrativeSuggestive>
+  <PC_Settings_NarrativeSuggestive_Tip>A short ambient observation fires when an incident triggers. The full letter arrives 3-7 days later. You may connect the dots before the game tells you.</PC_Settings_NarrativeSuggestive_Tip>
+  <PC_Settings_RevelationDelay>Revelation delay: {0}–{1} days</PC_Settings_RevelationDelay>
+
+  <PC_Settings_MaxChronicleEntries>Max entries per pawn: {0}</PC_Settings_MaxChronicleEntries>
+
+  <!-- Settings — UI tab -->
+  <PC_Settings_WindowWidth>Width:   {0} px</PC_Settings_WindowWidth>
+  <PC_Settings_WindowHeight>Height:  {0} px</PC_Settings_WindowHeight>
+  <PC_Settings_InnerPadding>Inner padding:    {0} px  —  space inside each pane</PC_Settings_InnerPadding>
+  <PC_Settings_PaneGap>Pane gap:         {0} px  —  gap between left and right pane</PC_Settings_PaneGap>
+  <PC_Settings_LeftPaneWidth>Left pane width:  {0}%  —  fraction of total width</PC_Settings_LeftPaneWidth>
+  <PC_Settings_ArcRowHeight>Arc row height:   {0} px</PC_Settings_ArcRowHeight>
+  <PC_Settings_DiaryRowHeight>Diary row height: {0} px</PC_Settings_DiaryRowHeight>
+  <PC_Settings_TagRowHeight>Tag row height:   {0} px</PC_Settings_TagRowHeight>
+  <PC_Settings_BodyFontLabel>Body / narrative text size:</PC_Settings_BodyFontLabel>
+  <PC_Settings_FontTiny>Tiny  — compact, fits more on screen</PC_Settings_FontTiny>
+  <PC_Settings_FontSmall>Small — default, easier to read</PC_Settings_FontSmall>
+  <PC_Settings_ColorAccent>Accent / gold  (headers, active arc, selected items)</PC_Settings_ColorAccent>
+  <PC_Settings_ColorBody>Body text</PC_Settings_ColorBody>
+  <PC_Settings_ColorDim>Dim / secondary text  (subtitles, day markers)</PC_Settings_ColorDim>
+  <PC_Settings_ColorDiary>Diary / spark entries</PC_Settings_ColorDiary>
+  <PC_Settings_ColorBg>Pane background  (lower alpha = more transparent)</PC_Settings_ColorBg>
+  <PC_Settings_ResetUI>Reset UI to defaults</PC_Settings_ResetUI>
+
+  <!-- Settings — Debug panel -->
+  <PC_Debug_SelectPrompt>Select a colonist and click ↻ Refresh</PC_Debug_SelectPrompt>
+  <PC_Debug_NoPawnSelected>No pawn selected — click to pick</PC_Debug_NoPawnSelected>
+  <PC_Debug_Refresh>↻ Refresh</PC_Debug_Refresh>
+  <PC_Debug_ExportCSV>⬇ Export CSV</PC_Debug_ExportCSV>
+  <PC_Debug_FilterPlaceholder>Filter symbols...</PC_Debug_FilterPlaceholder>
+  <PC_Debug_SymbolCount>{0} / {1} symbols</PC_Debug_SymbolCount>
+  <PC_Debug_ArcLabel>Arc:</PC_Debug_ArcLabel>
+  <PC_Debug_NoArc>No active arc</PC_Debug_NoArc>
+  <PC_Debug_ActiveEmbers>Active embers: {0}</PC_Debug_ActiveEmbers>
+  <PC_Debug_CompletedEpics>Completed epics: {0}</PC_Debug_CompletedEpics>
+  <PC_Debug_NarrativeProfile>Narrative Profile:</PC_Debug_NarrativeProfile>
+  <PC_Debug_TotalWeight>Total weight: {0}</PC_Debug_TotalWeight>
+  <PC_Debug_Dominant>Dominant: {0}</PC_Debug_Dominant>
+  <PC_Debug_RecentTales>Recent Tales</PC_Debug_RecentTales>
+  <PC_Debug_NoTales>No tales yet.</PC_Debug_NoTales>
+  <PC_Debug_NoChronicle>No chronicle entries yet.</PC_Debug_NoChronicle>
+  <PC_Debug_ChronicleOf>Chronicle — {0}</PC_Debug_ChronicleOf>
+
+  <!-- Settings — Debug panel — Performance sub-tab -->
+  <PC_Debug_Perf_Title>Performance Diagnostics</PC_Debug_Perf_Title>
+  <PC_Debug_Perf_Hint>Sampled every 250 ticks. Open a save with colonists active to gather readings.</PC_Debug_Perf_Hint>
+  <PC_Debug_Perf_CompTick>Comp Tick  (per pawn, sampled)</PC_Debug_Perf_CompTick>
+  <PC_Debug_Perf_Grammar>Grammar Resolver</PC_Debug_Perf_Grammar>
+  <PC_Debug_Perf_WorldScraper>World Scraper</PC_Debug_Perf_WorldScraper>
+  <PC_Debug_Perf_PawnScraper>Pawn Scraper</PC_Debug_Perf_PawnScraper>
+  <PC_Debug_Perf_Last>Last:</PC_Debug_Perf_Last>
+  <PC_Debug_Perf_Peak>Peak:</PC_Debug_Perf_Peak>
+  <PC_Debug_Perf_ActiveComps>Active comps:</PC_Debug_Perf_ActiveComps>
+  <PC_Debug_Perf_ColonyBudget>Colony budget:</PC_Debug_Perf_ColonyBudget>
+  <PC_Debug_Perf_FallbackRate>Fallback rate:</PC_Debug_Perf_FallbackRate>
+  <PC_Debug_Perf_Count>Resolve count:</PC_Debug_Perf_Count>
+  <PC_Debug_Perf_HitRate>Cache hit rate:</PC_Debug_Perf_HitRate>
+  <PC_Debug_Perf_CacheAge>Cache age:</PC_Debug_Perf_CacheAge>
+  <PC_Debug_Perf_CacheStale>stale / empty</PC_Debug_Perf_CacheStale>
+  <PC_Debug_Perf_Breakdown>Section breakdown (last full scrape):</PC_Debug_Perf_Breakdown>
+  <PC_Debug_Perf_Reset>↺ Reset peaks</PC_Debug_Perf_Reset>
+  <PC_Debug_Perf_Good>● Normal</PC_Debug_Perf_Good>
+  <PC_Debug_Perf_Warn>● Elevated</PC_Debug_Perf_Warn>
+  <PC_Debug_Perf_Bad>● High</PC_Debug_Perf_Bad>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       ITAB — Chrome &amp; Navigation
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <PC_ITab_ResizeTip>Click + drag to resize window.</PC_ITab_ResizeTip>
+  <PC_ITab_ChroniclesOf>Chronicles of {0}</PC_ITab_ChroniclesOf>
+  <PC_ITab_SharedArcWith>SHARED ARC — {0}</PC_ITab_SharedArcWith>
+  <PC_ITab_SharedArc>SHARED ARC</PC_ITab_SharedArc>
+  <PC_ITab_ArcChapters>ARC CHAPTERS</PC_ITab_ArcChapters>
+  <PC_ITab_Diary>DIARY</PC_ITab_Diary>
+  <PC_ITab_DefaultChapter>Chapter</PC_ITab_DefaultChapter>
+  <PC_ITab_DefaultSharedChapter>Shared Chapter</PC_ITab_DefaultSharedChapter>
+  <PC_ITab_DayStage>Day {0}  ·  {1}</PC_ITab_DayStage>
+  <PC_ITab_DiaryEntry>DIARY ENTRY</PC_ITab_DiaryEntry>
+  <PC_ITab_NoActiveArc>No active arc.</PC_ITab_NoActiveArc>
+  <PC_ITab_NarrativeProfile>Narrative Profile</PC_ITab_NarrativeProfile>
+  <PC_ITab_NoNarrativeThreads>No strong narrative threads yet.</PC_ITab_NoNarrativeThreads>
+  <PC_ITab_ClickForStats>Click for more stats.</PC_ITab_ClickForStats>
+
+  <!-- ITab — Arc progression -->
+  <PC_ITab_WhyFailed>Why it failed:</PC_ITab_WhyFailed>
+  <PC_ITab_WhySucceeded>Why it succeeded:</PC_ITab_WhySucceeded>
+  <PC_ITab_ChosenPath>Path: {0}</PC_ITab_ChosenPath>
+  <PC_ITab_PathPrefix>Path: </PC_ITab_PathPrefix>
+  <PC_ITab_ResolveArc>Resolve Arc  ▶</PC_ITab_ResolveArc>
+  <PC_ITab_AdvanceArc>Advance Arc  ▶</PC_ITab_AdvanceArc>
+  <PC_ITab_NextStage>Next  ▶</PC_ITab_NextStage>
+  <PC_ITab_SharedArcFinalTip>This is the final stage of the shared arc. Advancing resolves it permanently for both pawns.</PC_ITab_SharedArcFinalTip>
+  <PC_ITab_ArcFinalTip>This is the final stage of the arc. Advancing will resolve it permanently.</PC_ITab_ArcFinalTip>
+  <PC_ITab_DevNext>Dev: Next</PC_ITab_DevNext>
+  <PC_ITab_DevSkip>Dev: Skip</PC_ITab_DevSkip>
+
+  <!-- ITab — Choose path -->
+  <PC_ITab_ChoosePathClimax>⚔  THE ARC REACHES ITS END — CHOOSE:</PC_ITab_ChoosePathClimax>
+  <PC_ITab_ChoosePath>CHOOSE A PATH:</PC_ITab_ChoosePath>
+  <PC_ITab_ThisPawn>This pawn</PC_ITab_ThisPawn>
+  <PC_ITab_HardRoadTip>The Hard Road: commit to the confrontation. A narrative event fires.</PC_ITab_HardRoadTip>
+  <PC_ITab_EasyOutTip>The Easy Out: take the corrupted backstory now. No event fires. The arc closes immediately.</PC_ITab_EasyOutTip>
+  <PC_ITab_EffectsNow>Choosing this path applies these changes immediately:</PC_ITab_EffectsNow>
+  <PC_ITab_EffectsDirection>Choosing this path sets the arc direction.</PC_ITab_EffectsDirection>
+
+  <!-- ITab — Stakes panel -->
+  <PC_ITab_FinalStake>⚠  FINAL STAGE — THE ARC RESOLVES HERE</PC_ITab_FinalStake>
+  <PC_ITab_WhatAtStake>WHAT'S AT STAKE</PC_ITab_WhatAtStake>
+  <PC_ITab_Success>SUCCESS -></PC_ITab_Success>
+  <PC_ITab_Failure>FAILURE / ABANDON -></PC_ITab_Failure>
+  <PC_ITab_ReadyNext>Ready — click Next to continue</PC_ITab_ReadyNext>
+
+  <!-- ITab — Wait / progress bar -->
+  <PC_ITab_WaitingLabel>⏳  WAITING…</PC_ITab_WaitingLabel>
+  <PC_ITab_DaysRemaining>{0} days remaining</PC_ITab_DaysRemaining>
+  <PC_ITab_DaysRemainingPrepare>⏱  {0} days remaining to prepare</PC_ITab_DaysRemainingPrepare>
+  <PC_ITab_TimeExpired>⏱  Time has expired</PC_ITab_TimeExpired>
+
+  <!-- ITab — Per-pawn disable toggle -->
+  <PC_ITab_ChroniclesActive>✓ Active</PC_ITab_ChroniclesActive>
+  <PC_ITab_ChroniclesInactive>✗ Disabled</PC_ITab_ChroniclesInactive>
+  <PC_ITab_ChroniclesActive_Tip>Chronicles are active for this pawn. Click to disable.</PC_ITab_ChroniclesActive_Tip>
+  <PC_ITab_ChroniclesInactive_Tip>Chronicles are disabled for this pawn. Click to re-enable.</PC_ITab_ChroniclesInactive_Tip>
+  <PC_ITab_ChroniclesDisabledBody>Chronicles are disabled for this pawn. Click the toggle above to re-enable.</PC_ITab_ChroniclesDisabledBody>
+
+  <!-- ITab — Resolve / Abandon -->
+  <PC_ITab_AbandonArc>Abandon Arc  ✗</PC_ITab_AbandonArc>
+  <PC_ITab_ResolveArcTip>The pawn has proven themselves. Resolve the arc in success.</PC_ITab_ResolveArcTip>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       COMP - Wait condition labels
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <PC_Wait_ChoosePathBegin>Choose a path to begin</PC_Wait_ChoosePathBegin>
+  <PC_Wait_ChoosePathForward>Choose your path forward</PC_Wait_ChoosePathForward>
+  <PC_Wait_ChooseProceed>Choose how to proceed</PC_Wait_ChooseProceed>
+  <PC_Wait_SeedSettles>as the decision settles</PC_Wait_SeedSettles>
+  <PC_Wait_AwaitReckoning>await the reckoning</PC_Wait_AwaitReckoning>
+  <PC_Wait_TakeItNow>take it now</PC_Wait_TakeItNow>
+  <PC_ArcComplete>Arc complete</PC_ArcComplete>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       STAGE WAIT CONDITION - Fallback labels ({0} = pawn short name)
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <PC_WaitFallback_Kills>after {0}'s next kill</PC_WaitFallback_Kills>
+  <PC_WaitFallback_Injured>after {0} is next injured</PC_WaitFallback_Injured>
+  <PC_WaitFallback_Healed>after {0} recovers</PC_WaitFallback_Healed>
+  <PC_WaitFallback_Crafted>after {0} completes something</PC_WaitFallback_Crafted>
+  <PC_WaitFallback_Social>after {0} next connects with someone</PC_WaitFallback_Social>
+  <PC_WaitFallback_Ritual>after {0}'s next observance</PC_WaitFallback_Ritual>
+  <PC_WaitFallback_Tamed>after {0} next bonds with an animal</PC_WaitFallback_Tamed>
+  <PC_WaitFallback_Time>as {0}'s story unfolds</PC_WaitFallback_Time>
+  <PC_WaitFallback_Default>as {0}'s story continues</PC_WaitFallback_Default>
+
+  <!-- Condition hints (shown in choice mechanical hint) -->
+  <PC_CondHint_Kills>Requires: next kill</PC_CondHint_Kills>
+  <PC_CondHint_Injured>Requires: next injury</PC_CondHint_Injured>
+  <PC_CondHint_Healed>Requires: next recovery</PC_CondHint_Healed>
+  <PC_CondHint_Crafted>Requires: next crafting</PC_CondHint_Crafted>
+  <PC_CondHint_Social>Requires: a social moment</PC_CondHint_Social>
+  <PC_CondHint_Ritual>Requires: next observance</PC_CondHint_Ritual>
+  <PC_CondHint_Tamed>Requires: next animal bond</PC_CondHint_Tamed>
+  <PC_CondHint_Time>Wait: time passes</PC_CondHint_Time>
+  <PC_CondHint_Default>Wait: story unfolds</PC_CondHint_Default>
+  <!-- {0} = cond hint, {1} = tag display name -->
+  <PC_CondHint_TagPath>{0}  ·  {1} path</PC_CondHint_TagPath>
+
+  <!-- Climax skill check label ({0}=skill, {1}=threshold, {2}=current) -->
+  <PC_Climax_SkillCheck>Reach {0} level {1} (currently {2})</PC_Climax_SkillCheck>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       SEED CHOICES - Opening path selection
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <PC_Seed_Violence>Follow the edge of violence</PC_Seed_Violence>
+  <PC_Seed_Duty>Stand your ground</PC_Seed_Duty>
+  <PC_Seed_Betrayal>Reckon with what was done</PC_Seed_Betrayal>
+  <PC_Seed_Survival>Whatever it takes to survive</PC_Seed_Survival>
+  <PC_Seed_Trauma>Carry the wound forward</PC_Seed_Trauma>
+  <PC_Seed_Decay>Watch what falls apart</PC_Seed_Decay>
+  <PC_Seed_Resilience>Prove something can survive this</PC_Seed_Resilience>
+  <PC_Seed_Healer>Make tending your purpose</PC_Seed_Healer>
+  <PC_Seed_Nurture>Hold others through it</PC_Seed_Nurture>
+  <PC_Seed_Craft>Build your way through</PC_Seed_Craft>
+  <PC_Seed_Curiosity>Chase what you don't understand</PC_Seed_Curiosity>
+  <PC_Seed_Scholar>Study it until it yields</PC_Seed_Scholar>
+  <PC_Seed_Artist>Give it a shape</PC_Seed_Artist>
+  <PC_Seed_Kinship>Find your people in it</PC_Seed_Kinship>
+  <PC_Seed_Loss>Honor what was lost</PC_Seed_Loss>
+  <PC_Seed_Grief>Name it and face it</PC_Seed_Grief>
+  <PC_Seed_Refugee>Find somewhere solid to stand</PC_Seed_Refugee>
+  <PC_Seed_Devotion>Let belief carry you</PC_Seed_Devotion>
+  <PC_Seed_Faith>Trust the path</PC_Seed_Faith>
+  <PC_Seed_Noble>Hold your standing</PC_Seed_Noble>
+  <PC_Seed_Leadership>Carry others with you</PC_Seed_Leadership>
+  <PC_Seed_Power>Take what the moment offers</PC_Seed_Power>
+  <PC_Seed_Isolation>Go through it alone</PC_Seed_Isolation>
+  <PC_Seed_Wandering>Let the road decide</PC_Seed_Wandering>
+  <PC_Seed_Pacifism>Find a way that doesn't cost blood</PC_Seed_Pacifism>
+  <PC_Seed_Augmentation>Solve it with what you've built</PC_Seed_Augmentation>
+  <PC_Seed_Underworld>Work with what exists in the dark</PC_Seed_Underworld>
+  <PC_Seed_Animalfriend>Find the answer in the animals</PC_Seed_Animalfriend>
+  <PC_Seed_Default>Step into it directly</PC_Seed_Default>
+  <!-- {0} = path name, {1} = skill hint -->
+  <PC_Seed_MechanicalHint>Path: {0}  ·  {1}</PC_Seed_MechanicalHint>
+
+  <!-- Path skill hints -->
+  <PC_SkillHint_Combat>steers toward combat skills</PC_SkillHint_Combat>
+  <PC_SkillHint_Medicine>steers toward Medicine</PC_SkillHint_Medicine>
+  <PC_SkillHint_Crafting>steers toward Crafting / Artistic</PC_SkillHint_Crafting>
+  <PC_SkillHint_Intellectual>steers toward Intellectual</PC_SkillHint_Intellectual>
+  <PC_SkillHint_Animals>steers toward Animals</PC_SkillHint_Animals>
+  <PC_SkillHint_Social>steers toward Social</PC_SkillHint_Social>
+  <PC_SkillHint_Difficulty>builds through difficulty</PC_SkillHint_Difficulty>
+  <PC_SkillHint_Underworld>steers toward Social and guile</PC_SkillHint_Underworld>
+  <PC_SkillHint_Default>shapes the arc ahead</PC_SkillHint_Default>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       MIDDLE-STAGE CHOICES - GetTagFlavor action labels
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <PC_Choice_Violence>Push it to the breaking point</PC_Choice_Violence>
+  <PC_Choice_Duty>Hold to what you know</PC_Choice_Duty>
+  <PC_Choice_Betrayal>Use what you've learned the hard way</PC_Choice_Betrayal>
+  <PC_Choice_Survival>Endure, adapt, survive</PC_Choice_Survival>
+  <PC_Choice_Trauma>Don't hide the pain</PC_Choice_Trauma>
+  <PC_Choice_Decay>Accept what is breaking down</PC_Choice_Decay>
+  <PC_Choice_Resilience>Prove it can be survived</PC_Choice_Resilience>
+  <PC_Choice_Healer>Tend to someone who needs it</PC_Choice_Healer>
+  <PC_Choice_Nurture>Be the one who holds it together</PC_Choice_Nurture>
+  <PC_Choice_Craft>Build something that matters</PC_Choice_Craft>
+  <PC_Choice_Curiosity>Follow where it leads</PC_Choice_Curiosity>
+  <PC_Choice_Scholar>Study it until it makes sense</PC_Choice_Scholar>
+  <PC_Choice_Artist>Make it into something</PC_Choice_Artist>
+  <PC_Choice_Kinship>Reach toward someone</PC_Choice_Kinship>
+  <PC_Choice_Loss>Sit with what is gone</PC_Choice_Loss>
+  <PC_Choice_Grief>Name what was lost</PC_Choice_Grief>
+  <PC_Choice_Refugee>Find solid ground</PC_Choice_Refugee>
+  <PC_Choice_Devotion>Find it in belief</PC_Choice_Devotion>
+  <PC_Choice_Faith>Let faith carry it</PC_Choice_Faith>
+  <PC_Choice_Noble>Assert your standing</PC_Choice_Noble>
+  <PC_Choice_Leadership>Take the weight of it</PC_Choice_Leadership>
+  <PC_Choice_Power>Command what you can</PC_Choice_Power>
+  <PC_Choice_Isolation>Step back from it all</PC_Choice_Isolation>
+  <PC_Choice_Wandering>Let distance decide</PC_Choice_Wandering>
+  <PC_Choice_Pacifism>Find another way through</PC_Choice_Pacifism>
+  <PC_Choice_Augmentation>Let the machine handle it</PC_Choice_Augmentation>
+  <PC_Choice_Underworld>Work the angle</PC_Choice_Underworld>
+  <PC_Choice_Animalfriend>Find solace in the animals</PC_Choice_Animalfriend>
+  <PC_Choice_Default>Face it directly</PC_Choice_Default>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       TRADEOFF POOL - Middle-stage stat-consequence choices
+  ═══════════════════════════════════════════════════════════════════════════ -->
+
+  <!-- violence / survival / betrayal -->
+  <PC_Tradeoff_Combat_1>Sharpen the edge</PC_Tradeoff_Combat_1>
+  <PC_Tradeoff_Combat_1_Hint>+2 Shooting  -1 Medicine</PC_Tradeoff_Combat_1_Hint>
+  <PC_Tradeoff_Combat_2>Take the blow yourself</PC_Tradeoff_Combat_2>
+  <PC_Tradeoff_Combat_2_Hint>+3 Melee  -1 Social</PC_Tradeoff_Combat_2_Hint>
+  <PC_Tradeoff_Combat_3>Learn from the wound</PC_Tradeoff_Combat_3>
+  <PC_Tradeoff_Combat_3_Hint>+2 Melee  +1 Medicine</PC_Tradeoff_Combat_3_Hint>
+
+  <!-- duty -->
+  <PC_Tradeoff_Duty_1>Discipline through repetition</PC_Tradeoff_Duty_1>
+  <PC_Tradeoff_Duty_1_Hint>+2 Melee  +1 Intellectual</PC_Tradeoff_Duty_1_Hint>
+  <PC_Tradeoff_Duty_2>Command the situation</PC_Tradeoff_Duty_2>
+  <PC_Tradeoff_Duty_2_Hint>+2 Social  -1 Melee</PC_Tradeoff_Duty_2_Hint>
+  <PC_Tradeoff_Duty_3>Sacrifice comfort for order</PC_Tradeoff_Duty_3>
+  <PC_Tradeoff_Duty_3_Hint>+3 Melee  -1 Crafting</PC_Tradeoff_Duty_3_Hint>
+
+  <!-- leadership / noble / power -->
+  <PC_Tradeoff_Leader_1>Leverage your standing</PC_Tradeoff_Leader_1>
+  <PC_Tradeoff_Leader_1_Hint>+2 Social  +1 Intellectual</PC_Tradeoff_Leader_1_Hint>
+  <PC_Tradeoff_Leader_2>Inspire through words</PC_Tradeoff_Leader_2>
+  <PC_Tradeoff_Leader_2_Hint>+3 Social  -1 Melee</PC_Tradeoff_Leader_2_Hint>
+  <PC_Tradeoff_Leader_3>Study the situation carefully</PC_Tradeoff_Leader_3>
+  <PC_Tradeoff_Leader_3_Hint>+2 Intellectual  +1 Crafting</PC_Tradeoff_Leader_3_Hint>
+
+  <!-- craft / artist -->
+  <PC_Tradeoff_Craft_1>Work at it obsessively</PC_Tradeoff_Craft_1>
+  <PC_Tradeoff_Craft_1_Hint>+2 Crafting  +1 Artistic</PC_Tradeoff_Craft_1_Hint>
+  <PC_Tradeoff_Craft_2>Let art consume you</PC_Tradeoff_Craft_2>
+  <PC_Tradeoff_Craft_2_Hint>+3 Artistic  -1 Social</PC_Tradeoff_Craft_2_Hint>
+  <PC_Tradeoff_Craft_3>Build something necessary</PC_Tradeoff_Craft_3>
+  <PC_Tradeoff_Craft_3_Hint>+2 Crafting  +1 Construction</PC_Tradeoff_Craft_3_Hint>
+
+  <!-- healer / nurture -->
+  <PC_Tradeoff_Healer_1>Dedicate yourself to healing</PC_Tradeoff_Healer_1>
+  <PC_Tradeoff_Healer_1_Hint>+2 Medicine  -1 Melee</PC_Tradeoff_Healer_1_Hint>
+  <PC_Tradeoff_Healer_2>Become indispensable</PC_Tradeoff_Healer_2>
+  <PC_Tradeoff_Healer_2_Hint>+3 Medicine  -1 Social</PC_Tradeoff_Healer_2_Hint>
+  <PC_Tradeoff_Healer_3>Learn through care</PC_Tradeoff_Healer_3>
+  <PC_Tradeoff_Healer_3_Hint>+2 Medicine  +1 Intellectual</PC_Tradeoff_Healer_3_Hint>
+
+  <!-- scholar / curiosity -->
+  <PC_Tradeoff_Scholar_1>Study everything</PC_Tradeoff_Scholar_1>
+  <PC_Tradeoff_Scholar_1_Hint>+2 Intellectual  -1 Social</PC_Tradeoff_Scholar_1_Hint>
+  <PC_Tradeoff_Scholar_2>Theorize deeply</PC_Tradeoff_Scholar_2>
+  <PC_Tradeoff_Scholar_2_Hint>+3 Intellectual  -1 Melee</PC_Tradeoff_Scholar_2_Hint>
+  <PC_Tradeoff_Scholar_3>Apply your knowledge</PC_Tradeoff_Scholar_3>
+  <PC_Tradeoff_Scholar_3_Hint>+2 Intellectual  +1 Crafting</PC_Tradeoff_Scholar_3_Hint>
+
+  <!-- trauma / grief / loss / wandering / isolation / refugee / decay -->
+  <PC_Tradeoff_Hardship_1>Process through thought</PC_Tradeoff_Hardship_1>
+  <PC_Tradeoff_Hardship_1_Hint>+2 Intellectual  -1 Social</PC_Tradeoff_Hardship_1_Hint>
+  <PC_Tradeoff_Hardship_2>Reach toward someone</PC_Tradeoff_Hardship_2>
+  <PC_Tradeoff_Hardship_2_Hint>+2 Social  -1 Melee</PC_Tradeoff_Hardship_2_Hint>
+  <PC_Tradeoff_Hardship_3>Find small comforts</PC_Tradeoff_Hardship_3>
+  <PC_Tradeoff_Hardship_3_Hint>+1 Medicine  +1 Intellectual</PC_Tradeoff_Hardship_3_Hint>
+
+  <!-- animalfriend -->
+  <PC_Tradeoff_Animal_1>Bond deeply with them</PC_Tradeoff_Animal_1>
+  <PC_Tradeoff_Animal_1_Hint>+2 Animals  -1 Social</PC_Tradeoff_Animal_1_Hint>
+  <PC_Tradeoff_Animal_2>Let them be your world</PC_Tradeoff_Animal_2>
+  <PC_Tradeoff_Animal_2_Hint>+3 Animals  -1 Melee</PC_Tradeoff_Animal_2_Hint>
+  <PC_Tradeoff_Animal_3>Learn from them</PC_Tradeoff_Animal_3>
+  <PC_Tradeoff_Animal_3_Hint>+2 Animals  +1 Medicine</PC_Tradeoff_Animal_3_Hint>
+
+  <!-- devotion / faith -->
+  <PC_Tradeoff_Faith_1>Commit fully</PC_Tradeoff_Faith_1>
+  <PC_Tradeoff_Faith_1_Hint>+2 Social  -1 Intellectual</PC_Tradeoff_Faith_1_Hint>
+  <PC_Tradeoff_Faith_2>Preach your truth</PC_Tradeoff_Faith_2>
+  <PC_Tradeoff_Faith_2_Hint>+3 Social  -1 Melee</PC_Tradeoff_Faith_2_Hint>
+  <PC_Tradeoff_Faith_3>Contemplate</PC_Tradeoff_Faith_3>
+  <PC_Tradeoff_Faith_3_Hint>+2 Intellectual  +1 Social</PC_Tradeoff_Faith_3_Hint>
+
+  <!-- augmentation -->
+  <PC_Tradeoff_Augmentation_1>Push the enhancement</PC_Tradeoff_Augmentation_1>
+  <PC_Tradeoff_Augmentation_1_Hint>+2 Intellectual  -1 Medicine</PC_Tradeoff_Augmentation_1_Hint>
+  <PC_Tradeoff_Augmentation_2>Understand it fully</PC_Tradeoff_Augmentation_2>
+  <PC_Tradeoff_Augmentation_2_Hint>+3 Intellectual  -1 Social</PC_Tradeoff_Augmentation_2_Hint>
+  <PC_Tradeoff_Augmentation_3>Build toward it</PC_Tradeoff_Augmentation_3>
+  <PC_Tradeoff_Augmentation_3_Hint>+2 Crafting  +1 Intellectual</PC_Tradeoff_Augmentation_3_Hint>
+
+  <!-- underworld -->
+  <PC_Tradeoff_Underworld_1>Work the angles</PC_Tradeoff_Underworld_1>
+  <PC_Tradeoff_Underworld_1_Hint>+2 Social  -1 Melee</PC_Tradeoff_Underworld_1_Hint>
+  <PC_Tradeoff_Underworld_2>Keep the edge</PC_Tradeoff_Underworld_2>
+  <PC_Tradeoff_Underworld_2_Hint>+2 Melee  -1 Social</PC_Tradeoff_Underworld_2_Hint>
+  <PC_Tradeoff_Underworld_3>Dig deeper</PC_Tradeoff_Underworld_3>
+  <PC_Tradeoff_Underworld_3_Hint>+2 Intellectual  -1 Social</PC_Tradeoff_Underworld_3_Hint>
+
+  <!-- default -->
+  <PC_Tradeoff_Default_1>Press forward</PC_Tradeoff_Default_1>
+  <PC_Tradeoff_Default_1_Hint>+2 Intellectual  -1 Social</PC_Tradeoff_Default_1_Hint>
+  <PC_Tradeoff_Default_2>Hold steady</PC_Tradeoff_Default_2>
+  <PC_Tradeoff_Default_2_Hint>+1 Melee  +1 Intellectual</PC_Tradeoff_Default_2_Hint>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════════
+       CLIMAX DOORS - Hard Road vs Easy Out
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <PC_Climax_EasyOutLabel>Take what is offered</PC_Climax_EasyOutLabel>
+  <PC_Climax_EasyOutHint>The corrupted backstory is yours now. The arc closes.</PC_Climax_EasyOutHint>
+
+  <PC_Climax_HardRoad_Violence>Face what is coming</PC_Climax_HardRoad_Violence>
+  <PC_Climax_HardRoad_Hardship>Let it break and rebuild</PC_Climax_HardRoad_Hardship>
+  <PC_Climax_HardRoad_Healer>Be there when it matters most</PC_Climax_HardRoad_Healer>
+  <PC_Climax_HardRoad_Animal>Stand with what you've protected</PC_Climax_HardRoad_Animal>
+  <PC_Climax_HardRoad_Scholar>Use everything you've learned</PC_Climax_HardRoad_Scholar>
+  <PC_Climax_HardRoad_Underworld>Call in what you are owed</PC_Climax_HardRoad_Underworld>
+  <PC_Climax_HardRoad_Leader>Lead through the fire</PC_Climax_HardRoad_Leader>
+  <PC_Climax_HardRoad_Faith>Let belief be the answer</PC_Climax_HardRoad_Faith>
+  <PC_Climax_HardRoad_Craft>Make something that endures</PC_Climax_HardRoad_Craft>
+  <PC_Climax_HardRoad_Default>See it through</PC_Climax_HardRoad_Default>
+
+  <!-- Hard Road hint consequences -->
+  <PC_Climax_Consequence_SmallRaid>enemies arrive</PC_Climax_Consequence_SmallRaid>
+  <PC_Climax_Consequence_MentalBreak>the weight breaks surface</PC_Climax_Consequence_MentalBreak>
+  <PC_Climax_Consequence_FriendlyArrives>someone comes who needs you</PC_Climax_Consequence_FriendlyArrives>
+  <PC_Climax_Consequence_HostileArrives>a rival walks onto the map</PC_Climax_Consequence_HostileArrives>
+  <PC_Climax_Consequence_Default>something arrives</PC_Climax_Consequence_Default>
+  <!-- {0} = path name, {1} = consequence string -->
+  <PC_Climax_HintFormat>[{0} path]  {1}  ·  Redeemed backstory on success</PC_Climax_HintFormat>
+
+</LanguageData>

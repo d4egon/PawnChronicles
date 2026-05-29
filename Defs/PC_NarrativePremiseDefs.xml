@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    ═══════════════════════════════════════════════════════════════════════════
+    UNIVERSAL NARRATIVE PREMISES - Three Tiers of Intensity
+    ═══════════════════════════════════════════════════════════════════════════
+
+    All three tiers now use BestTagMatch. The engine scores every epic in the
+    pool against the pawn's tag profile and picks the best fit. Tag-specific
+    epics beat Universal when the pawn has clear tag presence; Universal wins
+    for pawns with flat or minimal profiles.
+
+    TIER DESIGN:
+      Ember    - Short arc. Low stakes. Falls back to Universal_Short.
+      Flame    - Medium arc. Real consequences.
+      Inferno  - Long arc. Life-defining. Falls back to Universal_Long.
+    ═══════════════════════════════════════════════════════════════════════════-->
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TIER 1: EMBER - Something stirs
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.NarrativePremiseDef>
+    <defName>PC_Premise_Ember</defName>
+    <label>Something Stirs</label>
+    <description>Every pawn on the Rim carries a story hidden somewhere in the back of their mind. For most, it stays buried. For some, it surfaces.</description>
+    <conditions />
+    <tagRequirements />
+      <epicPool>
+        <li>PC_Epic_Universal_Short</li>
+        <li>PC_Epic_Violence</li>
+        <li>PC_Epic_Scholar</li>
+        <li>PC_Epic_Craft</li>
+        <li>PC_Epic_Kinship</li>
+        <li>PC_Epic_Underworld</li>
+        <li>PC_Epic_Noble</li>
+        <li>PC_Epic_Wanderer</li>
+        <li>PC_Epic_Grief</li>
+        <li>PC_Epic_Devotion</li>
+        <li>PC_Epic_Healer</li>
+        <li>PC_Epic_Artist</li>
+        <li>PC_Epic_AnimalFriend</li>
+        <li>PC_Epic_Pacifist</li>
+        <li>PC_Epic_Hunter</li>
+        <li>PC_Epic_Captive</li>
+        <li>PC_Epic_Foundling</li>
+      </epicPool>
+    <epicSelectionStrategy>BestTagMatch</epicSelectionStrategy>
+    <activationChance>30</activationChance>
+    <uniquePerPawn>false</uniquePerPawn>
+  </PawnChronicles.NarrativePremiseDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TIER 2: FLAME - A story demands telling
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.NarrativePremiseDef>
+    <defName>PC_Premise_Flame</defName>
+    <label>A Story Demands Telling</label>
+    <description>This pawn's life has accumulated enough weight that the story is no longer optional. Something will happen. What it costs depends on who they are.</description>
+    <conditions />
+    <tagRequirements>
+      <li><tag>PC_Tag_Trauma</tag><minScore>20</minScore><weight>1.0</weight></li>
+      <li><tag>PC_Tag_Loss</tag><minScore>0</minScore><weight>1.0</weight></li>
+      <li><tag>PC_Tag_Violence</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+      <epicPool>
+        <li>PC_Epic_Universal_Short</li>
+        <li>PC_Epic_Violence</li>
+        <li>PC_Epic_Scholar</li>
+        <li>PC_Epic_Craft</li>
+        <li>PC_Epic_Kinship</li>
+        <li>PC_Epic_Underworld</li>
+        <li>PC_Epic_Noble</li>
+        <li>PC_Epic_Wanderer</li>
+        <li>PC_Epic_Grief</li>
+        <li>PC_Epic_Devotion</li>
+        <li>PC_Epic_Healer</li>
+        <li>PC_Epic_Artist</li>
+        <li>PC_Epic_AnimalFriend</li>
+        <li>PC_Epic_Pacifist</li>
+        <li>PC_Epic_Hunter</li>
+        <li>PC_Epic_Captive</li>
+        <li>PC_Epic_Foundling</li>
+      </epicPool>
+    <epicSelectionStrategy>BestTagMatch</epicSelectionStrategy>
+    <activationChance>55</activationChance>
+    <uniquePerPawn>false</uniquePerPawn>
+  </PawnChronicles.NarrativePremiseDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TIER 3: INFERNO - A life demands reckoning
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.NarrativePremiseDef>
+    <defName>PC_Premise_Inferno</defName>
+    <label>A Life Demands Reckoning</label>
+    <description>This pawn carries more than most. The weight has reached the point where something must give - and what gives will determine who they become.</description>
+    <conditions />
+    <tagRequirements>
+      <li><tag>PC_Tag_Trauma</tag><minScore>30</minScore><weight>1.5</weight></li>
+      <li><tag>PC_Tag_Loss</tag><minScore>0</minScore><weight>1.0</weight></li>
+      <li><tag>PC_Tag_Violence</tag><minScore>0</minScore><weight>1.0</weight></li>
+      <li><tag>PC_Tag_Resilience</tag><minScore>0</minScore><weight>1.0</weight></li>
+      <li><tag>PC_Tag_Duty</tag><minScore>0</minScore><weight>1.0</weight></li>
+    </tagRequirements>
+      <epicPool>
+        <li>PC_Epic_Universal_Long</li>
+        <li>PC_Epic_Violence</li>
+        <li>PC_Epic_Scholar</li>
+        <li>PC_Epic_Craft</li>
+        <li>PC_Epic_Kinship</li>
+        <li>PC_Epic_Underworld</li>
+        <li>PC_Epic_Noble</li>
+        <li>PC_Epic_Wanderer</li>
+        <li>PC_Epic_Grief</li>
+        <li>PC_Epic_Devotion</li>
+        <li>PC_Epic_Healer</li>
+        <li>PC_Epic_Artist</li>
+        <li>PC_Epic_AnimalFriend</li>
+        <li>PC_Epic_Pacifist</li>
+        <li>PC_Epic_Hunter</li>
+        <li>PC_Epic_Captive</li>
+        <li>PC_Epic_Foundling</li>
+      </epicPool>
+    <epicSelectionStrategy>BestTagMatch</epicSelectionStrategy>
+    <activationChance>75</activationChance>
+    <uniquePerPawn>false</uniquePerPawn>
+  </PawnChronicles.NarrativePremiseDef>
+
+</Defs>

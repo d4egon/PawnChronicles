@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       EMBER QUEST SCRIPT - lightweight, auto-expires, letter-only
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <QuestScriptDef>
+    <defName>PC_Quest_Ember</defName>
+    <expireDaysRange>2~2</expireDaysRange>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="PawnChronicles.QuestNode_EpicStage">
+          <signal>PawnEpic_EmberComplete</signal>
+          <stageRole>ember</stageRole>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MOOD BUFF - small reward for completing an ember
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!--
+    PC_EmberCompleted - stacking "momentum" buff, up to 3 deep.
+    Applied each time an ember fires. As moments accumulate across a day or two,
+    this creates a rising sense that things have been going right for this pawn.
+    Stage index mirrors PC_Thought_EmberMoment: 0=violence, 1=social, 2=craft,
+    3=intellectual, 4=wilderness, 5=generic. Applied by TagToStageIndex in C#.
+  -->
+  <ThoughtDef>
+    <defName>PC_EmberCompleted</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>3</stackLimit>
+    <stages>
+      <!-- 0: violence -->
+      <li>
+        <label>running on adrenaline</label>
+        <description>The body remembers what it's good at. A run of hard days that went the right way.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <!-- 1: social / nurture / healer -->
+      <li>
+        <label>people have needed me lately</label>
+        <description>A string of small moments where being there for others actually mattered. It adds up.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <!-- 2: craft -->
+      <li>
+        <label>the work has been going well</label>
+        <description>Several things in a row that came together right. Muscle memory serves me well.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <!-- 3: curiosity / intellectual -->
+      <li>
+        <label>a productive stretch</label>
+        <description>The mind has been sharp lately. Problems have been yielding. Questions have been answering themselves.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <!-- 4: wilderness / animal -->
+      <li>
+        <label>the land has been good to me</label>
+        <description>A few quiet days where the world outside the walls felt navigable rather than hostile.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <!-- 5: generic fallback -->
+      <li>
+        <label>a small moment</label>
+        <description>I took a moment to attend to something personal. It helped.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       NEGATIVE THOUGHT - minor setback during an ember
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <ThoughtDef>
+    <defName>PC_Thought_EmberSetback</defName>
+    <durationDays>0.5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>a small setback</label>
+        <description>Something went slightly wrong. Nothing serious, but the day felt a little dimmer for it.</description>
+        <baseMoodEffect>-4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       EMBER CONSEQUENCES
+       Job-specific pools fire first; universal (empty workTypes) is fallback.
+       WorkTypeDef defNames (confirmed from WorkTypeDefOf):
+         Mining, Crafting, Cooking, Doctor, Construction, Hunting,
+         Handling, Research, Growing, PlantCutting, Smithing
+       Art jobs run under Crafting in vanilla.
+       HediffDef names (confirmed from Hediffs_Local_Injuries.xml):
+         Bruise, Cut, Scratch, Burn, Misc, Stab, Crack, Crush
+       Severity guide: 0.03 = very minor, 0.05 = minor, 0.08 = noticeable
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- ── MINING ──────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Mining_Gold</defName>
+    <label>there was gold dust in the seam</label>
+    <workTypes><li>Mining</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1.5</weight>
+    <type>ItemSpawn</type>
+    <thingDef>Gold</thingDef>
+    <count>4</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Mining_Jade</defName>
+    <label>found a jade in the rock</label>
+    <workTypes><li>Mining</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1</weight>
+    <type>ItemSpawn</type>
+    <thingDef>Jade</thingDef>
+    <count>1</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Mining_Silver</defName>
+    <label>a glinting piece of silver in the wall</label>
+    <workTypes><li>Mining</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1.5</weight>
+    <type>ItemSpawn</type>
+    <thingDef>Silver</thingDef>
+    <count>8</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Mining_SkillXP</defName>
+    <label>rhythm in the stoneworks</label>
+    <workTypes><li>Mining</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Mining</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Mining_Bruise</defName>
+    <label>punched the rocks...</label>
+    <workTypes><li>Mining</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>2</weight>
+    <type>HediffApply</type>
+    <hediffDef>Bruise</hediffDef>
+    <hediffSeverity>0.15</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Mining_Cut</defName>
+    <label>sharp edge on the seam</label>
+    <workTypes><li>Mining</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>HediffApply</type>
+    <hediffDef>Cut</hediffDef>
+    <hediffSeverity>0.14</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Mining_Thought</defName>
+    <label>dust in the eyes</label>
+    <workTypes><li>Mining</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>ThoughtApply</type>
+    <thoughtDef>PC_Thought_EmberSetback</thoughtDef>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── CRAFTING (includes art/sculpting jobs) ─────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Crafting_Component</defName>
+    <label>spare part in the bin</label>
+    <workTypes><li>Crafting</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1</weight>
+    <type>ItemSpawn</type>
+    <thingDef>ComponentIndustrial</thingDef>
+    <count>1</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Crafting_Steel</defName>
+    <label>found some leftover steel</label>
+    <workTypes><li>Crafting</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1.5</weight>
+    <type>ItemSpawn</type>
+    <thingDef>Steel</thingDef>
+    <count>8</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Crafting_Jade</defName>
+    <label>spare piece that came out beautiful</label>
+    <workTypes><li>Crafting</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1</weight>
+    <type>ItemSpawn</type>
+    <thingDef>Jade</thingDef>
+    <count>1</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Crafting_SkillXP</defName>
+    <label>muscle-memory is kicking in</label>
+    <workTypes><li>Crafting</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Crafting</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Crafting_ArtSkillXP</defName>
+    <label>a moment that sparked</label>
+    <workTypes><li>Crafting</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1</weight>
+    <type>SkillChange</type>
+    <skillDef>Artistic</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Crafting_Cut</defName>
+    <label>the tool slipped</label>
+    <workTypes><li>Crafting</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>2</weight>
+    <type>HediffApply</type>
+    <hediffDef>Cut</hediffDef>
+    <hediffSeverity>0.14</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Crafting_Thought</defName>
+    <label>self-critique slapped back</label>
+    <workTypes><li>Crafting</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>ThoughtApply</type>
+    <thoughtDef>PC_Thought_EmberSetback</thoughtDef>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── SMITHING ───────────────────────────────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Smithing_Steel</defName>
+    <label>a nice quenching</label>
+    <workTypes><li>Smithing</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>ItemSpawn</type>
+    <thingDef>Steel</thingDef>
+    <count>6</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Smithing_SkillXP</defName>
+    <label>the iron listened</label>
+    <workTypes><li>Smithing</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Crafting</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Smithing_Bruise</defName>
+    <label>"It will keel"</label>
+    <workTypes><li>Smithing</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>2</weight>
+    <type>HediffApply</type>
+    <hediffDef>Bruise</hediffDef>
+    <hediffSeverity>0.15</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Smithing_Cut</defName>
+    <label>the sharpness test</label>
+    <workTypes><li>Smithing</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>HediffApply</type>
+    <hediffDef>Cut</hediffDef>
+    <hediffSeverity>0.15</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── COOKING ─────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Cooking_Meal</defName>
+    <label>an extra portion</label>
+    <workTypes><li>Cooking</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>ItemSpawn</type>
+    <thingDef>MealSimple</thingDef>
+    <count>2</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Cooking_SkillXP</defName>
+    <label>what a lovely meal!</label>
+    <workTypes><li>Cooking</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Cooking</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Cooking_Burn</defName>
+    <label>burned a hand on the stove</label>
+    <workTypes><li>Cooking</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>HediffApply</type>
+    <hediffDef>Burn</hediffDef>
+    <hediffSeverity>0.14</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Cooking_Cut</defName>
+    <label>knife slipped</label>
+    <workTypes><li>Cooking</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>HediffApply</type>
+    <hediffDef>Cut</hediffDef>
+    <hediffSeverity>0.14</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Cooking_Thought</defName>
+    <label>meal came out wrong</label>
+    <workTypes><li>Cooking</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>ThoughtApply</type>
+    <thoughtDef>PC_Thought_EmberSetback</thoughtDef>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── DOCTOR / MEDICINE ───────────────────────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Doctor_Medicine</defName>
+    <label>found extra supplies</label>
+    <workTypes><li>Doctor</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>ItemSpawn</type>
+    <thingDef>MedicineHerbal</thingDef>
+    <count>2</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Doctor_SkillXP</defName>
+    <label>a patient that listened</label>
+    <workTypes><li>Doctor</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Medicine</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Doctor_Cut</defName>
+    <label>suture needle caught the finger</label>
+    <workTypes><li>Doctor</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>HediffApply</type>
+    <hediffDef>Cut</hediffDef>
+    <hediffSeverity>0.13</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Doctor_Thought</defName>
+    <label>couldn't help enough</label>
+    <workTypes><li>Doctor</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>2</weight>
+    <type>ThoughtApply</type>
+    <thoughtDef>PC_Thought_EmberSetback</thoughtDef>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── CONSTRUCTION ────────────────────────────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Construction_Steel</defName>
+    <label>we ordered too many steel rods</label>
+    <workTypes><li>Construction</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1.5</weight>
+    <type>ItemSpawn</type>
+    <thingDef>Steel</thingDef>
+    <count>10</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Construction_Wood</defName>
+    <label>salvaged timber</label>
+    <workTypes><li>Construction</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1.5</weight>
+    <type>ItemSpawn</type>
+    <thingDef>WoodLog</thingDef>
+    <count>15</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Construction_SkillXP</defName>
+    <label>succesfully constructed something</label>
+    <workTypes><li>Construction</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Construction</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Construction_Bruise</defName>
+    <label>dropped something heavy</label>
+    <workTypes><li>Construction</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>2</weight>
+    <type>HediffApply</type>
+    <hediffDef>Bruise</hediffDef>
+    <hediffSeverity>0.16</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Construction_Cut</defName>
+    <label>sheet metal edge</label>
+    <workTypes><li>Construction</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>HediffApply</type>
+    <hediffDef>Cut</hediffDef>
+    <hediffSeverity>0.15</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Construction_Thought</defName>
+    <label>wall-segment had to come down</label>
+    <workTypes><li>Construction</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>ThoughtApply</type>
+    <thoughtDef>PC_Thought_EmberSetback</thoughtDef>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── HUNTING ──────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Hunting_Leather</defName>
+    <label>a flawless hide from a clean kill</label>
+    <workTypes><li>Hunting</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1.5</weight>
+    <type>ItemSpawn</type>
+    <thingDef>Leather_Plain</thingDef>
+    <count>5</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Hunting_SkillXP</defName>
+    <label>eye for the moment</label>
+    <workTypes><li>Hunting</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Shooting</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Hunting_Scratch</defName>
+    <label>branch caught the arm</label>
+    <workTypes><li>Hunting</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>2</weight>
+    <type>HediffApply</type>
+    <hediffDef>Scratch</hediffDef>
+    <hediffSeverity>0.14</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Hunting_Thought</defName>
+    <label>bastard got away</label>
+    <workTypes><li>Hunting</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>ThoughtApply</type>
+    <thoughtDef>PC_Thought_EmberSetback</thoughtDef>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── RESEARCH ─────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Research_SkillXP</defName>
+    <label>line of reasoning paid off</label>
+    <workTypes><li>Research</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Intellectual</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Research_Component</defName>
+    <label>useful component found in storage</label>
+    <workTypes><li>Research</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1</weight>
+    <type>ItemSpawn</type>
+    <thingDef>ComponentIndustrial</thingDef>
+    <count>1</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Research_Thought</defName>
+    <label>dead end</label>
+    <workTypes><li>Research</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>2</weight>
+    <type>ThoughtApply</type>
+    <thoughtDef>PC_Thought_EmberSetback</thoughtDef>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── GROWING / FARMING ───────────────────────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Growing_Potatoes</defName>
+    <label>unexpected yield</label>
+    <workTypes><li>Growing</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>ItemSpawn</type>
+    <thingDef>RawPotatoes</thingDef>
+    <count>10</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Growing_SkillXP</defName>
+    <label>soil that cooperated</label>
+    <workTypes><li>Growing</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Plants</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Growing_Scratch</defName>
+    <label>thorn in the hand</label>
+    <workTypes><li>Growing</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>2</weight>
+    <type>HediffApply</type>
+    <hediffDef>Scratch</hediffDef>
+    <hediffSeverity>0.13</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- Poison sting: ToxicBuildup from a toxic plant + a small scratch simultaneously -->
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Growing_PoisonSting</defName>
+    <label>touched a toxic plant</label>
+    <workTypes><li>Growing</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>HediffApply</type>
+    <hediffDef>ToxicBuildup</hediffDef>
+    <hediffSeverity>0.15</hediffSeverity>
+    <secondaryHediffDef>Cut</secondaryHediffDef>
+    <secondaryHediffSeverity>0.13</secondaryHediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Growing_Thought</defName>
+    <label>crop looks poor</label>
+    <workTypes><li>Growing</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>ThoughtApply</type>
+    <thoughtDef>PC_Thought_EmberSetback</thoughtDef>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── PLANT CUTTING ──────────────────────────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_PlantCutting_Wood</defName>
+    <label>extra timber from the fell</label>
+    <workTypes><li>PlantCutting</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>ItemSpawn</type>
+    <thingDef>WoodLog</thingDef>
+    <count>10</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_PlantCutting_SkillXP</defName>
+    <label>found the grain</label>
+    <workTypes><li>PlantCutting</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Plants</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_PlantCutting_Cut</defName>
+    <label>saw caught</label>
+    <workTypes><li>PlantCutting</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>2</weight>
+    <type>HediffApply</type>
+    <hediffDef>Cut</hediffDef>
+    <hediffSeverity>0.15</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── ANIMAL HANDLING ──────────────────────────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Handling_Leather</defName>
+    <label>shed hide from a cooperative animal</label>
+    <workTypes><li>Handling</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>1.5</weight>
+    <type>ItemSpawn</type>
+    <thingDef>Leather_Plain</thingDef>
+    <count>3</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Handling_SkillXP</defName>
+    <label>animal that trusted</label>
+    <workTypes><li>Handling</li></workTypes>
+    <isPositive>true</isPositive>
+    <weight>2</weight>
+    <type>SkillChange</type>
+    <skillDef>Animals</skillDef>
+    <skillXp>2000</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Handling_Bruise</defName>
+    <label>animal kicked out</label>
+    <workTypes><li>Handling</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>2</weight>
+    <type>HediffApply</type>
+    <hediffDef>Bruise</hediffDef>
+    <hediffSeverity>0.15</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Handling_Cut</defName>
+    <label>claw caught the arm</label>
+    <workTypes><li>Handling</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>HediffApply</type>
+    <hediffDef>Cut</hediffDef>
+    <hediffSeverity>0.15</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Handling_Thought</defName>
+    <label>animal wouldn't cooperate</label>
+    <workTypes><li>Handling</li></workTypes>
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>ThoughtApply</type>
+    <thoughtDef>PC_Thought_EmberSetback</thoughtDef>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <!-- ── UNIVERSAL (any job - fallback pool) ──────────────────────── -->
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Universal_Silver</defName>
+    <label>coin found in the dirt</label>
+    <workTypes />
+    <isPositive>true</isPositive>
+    <weight>1</weight>
+    <type>ItemSpawn</type>
+    <thingDef>Silver</thingDef>
+    <count>5</count>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Universal_SkillXP_Int</defName>
+    <label>idle thought that paid off</label>
+    <workTypes />
+    <isPositive>true</isPositive>
+    <weight>1</weight>
+    <type>SkillChange</type>
+    <skillDef>Intellectual</skillDef>
+    <skillXp>200</skillXp>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Universal_Bruise</defName>
+    <label>minor bump</label>
+    <workTypes />
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>HediffApply</type>
+    <hediffDef>Bruise</hediffDef>
+    <hediffSeverity>0.13</hediffSeverity>
+  </PawnChronicles.EmberConsequenceDef>
+
+  <PawnChronicles.EmberConsequenceDef>
+    <defName>PC_EC_Universal_Thought</defName>
+    <label>something felt off</label>
+    <workTypes />
+    <isPositive>false</isPositive>
+    <weight>1</weight>
+    <type>ThoughtApply</type>
+    <thoughtDef>PC_Thought_EmberSetback</thoughtDef>
+  </PawnChronicles.EmberConsequenceDef>
+
+</Defs>

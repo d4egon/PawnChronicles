@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PawnChronicles", "PawnChronicles.csproj", "{2C5E6AA5-628A-7C6F-74EB-C3CF64C6BBDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C5E6AA5-628A-7C6F-74EB-C3CF64C6BBDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C5E6AA5-628A-7C6F-74EB-C3CF64C6BBDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C5E6AA5-628A-7C6F-74EB-C3CF64C6BBDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C5E6AA5-628A-7C6F-74EB-C3CF64C6BBDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C1972C93-A66C-4B56-82C3-0B948571B344}
+	EndGlobalSection
+EndGlobal

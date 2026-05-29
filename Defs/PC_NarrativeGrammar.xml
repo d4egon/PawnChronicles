@@ -1,0 +1,1592 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--
+  ╔══════════════════════════════════════════════════════════════════════════════╗
+  ║                        PC_NarrativeGrammar                                 ║
+  ║           Dynamic narrative grammar for Pawn Chronicles                    ║
+  ╚══════════════════════════════════════════════════════════════════════════════╝
+
+  SECTIONS - Ctrl+F to jump
+  ─────────────────────────────────────────────────────────────────────────────
+    LEXICON POOLS       "COMPOSITION POOLS"    pc_lex_scene / tone / verb / ...
+    DEFAULT FALLBACKS   "DEFAULT FALLBACKS"    default_title / default_body
+    CLIMAX STAGES       "CLIMAX STAGES"        *_climax_title / *_climax_body
+    OPENING STAGES      "OPENING STAGES"       *_opening_title / *_opening_body
+    MIDDLE STAGES       "MIDDLE STAGES"        *_middle_title  / *_middle_body
+    SUCCESS             "SUCCESS"              *_success_title / *_success_body
+    FAILURE             "FAILURE"              *_failure_title / *_failure_body
+    EMBERS              "EMBERS"               *_ember_title   / *_ember_body
+    WAIT CONDITIONS     "WAIT CONDITION"       wait_condition_*
+    SPARKS              "SPARK RULES"          *_spark_title   / *_spark_body
+    HINTS & BRIDGES     "HINTS"                hint_*_body / bridge_*_body
+
+  KEY CASCADE (most specific wins)
+  ─────────────────────────────────────────────────────────────────────────────
+    {tag1}_{tag2}_{role}_{type}   e.g.  trauma_loss_opening_body
+    {tag}_{role}_{type}           e.g.  violence_opening_body
+    {role}_{type}                 e.g.  opening_body
+    default_{type}                e.g.  default_body
+
+    ROLES : opening  middle  success  failure  ember  spark  climax
+    TYPES : title    body
+
+  ══════════════════════════════════════════════════════════════════════════════
+  RIMWORLD GLOBAL TAGS  (always available, no rulesFiles needed)
+  ══════════════════════════════════════════════════════════════════════════════
+    Creatures   [Animal]           [AnimalBadass]      [AnimalGroup]
+    Color       [Color]            [ColorBadass]
+    Nature      [TerrainFeature]   [NaturalObject]     [TreeType]
+    Concepts    [ConceptAngsty]    [ConceptPositive]   [ConceptBadass]   [ConceptAny]
+    Adjectives  [AdjectiveAngsty]  [AdjectiveFriendly] [AdjectiveBadass] [AdjectiveNatural] [AdjectiveAny]
+    Combat      [Weapon]           [Gore]              [Enemy]           [Mechanoid]
+    People      [PersonJob]        [PersonFamily]      [PersonAlly]      [PersonBadass]
+    Society     [Community]        [Apparel]           [BodyPart]
+    Misc        [Quantity_adjphrase]
+
+  RIMWORLD PAWN TAGS  (injected by RimWorld when resolving for a pawn)
+  ══════════════════════════════════════════════════════════════════════════════
+    [pawn_nameDef]    [pawn_pronoun]    [pawn_possessive]
+    [pawn_objective]  [pawn_reflexive]
+
+  ══════════════════════════════════════════════════════════════════════════════
+  WORD LISTS  (rulesFiles - loaded from Words/ folder)
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_noun_story]          [pc_noun_quest]         [pc_noun_topic]
+    [pc_verb_friendly]       [pc_noun_characteristic]
+
+  ══════════════════════════════════════════════════════════════════════════════
+  LEXICON POOLS  (defined as grammar rules in this file - COMPOSITION POOLS section)
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_lex_scene]            atmosphere / location phrase
+    [pc_lex_tone]             emotional state phrase
+    [pc_lex_transit]          narrative transition phrase
+    [pc_lex_storyword]        abstract story noun
+    [pc_lex_animal_moment]    animal encounter fragment
+    [pc_lex_verb_trauma]      trauma response verb phrase
+    [pc_lex_verb_underworld]  underworld action verb phrase
+    [pc_lex_verb_violence]    violence response verb phrase
+    [pc_lex_verb_grief]       grief response verb phrase
+    [pc_lex_verb_curiosity]   curiosity action verb phrase
+    [pc_lex_verb_duty]        duty response verb phrase
+    [pc_lex_verb_survival]    survival response verb phrase
+    [pc_lex_verb_craft]       craft action verb phrase
+    [pc_lex_verb_devotion]    devotion action verb phrase
+    [pc_lex_verb_daily]       everyday action verb phrase
+    [pc_lex_secretive]        secretive / guarded behaviour fragment
+
+  ══════════════════════════════════════════════════════════════════════════════
+  SCRAPER TAGS - IDENTITY  (injected at resolve time via PawnDataScraper)
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_name_short]              [pc_name_full]              [pc_name_def]
+    [pc_gender]                  [pc_pronoun]                [pc_possessive]         [pc_objective]
+    [pc_age_bio]                 [pc_age_chrono]
+    [pc_race]                    [pc_lifestage]
+    [pc_backstory_child_title]   [pc_backstory_adult_title]
+    [pc_trait_list]              [pc_trait_count]
+
+  SCRAPER TAGS - SKILLS
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_skill_best_label]        [pc_skill_best_level]
+    [pc_skill_worst_label]       [pc_skill_worst_level]
+    [pc_skill_passions_list]
+    [pc_skill_{name}_level]      [pc_skill_{name}_passion]   [pc_skill_{name}_label]
+      names: shooting melee construction mining cooking plants animals crafting artistic medicine social intellectual
+
+  SCRAPER TAGS - HEALTH & NEEDS
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_hediff_count]            [pc_hediff_bad_count]       [pc_hediff_good_count]
+    [pc_hediff_0_label]          [pc_hediff_0_part]
+    [pc_hediff_bad_list]         [pc_hediff_good_list]
+    [pc_pain_level]              [pc_consciousness]
+    [pc_mood]                    [pc_mood_pct]
+    [pc_need_mood_level]         [pc_need_food_level]        [pc_need_rest_level]    [pc_need_joy_level]
+    [pc_thought_strongest_label] [pc_thought_strongest_mood]
+    [pc_in_mental_state]         [pc_inspired]
+
+  SCRAPER TAGS - EQUIPMENT & RECORDS
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_weapon_label]            [pc_weapon_is_melee]        [pc_weapon_is_ranged]
+    [pc_apparel_count]
+    [pc_record_kills]            [pc_record_timeascolonistorcolonyanimal]
+
+  SCRAPER TAGS - RELATIONS
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_relation_count]          [pc_parent_name]
+    [pc_friend_name]             [pc_friend_opinion]
+
+  SCRAPER TAGS - WORLD & COLONY
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_world_weather]           [pc_world_season]           [pc_world_biome]
+    [pc_world_time_of_day]       [pc_world_hour]             [pc_world_temp]
+    [pc_world_elevation]         [pc_world_rainfall]
+    [pc_world_settlement_count]  [pc_world_caravan_count]
+    [pc_colony_name]
+
+  SCRAPER TAGS - IDEOLOGY & XENOTYPE
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_ideo_name]               [pc_ideo_certainty]
+    [pc_ideo_precept_0_label]    (up to [pc_ideo_precept_N_label])
+    [pc_xenotype_label]          [pc_xenotype_def]           [pc_gene_count]
+
+  SCRAPER TAGS - ACTIVITY
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_job_label]               [pc_job_def]
+
+  ══════════════════════════════════════════════════════════════════════════════
+  LEXICON TAGS - C#-INJECTED  (built from scraper data in NarrativeGrammarResolver)
+  ══════════════════════════════════════════════════════════════════════════════
+    [pc_lex_identity_echo]       biographical phrase summarising who this pawn is
+    [pc_lex_wound_summary]       current injury / hediff state in prose
+    [pc_lex_social_anchor]       closest relation or social bond phrase
+    [pc_lex_combat_posture]      readiness / stance phrase derived from skill + weapon
+    [pc_lex_moral_state]         conscience / resolve phrase
+    [pc_lex_season_phrase]       e.g. "in the first breath of spring"
+    [pc_lex_time_phrase]         e.g. "as the colony stirred awake"
+    [pc_lex_atmosphere]          e.g. "the sky was open and clear"
+    [pc_lex_mood_phrase]         e.g. "holding steady"
+    [pc_lex_pain_phrase]         e.g. "uninjured"
+    [pc_lex_current_activity]    e.g. "wandering idly"
+    [pc_lex_location_name]       e.g. "outside"
+    [pc_lex_dominant_skill_label] best skill label
+    [pc_lex_tag_verb]            verb phrase for pawn's dominant narrative tag
+    [pc_lex_demeanor]            short demeanor word
+    [pc_lex_world_feel]          one-sentence world atmosphere
+    [pc_lex_moment_grief]        grief-flavoured scene sentence
+    [pc_lex_moment_kinship]      kinship-flavoured scene sentence
+  -->
+  <RulePackDef>
+    <defName>PC_NarrativeGrammar</defName>
+    <rulePack>
+
+      <!-- Only load what GlobalUtility doesn't already provide -->
+      <rulesFiles>
+        <li>pc_noun_story->Words/Nouns/Stories</li>
+        <li>pc_noun_quest->Words/Nouns/Quests</li>
+        <li>pc_noun_topic->Words/Nouns/TalkTopics_Heavy</li>
+        <li>pc_verb_friendly->Words/Verbs/Friendly</li>
+        <li>pc_noun_characteristic->Words/Nouns/PersonalCharacteristics</li>
+      </rulesFiles>
+
+      <rulesStrings>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             COMPOSITION POOLS
+             Built from globally available symbols + scraper data.
+             Every prose rule composes from these - never static strings.
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <!-- Scene / Atmosphere -->
+        <!-- weather anchored -->
+        <li>pc_lex_scene->beneath [pc_world_weather] skies</li>
+        <li>pc_lex_scene->in [pc_world_weather]</li>
+        <li>pc_lex_scene->standing in [pc_world_weather]</li>
+        <li>pc_lex_scene->among [TreeType]s, [pc_world_weather]</li>
+        <li>pc_lex_scene->at the [TerrainFeature], [pc_world_weather]</li>
+        <li>pc_lex_scene->outside [pc_colony_name], [pc_world_weather]</li>
+        <li>pc_lex_scene->watching [pc_world_weather] come down on [pc_colony_name]</li>
+        <!-- time anchored -->
+        <li>pc_lex_scene->in the [pc_world_time_of_day] light</li>
+        <li>pc_lex_scene->[pc_world_time_of_day] in [pc_world_biome]</li>
+        <li>pc_lex_scene->[pc_world_time_of_day] at [pc_colony_name]</li>
+        <li>pc_lex_scene->in the [pc_world_time_of_day], [pc_world_weather]</li>
+        <!-- season / color anchored -->
+        <li>pc_lex_scene->under a [Color] [pc_world_season] sky</li>
+        <li>pc_lex_scene->with [pc_world_season] wind at [pawn_possessive] back</li>
+        <li>pc_lex_scene->near [pc_colony_name], [pc_world_season]</li>
+        <!-- location anchored -->
+        <li>pc_lex_scene->somewhere in [pc_world_biome]</li>
+        <li>pc_lex_scene->near a [TerrainFeature]</li>
+        <li>pc_lex_scene->at the [TerrainFeature]</li>
+        <li>pc_lex_scene->beside a [NaturalObject]</li>
+        <li>pc_lex_scene->among [TreeType]s</li>
+        <li>pc_lex_scene->on watch near a [TerrainFeature]</li>
+        <li>pc_lex_scene->with [NaturalObject]s scattered nearby</li>
+        <li>pc_lex_scene->at the edge of [pc_colony_name]</li>
+        <!-- social anchored -->
+        <li>pc_lex_scene->with [pc_friend_name] nearby</li>
+        <li>pc_lex_scene->outside [pc_colony_name]</li>
+        <!-- everyday grounded -->
+        <li>pc_lex_scene->cleaning [pawn_possessive] [pc_weapon_label]</li>
+        <li>pc_lex_scene->on [pawn_possessive] bunk, staring at nothing</li>
+        <li>pc_lex_scene->on the path back to [pc_colony_name]</li>
+        <li>pc_lex_scene->picking at a callus on [pawn_possessive] [BodyPart]</li>
+        <li>pc_lex_scene->listening to [pc_friend_name] in the next room</li>
+        <li>pc_lex_scene->on the path between the fields and [pc_colony_name]</li>
+
+
+        <!-- Emotional Tone -->
+        <!-- pure tags -->
+        <li>pc_lex_tone->[AdjectiveFriendly]</li>
+        <li>pc_lex_tone->[AdjectiveAngsty]</li>
+        <li>pc_lex_tone->[AdjectiveBadass]</li>
+        <li>pc_lex_tone->[ConceptAngsty]</li>
+        <li>pc_lex_tone->[ConceptPositive]</li>
+        <!-- short tag combos -->
+        <li>pc_lex_tone->quietly [AdjectiveFriendly]</li>
+        <li>pc_lex_tone->[AdjectiveFriendly], mostly</li>
+        <li>pc_lex_tone->[AdjectiveAngsty] about it</li>
+        <li>pc_lex_tone->carrying [ConceptAngsty]</li>
+        <li>pc_lex_tone->still carrying [ConceptAngsty]</li>
+        <li>pc_lex_tone->something close to [ConceptAngsty]</li>
+        <li>pc_lex_tone->more [AdjectiveFriendly] than [pawn_pronoun] expected</li>
+        <li>pc_lex_tone->[AdjectiveAngsty] in a way [pawn_pronoun] cannot name</li>
+        <li>pc_lex_tone->tired but [AdjectiveFriendly]</li>
+        <li>pc_lex_tone->[pc_lex_mood_phrase], but still upright</li>
+        <li>pc_lex_tone->[pc_lex_mood_phrase]</li>
+        <!-- everyday -->
+        <li>pc_lex_tone->quietly satisfied</li>
+        <li>pc_lex_tone->grumbling but not really angry</li>
+        <li>pc_lex_tone->content with the routine</li>
+        <li>pc_lex_tone->mildly annoyed</li>
+        <li>pc_lex_tone->content</li>
+        <li>pc_lex_tone->fine with it</li>
+        <li>pc_lex_tone->past the worst of it, probably</li>
+        <li>pc_lex_tone->carrying a small, ridiculous hope</li>
+        <li>pc_lex_tone->grateful for the boring parts</li>
+        <li>pc_lex_tone->mildly irritated by perfection</li>
+        <li>pc_lex_tone->fond of small inconveniences</li>
+        <li>pc_lex_tone->quietly amused at [pawn_possessive] own predictability</li>
+
+
+        <!-- Transitions -->
+        <!-- functional one-word pivots -->
+        <li>pc_lex_transit->Then-</li>
+        <li>pc_lex_transit->But then-</li>
+        <li>pc_lex_transit->Yet-</li>
+        <li>pc_lex_transit->Still-</li>
+        <li>pc_lex_transit->Even so-</li>
+        <li>pc_lex_transit->And so-</li>
+        <li>pc_lex_transit->Until-</li>
+        <li>pc_lex_transit->Except-</li>
+        <!-- time pivots -->
+        <li>pc_lex_transit->Later-</li>
+        <li>pc_lex_transit->Weeks later-</li>
+        <li>pc_lex_transit->One [pc_world_time_of_day]-</li>
+        <li>pc_lex_transit->Not long after-</li>
+        <li>pc_lex_transit->One [pc_world_season]-</li>
+        <!-- cause pivots -->
+        <li>pc_lex_transit->Which is how-</li>
+        <li>pc_lex_transit->Out of nowhere-</li>
+        <li>pc_lex_transit->Without warning-</li>
+        <li>pc_lex_transit->Against every better instinct-</li>
+
+        <!-- Story nouns - mix of global and our own rulesFiles -->
+        <li>pc_lex_storyword->[pc_noun_story]</li>
+        <li>pc_lex_storyword->[pc_noun_quest]</li>
+        <li>pc_lex_storyword->[ConceptAngsty]</li>
+        <li>pc_lex_storyword->reckoning</li>
+        <li>pc_lex_storyword->echo</li>
+        <li>pc_lex_storyword->aftermath</li>
+        <li>pc_lex_storyword->ghostlight</li>
+        <li>pc_lex_storyword->unraveling</li>
+        <li>pc_lex_storyword->forgiveness</li>
+        <li>pc_lex_storyword->inheritance</li>
+        <li>pc_lex_storyword->fracture</li>
+        <li>pc_lex_storyword->homecoming</li>
+        <li>pc_lex_storyword->reckoning</li>
+        <li>pc_lex_storyword->becoming</li>
+        <li>pc_lex_storyword->ashes</li>
+        <li>pc_lex_storyword->resurrection</li>
+        <li>pc_lex_storyword->threshold</li>
+
+        <!-- Animal Moments?? -->
+        <li>pc_lex_animal_moment->a [Animal] that decided [pawn_nameDef] was worth watching</li>
+        <li>pc_lex_animal_moment->something feral that recognized its own kind in [pawn_objective]</li>
+        <li>pc_lex_animal_moment->a [AnimalBadass] moving parallel through the underbrush</li>
+
+        <!-- Tag-specific action verbs -->
+        <li>pc_lex_verb_trauma->flinched but kept moving</li>
+        <li>pc_lex_verb_trauma->did not react visibly. [pawn_pronoun] had practice</li>
+        <li>pc_lex_verb_trauma->said nothing</li>
+        <li>pc_lex_verb_trauma->set [pawn_possessive] jaw and kept moving</li>
+        <li>pc_lex_verb_trauma->went quiet</li>
+        <li>pc_lex_verb_trauma->did not mention it</li>
+        <li>pc_lex_verb_trauma->asked for something to do</li>
+        <li>pc_lex_verb_trauma->stared at [pawn_possessive] [BodyPart] a moment, then got back to it</li>
+
+        <li>pc_lex_verb_underworld->[pc_lex_secretive]</li>
+        <li>pc_lex_verb_underworld->weighed the cost</li>
+        <li>pc_lex_verb_underworld->read it twice and put it somewhere safe</li>
+        <li>pc_lex_verb_underworld->already knew what the answer would be</li>
+
+        <!-- Secretive / guarded behaviour - reusable across verb pools -->
+        <li>pc_lex_secretive->asked no questions</li>
+        <li>pc_lex_secretive->kept [pawn_possessive] name out of it</li>
+        <li>pc_lex_secretive->said nothing that could be repeated</li>
+        <li>pc_lex_secretive->did not write it down</li>
+        <li>pc_lex_secretive->checked the exits first</li>
+        <li>pc_lex_secretive->kept [pawn_possessive] own counsel</li>
+
+        <li>pc_lex_verb_violence->tightened [pawn_possessive] grip on [pawn_possessive] [Weapon]</li>
+        <li>pc_lex_verb_violence->did not look away</li>
+        <li>pc_lex_verb_violence->cleaned [pawn_possessive] [Weapon] after</li>
+        <li>pc_lex_verb_violence->stepped over the [Gore] without looking down</li>
+        <li>pc_lex_verb_violence->did not flinch</li>
+        <li>pc_lex_verb_violence->noted the kill. Moved on.</li>
+        <li>pc_lex_verb_violence->counted [pawn_possessive] [pc_record_kills] kills and said nothing</li>
+
+        <li>pc_lex_verb_grief->let the memory sit for once</li>
+        <li>pc_lex_verb_grief->read the name again</li>
+        <li>pc_lex_verb_grief->did not push it down</li>
+        <li>pc_lex_verb_grief->sat with it for once</li>
+        <li>pc_lex_verb_grief->did not change the subject</li>
+        <li>pc_lex_verb_grief->said the name out loud</li>
+        <li>pc_lex_verb_grief->put [pawn_possessive] work down for a moment</li>
+
+        <li>pc_lex_verb_curiosity->pulled the thread a little further</li>
+        <li>pc_lex_verb_curiosity->took notes. [pawn_pronoun] always took notes</li>
+        <li>pc_lex_verb_curiosity->started asking questions before [pawn_pronoun] had answers</li>
+        <li>pc_lex_verb_curiosity->wrote it down</li>
+        <li>pc_lex_verb_curiosity->followed it anyway</li>
+        <li>pc_lex_verb_curiosity->asked [pc_friend_name] about it first</li>
+        <li>pc_lex_verb_curiosity->kept looking</li>
+        <li>pc_lex_verb_curiosity->checked [pawn_possessive] notes again</li>
+
+        <li>pc_lex_verb_duty->did what was asked</li>
+        <li>pc_lex_verb_duty->showed up</li>
+        <li>pc_lex_verb_duty->did not complain about it</li>
+        <li>pc_lex_verb_duty->finished the job</li>
+        <li>pc_lex_verb_duty->volunteered before anyone asked</li>
+        <li>pc_lex_verb_duty->did not ask who decided</li>
+        <li>pc_lex_verb_duty->put [pawn_possessive] own work aside</li>
+
+        <li>pc_lex_verb_survival->kept moving anyway</li>
+        <li>pc_lex_verb_survival->ate what there was</li>
+        <li>pc_lex_verb_survival->patched [pawn_possessive] [pc_hediff_0_part] and kept going</li>
+        <li>pc_lex_verb_survival->slept when [pawn_pronoun] could</li>
+        <li>pc_lex_verb_survival->did not think past that day</li>
+        <li>pc_lex_verb_survival->found a way through</li>
+        <li>pc_lex_verb_survival->made do</li>
+
+        <li>pc_lex_verb_craft->got to work</li>
+        <li>pc_lex_verb_craft->gathered what [pawn_pronoun] needed</li>
+        <li>pc_lex_verb_craft->measured twice</li>
+        <li>pc_lex_verb_craft->laid out [pawn_possessive] tools</li>
+        <li>pc_lex_verb_craft->worked until it was right</li>
+        <li>pc_lex_verb_craft->took [pawn_possessive] time with it</li>
+        <li>pc_lex_verb_craft->fixed what others gave up on</li>
+
+        <li>pc_lex_verb_devotion->gave thanks in [pawn_possessive] own way</li>
+        <li>pc_lex_verb_devotion->knelt in [pawn_possessive] own way</li>
+        <li>pc_lex_verb_devotion->kept [pawn_possessive] rites</li>
+        <li>pc_lex_verb_devotion->marked the day</li>
+        <li>pc_lex_verb_devotion->did not broadcast it</li>
+        <li>pc_lex_verb_devotion->observed [pc_ideo_precept_0_label]</li>
+        <li>pc_lex_verb_devotion->prayed in [pawn_possessive] own way</li>
+
+        <!-- Small Everyday Verbs -->
+        <li>pc_lex_verb_daily->made [pawn_possessive] [pc_world_time_of_day] tea exactly the way [pawn_pronoun] liked it</li>
+        <li>pc_lex_verb_daily->paused to watch a bug crawl across the table</li>
+        <li>pc_lex_verb_daily->put a little extra on someone else's plate</li>
+        <li>pc_lex_verb_daily->laughed at [pawn_possessive] own terrible joke</li>
+        <li>pc_lex_verb_daily->fed the [Animal] that had been hanging around</li>
+        <li>pc_lex_verb_daily->nodded at [pc_friend_name] on the way past</li>
+        <li>pc_lex_verb_daily->sat in the same spot [pawn_pronoun] always used</li>
+        <li>pc_lex_verb_daily->did [pawn_possessive] share without being asked</li>
+        
+
+        <!-- Animal flavor - uses global [Animal] and [AnimalBadass] -->
+        <li>pc_lex_animal_moment->a [Animal] that did not run</li>
+        <li>pc_lex_animal_moment->something in the [pc_world_biome] that watched [pawn_objective] back</li>
+        <li>pc_lex_animal_moment->a [AnimalBadass] that had been following [pawn_objective] for three days</li>
+        <li>pc_lex_animal_moment->a [AnimalBadass], [AdjectiveNatural], watching from the [TerrainFeature]</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             DEFAULT FALLBACKS
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>default_title->[pawn_nameDef]'s [pc_lex_storyword]</li>
+        <li>default_body->[pawn_nameDef], [pc_lex_identity_echo], [pc_lex_verb_daily]. [pc_lex_scene]. [pawn_pronoun] was [pc_lex_tone], and [pc_thought_strongest_label] had been on [pawn_possessive] mind.\n\nSomething had found [pawn_objective]. [pawn_pronoun] had not decided what to do about it yet.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             CLIMAX STAGES
+             These fire when the arc reaches its two-door crisis point.
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>climax_title->The moment [pawn_nameDef] cannot avoid</li>
+        <li>climax_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene]. [pc_lex_wound_summary], and [pawn_pronoun] was [pc_lex_tone]. [pc_thought_strongest_label] had not left [pawn_possessive] mind since it started.\n\nThe choice was in front of [pawn_objective]. [pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>violence_climax_title->The fight [pawn_nameDef] chose</li>
+        <li>violence_climax_body->[pawn_pronoun] had [pc_record_kills] kills on [pawn_possessive] record and [pawn_possessive] [pc_weapon_label] within reach. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_combat_posture]. [pc_lex_wound_summary].\n\n[pc_lex_transit] [pawn_pronoun] [pc_lex_verb_violence]. [pawn_pronoun] had been here before.</li>
+
+        <li>craft_climax_title->What [pawn_nameDef]'s hands had been building toward</li>
+        <li>craft_climax_body->[pc_skill_best_label] at level [pc_skill_best_level]. [pawn_nameDef], [pc_lex_identity_echo], [pc_lex_verb_craft], [pc_lex_scene], and [pawn_pronoun] was [pc_lex_tone]. The materials were ready and [pawn_possessive] tools were laid out.\n\nOne last decision.</li>
+
+        <li>curiosity_climax_title->The truth [pawn_nameDef] cannot unknow</li>
+        <li>curiosity_climax_body->[pawn_nameDef], [pc_lex_identity_echo], [pc_lex_verb_curiosity], [pc_lex_scene]. [pawn_pronoun] had been [pc_lex_tone] since finding it, and [pc_thought_strongest_label] had not left [pawn_possessive] mind. The notes were full of questions.\n\nTwo of them had answers.</li>
+
+        <li>animalfriend_climax_title->What the wilderness demands</li>
+        <li>animalfriend_climax_body->[pc_lex_animal_moment]. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], and [pawn_pronoun] is [pc_lex_tone].\n\nNo [pc_colony_name]. No [PersonAlly]. [pawn_pronoun] [pc_lex_verb_survival].</li>
+
+        <li>social_climax_title->The person [pawn_nameDef] cannot ignore</li>
+        <li>social_climax_body->[pc_lex_social_anchor]. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_friend_name] was involved, and [pawn_pronoun] had not worked out what to say.\n\n[pawn_pronoun] [pc_lex_verb_duty].</li>
+
+        <li>loss_climax_title->The thing [pawn_nameDef] had been carrying</li>
+        <li>loss_climax_body->[pawn_nameDef], [pc_lex_identity_echo], [pc_lex_verb_grief], [pc_lex_scene]. [pawn_pronoun] was [pc_lex_tone], and [pc_thought_strongest_label] had surfaced again.\n\n[pawn_pronoun] had been putting this off. It found [pawn_objective] anyway.</li>
+
+        <li>trauma_climax_title->What [pawn_nameDef] buried</li>
+        <li>trauma_climax_body->[pc_lex_wound_summary]. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] had been loud lately.\n\n[pawn_pronoun] [pc_lex_verb_trauma]. It was not going away this time.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             OPENING STAGES
+        ═══════════════════════════════════════════════════════════════════ -->
+        <li>curiosity_isolation_opening_title->The Solitary Search</li>
+        <li>curiosity_opening_title->[pawn_nameDef]'s Great Inquiry</li>
+        
+        <li>opening_title->A New Chapter</li>
+        <li>default_title->The Chronicles of [pawn_nameDef]</li>
+
+        <li>haunted_opening_title->The thing that never left</li>
+        <li>haunted_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] had been back lately. [pawn_pronoun] thought [pawn_pronoun] had dealt with it.\n\n[pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>dream_opening_title->A dream that tasted like memory</li>
+        <li>dream_opening_body->[pawn_nameDef] woke up [pc_lex_tone], [pc_lex_scene]. The dream was about [TalkTopicHeavy]. [pc_thought_strongest_label] was in it.\n\n[pawn_pronoun] [pc_lex_verb_curiosity].</li>
+
+        <li>omen_opening_title->A sign no one else would notice</li>
+        <li>omen_opening_body->Three small things, [pc_lex_scene]. [pawn_nameDef] - a former [pc_backstory_adult_title] - noticed all of them.\n\n[pawn_pronoun] was [pc_lex_tone] [Trans] it. [pawn_pronoun] [pc_lex_verb_devotion].</li>
+
+        <li>ghost_opening_title->Someone who should be dead</li>
+        <li>ghost_opening_body->The name appeared in a report. Not a similar name. The name. [pc_lex_scene].\n\n[pawn_pronoun] read it twice. [pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>mirror_opening_title->Facing what [pawn_nameDef] became</li>
+        <li>mirror_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene]. The reflection in the [AdjectiveNatural] [NaturalObject] did not lie. [pc_lex_wound_summary].\n\n[pawn_pronoun] did not look away.</li>
+
+        <li>opening_title->Something reaches [pawn_nameDef]</li>
+        <li>opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_lex_combat_posture]. [pc_thought_strongest_label] and [TalkTopicLight] have both been on [pawn_possessive] mind.\n\n[pawn_pronoun] is [VerbFriendly]. [pawn_pronoun] [pc_lex_verb_daily].</li>
+
+        <li>trauma_opening_title->What [pawn_nameDef] still carries</li>
+        <li>trauma_opening_body->[pc_lex_wound_summary]. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] was back.\n\n[pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>trauma_underworld_opening_title->Word from the wrong people</li>
+        <li>trauma_underworld_opening_body->The contact was someone [pawn_nameDef] had not spoken to in years. They had something [pawn_pronoun] could not find through [Community] channels.\n\n[pawn_pronoun] [pc_lex_verb_underworld], [pc_lex_scene]. [pc_lex_social_anchor].</li>
+
+        <li>trauma_loss_opening_title->What was taken from [pawn_nameDef]</li>
+        <li>trauma_loss_opening_body->[pc_lex_wound_summary]. [pawn_nameDef], [pc_lex_identity_echo], had been carrying this since [pc_thought_strongest_label].\n\n[pc_lex_transit] a name resurfaces. [pawn_pronoun] [pc_lex_verb_grief], [pc_lex_scene].</li>
+
+        <li>loss_opening_title->An old thread resurfaces</li>
+        <li>loss_opening_body->The name appeared where it should not have. [pawn_nameDef], [pc_lex_identity_echo], read it twice.\n\n[pc_thought_strongest_label] surfaces. [pawn_pronoun] [pc_lex_verb_grief], [pc_lex_scene].</li>
+
+        <li>grief_opening_title->Something [pawn_nameDef] cannot stop thinking about</li>
+        <li>grief_opening_body->[pc_thought_strongest_label] surfaces. [pawn_nameDef] stood [pc_lex_scene], [pc_lex_tone].\n\n[pc_lex_transit] [pawn_pronoun] [pc_lex_verb_grief].</li>
+
+        <li>grief_loss_opening_title->The thing [pawn_nameDef] had been avoiding</li>
+        <li>grief_loss_opening_body->[pawn_nameDef], [pc_lex_identity_echo], had not asked directly in years. [pc_thought_strongest_label] found [pawn_objective] anyway, [pc_lex_scene].\n\n[pawn_pronoun] was [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_grief].</li>
+
+        <li>underworld_opening_title->A familiar kind of offer</li>
+        <li>underworld_opening_body->The message was not addressed to [pawn_nameDef] by name. It never was.\n\n[pawn_pronoun] [pc_lex_verb_underworld], [pc_lex_scene]. [pc_lex_identity_echo]. [pawn_pronoun] knew how these worked.</li>
+
+        <li>duty_opening_title->An old obligation</li>
+        <li>duty_opening_body->The message was formal. Precise. Someone needed something. They chose [pawn_nameDef] - [pc_lex_identity_echo] - specifically.\n\n[pawn_pronoun] was [pc_lex_tone], [pc_lex_scene].\n\n[pawn_pronoun] [pc_lex_verb_duty].</li>
+
+        <li>devotion_opening_title->A sign, perhaps</li>
+        <li>devotion_opening_body->[pawn_nameDef], [pc_ideo_name], stood [pc_lex_scene], [pc_lex_tone]. The circumstances were specific. The timing was specific.\n\n[pawn_pronoun] [pc_lex_verb_devotion].</li>
+
+        <li>violence_opening_title->Something [pawn_nameDef] did not forget</li>
+        <li>violence_opening_body->A name appeared where it should not have. [pawn_nameDef], [pc_record_kills] kills on [pawn_possessive] record, did not react visibly.\n\n[pc_thought_strongest_label] was back. [pawn_pronoun] [pc_lex_verb_violence], [pc_lex_scene].</li>
+
+        <li>kinship_opening_title->A name [pawn_nameDef] thought was gone</li>
+        <li>kinship_opening_body->[pawn_nameDef] read it twice, then a third time. [pc_lex_social_anchor]. [pc_lex_scene].\n\n[pc_friend_name] was still out there. [pawn_pronoun] [pc_lex_verb_duty].</li>
+
+        <li>curiosity_opening_title->A fragment of something larger</li>
+        <li>curiosity_opening_body->Recovered data. A partial file referencing something with no record. [pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level] - [pc_lex_verb_curiosity], [pc_lex_scene].\n\n[pc_thought_strongest_label] surfaces.</li>
+
+        <li>survival_opening_title->Something that should have stayed buried</li>
+        <li>survival_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_lex_wound_summary]. [ConceptAngsty] was back.\n\n[pawn_pronoun] [pc_lex_verb_survival].</li>
+
+        <li>craft_opening_title->Something that demands to be built</li>
+        <li>craft_opening_body->The schematic arrived without a sender. [pawn_nameDef] - former [pc_backstory_adult_title], [pc_skill_best_label] at [pc_skill_best_level] - had seen something like this before.\n\n[pawn_pronoun] [pc_lex_verb_craft], [pc_lex_scene].</li>
+
+        <li>noble_opening_title->A claim upon [pawn_nameDef]</li>
+        <li>noble_opening_body->A sealed letter arrived. [pawn_nameDef], [pc_lex_identity_echo], held it a moment, [pc_lex_scene].\n\n[pawn_pronoun] opened it. [pawn_pronoun] was [pc_lex_tone].</li>
+
+        <li>animalfriend_opening_title->Where the animal went</li>
+        <li>animalfriend_opening_body->[pc_lex_animal_moment].\n\n[pawn_nameDef] - [pc_lex_identity_echo] - watched it, [pc_lex_scene]. [pawn_pronoun] [pc_lex_verb_survival].</li>
+
+        <li>wandering_opening_title->A destination presents itself</li>
+        <li>wandering_opening_body->The rumour had followed [pawn_nameDef] through [Quantity_adjphrase] [Community]s. [pawn_pronoun] was [pc_lex_tone], [pc_lex_scene], [pc_lex_combat_posture].\n\n[pawn_pronoun] [pc_lex_verb_survival].</li>
+
+        <li>healer_opening_title->A patient [pawn_nameDef] cannot help</li>
+        <li>healer_opening_body->The case arrived through unofficial channels. [pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level] - read it, [pc_lex_scene].\n\n[pawn_pronoun] was [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_duty].</li>
+
+        <li>betrayal_opening_title->A name [pawn_nameDef] hoped never to see</li>
+        <li>betrayal_opening_body->The name appeared on a trader's roster. [pawn_nameDef] - [pc_lex_identity_echo] - stood [pc_lex_scene], [pc_lex_tone].\n\n[pawn_pronoun] [pc_lex_secretive].</li>
+
+        <li>resilience_opening_title->One more thing</li>
+        <li>resilience_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene]. [ConceptAngsty] was not new. [pc_thought_strongest_label] was.\n\n[pawn_pronoun] was [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>isolation_opening_title->Something that cannot be handled alone</li>
+        <li>isolation_opening_body->[pawn_nameDef], [pc_lex_identity_echo], had managed without help. [pc_thought_strongest_label] did not fit the usual approach.\n\n[pawn_pronoun] considers [pawn_possessive] options, [pc_lex_scene], [pc_lex_tone]. [pawn_pronoun] [pc_lex_secretive].</li>
+
+        <li>refugee_opening_title->Word from somewhere [pawn_nameDef] left behind</li>
+        <li>refugee_opening_body->The message was specific. [pawn_nameDef] - [pc_lex_identity_echo] - did not expect it to arrive here.\n\n[pawn_pronoun] stood [pc_lex_scene], [pc_lex_combat_posture], [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_survival].</li>
+
+        <li>scholar_opening_title->A page that should not exist</li>
+        <li>scholar_opening_body->Recovered data. A single fragment referencing something [pawn_nameDef] had spent years looking for. [pc_lex_identity_echo] - [pc_skill_best_label] at [pc_skill_best_level].\n\n[pawn_pronoun] [pc_lex_verb_curiosity], [pc_lex_scene].</li>
+
+        <li>leadership_opening_title->Something only [pawn_nameDef] can do</li>
+        <li>leadership_opening_body->The request was phrased politely. There was no one else.\n\n[pawn_nameDef] - [pc_lex_social_anchor] - listened to the full account, [pc_lex_scene].\n\n[pawn_pronoun] [pc_lex_verb_duty].</li>
+
+        <li>faith_opening_title->A calling [pawn_nameDef] did not expect</li>
+        <li>faith_opening_body->[pawn_nameDef], [pc_ideo_name], stood [pc_lex_scene], [pc_lex_tone]. The conviction was there. Not a vision - just a fact.\n\n[pawn_pronoun] prepared, [pc_lex_combat_posture]. [pawn_pronoun] [pc_lex_verb_devotion].</li>
+
+        <li>decay_opening_title->Something [pawn_nameDef] cannot outrun</li>
+        <li>decay_opening_body->[pc_hediff_bad_list]. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] was louder than usual.\n\n[pawn_pronoun] [pc_lex_verb_survival]. [pawn_pronoun] would deal with it later.</li>
+
+        <li>pacifism_opening_title->Something that cannot be talked away</li>
+        <li>pacifism_opening_body->[pawn_nameDef] - [pc_lex_identity_echo] - had always believed [ConceptBadass] was not the answer.\n\nSomething had arrived that disagreed. [pawn_pronoun] stood [pc_lex_scene], [pc_lex_tone], [pc_lex_combat_posture].</li>
+
+        <li>redemption_opening_title->The chance [pawn_nameDef] never asked for</li>
+        <li>redemption_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. Something was being offered. [pawn_pronoun] was [pc_lex_tone] [Trans] it.\n\n[pawn_pronoun] [pc_lex_verb_duty].</li>
+
+        <li>corruption_opening_title->The path [pawn_nameDef] knows too well</li>
+        <li>corruption_opening_body->The offer was familiar. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone].\n\n[pawn_pronoun] [pc_lex_secretive]. [pawn_pronoun] had done this before.</li>
+
+        <li>threshold_opening_title->The line [pawn_nameDef] had not yet crossed</li>
+        <li>threshold_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_lex_wound_summary]. [pc_thought_strongest_label] had not moved.\n\n[pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>echo_opening_title->Something that should have stayed silent</li>
+        <li>echo_opening_body->A name [pawn_nameDef] thought [pawn_pronoun] had left behind. [pc_lex_scene].\n\n[pawn_pronoun] is [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>rebirth_opening_title->The first breath after drowning</li>
+        <li>rebirth_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_lex_wound_summary]. [pc_thought_strongest_label] had changed.\n\n[pawn_pronoun] [pc_lex_verb_survival].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             MIDDLE STAGES
+        ═══════════════════════════════════════════════════════════════════ -->
+        <li>daily_middle_title->The same thing, different day</li>
+        <li>daily_middle_body->[pawn_nameDef] [pc_lex_verb_daily], [pc_lex_scene]. [pawn_pronoun] was [pc_lex_tone]. [pc_thought_strongest_label] was still there.\n\n[pawn_pronoun] [pc_lex_verb_duty].</li>
+
+        <li>haunted_middle_title->Deeper into the mirror</li>
+        <li>haunted_middle_body->[pawn_nameDef] - [pc_lex_identity_echo] - was [pc_lex_tone], [pc_lex_scene]. [pc_thought_strongest_label] was louder. [pc_lex_wound_summary].\n\n[pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>dream_middle_title->Chasing the thread</li>
+        <li>dream_middle_body->[pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level] - [pc_lex_verb_curiosity], [pc_lex_scene]. [pc_thought_strongest_label] was still in [pawn_possessive] head.\n\n[pc_lex_transit] [pawn_pronoun] found something. [pawn_pronoun] wrote it down.</li>
+
+        <li>ghost_middle_title->Too close now</li>
+        <li>ghost_middle_body->The trail had become specific. [pawn_nameDef], [pc_lex_combat_posture], [pc_lex_scene]. [pawn_pronoun] was [pc_lex_tone].\n\n[pc_lex_transit] something moved at the edge of [pawn_possessive] awareness. [pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>middle_title->The [pc_lex_storyword] [pawn_nameDef] walks</li>
+        <li>middle_body->[pawn_nameDef], [pc_lex_identity_echo], pressed on, [pc_lex_scene], [pc_lex_tone]. [pc_lex_wound_summary]. [pc_thought_strongest_label] had not let go.\n\n[pc_lex_transit] [pawn_pronoun] was [pc_lex_moral_state]. [pawn_pronoun] [pc_lex_verb_daily].</li>
+
+        <li>trauma_middle_title->The cost of moving</li>
+        <li>trauma_middle_body->[pawn_nameDef] - [pc_lex_identity_echo] - was [pc_lex_tone], [pc_lex_scene]. [pc_lex_wound_summary]. [pc_thought_strongest_label] had been loud.\n\n[pc_lex_transit] [pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>underworld_middle_title->The price of knowing</li>
+        <li>underworld_middle_body->The contact knew exactly where it was. Information like that never came free.\n\n[pawn_nameDef] - [pc_lex_identity_echo] - [pc_lex_verb_underworld], [pc_lex_scene]. [pawn_pronoun] had done it before.</li>
+
+        <li>grief_middle_title->What [pawn_nameDef] found</li>
+        <li>grief_middle_body->[pc_thought_strongest_label] had led somewhere [pawn_nameDef] was not expecting. [pc_lex_social_anchor]. [pc_lex_scene].\n\n[pawn_pronoun] [pc_lex_verb_grief]. [pawn_pronoun] was [pc_lex_moral_state].</li>
+
+        <li>duty_middle_title->What was owed</li>
+        <li>duty_middle_body->There was an arrangement. Information exchanged. A debt acknowledged.\n\n[pawn_nameDef] moved on, [pc_lex_combat_posture], [pc_lex_scene]. [pawn_pronoun] was [pc_lex_tone].</li>
+
+        <li>violence_middle_title->The weight of what was done</li>
+        <li>violence_middle_body->[pawn_nameDef] - [pc_record_kills] kills on [pawn_possessive] record - stood [pc_lex_scene], [pc_lex_combat_posture]. [pc_lex_wound_summary]. [pc_thought_strongest_label] was back.\n\n[pawn_pronoun] [pc_lex_verb_violence]. [pawn_pronoun] was [pc_lex_moral_state].</li>
+
+        <li>kinship_middle_title->The people waiting</li>
+        <li>kinship_middle_body->[pawn_nameDef] thought of [pc_colony_name]. [pc_lex_social_anchor]. [pc_friend_name] was waiting.\n\n[pawn_pronoun] kept going, [pc_lex_scene], [pc_lex_tone].</li>
+
+        <li>curiosity_middle_title->Deeper than expected</li>
+        <li>curiosity_middle_body->The data led somewhere older. [pawn_nameDef] - [pc_age_bio] years, [pc_skill_best_label] at [pc_skill_best_level] - [pc_lex_verb_curiosity], [pc_lex_scene].\n\n[pc_thought_strongest_label] had not moved. [pawn_pronoun] pressed on.</li>
+
+        <li>isolation_middle_title->An unwanted dependency</li>
+        <li>isolation_middle_body->[pawn_nameDef] could not finish this alone. The [PersonJob] who could help was not someone [pawn_pronoun] would have chosen. [pc_lex_social_anchor].\n\n[pawn_pronoun] made the arrangement, [pc_lex_tone], [pc_lex_scene].</li>
+
+        <li>survival_middle_title->Closer than expected</li>
+        <li>survival_middle_body->The trail was fresher than [pawn_nameDef] had anticipated. [ConceptAngsty] was close.\n\n[pawn_pronoun] - [pc_lex_wound_summary] - [pc_lex_verb_survival], [pc_lex_scene], [pc_lex_combat_posture].</li>
+
+        <li>craft_middle_title->The part that is missing</li>
+        <li>craft_middle_body->Progress had been good. One element could not be sourced through [Community] channels.\n\n[pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level] - considered the alternatives, [pc_lex_scene].\n\n[pc_lex_transit] [pawn_pronoun] [pc_lex_verb_craft].</li>
+
+        <li>resilience_middle_title->One more cost</li>
+        <li>resilience_middle_body->[pawn_nameDef] - [pc_lex_identity_echo] - had been here before. [pc_lex_wound_summary]. The cost was higher than expected.\n\n[pawn_pronoun] was [pc_lex_moral_state]. [pawn_pronoun] adjusted. Continued.</li>
+
+        <li>noble_middle_title->The weight of a name</li>
+        <li>noble_middle_body->The old retainers remembered [pawn_nameDef], [pc_lex_identity_echo]. They would help - that was the arrangement.\n\nBut they made [pawn_nameDef] understand what [pawn_pronoun] was asking them to risk. [pc_lex_scene].</li>
+
+        <li>devotion_middle_title->What the belief costs</li>
+        <li>devotion_middle_body->The belief was still there. Being tested by circumstance, [pc_lex_scene].\n\n[pawn_pronoun] was [pc_lex_moral_state]. [pawn_pronoun] [pc_lex_verb_devotion]. [pc_ideo_name].</li>
+
+        <li>betrayal_middle_title->Face to face with it</li>
+        <li>betrayal_middle_body->[pawn_nameDef] - [pc_lex_identity_echo] - had a speech prepared. [pc_lex_scene].\n\n[ConceptAngsty] was there. [pawn_pronoun] was [pc_lex_tone]. The speech stayed unspoken.</li>
+
+        <li>decay_middle_title->The thing that does not help</li>
+        <li>decay_middle_body->[pc_hediff_bad_list]. [pawn_nameDef] kept moving, [pc_lex_scene], [pc_lex_tone].\n\n[pawn_pronoun] [pc_lex_verb_survival]. [pawn_pronoun] would think about it later.</li>
+
+        <li>animalfriend_middle_title->What followed</li>
+        <li>animalfriend_middle_body->[pc_lex_animal_moment] had not left. [pawn_nameDef] was [pc_lex_tone], [pc_lex_scene].\n\n[pawn_pronoun] left something out for it. [pawn_pronoun] [pc_lex_verb_daily].</li>
+
+        <li>wandering_middle_title->Further than expected</li>
+        <li>wandering_middle_body->[pawn_nameDef] was further from [pc_colony_name] than [pawn_pronoun] had intended, [pc_lex_scene], [pc_lex_combat_posture]. [pc_thought_strongest_label] had not helped.\n\n[pawn_pronoun] was [pc_lex_moral_state]. [pawn_pronoun] [pc_lex_verb_survival].</li>
+
+        <li>healer_middle_title->What it costs to save someone</li>
+        <li>healer_middle_body->The compound existed. The price was not silver - it was a favour.\n\n[pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level] - considered, [pc_lex_scene].\n\n[pawn_pronoun] [pc_lex_verb_duty]. [pawn_pronoun] [pc_lex_secretive].</li>
+
+        <li>pacifism_middle_title->Every other way first</li>
+        <li>pacifism_middle_body->[pawn_nameDef] had tried negotiation. Patience. [AdjectiveFriendly] optimism.\n\nThe [Enemy] had not responded. [pc_lex_social_anchor] - running out of time.\n\n[pawn_pronoun] stood [pc_lex_scene], [pc_lex_combat_posture], [pc_lex_tone].</li>
+
+        <li>redemption_middle_title->The cost of becoming new</li>
+        <li>redemption_middle_body->[pawn_nameDef] - [pc_lex_identity_echo] - was [pc_lex_tone], [pc_lex_scene]. [pc_lex_wound_summary]. [pc_thought_strongest_label] was still there.\n\n[pawn_pronoun] [pc_lex_verb_duty]. [pawn_pronoun] kept moving.</li>
+
+        <li>corruption_middle_title->The comfort of the familiar dark</li>
+        <li>corruption_middle_body->[pawn_nameDef] - [pc_lex_identity_echo] - stood [pc_lex_scene], [pc_lex_tone]. This was familiar ground. [pc_thought_strongest_label] was not new.\n\n[pawn_pronoun] [pc_lex_secretive].</li>
+
+        <li>threshold_middle_title->Between who [pawn_nameDef] was and who [pawn_pronoun] must become</li>
+        <li>threshold_middle_body->[pawn_nameDef] - [pc_lex_identity_echo] - stood [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] would not move. [pc_lex_wound_summary].\n\n[pawn_pronoun] [pc_lex_verb_trauma].</li>
+
+        <li>memory_middle_title->What the past still demands</li>
+        <li>memory_middle_body->[pc_thought_strongest_label] had been with [pawn_nameDef], [pc_lex_identity_echo], for a long time. [pc_lex_scene], [pc_lex_tone]. [pc_lex_wound_summary].\n\n[pawn_pronoun] [pc_lex_verb_grief]. [pawn_pronoun] was not done with it yet.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             SUCCESS
+        ═══════════════════════════════════════════════════════════════════ -->
+        <li>daily_success_title->A good, ordinary day</li>
+        <li>daily_success_body->Nothing dramatic. [pawn_nameDef] [pc_lex_verb_daily], [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] was quieter.\n\n[pawn_pronoun] noted it.</li>
+
+        <li>haunted_success_title->What survived the haunting</li>
+        <li>haunted_success_body->It was finished. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_lex_wound_summary]. [pc_thought_strongest_label] was quieter - not gone, but not as loud.\n\n[pc_lex_social_anchor]. [pc_friend_name] was waiting back at [pc_colony_name].\n\n[pawn_pronoun] was [VerbFriendly] and [pawn_pronoun] was going home.</li>
+
+        <li>dream_success_title->The dream delivered</li>
+        <li>dream_success_body->What [pawn_nameDef] found was real. Not what [pawn_pronoun] expected - specific in different ways. [pc_lex_scene], [pc_lex_tone].\n\n[pc_thought_strongest_label] had changed shape. [pc_lex_social_anchor] back at [pc_colony_name].\n\n[pawn_pronoun] [pc_lex_verb_curiosity]. [pawn_pronoun] would write it up properly when [pawn_pronoun] got back.</li>
+
+        <li>mirror_success_title->The reflection smiled back</li>
+        <li>mirror_success_body->[pawn_nameDef], [pc_lex_identity_echo], faced what [pawn_pronoun] had become and did not look away. [pc_lex_wound_summary]. [pc_thought_strongest_label] was still there - smaller.\n\n[pc_lex_social_anchor]. [pawn_pronoun] returned [pc_lex_tone], [pc_lex_scene].\n\n[pawn_pronoun] [pc_lex_verb_daily]. [pawn_pronoun] was [VerbFriendly].</li>
+
+        <li>success_title->[pawn_nameDef]'s [pc_lex_storyword] finds its shape</li>
+        <li>success_body->It was over. Not cleanly - nothing ends cleanly - but [pawn_nameDef] was still here. [pc_lex_identity_echo]. [pc_lex_wound_summary].\n\n[pawn_pronoun] was [pc_lex_tone] and tired, and [pc_thought_strongest_label] had shifted. [pc_lex_social_anchor]. [pc_friend_name] was [VerbFriendly] when [pawn_pronoun] walked in.\n\n[pawn_pronoun] [pc_lex_verb_daily], [pc_lex_scene]. [pawn_pronoun] was [pc_lex_moral_state]. That was probably enough.</li>
+
+        <li>trauma_success_title->What was restored</li>
+        <li>trauma_success_body->The damage had been addressed. [pawn_nameDef] - [pc_lex_identity_echo], [pc_lex_wound_summary] - tested what was broken, [pc_lex_scene]. [pc_thought_strongest_label] was quieter.\n\n[pc_lex_social_anchor]. [pawn_pronoun] was [pc_lex_tone] and [pawn_pronoun] was [VerbFriendly] about it.\n\n[pawn_pronoun] [pc_lex_verb_craft]. [pawn_pronoun] started the next day.</li>
+
+        <li>grief_success_title->What [pawn_nameDef] was able to carry home</li>
+        <li>grief_success_body->It was not resolution. But it was something real. [pawn_nameDef], [pc_lex_identity_echo], was [pc_lex_moral_state], [pc_lex_scene]. [pc_thought_strongest_label] had a different weight to it.\n\n[pc_lex_social_anchor]. [pc_friend_name] was waiting. [pc_skill_best_label] work in [pc_colony_name] was waiting.\n\n[pawn_pronoun] [pc_lex_verb_grief] one more time. Then [pawn_pronoun] went back to it.</li>
+
+        <li>kinship_success_title->Found</li>
+        <li>kinship_success_body->[pawn_nameDef] found them. [pc_lex_social_anchor]. [pc_lex_scene], [pc_lex_tone].\n\nThe [ConceptAngsty] of not knowing was over. [pc_thought_strongest_label] had shifted in a way that would take time to understand.\n\n[pawn_pronoun] returned to [pc_colony_name] with [ConceptPositive] [pawn_pronoun] did not have when [pawn_pronoun] left. [pc_friend_name] would notice.</li>
+
+        <li>underworld_success_title->Clear of it</li>
+        <li>underworld_success_body->The deal was done. [pawn_nameDef], [pc_lex_identity_echo], walked out with what [pawn_pronoun] came for and nothing extra. [pc_lex_scene]. [pc_lex_combat_posture].\n\n[pawn_pronoun] was [pc_lex_tone] and [pawn_pronoun] [pc_lex_secretive]. [pc_lex_wound_summary].\n\n[pc_lex_social_anchor]. [pawn_pronoun] moved in a direction [pawn_pronoun] had chosen entirely alone.</li>
+
+        <li>violence_success_title->What [pawn_nameDef] managed to put down</li>
+        <li>violence_success_body->[pawn_nameDef] - [pc_record_kills] kills on [pawn_possessive] record, [pc_lex_identity_echo] - was not going to say the circumstances were clean. [pc_lex_wound_summary]. [pc_lex_scene].\n\n[pawn_pronoun] was [pc_lex_tone]. [pc_thought_strongest_label] carried the same [ConceptAngsty]. It was slightly lighter.\n\n[pc_lex_social_anchor]. [pawn_pronoun] [pc_lex_verb_violence] and got back to work. That would have to do.</li>
+
+        <li>curiosity_success_title->What the fragment led to</li>
+        <li>curiosity_success_body->The answer was real. [pawn_nameDef] - [pc_age_bio] years, [pc_skill_best_label] at [pc_skill_best_level] - sat with it, [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] had a different shape.\n\n[pc_lex_social_anchor] back at [pc_colony_name].\n\n[pawn_pronoun] started writing down what it meant. [pawn_pronoun] would be at it for a while.</li>
+
+        <li>craft_success_title->The thing [pawn_nameDef] made</li>
+        <li>craft_success_body->The final piece went in. [pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level], [pc_lex_identity_echo] - stepped back and looked at it, [pc_lex_scene].\n\nIt works. [pawn_pronoun] was [VerbFriendly] and [pawn_pronoun] was [pc_lex_tone] about it. [pc_lex_wound_summary].\n\n[pc_lex_social_anchor]. [pawn_pronoun] got to work on the documentation. Someone else should be able to build this too.</li>
+
+        <li>devotion_success_title->The answer [pawn_nameDef] received</li>
+        <li>devotion_success_body->There was a version where it was all [ConceptAngsty]. [pawn_nameDef], [pc_ideo_name], held that knowledge. [pc_lex_scene], [pc_lex_tone].\n\nThe timing. The specific nature of what was found. [pc_thought_strongest_label] was quieter.\n\n[pawn_pronoun] [pc_lex_verb_devotion]. [pc_lex_social_anchor]. [pawn_pronoun] went back to [pc_colony_name] with something [pawn_pronoun] did not have before.</li>
+
+        <li>resilience_success_title->Still here</li>
+        <li>resilience_success_body->[pawn_nameDef] - [pc_lex_identity_echo], [pc_lex_wound_summary] - no longer experienced the end of hard things as triumph. It was enough that it ended.\n\n[pawn_pronoun] was [pc_lex_moral_state], [pc_lex_scene]. [pc_thought_strongest_label] was quieter. [pc_lex_social_anchor].\n\n[pawn_pronoun] [pc_lex_verb_daily] and went back to work.</li>
+
+        <li>noble_success_title->The name reclaimed</li>
+        <li>noble_success_body->The crest was returned. [pawn_nameDef], [pc_lex_identity_echo], wore it again, [pc_lex_scene], [pc_lex_tone].\n\n[pc_lex_wound_summary]. [pc_thought_strongest_label] was settled. [pc_lex_social_anchor].\n\n[pawn_pronoun] accepted the weight. [pawn_pronoun] had carried heavier things.</li>
+
+        <li>wandering_success_title->What [pawn_nameDef] found at the end of the road</li>
+        <li>wandering_success_body->The road ended with [ConceptPositive] [pawn_nameDef] did not expect to find. [pawn_pronoun] stood [pc_lex_scene], [pc_lex_tone], considering whether [pc_colony_name] might be the place [pawn_pronoun] stops.\n\n[pc_lex_social_anchor]. [pc_friend_name] was [VerbFriendly]. [pc_thought_strongest_label] was quieter than it had been in [Quantity_adjphrase] seasons.\n\n[pawn_pronoun] [pc_lex_verb_daily]. The restlessness was quieter.</li>
+
+        <li>betrayal_success_title->What it cost to make it right</li>
+        <li>betrayal_success_body->The person [pawn_nameDef] wronged had not forgiven [pawn_objective]. [pawn_pronoun] did not ask for forgiveness. The chance was given. The cost was higher than expected.\n\n[pawn_pronoun] returned to [pc_colony_name], [pc_lex_tone], [pc_lex_scene]. [pc_lex_wound_summary]. [pc_thought_strongest_label] was different.\n\n[pc_lex_social_anchor]. [pawn_pronoun] [pc_lex_verb_duty] and kept going. That was fair.</li>
+
+        <li>survival_success_title->What freedom looks like</li>
+        <li>survival_success_body->The thing that needed confronting had been confronted. [pawn_nameDef] - [pc_lex_identity_echo], [pc_lex_wound_summary] - did it.\n\n[pawn_pronoun] walked back, [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] was still there. Smaller for being named.\n\n[pc_lex_social_anchor]. [pawn_pronoun] [pc_lex_verb_survival]. [pawn_pronoun] always did.</li>
+
+        <li>healer_success_title->The patient who lived</li>
+        <li>healer_success_body->The treatment worked. [pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level] - did not exhale until the readings stabilised. [pc_lex_scene]. [pc_lex_wound_summary].\n\n[pawn_pronoun] was [pc_lex_tone] and [pawn_pronoun] was [VerbFriendly] about it. [pc_lex_social_anchor].\n\n[pawn_pronoun] sat beside the bed and watched the breathing. [pc_thought_strongest_label] was quieter.</li>
+
+        <li>animalfriend_success_title->What stayed</li>
+        <li>animalfriend_success_body->[pc_lex_animal_moment] was still there. [pawn_nameDef], [pc_lex_identity_echo], had stopped pretending to be surprised. [pc_lex_scene], [pc_lex_tone].\n\n[pawn_pronoun] made room for it. [pc_thought_strongest_label] was quieter when it was around. [pc_lex_social_anchor].\n\n[pawn_pronoun] [pc_lex_verb_daily]. Some things just stayed.</li>
+
+        <li>redemption_success_title->What [pawn_nameDef] became</li>
+        <li>redemption_success_body->It was not perfect. It never could be. [pawn_nameDef] - [pc_lex_identity_echo], [pc_lex_wound_summary] - stood [pc_lex_scene], [pc_lex_tone].\n\n[pc_thought_strongest_label] was different. [pc_lex_social_anchor]. [pc_friend_name] was [VerbFriendly].\n\n[pawn_pronoun] [pc_lex_verb_duty] and kept going. The story [pawn_pronoun] was living was kinder than the one [pawn_pronoun] had expected.</li>
+
+        <li>corruption_success_title->The version that survived</li>
+        <li>corruption_success_body->[pawn_nameDef] got what [pawn_pronoun] needed. [pc_lex_scene]. [pc_lex_wound_summary]. [pc_thought_strongest_label] was still present.\n\n[pawn_pronoun] was [pc_lex_tone] and [pawn_pronoun] [pc_lex_secretive]. [pc_lex_social_anchor].\n\nThe cost was exactly what [pawn_pronoun] had expected. [pawn_pronoun] could live with that.</li>
+
+        <li>threshold_success_title->The line crossed</li>
+        <li>threshold_success_body->There was no going back. [pawn_nameDef] - [pc_lex_identity_echo] - did not want to. [pc_lex_scene], [pc_lex_tone]. [pc_lex_wound_summary].\n\n[pc_thought_strongest_label] was settled. [pc_lex_social_anchor]. [pc_friend_name] noticed something was different.\n\n[pawn_pronoun] [pc_lex_verb_daily] and did not explain.</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             FAILURE
+        ═══════════════════════════════════════════════════════════════════ -->
+        <li>daily_failure_title->The small thing that went wrong</li>
+        <li>daily_failure_body->Something went wrong. [pawn_nameDef] stood [pc_lex_scene], [pc_lex_tone].\n\n[pawn_pronoun] [pc_lex_verb_daily]. [pawn_pronoun] would try again.</li>
+
+        <li>haunted_failure_title->The haunting won this round</li>
+        <li>haunted_failure_body->[pawn_nameDef], [pc_lex_identity_echo], returned with more than [pawn_pronoun] left with. [pc_lex_wound_summary]. [pc_lex_scene].\n\n[pc_thought_strongest_label] was louder. [pc_lex_social_anchor].\n\n[pawn_pronoun] [pc_lex_verb_trauma]. The weight was [pc_lex_tone].</li>
+
+        <li>dream_failure_title->The dream lied</li>
+        <li>dream_failure_body->What waited at the end was not what the dream promised. [pawn_nameDef], [pc_lex_identity_echo], added it to the list, [pc_lex_scene]. [pc_lex_wound_summary].\n\n[pc_thought_strongest_label] was louder for it. [pc_lex_social_anchor].\n\n[pawn_pronoun] [pc_lex_verb_curiosity]. [pawn_pronoun] was not done looking.</li>
+
+        <li>mirror_failure_title->The reflection did not blink</li>
+        <li>mirror_failure_body->Looking too long showed [pawn_nameDef] - [pc_lex_identity_echo] - something [pawn_pronoun] was not ready to carry. [pc_lex_wound_summary]. [pc_lex_scene].\n\n[pc_thought_strongest_label] was louder. [pc_lex_social_anchor].\n\n[pawn_pronoun] walked away first. [pawn_pronoun] was [pc_lex_tone] about it.</li>
+
+        <li>failure_title->What [pawn_nameDef] paid</li>
+        <li>failure_body->It did not go the way [pawn_pronoun] needed. [pawn_nameDef], [pc_lex_identity_echo], returned [pc_lex_tone], [pc_lex_scene]. [pc_lex_wound_summary]. [pc_thought_strongest_label] was heavier.\n\n[pawn_pronoun] was [pc_lex_moral_state]. [pc_lex_social_anchor]. [pc_friend_name] was [VerbFriendly] and asked no questions.\n\n[pawn_pronoun] [pc_lex_verb_daily] and got back to work. It was the best [pawn_pronoun] had.</li>
+
+        <li>trauma_failure_title->The price of it</li>
+        <li>trauma_failure_body->What [pawn_nameDef] sought was real. The people beside it were too. [pc_lex_wound_summary]. [pc_lex_scene].\n\n[pc_thought_strongest_label] was louder. [pc_lex_social_anchor].\n\n[pawn_pronoun] returned to [pc_colony_name], [pc_lex_tone].</li>
+
+        <li>grief_failure_title->The door that would not open</li>
+        <li>grief_failure_body->There was nothing to find. The trail had gone cold. [pawn_nameDef] - [pc_lex_identity_echo] - came home [pc_lex_scene] and did not say much for a while.\n\n[pc_thought_strongest_label] was heavier. [pc_lex_social_anchor]. [pc_friend_name] did not push.\n\n[pawn_pronoun] was [pc_lex_moral_state]. [pawn_pronoun] [pc_lex_verb_grief].</li>
+
+        <li>kinship_failure_title->Too late</li>
+        <li>kinship_failure_body->The search ended. What [pawn_nameDef] found was not what [pawn_pronoun] hoped for. [pc_lex_scene]. [pc_lex_wound_summary].\n\n[pawn_pronoun] returned different. Not visibly. [pc_lex_social_anchor]. [pc_thought_strongest_label] had a new weight.\n\n[pawn_pronoun] was [pc_lex_tone]. [pawn_pronoun] did not know what to do with it yet.</li>
+
+        <li>underworld_failure_title->What it cost</li>
+        <li>underworld_failure_body->The arrangement went sideways in small increments. [pawn_nameDef] - [pc_lex_identity_echo] - came out of it, [pc_lex_combat_posture], [pc_lex_wound_summary].\n\nThe thing [pawn_pronoun] went for was gone. [pc_thought_strongest_label] was louder for it.\n\n[pawn_pronoun] returned to [pc_colony_name], [pc_lex_scene], [pc_lex_tone]. [pc_lex_social_anchor].</li>
+
+        <li>violence_failure_title->What [pawn_nameDef] cannot put down</li>
+        <li>violence_failure_body->[pawn_nameDef] - [pc_record_kills] kills on [pawn_possessive] record, [pc_lex_identity_echo] - had expected some shift in the [ConceptAngsty]. The weight was the same. More specific. [pc_lex_wound_summary]. [pc_lex_scene].\n\n[pc_thought_strongest_label] had a name on it now. [pc_lex_social_anchor].\n\n[pawn_pronoun] was [pc_lex_moral_state]. [pawn_pronoun] [pc_lex_verb_violence].</li>
+
+        <li>curiosity_failure_title->What the fragment was hiding</li>
+        <li>curiosity_failure_body->The answer arrived. [pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level] - did not expect to wish it hadn't. [pc_lex_scene]. [pc_lex_wound_summary].\n\n[pc_thought_strongest_label] was louder. [pc_lex_social_anchor].\n\n[pawn_pronoun] was [pc_lex_tone].</li>
+
+        <li>isolation_failure_title->The cost of not asking</li>
+        <li>isolation_failure_body->If [pawn_nameDef] had asked for help, it might have gone differently. [pawn_pronoun] did not ask. [pc_lex_scene]. [pc_lex_wound_summary].\n\n[pawn_pronoun] went back with something missing and a specific piece of information about [pawn_possessive] own limitations. [pc_thought_strongest_label] was heavier.\n\n[pc_lex_social_anchor]. [pawn_pronoun] was [pc_lex_tone].</li>
+
+        <li>survival_failure_title->Still standing</li>
+        <li>survival_failure_body->[pawn_nameDef] - [pc_lex_identity_echo] - survived. [pawn_pronoun] had always been good at surviving. [pc_lex_wound_summary]. [pc_lex_scene].\n\nWhat [pawn_pronoun] came for was gone. [pc_thought_strongest_label] was heavier. [pc_lex_social_anchor].\n\n[pawn_pronoun] was still there, [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_survival]. [pawn_pronoun] always did.</li>
+
+        <li>craft_failure_title->The thing that did not work</li>
+        <li>craft_failure_body->Something was wrong at a level [pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level] - did not catch in time. [pc_lex_wound_summary]. [pc_lex_scene].\n\n[pc_thought_strongest_label] was heavier. [pc_lex_social_anchor].\n\nThe documentation would be thorough. [pawn_pronoun] returned to [pc_colony_name], [pc_lex_tone]. [pawn_pronoun] would work out what went wrong.</li>
+
+        <li>betrayal_failure_title->The debt that cannot be paid</li>
+        <li>betrayal_failure_body->[pawn_nameDef], [pc_lex_identity_echo], understood the risk. The debt found the gap anyway. [pc_lex_scene]. [pc_lex_wound_summary].\n\n[ConceptAngsty] had a name on it now. [pc_thought_strongest_label] was not going anywhere.\n\n[pawn_pronoun] carried it home. [pc_lex_social_anchor]. [pawn_pronoun] was [pc_lex_tone].</li>
+
+        <li>devotion_failure_title->What [pawn_nameDef] was wrong about</li>
+        <li>devotion_failure_body->The certainty was real. But it was wrong, [pc_lex_scene].\n\n[pawn_nameDef] holds the belief more carefully now.\n\n[pawn_pronoun] returns. [pc_lex_social_anchor]. More honest about what [pawn_pronoun] actually knows.</li>
+
+        <li>resilience_failure_title->The thing that was too much</li>
+        <li>resilience_failure_body->[pawn_nameDef] had absorbed a great deal. This one found the edge of it.\n\n[pawn_pronoun] was still there. Functional. But running at a reduced margin, [pc_lex_moral_state].\n\n[pc_lex_social_anchor]. [pc_lex_scene].</li>
+
+        <li>noble_failure_title->The name that was lost</li>
+        <li>noble_failure_body->The house was gone. [pawn_nameDef] was left with the name and nothing attached to it.\n\nThat should have felt like [ConceptPositive]. [pawn_pronoun] carried it anyway, [pc_lex_scene].</li>
+
+        <li>wandering_failure_title->The road that led nowhere</li>
+        <li>wandering_failure_body->The road ended with an absence.\n\n[pawn_pronoun] returned to [pc_colony_name], [pc_lex_scene], not sure whether [pawn_pronoun] was arriving or passing through.\n\n[pc_lex_social_anchor]. The restlessness was louder.</li>
+
+        <li>healer_failure_title->The one [pawn_nameDef] could not save</li>
+        <li>healer_failure_body->The patient died. [pawn_nameDef] knew, at some point, the outcome was no longer in [pawn_possessive] control.\n\n[pc_skill_best_label] at [pc_skill_best_level] was not enough, this time.\n\n[pawn_pronoun] added it to the list. The list was longer than [pawn_pronoun] talked about.</li>
+
+        <li>redemption_failure_title->The chance [pawn_nameDef] could not take</li>
+        <li>redemption_failure_body->The door was open. [pawn_nameDef] stood in the doorway and could not walk through. [pc_lex_scene]. [pawn_pronoun] was [pc_lex_moral_state]. [pc_lex_social_anchor].</li>
+
+        <li>threshold_failure_title->Still the same person</li>
+        <li>threshold_failure_body->The moment came. [pawn_nameDef] made the only choice [pawn_pronoun] knew how to make. [pc_lex_scene]. [pawn_pronoun] was [pc_lex_moral_state]. [pc_lex_social_anchor].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             EMBERS - Daily Moments
+        ═══════════════════════════════════════════════════════════════════ -->
+        <li>redemption_ember_title->The person [pawn_nameDef] is trying to become</li>
+        <li>redemption_ember_body->[pawn_nameDef] could take a quiet moment today to practice being the version of [pawn_pronoun] [pawn_pronoun] hopes to die as.</li>
+
+        <li>memory_ember_title->Sitting with the past</li>
+        <li>memory_ember_body->An old memory surfaces without warning today. [pawn_nameDef] could let it stay for a while instead of driving it away.</li>
+
+        <li>threshold_ember_title->Choosing again</li>
+        <li>threshold_ember_body->Today offers [pawn_nameDef] a small, private chance to be different than [pawn_pronoun] was yesterday.</li>
+
+        <li>haunted_ember_title->The ghost sits with [pawn_nameDef]</li>
+        <li>haunted_ember_body->For once the memory does not demand anything. [pawn_nameDef] could sit with it [pc_lex_scene], just the two of them and the quiet.</li>
+
+        <li>dream_ember_title->Chasing fragments</li>
+        <li>dream_ember_body->A piece of last night's dream is still loose in [pawn_nameDef]'s mind. A few quiet hours might pin it down.</li>
+
+        <li>mirror_ember_title->Looking anyway</li>
+        <li>mirror_ember_body->[pawn_nameDef] catches [pawn_possessive] reflection today and decides not to look away. Just for a moment. Just to see what's still there.</li>
+
+        <li>omen_ember_title->Reading the small signs</li>
+        <li>omen_ember_body->The world keeps leaving tiny messages. Today [pawn_nameDef] could actually read them instead of walking past.</li>
+
+        <li>ember_title->A moment for [pawn_nameDef]</li>
+        <li>ember_title->Something [pawn_nameDef] has been putting off</li>
+        <li>ember_title->[pawn_nameDef] - a quiet window</li>
+        <li>ember_body->[pawn_nameDef] has a chance today, [pc_lex_scene], to tend to something personal. A small thing - but the kind that matters.</li>
+        <li>ember_body->The day opens a small gap. [pawn_nameDef] could use it. No one else would even notice.</li>
+        <li>ember_body->[pawn_nameDef] has a free stretch today. [pc_lex_scene]. [pawn_pronoun] could do something with it.</li>
+
+        <li>kinship_ember_title->[pawn_nameDef] thinks of someone</li>
+        <li>kinship_ember_title->A face [pawn_nameDef] keeps coming back to</li>
+        <li>kinship_ember_title->[pawn_nameDef] - it has been too long</li>
+        <li>kinship_ember_title->Someone worth the time</li>
+        <li>kinship_ember_body->[pawn_nameDef] could spend time with someone who matters - [pc_lex_social_anchor]. A meal shared. A word spoken. The kind of thing that keeps the bonds from fraying.</li>
+        <li>kinship_ember_body->The thought of [pc_lex_social_anchor] surfaces at odd moments. [pawn_nameDef] could do something about that today instead of just noting it.</li>
+        <li>kinship_ember_body->There is someone [pawn_nameDef] has not really talked to lately. Not properly. Today could fix that.</li>
+
+        <li>grief_ember_title->A quiet moment for [pawn_nameDef]</li>
+        <li>grief_ember_title->Still carrying it</li>
+        <li>grief_ember_title->[pawn_nameDef] - the weight sits different today</li>
+        <li>grief_ember_body->The thought of [pc_thought_strongest_label] surfaces again. [pawn_nameDef] could take a moment to sit with it, [pc_lex_scene], instead of pushing through.</li>
+        <li>grief_ember_body->Some losses do not leave. [pawn_nameDef] has learned to work around them. Today it might help to stop working, just briefly, and let the feeling breathe.</li>
+        <li>grief_ember_body->The grief is not gone. It is just quiet at the moment. [pawn_nameDef] knows better than to mistake quiet for healed.</li>
+
+        <li>trauma_ember_title->[pawn_nameDef] tends to an old wound</li>
+        <li>trauma_ember_title->Something [pawn_nameDef] tries not to think about</li>
+        <li>trauma_ember_title->An old ache, surfacing</li>
+        <li>trauma_ember_body->[pc_hediff_0_label] is acting up. [pawn_nameDef] could take the time to tend to it properly - rest, treatment, the kind of care that usually gets postponed.</li>
+        <li>trauma_ember_body->The body remembers things the mind tries to forget. [pawn_possessive] [BodyPart] has opinions about it today. [pawn_nameDef] could listen for once.</li>
+        <li>trauma_ember_body->It surfaces, quietly - the memory of what happened. [pawn_nameDef], [pc_lex_scene], could let it surface without fighting it today.</li>
+
+        <li>curiosity_ember_title->[pawn_nameDef] follows a thought</li>
+        <li>curiosity_ember_title->A question with no good answer yet</li>
+        <li>curiosity_ember_title->The mind is pulling in a direction</li>
+        <li>curiosity_ember_body->An idea has been nagging - something related to [pc_skill_best_label] at level [pc_skill_best_level]. A few hours of focused work could settle it.</li>
+        <li>curiosity_ember_body->The question has been sitting there for days. [pawn_nameDef] has not had the time to follow it properly. Today might be different.</li>
+        <li>curiosity_ember_body->Not every thought needs an audience. [pawn_nameDef] could spend a few hours in [pawn_possessive] own head, [pc_lex_scene], just to see where it goes.</li>
+
+        <li>craft_ember_title->[pawn_nameDef] sees something to make</li>
+        <li>craft_ember_title->An itch in the hands</li>
+        <li>craft_ember_title->The work is calling</li>
+        <li>craft_ember_body->The materials are there. [pawn_nameDef] could spend a day making something that matters - not for the colony, just for [pawn_possessive]self.</li>
+        <li>craft_ember_body->The hands want to work on something specific. [pawn_nameDef] has been ignoring it. Today the urge is harder to dismiss.</li>
+        <li>craft_ember_body->Some things just want to be made. [pawn_nameDef] has been aware of this one for a while. [pc_lex_scene], the time might be right.</li>
+
+        <li>violence_ember_title->[pawn_nameDef] sharpens the blade</li>
+        <li>violence_ember_title->Staying sharp</li>
+        <li>violence_ember_title->A readiness [pawn_nameDef] maintains</li>
+        <li>violence_ember_body->[pawn_nameDef] could spend time with [pc_weapon_label] today. Just the maintenance, the practice, the familiar weight of a [Weapon] in [pawn_possessive] hands.</li>
+        <li>violence_ember_body->The edge dulls when it is not used. So does the mind behind it. [pawn_nameDef] knows this. A few hours of practice costs nothing.</li>
+        <li>violence_ember_body->The body knows how to do this. [pawn_nameDef] - [pc_lex_identity_echo] - just needs to get out of its way for a while.</li>
+
+        <li>devotion_ember_title->[pawn_nameDef] takes a moment</li>
+        <li>devotion_ember_title->A quiet obligation</li>
+        <li>devotion_ember_title->Returning to what matters</li>
+        <li>devotion_ember_body->The day offers a chance for [pc_ideo_name] observance. [pawn_nameDef] could take the time - a quiet moment, [pc_lex_scene].</li>
+        <li>devotion_ember_body->It does not need to be elaborate. [pawn_nameDef] could simply stop, [pc_lex_scene], and be present in the way the belief requires.</li>
+        <li>devotion_ember_body->The obligation is small. The act of meeting it is not. [pawn_nameDef] knows the difference.</li>
+
+        <li>animalfriend_ember_title->[pawn_nameDef] and the animals</li>
+        <li>animalfriend_ember_title->Something the animals understand</li>
+        <li>animalfriend_ember_title->A quiet between species</li>
+        <li>animalfriend_ember_body->[pc_lex_animal_moment] is close today. [pawn_nameDef] could spend time - the quiet work that neither species needs to explain.</li>
+        <li>animalfriend_ember_body->Animals do not ask questions. [pawn_nameDef] appreciates this more than most people would. A few hours of that kind of company might help.</li>
+        <li>animalfriend_ember_body->There is an honesty to working with animals that [pawn_nameDef] finds easier than working with people. Today offers an excuse to lean into it.</li>
+
+        <li>resilience_ember_title->[pawn_nameDef] takes stock</li>
+        <li>resilience_ember_title->Still here</li>
+        <li>resilience_ember_title->What [pawn_nameDef] is made of</li>
+        <li>resilience_ember_body->A moment between tasks. [pawn_nameDef], [pc_lex_wound_summary], [pc_lex_moral_state], could take a breath and assess where [pawn_pronoun] actually is.</li>
+        <li>resilience_ember_body->It has been a long stretch. [pawn_nameDef] is still standing. There is something worth acknowledging in that, [pc_lex_scene], even if only to [pawn_possessive]self.</li>
+        <li>resilience_ember_body->The hard part is usually just continuing. [pawn_nameDef] has been continuing for a while now. A moment to notice that would not hurt.</li>
+
+        <li>wandering_ember_title->[pawn_nameDef] looks at the [pc_world_biome] horizon</li>
+        <li>wandering_ember_title->The pull of elsewhere</li>
+        <li>wandering_ember_title->What lies past the perimeter</li>
+        <li>wandering_ember_body->The edge of [pc_colony_name] faces outward, [pc_lex_scene]. [pawn_nameDef] stands there sometimes. Not to leave. Just to remember that the world is larger than the walls.</li>
+        <li>wandering_ember_body->The roads do not stop at [pc_colony_name]. [pawn_nameDef] knows this better than most. [pc_lex_scene], the knowledge feels close today.</li>
+        <li>wandering_ember_body->The itch is not restlessness, exactly. It is more like memory. [pawn_nameDef] could walk to the edge of camp and let it breathe for a while.</li>
+
+        <li>isolation_ember_title->[pawn_nameDef] needs space</li>
+        <li>isolation_ember_title->A quieter corner of the day</li>
+        <li>isolation_ember_title->The crowd feels loud today</li>
+        <li>isolation_ember_body->[pawn_nameDef] could use some time alone today, [pc_lex_scene]. Not running from something - just the ordinary need for silence.</li>
+        <li>isolation_ember_body->The colony is always full of people wanting things. [pawn_nameDef] could find an hour where that is not true for once.</li>
+        <li>isolation_ember_body->There are thoughts [pawn_nameDef] can only think when no one is watching. Today might be the day to think them.</li>
+
+        <li>betrayal_ember_title->A thought [pawn_nameDef] pushes away</li>
+        <li>betrayal_ember_title->The memory comes back</li>
+        <li>betrayal_ember_title->Still unfinished</li>
+        <li>betrayal_ember_body->The memory arrives uninvited - a face, a choice, a [ConceptAngsty] [pawn_pronoun] has not finished carrying. [pawn_nameDef] could sit with it today instead of pushing it down. Or not. Both are choices.</li>
+        <li>betrayal_ember_body->Trust is not easy to rebuild. [pawn_nameDef] knows this. The question is whether [pawn_pronoun] wants to try, or whether the answer is already settled.</li>
+        <li>betrayal_ember_body->The resentment sits where the trust used to be. [pawn_nameDef] has learned to work around it. That is not the same as being free of it.</li>
+
+        <li>noble_ember_title->The weight of a name</li>
+        <li>noble_ember_title->What the station requires</li>
+        <li>noble_ember_title->[pawn_nameDef] - a different kind of accounting</li>
+        <li>noble_ember_body->[pawn_nameDef] catches [pawn_possessive]self standing straighter today. The name still means something - to [pawn_pronoun], if to no one else.</li>
+        <li>noble_ember_body->Rank is not given, it is maintained. [pawn_nameDef] understands this. Today is a chance to be deliberate about it.</li>
+        <li>noble_ember_body->There are obligations that come with who [pawn_nameDef] is. Most days they sit quietly. Today they are asking to be met.</li>
+
+        <li>survival_ember_title->Something [pawn_nameDef] does not take for granted</li>
+        <li>survival_ember_title->Still breathing - that counts</li>
+        <li>survival_ember_title->The calculus of surviving</li>
+        <li>survival_ember_body->Food. Shelter. A place that is not actively trying to kill [pawn_objective]. [pawn_nameDef] - once a [pc_backstory_child_title] - notices these things more than most people do.</li>
+        <li>survival_ember_body->There was a time when today would have seemed impossible. [pawn_nameDef] does not dwell on that. But [pawn_pronoun] does not forget it either.</li>
+        <li>survival_ember_body->The margin is always smaller than it looks. [pawn_nameDef] knows the real numbers. That knowledge is worth sitting with, [pc_lex_scene].</li>
+
+        <li>healer_ember_title->A patient who could use a visit</li>
+        <li>healer_ember_title->The care that does not show in records</li>
+        <li>healer_ember_title->[pawn_nameDef] - something beyond the work</li>
+        <li>healer_ember_body->Someone in [pc_colony_name] has been recovering quietly. [pawn_nameDef] could check on them - not because [pawn_pronoun] has to, but because [pawn_pronoun] knows what the difference feels like from the bed.</li>
+        <li>healer_ember_body->There is medicine and there is care. [pawn_nameDef] knows the difference. Today offers a chance to practice the second kind.</li>
+        <li>healer_ember_body->The body heals faster when it feels less alone. [pawn_nameDef] has seen this enough times to believe it. Someone in camp could use a reminder of that today.</li>
+
+        <li>leadership_ember_title->Someone asks [pawn_nameDef] for advice</li>
+        <li>leadership_ember_body->A [PersonJob] in [pc_colony_name] has a [pc_noun_topic] they cannot resolve alone. [pawn_nameDef] - [pc_lex_identity_echo] - is the person they trust to help.</li>
+
+        <li>scholar_ember_title->[pawn_nameDef] finds something to read</li>
+        <li>scholar_ember_body->A recovered text catches [pawn_nameDef]'s eye. Related to [pc_skill_best_label]. The kind of thing [pawn_pronoun] would normally set aside but today has the time to sit with, [pc_lex_scene].</li>
+
+        <li>daily_ember_title->A quiet [pc_world_time_of_day] cup of tea</li>
+        <li>daily_ember_body->[pawn_nameDef] could take a few minutes today to sit with a warm drink and do absolutely nothing useful.</li>
+
+        <li>daily_ember_title->The stubborn tool</li>
+        <li>daily_ember_body->That one tool that always fights back is due for some maintenance. [pawn_nameDef] could finally tame it.</li>
+
+        <li>daily_ember_title->Looking after the little things</li>
+        <li>daily_ember_body->A fence post, a leaking bucket, or a squeaky hinge. Small problems that deserve attention.</li>
+
+        <li>daily_ember_title->The familiar walk</li>
+        <li>daily_ember_body->The path between the [pc_world_biome] and [pc_colony_name] is well-worn. [pawn_nameDef] could walk it slowly today.</li>
+
+        <li>daily_ember_title->A moment of useless beauty</li>
+        <li>daily_ember_body->A flower, a strange cloud, or the way the light falls on the wall. [pawn_nameDef] could just look at it.</li>
+
+        <li>daily_ember_title->Checking on the small comforts</li>
+        <li>daily_ember_body->Making sure the bedding is aired, the boots are dry, the mug isn't chipped. The tiny things that matter.</li>
+        <!-- ═══════════════════════════════════════════════════════════════
+             WAIT CONDITION LABELS - Chronicles tab
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>wait_condition_kills->[pawn_nameDef]'s story will continue after [pawn_pronoun] next takes a life...</li>
+        <li>wait_condition_injured->[pawn_nameDef]'s story will continue after [pawn_pronoun] next receives an injury...</li>
+        <li>wait_condition_healed->[pawn_nameDef]'s story will continue after [pawn_pronoun] recovers from a non-permanent injury...</li>
+        <li>wait_condition_crafted->[pawn_nameDef]'s story will continue after [pawn_pronoun] crafts or builds 20 things...</li>
+        <li>wait_condition_social->[pawn_possessive] arc will continue after 10 social interactions with other colonists...</li>
+        <li>wait_condition_ritual->[pawn_nameDef]'s arc will continue after [pawn_pronoun] participates in a ritual...</li>
+        <li>wait_condition_tamed->[pawn_nameDef]'s story will continue after [pawn_pronoun] next tames an animal...</li>
+        <li>wait_condition_time->[pawn_nameDef]'s story will continue when this [pc_world_season] passes, 15 days...</li>
+
+
+      
+        <!-- SPARK RULES: single-sentence diary entries
+             Cascade: {tag}_spark_body -> spark_body -> default_body
+             75 rules, 13 tag categories, each uses 2-4 pawn symbols -->
+             
+        
+        <li>spark_title->A moment for [pawn_nameDef]</li>
+        <li>spark_title->[pawn_nameDef] notes something</li>
+        <li>spark_title->[pawn_nameDef], [pc_world_time_of_day]</li>
+        <li>spark_title->Something [pawn_nameDef] carries</li>
+        <li>spark_title->[pawn_nameDef] - [pc_lex_identity_echo]</li>
+        <li>spark_title->Still here: [pawn_nameDef]</li>
+        <li>spark_title->Day [pc_age_bio]: [pawn_nameDef]</li>
+        <li>spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - [pc_lex_tag_verb] today, [pc_lex_scene].</li>
+        <li>spark_body->[pawn_nameDef] kept moving. [pc_lex_scene]. [pc_lex_moral_state].</li>
+        <li>spark_body->A [pc_world_time_of_day] thought found [pawn_nameDef] while [pawn_pronoun] worked. [pc_lex_world_feel].</li>
+        <li>spark_body->[pawn_nameDef], [pc_lex_demeanor], paused [pc_lex_scene]. [pc_thought_strongest_label] surfaced briefly.</li>
+        <li>spark_body->[pawn_nameDef] had been doing [pc_skill_best_label] for [pc_age_bio] years. [pc_lex_scene].</li>
+        <li>spark_body->The [pc_world_biome] outside [pc_colony_name] today. [pawn_nameDef] noticed it and went back to work.</li>
+        <li>spark_body->[pawn_nameDef] - [pc_lex_combat_posture] - thought of [pc_backstory_child_title] briefly. [pc_lex_scene].</li>
+        <li>spark_body->A thought arrived and departed. [pc_world_weather] outside. [pawn_nameDef] went back to work.</li>
+        <li>spark_body->[pc_lex_wound_summary]. [pawn_nameDef] worked anyway. [pc_lex_scene].</li>
+        <li>spark_body->[pawn_nameDef] [pc_lex_tag_verb] today and did not think about why. [pc_lex_moral_state].</li>
+        <li>spark_body->Something in the [pc_world_time_of_day] light caught [pawn_nameDef]. [pc_lex_world_feel].</li>
+        <li>spark_body->[pawn_nameDef] - [pc_lex_identity_echo]. Still, [pc_lex_scene].</li>
+        <li>spark_body->The day offered [pawn_nameDef] a small thing. [pawn_pronoun] took it. [pc_lex_scene].</li>
+        <li>spark_body->[pawn_nameDef] is [pc_lex_moral_state], [pc_lex_scene].</li>
+        <li>spark_body->A quiet found [pawn_nameDef] during [pc_world_time_of_day]. [pc_lex_social_anchor].</li>
+        <li>spark_body->[pawn_nameDef] caught [pawn_possessive]self thinking of [pc_backstory_adult_title] work. [pc_lex_scene].</li>
+        <li>spark_body->The [pc_world_weather] today. [pc_lex_world_feel].</li>
+        <li>spark_body->[pawn_nameDef] spent ten minutes looking for a tool [pawn_pronoun] was holding the whole time. [pc_lex_scene].</li>
+        <li>spark_body->The soup tasted better than it had any right to. [pawn_nameDef] ate it slowly.</li>
+        <li>spark_body->A button finally stopped dangling. [pawn_nameDef] noticed.</li>
+        <li>spark_body->[pawn_nameDef] caught [pawn_pronoun]self humming while cleaning the same corner again.</li>
+        <li>spark_body->The chair [pawn_nameDef] always sat in creaked in exactly the right way.</li>
+        <li>spark_body->Someone left the door open. The draft felt strangely pleasant.</li>
+        <li>spark_body->[pawn_nameDef] remembered to water the plant. [pc_lex_scene].</li>
+        <li>spark_body->The boots finally stopped rubbing [pawn_possessive] [BodyPart].</li>
+        <li>spark_body->A perfectly ripe berry survived the journey from field to mouth.</li>
+        <li>spark_body->[pawn_nameDef] fixed something without swearing once. [pc_lex_scene].</li>
+        <li>daily_spark_body->The light hit the table at just the right angle this [pc_world_time_of_day]. [pawn_nameDef] noticed.</li>
+        <li>daily_spark_body->A quiet meal shared with no conversation needed. It was enough.</li>
+        <li>daily_spark_body->[pawn_nameDef] found [pawn_possessive] favorite mug clean and waiting.</li>
+        <li>daily_spark_body->The [pc_world_season] wind carried across the [pc_world_biome]. [pawn_nameDef] stood still for a moment.</li>
+        <li>daily_spark_body->A small joke landed perfectly. Everyone groaned. [pawn_nameDef] smiled.</li>
+        <li>daily_spark_body->The fire didn't smoke today. Little mercies.</li>
+        <li>daily_spark_body->[pawn_nameDef] caught [pawn_pronoun]self smiling at nothing in particular.</li>
+        <li>daily_spark_body->The same song played in [pawn_nameDef]'s head all day. It wasn't annoying.</li>
+        <li>trauma_spark_body->[pc_lex_wound_summary]. [pawn_nameDef] carries it into [pc_world_time_of_day] without slowing down.</li>
+        <li>trauma_spark_body->The [pc_hediff_0_label] sharpened briefly. [pawn_nameDef] - [pc_lex_identity_echo] - worked through it.</li>
+        <li>trauma_spark_body->[pawn_nameDef] remembered things [pc_lex_scene] that [pawn_pronoun] did not usually let surface.</li>
+        <li>trauma_spark_body->Something from [pc_backstory_child_title] arrived uninvited, [pc_world_time_of_day]. [pawn_nameDef] [pc_lex_tag_verb].</li>
+        <li>trauma_spark_body->The scar on [pawn_nameDef]'s [pc_hediff_0_part] sharpened briefly. [pc_lex_moral_state]. Still here.</li>
+        <li>trauma_spark_body->[pawn_nameDef] had a thought.. "[pc_thought_strongest_label]".</li>
+        <li>trauma_spark_body->Pain flared in [pawn_nameDef]'s [pc_hediff_0_part] and passed. [pc_lex_world_feel]. [pawn_pronoun] kept going.</li>
+        <li>animalfriend_spark_body->An animal held [pawn_nameDef]'s attention briefly, [pc_lex_scene]. Neither needed to explain why.</li>
+        <li>animalfriend_spark_body->[pawn_nameDef] read a creature's posture and knew, without thinking, what it meant.</li>
+        <li>animalfriend_spark_body->The animals in [pc_colony_name] know [pawn_nameDef]'s step. Today that registers.</li>
+        <li>animalfriend_spark_body->[pawn_nameDef] watched something with four legs live its day, [pc_lex_scene]. The [pc_world_biome] creatures did not ask questions. That helps.</li>
+        <li>animalfriend_spark_body->A bonded creature came close while [pawn_nameDef] worked. No reason. Just did. [pc_lex_scene].</li>
+        <li>animalfriend_spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - spends a moment with an animal. Enough said.</li>
+        <li>violence_spark_body->[pawn_nameDef]'s grip on [pc_weapon_label] settles with practiced certainty, [pc_lex_scene].</li>
+        <li>violence_spark_body->An old alertness came over [pawn_nameDef] - the kind that did not require thought. [pc_world_time_of_day].</li>
+        <li>violence_spark_body->[pawn_nameDef] read the space around [pawn_objective] the way someone read it who had needed to.</li>
+        <li>violence_spark_body->[pawn_nameDef] handled [pc_weapon_label] with the ease that came from very specific experience, [pc_lex_scene].</li>
+        <li>violence_spark_body->The body remembered things [pawn_nameDef] did not think about. [pc_lex_combat_posture] said enough.</li>
+        <li>violence_spark_body->[pawn_nameDef] notices a threat that was not there. [pc_lex_scene]. [pawn_pronoun] relaxes, slowly.</li>
+        <li>craft_spark_body->Something [pawn_nameDef] was making today came together better than expected. [pc_lex_scene].</li>
+        <li>craft_spark_body->[pawn_nameDef] found a small improvement [pc_lex_scene] that no one else would notice. [pawn_pronoun] noticed.</li>
+        <li>craft_spark_body->A technique clicks for [pawn_nameDef] during [pc_skill_best_label] work. Hard to explain. Just right.</li>
+        <li>craft_spark_body->[pawn_nameDef] looks at something [pawn_pronoun] built. [pc_lex_moral_state]. It holds.</li>
+        <li>craft_spark_body->The materials behaved correctly under [pawn_nameDef]'s hands. That was the whole thought.</li>
+        <li>craft_spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - finds the right way during [pc_world_time_of_day] work.</li>
+        <li>kinship_spark_body->[pawn_nameDef] catches someone's eye across [pc_colony_name] and feels less alone. [pc_lex_scene].</li>
+        <li>kinship_spark_body->A brief exchange reminded [pawn_nameDef] why [pawn_pronoun] was still there. [pc_lex_scene].</li>
+        <li>kinship_spark_body->[pawn_nameDef] thought of [pc_parent_name] without meaning to, [pc_world_time_of_day]. [pc_lex_moral_state].</li>
+        <li>kinship_spark_body->Someone said something to [pawn_nameDef] that was not much but landed right, [pc_lex_scene].</li>
+        <li>kinship_spark_body->[pawn_nameDef] watches [pc_friend_name] across the work and thinks: still here. [pc_lex_world_feel].</li>
+        <li>kinship_spark_body->[pawn_nameDef] - [pc_lex_social_anchor] - lets that be enough for today.</li>
+        <li>grief_spark_body->A name surfaced in [pawn_nameDef]'s thoughts [pc_lex_scene] and then moved on.</li>
+        <li>grief_spark_body->[pc_thought_strongest_label]. [pawn_nameDef] lets it surface and then lets it go.</li>
+        <li>grief_spark_body->Something in the [pc_world_time_of_day] light reminded [pawn_nameDef] of what was not there anymore.</li>
+        <li>grief_spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - did not say anything. [pc_lex_scene].</li>
+        <li>grief_spark_body->The absence arrived briefly, [pc_world_time_of_day]. [pawn_nameDef] [pc_lex_tag_verb].</li>
+        <li>loss_spark_body->[pawn_nameDef] thought about what was gone. Just for a moment, [pc_lex_scene]. Then went back to work.</li>
+        <li>curiosity_spark_body->[pawn_nameDef] pulls a thread on [pawn_possessive] [pc_skill_best_label] work and finds it leads further.</li>
+        <li>curiosity_spark_body->A small detail catches [pawn_nameDef]'s attention [pc_lex_scene] that might mean something.</li>
+        <li>curiosity_spark_body->[pawn_nameDef] started a question [pawn_pronoun] did not have the answer to yet. [pc_world_time_of_day].</li>
+        <li>curiosity_spark_body->Something in [pc_world_biome] catches [pawn_nameDef]'s attention. A pattern. Worth noting.</li>
+        <li>scholar_spark_body->[pawn_nameDef] made a note [pc_lex_scene]. [pawn_pronoun] always made notes. [pc_lex_moral_state].</li>
+        <li>scholar_spark_body->An idea connects to another in [pawn_nameDef]'s mind during [pc_world_time_of_day] work. Quietly useful.</li>
+        <li>devotion_spark_body->[pawn_nameDef] takes a breath [pc_lex_scene] and feels the conviction settle. [pc_lex_moral_state].</li>
+        <li>devotion_spark_body->The belief arrived quietly during [pc_world_time_of_day] work - certain and undemanding.</li>
+        <li>faith_spark_body->[pawn_nameDef] gives brief thanks in [pawn_possessive] own way. [pc_lex_world_feel].</li>
+        <li>faith_spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - observes something [pc_lex_scene] and calls it what it is.</li>
+        <li>nurture_spark_body->[pawn_nameDef] notices someone in [pc_colony_name] looks unwell. Makes a note. [pc_lex_scene].</li>
+        <li>nurture_spark_body->A small act of care passed between [pawn_nameDef] and another, [pc_lex_scene]. Neither made it a thing.</li>
+        <li>nurture_spark_body->[pawn_nameDef] adjusts something for someone else without being asked. [pc_world_time_of_day] work.</li>
+        <li>nurture_spark_body->[pawn_nameDef] - [pc_lex_social_anchor] - checks on someone quietly. [pc_lex_moral_state].</li>
+        <li>isolation_spark_body->[pawn_nameDef] works [pc_lex_scene] without needing anyone to notice. [pc_lex_moral_state].</li>
+        <li>isolation_spark_body->[pawn_nameDef] finds [pawn_possessive] own company sufficient today, [pc_world_time_of_day]. [pc_lex_scene].</li>
+        <li>isolation_spark_body->The quiet around [pawn_nameDef] was chosen, not imposed. [pc_lex_world_feel]. [pawn_pronoun] preferred it.</li>
+        <li>resilience_spark_body->[pawn_nameDef] takes stock: [pc_lex_wound_summary]. [pc_lex_moral_state]. Still ahead of the alternative.</li>
+        <li>resilience_spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - had been through worse. That counted, [pc_lex_scene].</li>
+        <li>survival_spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - notices: still here. [pc_lex_scene].</li>
+        <li>wandering_spark_body->[pawn_nameDef] looks toward the edge of [pc_colony_name], [pc_world_time_of_day]. Not to leave. Just to remember something from [pawn_possessive] past.</li>
+        <li>spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - had [pc_age_bio] years behind [pawn_objective]. [pc_lex_scene].</li>
+        <li>spark_body->The [pc_world_weather] caught [pawn_nameDef] mid-step. [pawn_pronoun] paused, then went on.</li>
+        <li>spark_body->[pawn_nameDef] almost laughed. The sound surprised [pawn_pronoun].</li>
+        <li>haunted_spark_body->The ghost was loud. [pawn_nameDef] answered it out loud once, then kept working.</li>
+        <li>dream_spark_body->A line from the dream returned perfectly formed. [pawn_nameDef] wrote it down before it dissolved.</li>
+        <li>mirror_spark_body->[pawn_nameDef] meets [pawn_possessive] own eyes in a polished blade and nods once. Acknowledgement. Nothing more.</li>
+        <li>omen_spark_body->Three unrelated things line up too neatly. [pawn_nameDef] files the coincidence away for later.</li>
+        <li>redemption_spark_body->[pawn_nameDef] catches [pawn_pronoun]self choosing kindness where [pawn_pronoun] once would have chosen survival. The difference surprises [pawn_objective].</li>
+        <li>threshold_spark_body->For a moment [pawn_nameDef] did not recognise [pawn_possessive] own reflection. Something had shifted. [pc_lex_scene].</li>
+        <li>memory_spark_body->The past visited but did not stay. [pawn_nameDef] let it leave without argument. That was new.</li>
+        <li>evolution_spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - notices [pawn_pronoun] no longer flinches at the sound that once broke [pawn_objective].</li>
+        <li>spark_body->A small mercy found [pawn_nameDef] today. [pawn_pronoun] took it.</li>
+
+
+        <!-- ═══════════════════════════════════════════════════════════════════════
+             BRIDGE RULES - Personalized "why this is happening" text.
+             
+             These fire as part of NarrativeIncidentFirer.Fire().
+             Each rule resolves using the pawn's actual data:
+               bridge_{role}_title  -> appended to letter label
+               bridge_{role}_body   -> separator + this text after narrative body
+             
+             The player reads: [story body] ──── [bridge body] -> then the event fires.
+             Every rule uses at least 2 pawn-specific symbols for personalization.
+        ═══════════════════════════════════════════════════════════════════════ -->
+        <li>bridge_redemption_title->A door [pawn_nameDef] did not expect</li>
+        <li>bridge_redemption_body->[pawn_nameDef] was offered something [pawn_pronoun] had not expected. [pc_lex_scene]. [pawn_pronoun] was [pc_lex_moral_state].</li>
+
+        <li>bridge_threshold_title->The moment of choosing</li>
+        <li>bridge_threshold_body->[pawn_nameDef] had a decision to make. [pawn_pronoun] had been putting it off. [pc_lex_scene]. [pawn_pronoun] was [pc_lex_moral_state].</li>
+
+        <li>bridge_memory_title->The past refuses to stay buried</li>
+        <li>bridge_memory_body->What [pawn_nameDef] thought was finished surfaced again. [pawn_pronoun] recognised it. [pc_lex_scene].</li>
+
+        <li>bridge_haunted_confrontation_title->The memory finally steps into the light</li>
+        <li>bridge_haunted_confrontation_body->[pawn_nameDef] had been carrying [pc_thought_strongest_label] long enough. [pc_lex_wound_summary]. [pc_lex_scene]. [pawn_pronoun] had decided to stop waiting for it to pass on its own.</li>
+
+        <li>bridge_dream_manifest_title->The dream walks</li>
+        <li>bridge_dream_manifest_body->What [pawn_nameDef] had been dreaming about appeared in front of [pawn_objective]. [pc_lex_scene]. [pc_lex_moral_state].</li>
+
+        <li>bridge_omen_realized_title->The pattern completes</li>
+        <li>bridge_omen_realized_body->The pattern [pawn_nameDef] had been tracking became clear. [pawn_pronoun] recognised what it pointed to. [pc_lex_scene]. [pc_lex_moral_state].</li>
+
+
+        <!-- Trauma: mental break / weight becoming unbearable -->
+        <li>bridge_trauma_break_title->Something breaks in [pawn_nameDef]</li>
+        <li>bridge_trauma_break_body->[pawn_nameDef] had been carrying [pc_thought_strongest_label] for a long time. [pc_lex_wound_summary]. [pc_lex_scene]. [pawn_pronoun] needed [pc_lex_social_anchor].</li>
+
+        <!-- Violence: hostile pawn arrives -->
+        <li>bridge_violence_confrontation_title->The past arrives</li>
+        <li>bridge_violence_confrontation_body->[pawn_nameDef] reached for [pc_weapon_label] out of habit. [pc_lex_combat_posture]. [pc_lex_scene]. [pawn_pronoun] recognised what was coming.</li>
+
+        <!-- Kinship: someone walks in -->
+        <li>bridge_kinship_contact_title->Someone is coming to [pc_colony_name]</li>
+        <li>bridge_kinship_contact_body->Word reached [pawn_nameDef], [pc_lex_scene]. Someone from [pawn_possessive] past had been found. [pawn_pronoun] had not expected it. They were making their way to [pc_colony_name].</li>
+
+        <!-- Loss/grief: mental break from accumulated grief -->
+        <li>bridge_grief_collapse_title->The grief becomes something specific</li>
+        <li>bridge_grief_collapse_body->[pawn_nameDef] had carried [pc_thought_strongest_label] across [pc_age_bio] years. [pc_lex_wound_summary]. [pc_lex_scene]. [pawn_pronoun] needed time.</li>
+
+        <!-- Craft: trader arrives with relevant goods -->
+        <li>bridge_craft_opportunity_title->What [pawn_nameDef] needs has arrived</li>
+        <li>bridge_craft_opportunity_body->[pawn_nameDef]'s reputation in [pc_skill_best_label] had reached someone with connections. A trader was approaching [pc_colony_name] with the materials [pawn_pronoun] had been looking for.</li>
+
+        <!-- Curiosity: item surfaces / discovery made physical -->
+        <li>bridge_curiosity_discovery_title->Something surfaces</li>
+        <li>bridge_curiosity_discovery_body->The pattern [pawn_nameDef] had been following through smaller observations became visible as an object. [pawn_pronoun] found it. [pc_lex_scene]. [pc_lex_moral_state].</li>
+
+        <!-- Underworld: small raid - consequence arrives -->
+        <li>bridge_underworld_consequence_title->The account comes due</li>
+        <li>bridge_underworld_consequence_body->Someone in [pawn_nameDef]'s past decided the account was overdue. [pawn_pronoun] had known this was possible. [pc_lex_moral_state]. [pc_colony_name] had visitors coming who were not interested in courtesy.</li>
+
+        <!-- Survival: threat found the pawn -->
+        <li>bridge_survival_threat_title->They found [pawn_nameDef]</li>
+        <li>bridge_survival_threat_body->[pawn_nameDef] had been careful. Whatever tracked [pawn_objective] through [pc_world_biome] found its way to [pc_colony_name] anyway. [pc_lex_combat_posture]. [pawn_pronoun] was [pc_lex_demeanor].</li>
+
+        <!-- Devotion: a meaningful object arrives / inner conviction made external -->
+        <li>bridge_devotion_calling_title->The conviction requires something</li>
+        <li>bridge_devotion_calling_body->[pawn_nameDef]'s faith had been consistent. [pc_lex_scene], it required something more concrete. [pawn_pronoun] found what [pawn_pronoun] needed. [pc_lex_moral_state].</li>
+
+        <!-- Duty: obligation made concrete -->
+        <li>bridge_duty_summons_title->The obligation arrives</li>
+        <li>bridge_duty_summons_body->What [pawn_nameDef] owed - or was owed - arrived at [pc_colony_name]. [pawn_pronoun] had understood this was coming. The specific form it took was the part [pawn_pronoun] did not expect. [pc_lex_moral_state].</li>
+
+        <!-- Loss: something from what was lost returns -->
+        <li>bridge_loss_confrontation_title->What was gone returns</li>
+        <li>bridge_loss_confrontation_body->Something [pawn_nameDef] lost - or left - came back in a form [pawn_pronoun] did not expect. [pc_lex_scene]. [pawn_pronoun] knew what it meant. [pc_lex_moral_state].</li>
+
+
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             ALIEN SPACE CHAOS - Cosmic, Weird, Anomalous
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>pc_lex_scene->beneath a bleeding [ColorBadass] sky</li>
+        <li>pc_lex_scene->where the stars refuse to stay in their places</li>
+        <li>pc_lex_scene->inside the void</li>
+        <li>pc_lex_scene->at the edge of a wound in the world</li>
+        <li>pc_lex_scene->in zero-gravity</li>
+        <li>pc_lex_scene->amid alien ruins</li>
+        <li>pc_lex_scene->in the static from the radio</li>
+        <li>pc_lex_scene->under an eerie moon</li>
+
+        <li>pc_lex_tone->cosmic and unconcerned</li>
+        <li>pc_lex_tone->haunted by geometries that should not exist</li>
+        <li>pc_lex_tone->the particular dread of being watched by something vast</li>
+        <li>pc_lex_tone->half-dissolved into the void and liking it</li>
+        <li>pc_lex_tone->carrying the taste of deep space on the tongue</li>
+
+        <li>pc_lex_storyword->aberration</li>
+        <li>pc_lex_storyword->void-song</li>
+        <li>pc_lex_storyword->anomaly</li>
+        <li>pc_lex_storyword->fractured signal</li>
+        <li>pc_lex_storyword->star-rot</li>
+        <li>pc_lex_storyword->unmaking</li>
+        <li>pc_lex_storyword->the thing that should not be</li>
+
+        <li>pc_lex_transit->Then the sky tore open-</li>
+        <li>pc_lex_transit->Without warning the laws of physics stuttered-</li>
+        <li>pc_lex_transit->And reality remembered it was optional-</li>
+        <li>pc_lex_transit->In the moment the stars blinked-</li>
+
+        <!-- Chaos openers -->
+        <li>chaos_opening_title->Something that was never meant to be seen</li>
+        <li>chaos_opening_body->The signal came from nowhere and everywhere at once. [pawn_nameDef] listened. The voice on the other end knew [pawn_possessive] name.</li>
+        <li>chaos_opening_body->The ground split open and something that was not quite a machine crawled out. It looked at [pawn_nameDef] like it had been waiting.</li>
+
+        <li>chaos_middle_title->The price of looking too long</li>
+        <li>chaos_middle_body->Every answer only made the questions worse. [pawn_nameDef] was [pc_lex_tone]. [pawn_pronoun] stood at the threshold of something that would unmake [pawn_objective].</li>
+
+        <li>chaos_success_title->What the void gave back</li>
+        <li>chaos_success_body->It should have destroyed [pawn_nameDef]. Instead it left something stranger - a fragment of knowledge that burned behind [pawn_possessive] eyes but did not consume.</li>
+
+        <li>chaos_failure_title->The thing that looked back</li>
+        <li>chaos_failure_body->[pawn_nameDef] opened it anyway. [pc_lex_scene]. [pc_lex_wound_summary]. [pc_thought_strongest_label] had changed texture. [pc_lex_social_anchor]. [pawn_pronoun] was [pc_lex_moral_state].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             SOCIAL INTERACTION JAZZ - Drama, Gossip, Tension, Intimacy
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>pc_lex_social_scene->across a table in the common room</li>
+        <li>pc_lex_social_scene->in the [pc_world_time_of_day] after a conversation that went wrong</li>
+        <li>pc_lex_social_scene->in the same room, not quite looking at each other</li>
+        <li>pc_lex_social_scene->standing outside [pc_colony_name] in the [pc_world_time_of_day]</li>
+
+        <li>pc_lex_social_tone->carefully polite and quietly furious</li>
+        <li>pc_lex_social_tone->laughing too loud at something that wasn't funny</li>
+        <li>pc_lex_social_tone->civil in a way that costs something</li>
+        <li>pc_lex_social_tone->saying the right words in the wrong tone</li>
+
+        <li>pc_lex_social_storyword->rumour</li>
+        <li>pc_lex_social_storyword->confession</li>
+        <li>pc_lex_social_storyword->betrayal</li>
+        <li>pc_lex_social_storyword->reconciliation</li>
+        <li>pc_lex_social_storyword->gossip</li>
+        <li>pc_lex_social_storyword->promise</li>
+
+        <!-- Social openers -->
+        <li>social_opening_title->A conversation that changes everything</li>
+        <li>social_opening_body->It started with nothing important. Then [pawn_nameDef] said one sentence too many. [pc_lex_social_anchor]. [pawn_pronoun] was [pc_lex_tone].</li>
+
+        <li>social_middle_title->The thing neither will say</li>
+        <li>social_middle_body->They kept circling it. [pc_lex_social_storyword]. Neither named it first. [pc_colony_name] moved around them like it had not noticed.</li>
+
+        <li>social_success_title->What they almost lost</li>
+        <li>social_success_body->They almost broke it. Instead they found something on the other side of it. [pc_lex_social_anchor]. [pawn_pronoun] was [pc_lex_tone].</li>
+
+        <li>social_failure_title->The silence that stayed</li>
+        <li>social_failure_body->[pawn_nameDef] said something that could not be unsaid. [pc_lex_scene]. [pc_thought_strongest_label] was louder for it. [pc_lex_social_anchor]. [pawn_pronoun] was [pc_lex_moral_state].</li>
+
+
+        <!-- =================================================================
+             NARRATIVE INCIDENT BRIDGES - explain WHY a world event fires
+             Each role supplies a _title and _body rule.
+             Referenced by NarrativeIncidentFirer.ResolveBridge().
+        ================================================================== -->
+
+        <!-- body_pays: physical toll from arc work - minor wound/cut incident -->
+        <li>bridge_body_pays_title->The work leaves a mark</li>
+        <li>bridge_body_pays_body->[pawn_nameDef] pushed past the point where the body stopped cooperating. [pc_lex_wound_summary]. [pc_lex_scene]. [pawn_pronoun] knew the price. [pawn_pronoun] paid it.</li>
+
+        <!-- unexpected_grief: an unwelcome reminder of loss surfaces -->
+        <li>bridge_unexpected_grief_title->Something catches [pawn_nameDef] off guard</li>
+        <li>bridge_unexpected_grief_body->[pawn_nameDef] had not expected [pc_thought_strongest_label] to surface when it did. [pc_lex_scene]. [pawn_pronoun] was [pc_lex_tone]. [pc_lex_social_anchor].</li>
+
+        <!-- faith_fracture: ideology / conviction cracks under pressure -->
+        <li>bridge_faith_fracture_title->The conviction develops a fault line</li>
+        <li>bridge_faith_fracture_body->[pawn_nameDef]'s beliefs had held through worse than this. [pc_lex_scene]. Something in recent events raised a question [pawn_pronoun] could not dismiss. [pawn_pronoun] was [pc_lex_tone] about what came next.</li>
+
+        <!-- prophet_mark: being chosen/marked for something larger -->
+        <li>bridge_prophet_mark_title->Something chose [pawn_nameDef]</li>
+        <li>bridge_prophet_mark_body->Something changed in how people around [pawn_nameDef] were acting. [pc_lex_scene]. [pawn_pronoun] did not know what they saw. [pc_lex_moral_state].</li>
+
+        <!-- power_resonance: void/psychic energies responding to the pawn -->
+        <li>bridge_power_resonance_title->The frequency shifts</li>
+        <li>bridge_power_resonance_body->Others in [pc_colony_name] had started treating [pawn_nameDef] differently. [pawn_pronoun] was not sure when that had changed. [pc_lex_scene]. [pc_lex_moral_state].</li>
+
+        <!-- star_call: obsessive pull toward the sky / leaving / the horizon -->
+        <li>bridge_star_call_title->The [pc_world_season] sky is asking again</li>
+        <li>bridge_star_call_body->[pawn_nameDef] had felt the pull before. [pc_lex_scene]. This time it did not pass. [pawn_pronoun] looked at the [pc_world_season] sky more than usual. [pc_lex_moral_state].</li>
+
+        <!-- ghost_encounter: a spiritual presence or haunting event -->
+        <li>bridge_ghost_encounter_title->Something is still here</li>
+        <li>bridge_ghost_encounter_body->[pawn_nameDef] was not the first to have reported this. [pc_lex_scene]. The location and the hour matched other accounts. [pawn_pronoun] could not prove what [pawn_pronoun] experienced. [pc_lex_moral_state].</li>
+
+        <!-- blood_guilt: the consequences of violence catch up -->
+        <li>bridge_blood_guilt_title->The violence returns</li>
+        <li>bridge_blood_guilt_body->[pawn_nameDef] made choices that required blood. [pc_lex_scene]. Not all of it was necessary. [pawn_pronoun] knew it at the time. [pc_lex_moral_state].</li>
+
+        <!-- machine_resonance: unexplained affinity with machines/constructs -->
+        <li>bridge_machine_resonance_title->[pawn_nameDef] hears what the machines are saying</li>
+        <li>bridge_machine_resonance_body->[pawn_nameDef] had been paying close attention to the machines in [pc_colony_name]. [pc_lex_scene]. [pc_skill_best_label] at [pc_skill_best_level]. [pawn_pronoun] was beginning to anticipate them. [pc_lex_moral_state].</li>
+
+        <!-- old_habit_toll: an old pattern resurfaces and costs something -->
+        <li>bridge_old_habit_toll_title->The old reflex fires</li>
+        <li>bridge_old_habit_toll_body->[pawn_nameDef] knew this was possible. [pawn_pronoun] had done it before - the same reach, the same reaction. [pc_lex_scene]. [pc_lex_wound_summary]. [pawn_pronoun] would need to decide what happened next.</li>
+
+
+
+        <!-- =================================================================
+             SUGGESTIVE MODE HINTS
+             Short, dry, observational lines. One sentence. No explanation.
+             Fired immediately when an incident triggers in Suggestive mode.
+             The full letter arrives days later as a revelation.
+             Format: hint_{bridgeRole}_body -> one line
+        ================================================================== -->
+
+        <!-- body_pays: physical toll -->
+        <li>hint_body_pays_body->[pawn_nameDef] winced getting up this [pc_world_time_of_day]. Didn't say why.</li>
+        <li>hint_body_pays_body->[pawn_nameDef] was moving carefully. [pawn_pronoun] did not explain why.</li>
+        <li>hint_body_pays_body->[pawn_nameDef] had a cut [pawn_pronoun] would not explain.</li>
+
+        <!-- ghost_encounter: haunting -->
+        <li>hint_ghost_encounter_body->[pawn_nameDef] checked the same room twice during the [pc_world_time_of_day].</li>
+        <li>hint_ghost_encounter_body->[pawn_nameDef] didn't sleep much. Keeps looking at corners.</li>
+        <li>hint_ghost_encounter_body->Something was bothering [pawn_nameDef]. [pawn_pronoun] would not say what.</li>
+
+        <!-- blood_guilt: violence catching up -->
+        <li>hint_blood_guilt_body->[pawn_nameDef]'s hands were shaking at breakfast.</li>
+        <li>hint_blood_guilt_body->[pawn_nameDef] went quiet when someone mentioned the last fight.</li>
+        <li>hint_blood_guilt_body->[pawn_nameDef] skipped dinner. Not sick. Just somewhere else.</li>
+
+        <!-- faith_fracture: belief cracking -->
+        <li>hint_faith_fracture_body->[pawn_nameDef] skipped [pawn_possessive] usual [pc_world_time_of_day] ritual.</li>
+        <li>hint_faith_fracture_body->[pawn_nameDef] said something odd about [pawn_possessive] beliefs. Didn't elaborate.</li>
+        <li>hint_faith_fracture_body->Something had shifted in [pawn_nameDef]. [pawn_pronoun] did not have words for it.</li>
+
+        <!-- prophet_mark: being chosen -->
+        <li>hint_prophet_mark_body->[pawn_nameDef] had a look. Like [pawn_pronoun] understood something the rest of [pc_colony_name] did not.</li>
+        <li>hint_prophet_mark_body->People keep gravitating toward [pawn_nameDef] for no obvious reason.</li>
+        <li>hint_prophet_mark_body->[pawn_nameDef] was talking quietly to [pawn_reflexive] this [pc_world_time_of_day].</li>
+
+        <!-- power_resonance: void/psychic pull -->
+        <li>hint_power_resonance_body->[pawn_nameDef] paused in the middle of work and stood there for a while.</li>
+        <li>hint_power_resonance_body->[pawn_nameDef] said the air felt different today. No one else noticed anything.</li>
+        <li>hint_power_resonance_body->Something had been pulling at [pawn_nameDef]. [pawn_pronoun] could not explain it.</li>
+
+        <!-- star_call: sky obsession -->
+        <li>hint_star_call_body->[pawn_nameDef] was out again in the [pc_world_time_of_day]. Just looking up at the [pc_world_season] sky.</li>
+        <li>hint_star_call_body->[pawn_nameDef] kept stopping work to stare at the [pc_world_biome] horizon.</li>
+        <li>hint_star_call_body->[pawn_nameDef] asked how far the nearest orbital station is. For no reason [pawn_pronoun] shared.</li>
+
+        <!-- machine_resonance: machine affinity -->
+        <li>hint_machine_resonance_body->[pawn_nameDef] spent an hour just listening to the generator hum.</li>
+        <li>hint_machine_resonance_body->[pawn_nameDef] fixed something in the workshop that wasn't broken. Said it was bothering [pawn_objective].</li>
+        <li>hint_machine_resonance_body->The machines had been running cleaner since [pawn_nameDef] started paying attention to them.</li>
+
+        <!-- old_habit_toll: old reflex cost -->
+        <li>hint_old_habit_toll_body->[pawn_nameDef]'s got a fresh cut on [pawn_possessive] [BodyPart]. Old scar, same spot.</li>
+        <li>hint_old_habit_toll_body->[pawn_nameDef] did something without thinking. Regretted it immediately.</li>
+        <li>hint_old_habit_toll_body->[pawn_nameDef]'s been quiet since yesterday. Something happened.</li>
+
+        <!-- unexpected_grief: loss surfacing -->
+        <li>hint_unexpected_grief_body->[pawn_nameDef] went still when someone said a [PersonFamily]. [pawn_pronoun] Didn't explain.</li>
+        <li>hint_unexpected_grief_body->[pawn_nameDef] found something today that [pawn_pronoun] wasn't looking for.</li>
+        <li>hint_unexpected_grief_body->[pawn_nameDef] stepped out into the [pc_world_biome] for a while. Came back quieter.</li>
+
+        <!-- violence_confrontation: past violence returning -->
+        <li>hint_violence_confrontation_body->[pawn_nameDef] clocked the exits when the strangers arrived. Old habit.</li>
+        <li>hint_violence_confrontation_body->[pawn_nameDef] had been watching the perimeter more than usual.</li>
+        <li>hint_violence_confrontation_body->[pawn_nameDef] slept with [pawn_possessive] [pc_weapon_label] close last night.</li>
+
+        <!-- underworld_consequence: debts -->
+        <li>hint_underworld_consequence_body->[pawn_nameDef] got a message [pawn_pronoun] didn't want to talk about.</li>
+        <li>hint_underworld_consequence_body->[pawn_nameDef] checked the comms twice this [pc_world_time_of_day]. Waiting for something.</li>
+        <li>hint_underworld_consequence_body->[pawn_nameDef] went quiet when someone mentioned [pawn_possessive] past work.</li>
+
+        <!-- survival_threat: being tracked -->
+        <li>hint_survival_threat_body->[pawn_nameDef] checked the treeline three times today. Nothing there. Probably.</li>
+        <li>hint_survival_threat_body->[pawn_nameDef] asked to change [pawn_possessive] bunk. Didn't say why.</li>
+        <li>hint_survival_threat_body->[pawn_nameDef] was tense. The kind of tense that came from listening.</li>
+
+        <!-- trauma_break: grief/trauma spiking -->
+        <li>hint_trauma_break_body->[pawn_nameDef] didn't come to meals today. Just sat.</li>
+        <li>hint_trauma_break_body->[pawn_nameDef] was having one of those days. Better to give [pawn_objective] space.</li>
+        <li>hint_trauma_break_body->Something hit [pawn_nameDef]. [pawn_pronoun] was carrying more than usual.</li>
+
+        <!-- grief_collapse: loss becoming heavy -->
+        <li>hint_grief_collapse_body->[pawn_nameDef] didn't talk today. Not even at dinner.</li>
+        <li>hint_grief_collapse_body->Something reminded [pawn_nameDef] of something. [pawn_pronoun] held it together, barely.</li>
+        <li>hint_grief_collapse_body->[pawn_nameDef] was grieving something. Old or recent, it was hard to say.</li>
+
+        <!-- kinship_contact: someone coming -->
+        <li>hint_kinship_contact_body->[pawn_nameDef] had been waiting for something. [pc_lex_scene].</li>
+        <li>hint_kinship_contact_body->[pawn_nameDef] seemed lighter. [pc_lex_scene].</li>
+        <li>hint_kinship_contact_body->[pawn_nameDef] mentioned someone from [pawn_possessive] past. [pawn_pronoun] dropped it quickly. [pc_lex_scene].</li>
+
+        <!-- craft_opportunity: work calling -->
+        <li>hint_craft_opportunity_body->[pawn_nameDef] kept looking at the workshop like [pawn_pronoun] was waiting for something.</li>
+        <li>hint_craft_opportunity_body->[pawn_nameDef] was sketching something at dinner. Wouldn't show anyone.</li>
+        <li>hint_craft_opportunity_body->[pawn_nameDef]'s hands were restless. [pawn_pronoun] wanted to be making something.</li>
+
+        <!-- curiosity_discovery: something found -->
+        <li>hint_curiosity_discovery_body->[pawn_nameDef] found something today. Pocketed it before anyone could ask.</li>
+        <li>hint_curiosity_discovery_body->[pawn_nameDef] had been distracted since [pc_world_time_of_day]. Good distracted, not bad.</li>
+        <li>hint_curiosity_discovery_body->[pawn_nameDef] kept circling back to the same spot on the map.</li>
+
+        <!-- devotion_calling: faith demanding action -->
+        <li>hint_devotion_calling_body->[pawn_nameDef] prayed longer than usual this [pc_world_time_of_day].</li>
+        <li>hint_devotion_calling_body->[pawn_nameDef]'s conviction had weight that day. Others noticed.</li>
+        <li>hint_devotion_calling_body->[pawn_nameDef] had made a decision. [pawn_pronoun] had not said what yet.</li>
+
+        <!-- duty_summons: obligation -->
+        <li>hint_duty_summons_body->[pawn_nameDef] had the look of someone running a calculation in [pawn_possessive] head.</li>
+        <li>hint_duty_summons_body->[pawn_nameDef] owed something to someone. It was in the way [pawn_pronoun] moved.</li>
+        <li>hint_duty_summons_body->[pawn_nameDef] got quiet at a moment that didn't seem to call for it.</li>
+
+
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             DEEP COMPOSITION LAYERS - Human Texture System
+
+             Call [pc_lex_moment] for a complete grounded physical moment.
+             Call [pc_lex_moment_<theme>] for a tag-biased variant.
+
+             5 atomic pools compose recursively:
+               L1  pc_lex_anchor       - where + how the body is in space
+               L2  pc_lex_body_signal  - involuntary physical communication
+               L2b pc_lex_body_*       - themed variants per narrative tag
+               L3  pc_lex_sensory      - what the environment feels like now
+               L4  pc_lex_subtext      - what is happening under the surface
+               L5  pc_lex_memory_flash - brief intrusion from another time
+
+             12 anchors × 13 signals × 16 sensory × 11 subtext × 10 memory
+             = 200,000+ combinations before themed variants are counted.
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <!-- L1 - ANCHOR: where and how the body occupies space (grounded in actual scraper data) -->
+        <li>pc_lex_anchor->at [pawn_possessive] [pc_skill_best_label] worked in the [pc_world_time_of_day]</li>
+        <li>pc_lex_anchor->near a [TerrainFeature] where the [pc_world_biome] forgets [pc_colony_name]</li>
+        <li>pc_lex_anchor->among [NaturalObject]s in the [Color] [pc_world_time_of_day] light</li>
+        <li>pc_lex_anchor->at the edge of [pc_colony_name], [pc_world_weather] and [pc_world_season] in the air</li>
+        <li>pc_lex_anchor->under [TreeType]s at [pc_world_time_of_day], [pc_world_weather] moving</li>
+        <li>pc_lex_anchor->at a [TerrainFeature] in the [pc_world_biome], [pawn_possessive] [BodyPart] at rest</li>
+        <li>pc_lex_anchor->in the [AdjectiveNatural] [pc_world_time_of_day] of [pc_colony_name]</li>
+        <li>pc_lex_anchor->somewhere [AdjectiveNatural] in the [pc_world_biome], [pc_world_season] in the air</li>
+        <li>pc_lex_anchor->at [pawn_possessive] [pc_skill_best_label] bench, the [Color] [pc_world_time_of_day] light around [pawn_objective]</li>
+        <li>pc_lex_anchor->in the [pc_world_time_of_day] quiet, [pc_world_weather] and [NaturalObject] outside</li>
+        <li>pc_lex_anchor->with [NaturalObject] at [pawn_possessive] back and [pc_world_biome] ahead</li>
+        <li>pc_lex_anchor->at the [TerrainFeature] where [pc_colony_name] ends and [pc_world_biome] begins</li>
+
+        <!-- L2 - BODY SIGNAL: [BodyPart] is the atom - involuntary physical communication -->
+        <li>pc_lex_body_signal->[pawn_possessive] [BodyPart] [AdjectiveAngsty]</li>
+        <li>pc_lex_body_signal->[pawn_possessive] [BodyPart] carrying [ConceptAngsty]</li>
+        <li>pc_lex_body_signal->the [AdjectiveAngsty] way [pawn_pronoun] holds [pawn_possessive] [BodyPart]</li>
+        <li>pc_lex_body_signal->something [AdjectiveAngsty] in [pawn_possessive] [BodyPart]</li>
+        <li>pc_lex_body_signal->[pawn_possessive] [BodyPart] and the [ConceptAngsty] behind it</li>
+        <li>pc_lex_body_signal->[pawn_possessive] [BodyPart] betraying [ConceptAngsty] without [pawn_pronoun] choosing it</li>
+        <li>pc_lex_body_signal->[ConceptAngsty] in the way [pawn_pronoun] uses [pawn_possessive] [BodyPart]</li>
+
+        <!-- L2b - THEMED BODY SIGNALS: tag-specific, scraper-aware, [BodyPart] as atom -->
+
+        <!-- Violence - actual weapon + kill record -->
+        <li>pc_lex_body_violence->[pawn_possessive] [BodyPart] tight around [pawn_possessive] [pc_weapon_label]</li>
+        <li>pc_lex_body_violence->[pawn_possessive] [BodyPart] carrying [pc_record_kills] kills worth of [ConceptAngsty]</li>
+        <li>pc_lex_body_violence->something [AdjectiveBadass] in the way [pawn_pronoun] reads a [TerrainFeature]</li>
+        <li>pc_lex_body_violence->the [AdjectiveBadass] stillness [pawn_pronoun] had before [pawn_pronoun] moved</li>
+        <li>pc_lex_body_violence->[pawn_possessive] [BodyPart] [AdjectiveBadass], the way [pc_weapon_label] makes it</li>
+
+        <!-- Grief - actual strongest thought -->
+        <li>pc_lex_body_grief->[pawn_possessive] [BodyPart] carrying [ConceptAngsty]</li>
+        <li>pc_lex_body_grief->the [AdjectiveAngsty] way [pawn_pronoun] holds [pawn_possessive] [BodyPart]</li>
+        <li>pc_lex_body_grief->[pawn_possessive] [BodyPart] and [pc_thought_strongest_label] behind it</li>
+        <li>pc_lex_body_grief->something [AdjectiveAngsty] in [pawn_possessive] [BodyPart] that had no name yet</li>
+
+        <!-- Curiosity -->
+        <li>pc_lex_body_curiosity->[pawn_possessive] [BodyPart] ahead of [pawn_possessive] thoughts on [pc_skill_best_label]</li>
+        <li>pc_lex_body_curiosity->the [AdjectiveFriendly] way [pawn_possessive] [BodyPart] moved when [pawn_pronoun] was working something out</li>
+        <li>pc_lex_body_curiosity->[pawn_possessive] [BodyPart] tracing [ConceptAngsty] in the [pc_world_time_of_day] air</li>
+
+        <!-- Craft - actual best skill -->
+        <li>pc_lex_body_craft->[pawn_possessive] [BodyPart] restless with [pc_skill_best_label] wanting to happen</li>
+        <li>pc_lex_body_craft->the [AdjectiveFriendly] precision in [pawn_possessive] [BodyPart] that [pc_skill_best_label] built</li>
+        <li>pc_lex_body_craft->[pawn_possessive] [BodyPart] already solving what [pawn_possessive] mind was still asking</li>
+        <li>pc_lex_body_craft->[pawn_possessive] [BodyPart] tracing a [pc_skill_best_label] problem through the air</li>
+
+        <!-- Kinship -->
+        <li>pc_lex_body_kinship->[pawn_possessive] [BodyPart] open in a way [pawn_pronoun] did not always allow</li>
+        <li>pc_lex_body_kinship->the [AdjectiveFriendly] weight of [pawn_possessive] [BodyPart] toward [pc_lex_social_anchor]</li>
+        <li>pc_lex_body_kinship->[pawn_possessive] [BodyPart] carrying [ConceptPositive] [pawn_pronoun] has not yet spoken</li>
+
+        <!-- Trauma - actual hediff body part -->
+        <li>pc_lex_body_trauma->[pawn_possessive] [BodyPart] braced for something the [pc_world_biome] was not asking for</li>
+        <li>pc_lex_body_trauma->[pawn_possessive] [pc_hediff_0_part] remembering what [pawn_pronoun] prefers to file</li>
+        <li>pc_lex_body_trauma->the [AdjectiveAngsty] habit of [pawn_possessive] [BodyPart] checking what was not there</li>
+        <li>pc_lex_body_trauma->[ConceptAngsty] in [pawn_possessive] [BodyPart] from a [pc_backstory_child_title] that did not end well</li>
+
+        <!-- Devotion -->
+        <li>pc_lex_body_devotion->[pawn_possessive] [BodyPart] carrying [ConceptAngsty] in the practiced way</li>
+        <li>pc_lex_body_devotion->the [AdjectiveFriendly] stillness of [pawn_possessive] [BodyPart] when [pawn_pronoun] was sure of something</li>
+        <li>pc_lex_body_devotion->[pawn_possessive] [BodyPart] [AdjectiveFriendly] in the way belief makes a [BodyPart]</li>
+
+        <!-- Resilience - wound summary + age -->
+        <li>pc_lex_body_resilience->[pawn_possessive] [BodyPart] lower than usual, which means something</li>
+        <li>pc_lex_body_resilience->[pc_lex_wound_summary] - and [pawn_possessive] [BodyPart] still working</li>
+        <li>pc_lex_body_resilience->[pawn_possessive] [BodyPart] carrying [pc_age_bio] years and still here</li>
+        <li>pc_lex_body_resilience->the [AdjectiveFriendly] weight of [pawn_possessive] [BodyPart] that had not stopped yet</li>
+
+        <!-- Wandering -->
+        <li>pc_lex_body_wandering->[pawn_possessive] [BodyPart] already past the [TerrainFeature]</li>
+        <li>pc_lex_body_wandering->the [AdjectiveNatural] pull in [pawn_possessive] [BodyPart] toward the [pc_world_biome]</li>
+        <li>pc_lex_body_wandering->[pawn_possessive] [BodyPart] aimed at a [TerrainFeature] [pawn_pronoun] cannot name yet</li>
+
+        <!-- L3 - SENSORY: scraper-first, global atoms for texture - where they actually ARE -->
+        <li>pc_lex_sensory->[pc_world_weather] [AdjectiveNatural] against [NaturalObject]</li>
+        <li>pc_lex_sensory->the [Color] [pc_world_time_of_day] light through [NaturalObject]</li>
+        <li>pc_lex_sensory->a [Animal] [AdjectiveNatural] somewhere in the [pc_world_biome]</li>
+        <li>pc_lex_sensory->[NaturalObject] and [pc_world_weather] and the smell of [pc_world_season]</li>
+        <li>pc_lex_sensory->[TreeType]s in the [Color] [pc_world_time_of_day], [pc_world_weather] moving through them</li>
+        <li>pc_lex_sensory->the [AdjectiveNatural] sound of [pc_world_weather] on [pc_world_biome] [NaturalObject]</li>
+        <li>pc_lex_sensory->a [AnimalGroup] somewhere in the [Color] [pc_world_time_of_day]</li>
+        <li>pc_lex_sensory->the [pc_world_season] smell of [NaturalObject] after [pc_world_weather]</li>
+        <li>pc_lex_sensory->[pc_world_weather] and [NaturalObject] and a [AnimalBadass] that had noticed [pawn_objective]</li>
+        <li>pc_lex_sensory->a [Animal] [AdjectiveNatural] at the [TerrainFeature], [pc_world_weather] around it</li>
+        <li>pc_lex_sensory->the [Color] [pc_world_weather] of [pc_world_season] in [pc_world_biome]</li>
+        <li>pc_lex_sensory->[NaturalObject] and [AdjectiveNatural] [pc_world_weather] and [pc_colony_name] somewhere behind [pawn_objective]</li>
+
+        <!-- L4 - SUBTEXT: [ConceptAngsty] and [AdjectiveAngsty] as atoms - what is under the surface -->
+        <li>pc_lex_subtext->something like [ConceptAngsty] that [pawn_pronoun] had no word for</li>
+        <li>pc_lex_subtext->between [ConceptAngsty] and [ConceptPositive], not settling</li>
+        <li>pc_lex_subtext->[AdjectiveAngsty] in a way [pawn_pronoun] cannot explain to a [PersonJob]</li>
+        <li>pc_lex_subtext->the [AdjectiveAngsty] [pc_noun_topic] [pawn_pronoun] kept not thinking about</li>
+        <li>pc_lex_subtext->not [ConceptAngsty] exactly - something [AdjectiveAngsty] wearing its shape</li>
+        <li>pc_lex_subtext->the [ConceptAngsty] [pawn_pronoun] kept for [pawn_reflexive]</li>
+        <li>pc_lex_subtext->[ConceptAngsty] asking [pawn_pronoun] something [pawn_pronoun] had not answered</li>
+        <li>pc_lex_subtext->knowing [ConceptAngsty] and not knowing what to do with it</li>
+        <li>pc_lex_subtext->[AdjectiveAngsty] about [pc_thought_strongest_label] in a way [pawn_pronoun] was not ready to say</li>
+        <li>pc_lex_subtext->the [ConceptAngsty] that [pc_skill_best_label] cannot fix</li>
+
+        <!-- L5 - MEMORY FLASH: [PersonFamily], [PersonAlly], [Community] as atoms - another time intruding -->
+        <li>pc_lex_memory_flash->the voice of a [PersonFamily] from a [Community] that no longer exists</li>
+        <li>pc_lex_memory_flash->what it was to trust a [PersonAlly] before [pawn_pronoun] knew better</li>
+        <li>pc_lex_memory_flash->the sound of [AnimalGroup] from [pawn_possessive] [pc_backstory_child_title]-years</li>
+        <li>pc_lex_memory_flash->a [AdjectiveFriendly] thing from a [AdjectiveFriendly] time [pawn_pronoun] did not return to</li>
+        <li>pc_lex_memory_flash->the smell of [NaturalObject] from a [TerrainFeature] [pawn_pronoun] had not seen in years</li>
+        <li>pc_lex_memory_flash->the [AdjectiveNatural] sound of a [Community] that trusted [pawn_objective]</li>
+        <li>pc_lex_memory_flash->a [PersonFamily] [pawn_pronoun] can no longer quite picture - only the shape of</li>
+        <li>pc_lex_memory_flash->what [ConceptPositive] felt like before the Rim taught [pawn_objective] better</li>
+        <li>pc_lex_memory_flash->the way a [PersonAlly] once looked at [pawn_objective] before [pawn_pronoun] became this</li>
+        <li>pc_lex_memory_flash->the last [AdjectiveNatural] thing before [pc_backstory_child_title] changed everything</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             MOMENT ASSEMBLERS
+
+             [pc_lex_moment]          - generic, draws from all 5 pools
+             [pc_lex_moment_<theme>]  - swaps L2 for the themed signal pool
+
+             5 generic templates × 12 anchors × 13 signals × 16 sensory
+             = ~12,000 combinations per pool of generic entries alone.
+             Themed assemblers reuse the same templates with focused signals.
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <!-- Generic assembler -->
+        <li>pc_lex_moment->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_signal]. [pc_lex_sensory].</li>
+        <li>pc_lex_moment->[pc_lex_sensory]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_signal].</li>
+        <li>pc_lex_moment->[pawn_nameDef] [pc_lex_anchor]. [pc_lex_sensory]. [pc_lex_body_signal].</li>
+        <li>pc_lex_moment->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_subtext]. [pc_lex_sensory].</li>
+        <li>pc_lex_moment->[pc_lex_memory_flash]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_signal].</li>
+
+        <!-- Themed assemblers -->
+        <li>pc_lex_moment_violence->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_violence]. [pc_lex_sensory].</li>
+        <li>pc_lex_moment_violence->[pc_lex_sensory]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_violence].</li>
+        <li>pc_lex_moment_violence->[pc_lex_memory_flash]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_violence].</li>
+
+        <li>pc_lex_moment_grief->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_grief]. [pc_lex_sensory].</li>
+        <li>pc_lex_moment_grief->[pc_lex_sensory]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_grief].</li>
+        <li>pc_lex_moment_grief->[pc_lex_memory_flash]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_grief].</li>
+
+        <li>pc_lex_moment_curiosity->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_curiosity]. [pc_lex_sensory].</li>
+        <li>pc_lex_moment_curiosity->[pc_lex_sensory]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_curiosity].</li>
+
+        <li>pc_lex_moment_craft->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_craft]. [pc_lex_sensory].</li>
+        <li>pc_lex_moment_craft->[pc_lex_sensory]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_craft].</li>
+
+        <li>pc_lex_moment_kinship->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_kinship]. [pc_lex_sensory].</li>
+        <li>pc_lex_moment_kinship->[pc_lex_memory_flash]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_kinship].</li>
+
+        <li>pc_lex_moment_trauma->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_trauma]. [pc_lex_sensory].</li>
+        <li>pc_lex_moment_trauma->[pc_lex_memory_flash]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_trauma].</li>
+
+        <li>pc_lex_moment_devotion->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_devotion]. [pc_lex_sensory].</li>
+        <li>pc_lex_moment_resilience->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_resilience]. [pc_lex_sensory].</li>
+        <li>pc_lex_moment_wandering->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_wandering]. [pc_lex_sensory].</li>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             MOMENT-SEEDED EMBER BODIES
+             New entries on existing keys - GrammarResolver picks randomly.
+             Each opens with a themed moment, then the actual ember beat.
+        ═══════════════════════════════════════════════════════════════════ -->
+
+        <li>violence_ember_body->[pc_lex_moment_violence]\n\n[pawn_nameDef] could spend time with [pc_weapon_label] today. The maintenance, the practice - the familiar weight of it in [pawn_possessive] hands.</li>
+        <li>grief_ember_body->[pc_lex_moment_grief]\n\nThe weight surfaces. [pawn_nameDef] could sit with it today instead of keeping ahead of it.</li>
+        <li>curiosity_ember_body->[pc_lex_moment_curiosity]\n\nThe question has been sitting there. [pawn_nameDef] hasn't had time to follow it properly. Today might be different.</li>
+        <li>craft_ember_body->[pc_lex_moment_craft]\n\n[pawn_nameDef] could make something today - not for the colony. Just for [pawn_possessive]self. The materials have been waiting.</li>
+
+        <li>devotion_ember_body->[pc_lex_moment_devotion]\n\nThe day offered a quiet window. [pawn_nameDef] could take a moment for [pc_ideo_name] observance - [pc_lex_scene], nothing elaborate.</li>
+
+        <li>resilience_ember_body->[pc_lex_moment_resilience]\n\n[pawn_nameDef] was still here. That was worth noting, [pc_lex_scene], even if only to [pawn_possessive]self.</li>
+
+        <li>wandering_ember_body->[pc_lex_moment_wandering]\n\nThe edge of [pc_colony_name] was facing outward. [pawn_nameDef] could stand there today - not to leave. Just to remember the world is larger than [pc_colony_name]</li>
+
+        <li>kinship_ember_body->[pc_lex_moment_kinship]\n\n[pc_friend_name], whom [pawn_nameDef] does not talk to enough, stood close by. </li>
+
+        <li>trauma_ember_body->[pc_lex_moment_trauma]\n\n[pc_hediff_0_label].. This [pc_world_time_of_day] might be the time to stop [AdjectiveAngsty] about it.</li>
+
+        <li>ember_body->[pc_lex_moment]\n\nA small gap opens in the day. [pawn_nameDef] could do something with it - or not. Both are choices.</li>
+        <li>animalfriend_ember_body->[pc_lex_moment]\n\n[pc_lex_animal_moment] is close today. [pawn_nameDef] could spend a few hours in that particular company. Neither species would need to explain why.</li>
+
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+</Defs>
