@@ -235,4 +235,151 @@
     <raidPoints>500</raidPoints>
   </PawnChronicles.EffectEntryDef>
 
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_HeavyRaid</defName>
+    <label>they send more than one</label>
+    <consequence>they send more than one</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>crisis</li><li>violence</li><li>betrayal</li></tags>
+    <raidPoints>750</raidPoints>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── More skill level losses ────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_ShootingLoss</defName>
+    <label>the aim goes unreliable</label>
+    <consequence>the aim goes unreliable</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>withdrawal</li><li>alcohol</li><li>dependency</li></tags>
+    <skillLevelDef>Shooting</skillLevelDef>
+    <skillLevel>-1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_ArtisticLoss</defName>
+    <label>the eye for it goes flat</label>
+    <consequence>the eye for it goes flat</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>artist</li><li>craft</li><li>crisis</li><li>withdrawal</li></tags>
+    <skillLevelDef>Artistic</skillLevelDef>
+    <skillLevel>-1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_AnimalsLoss</defName>
+    <label>the animals keep their distance</label>
+    <consequence>the animals keep their distance</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>animalfriend</li><li>general</li><li>crisis</li></tags>
+    <skillLevelDef>Animals</skillLevelDef>
+    <skillLevel>-1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_PlantsLoss</defName>
+    <label>neglects what was growing</label>
+    <consequence>neglects what was growing</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>wandering</li><li>withdrawal</li></tags>
+    <skillLevelDef>Plants</skillLevelDef>
+    <skillLevel>-1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── More skill XP losses ───────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_CraftingXPLoss</defName>
+    <label>the hands forget what they knew</label>
+    <consequence>the hands forget what they knew</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>craft</li><li>artist</li><li>withdrawal</li><li>alcohol</li></tags>
+    <skillXpDef>Crafting</skillXpDef>
+    <skillXP>-6000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_AnimalsXPLoss</defName>
+    <label>something feral withdraws</label>
+    <consequence>something feral withdraws</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>animalfriend</li><li>crisis</li><li>isolation</li></tags>
+    <skillXpDef>Animals</skillXpDef>
+    <skillXP>-6000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_MedicineXPLoss</defName>
+    <label>stops paying attention to the details</label>
+    <consequence>stops paying attention to the details</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>healer</li><li>dependency</li><li>withdrawal</li></tags>
+    <skillXpDef>Medicine</skillXpDef>
+    <skillXP>-6000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── More passion losses ────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LosePassion_Medicine</defName>
+    <label>the drive to fix others fades</label>
+    <consequence>the drive to fix others fades</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>healer</li><li>addiction</li><li>crisis</li></tags>
+    <passionSkillDef>Medicine</passionSkillDef>
+    <passion>-1</passion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LosePassion_Animals</defName>
+    <label>stops caring what the animals do</label>
+    <consequence>stops caring what the animals do</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>animalfriend</li><li>crisis</li><li>withdrawal</li></tags>
+    <passionSkillDef>Animals</passionSkillDef>
+    <passion>-1</passion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LosePassion_Intellectual</defName>
+    <label>the questions stop mattering</label>
+    <consequence>the questions stop mattering</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>scholar</li><li>curiosity</li><li>crisis</li><li>dependency</li></tags>
+    <passionSkillDef>Intellectual</passionSkillDef>
+    <passion>-1</passion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LosePassion_Artistic</defName>
+    <label>the urge to make things goes quiet</label>
+    <consequence>the urge to make things goes quiet</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>artist</li><li>craft</li><li>crisis</li><li>withdrawal</li></tags>
+    <passionSkillDef>Artistic</passionSkillDef>
+    <passion>-1</passion>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Heavier hediffs for crisis stages ─────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_Hangover_Heavy</defName>
+    <label>pays hard for it</label>
+    <consequence>pays hard for it</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>alcohol</li><li>crisis</li></tags>
+    <hediffDef>Hangover</hediffDef>
+    <hediffSeverity>0.9</hediffSeverity>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_ToxicBuildup_Heavy</defName>
+    <label>the toxins win this round</label>
+    <consequence>the toxins win this round</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>psychite</li><li>wakeup</li><li>gojuice</li><li>crisis</li></tags>
+    <hediffDef>ToxicBuildup</hediffDef>
+    <hediffSeverity>0.5</hediffSeverity>
+  </PawnChronicles.EffectEntryDef>
+
 </Defs>

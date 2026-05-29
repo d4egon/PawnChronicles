@@ -511,6 +511,7 @@
         <label>opened up to them</label>
         <description>We talked honestly for once. It helped.</description>
         <baseMoodEffect>4</baseMoodEffect>
+        <baseOpinionOffset>15</baseOpinionOffset>
       </li>
     </stages>
   </ThoughtDef>
@@ -526,6 +527,7 @@
         <label>things went badly between us</label>
         <description>Something happened that left a bad feeling. It hasn't gone away.</description>
         <baseMoodEffect>-6</baseMoodEffect>
+        <baseOpinionOffset>-15</baseOpinionOffset>
       </li>
     </stages>
   </ThoughtDef>

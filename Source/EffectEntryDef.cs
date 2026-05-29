@@ -187,7 +187,6 @@ namespace PawnChronicles
 
             pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(td, target);
             target.needs?.mood?.thoughts?.memories?.TryGainMemory(td, pawn);
-            Log.Message($"[PawnChronicles] Social opinion: {pawn.LabelShort} <-> {target.LabelShort} via {thoughtName}");
         }
 
         private void TryApplyMentalBreak(Pawn pawn)
@@ -281,11 +280,15 @@ namespace PawnChronicles
                 }
                 if (socialOpinion != 0)
                 {
-                    string sign = socialOpinion > 0 ? "+" : "";
-                    string key = socialOpinion > 0
+                    // Read the actual opinion offset from the thought so the hint matches the social tab
+                    string thoughtName = socialOpinion > 0 ? "PC_Thought_SocialBond" : "PC_Thought_SocialConflict";
+                    var tDef = DefDatabase<ThoughtDef>.GetNamedSilentFail(thoughtName);
+                    int opinionVal = (int)(tDef?.stages?[0]?.baseOpinionOffset ?? socialOpinion);
+                    string sign = opinionVal > 0 ? "+" : "";
+                    string key = opinionVal > 0
                         ? "PC_Effect_Display_OpinionPos"
                         : "PC_Effect_Display_OpinionNeg";
-                    return key.Translate($"{sign}{socialOpinion}");
+                    return key.Translate($"{sign}{opinionVal}");
                 }
                 if (!string.IsNullOrEmpty(mentalBreakDef))
                     return "PC_Effect_Display_MentalBreak".Translate();
