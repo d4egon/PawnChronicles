@@ -498,5 +498,21 @@
     </li></stages>
   </ThoughtDef>
 
+  <!-- ── Social opinion thoughts (used by EffectEntryDef socialOpinion) ── -->
+
+  <!-- Positive social memory: applied to both pawns when socialOpinion > 0 -->
+  <ThoughtDef>
+    <defName>PC_Thought_SocialBond</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>12</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>opened up to them</label>
+        <description>We talked honestly for once. It helped.</description>
+        <baseMoodEffect>4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
 
 </Defs>

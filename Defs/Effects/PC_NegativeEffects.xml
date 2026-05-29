@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       NEGATIVE EFFECT POOL
+       isPositive = false  |  drawn as the cost of each choice pairing
+       Tags: "general" = available to all arcs
+             "addiction" = all addiction arcs
+             "alcohol", "psychite", etc = substance-specific
+             "dependency", "social", "withdrawal", "crisis" = stage-specific
+       ══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- ── Skill level losses ─────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_SocialLoss</defName>
+    <label>withdraws from others</label>
+    <consequence>withdraws from others</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>addiction</li></tags>
+    <skillLevelDef>Social</skillLevelDef>
+    <skillLevel>-1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_MedicineLoss</defName>
+    <label>stops taking care</label>
+    <consequence>stops taking care</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>dependency</li></tags>
+    <skillLevelDef>Medicine</skillLevelDef>
+    <skillLevel>-1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_IntellectualLoss</defName>
+    <label>stops thinking clearly</label>
+    <consequence>stops thinking clearly</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>alcohol</li><li>withdrawal</li></tags>
+    <skillLevelDef>Intellectual</skillLevelDef>
+    <skillLevel>-1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_CraftingLoss</defName>
+    <label>the hands shake</label>
+    <consequence>the hands shake</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>withdrawal</li><li>alcohol</li></tags>
+    <skillLevelDef>Crafting</skillLevelDef>
+    <skillLevel>-1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_MeleeLoss</defName>
+    <label>the edge is gone</label>
+    <consequence>the edge is gone</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>violence</li><li>duty</li><li>survival</li></tags>
+    <skillLevelDef>Melee</skillLevelDef>
+    <skillLevel>-1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Skill XP losses ────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_SocialXPLoss</defName>
+    <label>burns bridges</label>
+    <consequence>burns bridges</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>social</li><li>crisis</li></tags>
+    <skillXpDef>Social</skillXpDef>
+    <skillXP>-6000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_IntellectualXPLoss</defName>
+    <label>the mind goes soft</label>
+    <consequence>the mind goes soft</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>dependency</li><li>alcohol</li><li>psychite</li></tags>
+    <skillXpDef>Intellectual</skillXpDef>
+    <skillXP>-6000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Passion losses ─────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LosePassion</defName>
+    <label>something dims inside</label>
+    <consequence>something dims inside</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>crisis</li><li>addiction</li></tags>
+    <anyPassion>-1</anyPassion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LosePassion_Social</defName>
+    <label>people become noise</label>
+    <consequence>people become noise</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>social</li><li>addiction</li><li>dependency</li></tags>
+    <passionSkillDef>Social</passionSkillDef>
+    <passion>-1</passion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LosePassion_Craft</defName>
+    <label>the work loses its meaning</label>
+    <consequence>the work loses its meaning</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>craft</li><li>artist</li><li>withdrawal</li></tags>
+    <passionSkillDef>Crafting</passionSkillDef>
+    <passion>-1</passion>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Social opinion losses ──────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_OpinionDrop</defName>
+    <label>a fight breaks out</label>
+    <consequence>a fight breaks out</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>social</li><li>addiction</li></tags>
+    <socialOpinion>-20</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_OpinionDrop_Crisis</defName>
+    <label>they push everyone away</label>
+    <consequence>they push everyone away</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>crisis</li><li>addiction</li></tags>
+    <socialOpinion>-30</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_OpinionDrop_Small</defName>
+    <label>the mask slips</label>
+    <consequence>the mask slips</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>dependency</li></tags>
+    <socialOpinion>-12</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Mental breaks ──────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_Berserk</defName>
+    <label>the rage breaks through</label>
+    <consequence>the rage breaks through</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>crisis</li><li>violence</li><li>withdrawal</li></tags>
+    <mentalBreakDef>Berserk</mentalBreakDef>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_Catatonic</defName>
+    <label>goes blank</label>
+    <consequence>goes blank</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>crisis</li><li>addiction</li><li>withdrawal</li></tags>
+    <mentalBreakDef>Catatonic</mentalBreakDef>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_CorpseObsession</defName>
+    <label>fixates on the dead</label>
+    <consequence>fixates on the dead</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>crisis</li><li>trauma</li><li>grief</li><li>loss</li></tags>
+    <mentalBreakDef>CorpseObsession</mentalBreakDef>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Hediff applications ────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_Hangover</defName>
+    <label>pays for it the next morning</label>
+    <consequence>pays for it the next morning</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>alcohol</li><li>dependency</li><li>general</li></tags>
+    <hediffDef>Hangover</hediffDef>
+    <hediffSeverity>0.6</hediffSeverity>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_FoodPoisoning</defName>
+    <label>the body rebels</label>
+    <consequence>the body rebels</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>general</li><li>dependency</li></tags>
+    <hediffDef>FoodPoisoning</hediffDef>
+    <hediffSeverity>0.4</hediffSeverity>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_ToxicBuildup</defName>
+    <label>the toxins accumulate</label>
+    <consequence>the toxins accumulate</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>addiction</li><li>psychite</li><li>wakeup</li><li>gojuice</li><li>dependency</li></tags>
+    <hediffDef>ToxicBuildup</hediffDef>
+    <hediffSeverity>0.25</hediffSeverity>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_CatatonicBreakdown</defName>
+    <label>shuts down entirely</label>
+    <consequence>shuts down entirely</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>crisis</li><li>addiction</li></tags>
+    <hediffDef>CatatonicBreakdown</hediffDef>
+    <hediffSeverity>0.5</hediffSeverity>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Raids ──────────────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_SmallRaid</defName>
+    <label>someone comes to collect</label>
+    <consequence>someone comes to collect</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>crisis</li><li>underworld</li><li>addiction</li></tags>
+    <raidPoints>300</raidPoints>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_DebtCollector</defName>
+    <label>the debts come due</label>
+    <consequence>the debts come due</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>crisis</li><li>underworld</li><li>alcohol</li><li>psychite</li></tags>
+    <raidPoints>500</raidPoints>
+  </PawnChronicles.EffectEntryDef>
+
+</Defs>

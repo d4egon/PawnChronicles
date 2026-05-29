@@ -178,14 +178,14 @@ namespace PawnChronicles
             string stage = parts.Length > 0 ? parts[parts.Length - 1] : "";
             return stage switch
             {
-                "opening"    => BuildTimeCondition(pawn, 15),
-                "dependency" => BuildTimeCondition(pawn, 15),
+                "opening"    => BuildTimeCondition(pawn, 5),
+                "dependency" => BuildTimeCondition(pawn, 5),
                 "social"     => BuildSocialCondition(pawn),
                 "withdrawal" => BuildWithdrawalCondition(pawn),
                 "crisis"     => ("mood_low",
                                  ResolveConditionLabel(pawn, "wait_condition_mood_low"),
                                  0, 0),
-                _            => BuildTimeCondition(pawn, 15)
+                _            => BuildTimeCondition(pawn, 3)
             };
         }
 

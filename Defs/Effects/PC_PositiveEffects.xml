@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       POSITIVE EFFECT POOL
+       isPositive = true  |  drawn as the upside of each choice pairing
+       Tags: "general" = available to all arcs
+             "addiction" = all addiction arcs
+             "alcohol", "psychite", etc = substance-specific
+             "dependency", "social", "withdrawal", "crisis" = stage-specific
+       ══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- ── Skill level gains ─────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_CraftingSkill</defName>
+    <label>lean into the work</label>
+    <consequence>lean into the work</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li></tags>
+    <skillLevelDef>Crafting</skillLevelDef>
+    <skillLevel>1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_SocialSkill</defName>
+    <label>reach out to someone</label>
+    <consequence>reach out to someone</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li><li>social</li><li>addiction</li></tags>
+    <skillLevelDef>Social</skillLevelDef>
+    <skillLevel>1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_MedicineSkill</defName>
+    <label>study the condition</label>
+    <consequence>study the condition</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li><li>addiction</li><li>withdrawal</li></tags>
+    <skillLevelDef>Medicine</skillLevelDef>
+    <skillLevel>1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_IntellectualSkill</defName>
+    <label>think it through</label>
+    <consequence>think it through</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li><li>dependency</li></tags>
+    <skillLevelDef>Intellectual</skillLevelDef>
+    <skillLevel>1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_ShootingSkill</defName>
+    <label>train the reflex</label>
+    <consequence>train the reflex</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>violence</li><li>duty</li><li>survival</li></tags>
+    <skillLevelDef>Shooting</skillLevelDef>
+    <skillLevel>1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_MeleeSkill</defName>
+    <label>push through the pain</label>
+    <consequence>push through the pain</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>violence</li><li>trauma</li><li>withdrawal</li></tags>
+    <skillLevelDef>Melee</skillLevelDef>
+    <skillLevel>1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_AnimalsSkill</defName>
+    <label>spend time with the animals</label>
+    <consequence>spend time with the animals</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>animalfriend</li><li>general</li></tags>
+    <skillLevelDef>Animals</skillLevelDef>
+    <skillLevel>1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_CookingSkill</defName>
+    <label>find comfort in routine</label>
+    <consequence>find comfort in routine</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li><li>dependency</li><li>alcohol</li></tags>
+    <skillLevelDef>Cooking</skillLevelDef>
+    <skillLevel>1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_ArtisticSkill</defName>
+    <label>channel it into something</label>
+    <consequence>channel it into something</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li><li>artist</li><li>crisis</li></tags>
+    <skillLevelDef>Artistic</skillLevelDef>
+    <skillLevel>1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Skill XP gains ─────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_CraftingXP</defName>
+    <label>keep the hands busy</label>
+    <consequence>keep the hands busy</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li><li>craft</li></tags>
+    <skillXpDef>Crafting</skillXpDef>
+    <skillXP>8000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_IntellectualXP</defName>
+    <label>document the experience</label>
+    <consequence>document the experience</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li><li>scholar</li><li>addiction</li></tags>
+    <skillXpDef>Intellectual</skillXpDef>
+    <skillXP>8000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_MedicineXP</defName>
+    <label>self-medicate methodically</label>
+    <consequence>self-medicate methodically</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>addiction</li><li>withdrawal</li><li>healer</li></tags>
+    <skillXpDef>Medicine</skillXpDef>
+    <skillXP>8000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Passion gains ──────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_GainPassion</defName>
+    <label>discover a new calling</label>
+    <consequence>discover a new calling</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li><li>crisis</li></tags>
+    <anyPassion>1</anyPassion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_GainPassion_Craft</defName>
+    <label>find meaning in the making</label>
+    <consequence>find meaning in the making</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>craft</li><li>artist</li></tags>
+    <passionSkillDef>Crafting</passionSkillDef>
+    <passion>1</passion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_GainPassion_Social</defName>
+    <label>need for connection sharpens</label>
+    <consequence>need for connection sharpens</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>social</li><li>kinship</li><li>addiction</li></tags>
+    <passionSkillDef>Social</passionSkillDef>
+    <passion>1</passion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_GainPassion_Medicine</defName>
+    <label>turns to fixing others</label>
+    <consequence>turns to fixing others</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>healer</li><li>addiction</li><li>withdrawal</li></tags>
+    <passionSkillDef>Medicine</passionSkillDef>
+    <passion>1</passion>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Social opinion gains ───────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_OpinionUp_Small</defName>
+    <label>leans on someone</label>
+    <consequence>leans on someone</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li><li>social</li><li>addiction</li></tags>
+    <socialOpinion>15</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_OpinionUp_Crisis</defName>
+    <label>confesses to a friend</label>
+    <consequence>confesses to a friend</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>crisis</li><li>addiction</li></tags>
+    <socialOpinion>25</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Spawn items ────────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_FindStash</defName>
+    <label>finds a hidden stash</label>
+    <consequence>finds a hidden stash</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>addiction</li><li>dependency</li><li>alcohol</li></tags>
+    <spawnItemDef>Beer</spawnItemDef>
+    <spawnCount>6</spawnCount>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_FindAmbrosia</defName>
+    <label>finds a cache of ambrosia</label>
+    <consequence>finds a cache of ambrosia</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>ambrosia</li><li>dependency</li></tags>
+    <spawnItemDef>Ambrosia</spawnItemDef>
+    <spawnCount>8</spawnCount>
+  </PawnChronicles.EffectEntryDef>
+
+</Defs>

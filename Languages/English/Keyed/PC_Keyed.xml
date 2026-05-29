@@ -469,6 +469,22 @@
   <PC_Climax_HardRoad_Craft>Make something that endures</PC_Climax_HardRoad_Craft>
   <PC_Climax_HardRoad_Default>See it through</PC_Climax_HardRoad_Default>
 
+  <!-- ── Effect pool display strings ───────────────────────────────────── -->
+  <PC_Effect_Display_GainPassion>gain passion</PC_Effect_Display_GainPassion>
+  <PC_Effect_Display_LosePassion>lose passion</PC_Effect_Display_LosePassion>
+  <!-- {0} = skill label -->
+  <PC_Effect_Display_PassionGain>passion: {0}</PC_Effect_Display_PassionGain>
+  <PC_Effect_Display_PassionLose>lose passion: {0}</PC_Effect_Display_PassionLose>
+  <!-- {0} = signed opinion delta e.g. "+15" or "-20" -->
+  <PC_Effect_Display_Opinion>{0} opinion</PC_Effect_Display_Opinion>
+  <PC_Effect_Display_MentalBreak>mental break</PC_Effect_Display_MentalBreak>
+  <PC_Effect_Display_Incident>incident fires</PC_Effect_Display_Incident>
+  <!-- {0} = count, {1} = item label -->
+  <PC_Effect_Display_SpawnItem>find {0}x {1}</PC_Effect_Display_SpawnItem>
+  <PC_Effect_Display_Raid>raid incoming</PC_Effect_Display_Raid>
+  <!-- {0} = positive DisplayLabel, {1} = negative DisplayLabel -->
+  <PC_Effect_HintFormat>{0}  /  {1}</PC_Effect_HintFormat>
+
   <!-- Hard Road hint consequences -->
   <PC_Climax_Consequence_SmallRaid>enemies arrive</PC_Climax_Consequence_SmallRaid>
   <PC_Climax_Consequence_MentalBreak>the weight breaks surface</PC_Climax_Consequence_MentalBreak>

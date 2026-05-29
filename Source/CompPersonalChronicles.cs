@@ -83,6 +83,15 @@ namespace PawnChronicles
         private const int MaxIgnoredTicks = 1800000;
         private const int TickCheckInterval = 250;
 
+        /// <summary>
+        /// Game tick when this pawn first became an active colonist.
+        /// Arcs are suppressed for SpawnGraceTicks after this point so new
+        /// pawns (fresh start, refugees, recruits) aren't immediately hit.
+        /// -1 = not yet set.
+        /// </summary>
+        private int _firstSpawnTick = -1;
+        private const int SpawnGraceTicks = 5000; // 2 in-game hours
+
         // ── Performance telemetry (static — aggregate across all comps) ────────
         public static long LastTickUs  = 0;   // microseconds, last sampled tick (per pawn)
         public static long PeakTickUs  = 0;
@@ -248,6 +257,7 @@ namespace PawnChronicles
             {
                 Scribe_Values.Look(ref socialInteractionCount,  "socialInteractionCount",  0);
                 Scribe_Values.Look(ref ritualParticipationCount, "ritualParticipationCount", 0);
+                Scribe_Values.Look(ref _firstSpawnTick, "firstSpawnTick", -1);
             }
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
@@ -278,12 +288,26 @@ namespace PawnChronicles
         // ─────────────────────────────────────────────────────────────────────
         // TICKING
         // ─────────────────────────────────────────────────────────────────────
+        /// <summary>True while the spawn grace period is still active.</summary>
+        private bool InSpawnGrace
+        {
+            get
+            {
+                if (_firstSpawnTick < 0) return true; // not initialised yet
+                return Find.TickManager.TicksGame - _firstSpawnTick < SpawnGraceTicks;
+            }
+        }
+
         public override void CompTick()
         {
             if (parent is not Pawn pawn || !pawn.IsFreeColonist || !pawn.Spawned || pawn.Dead)
                 return;
             if (chroniclesDisabled)
                 return;
+
+            // Record the first tick this pawn was an active colonist
+            if (_firstSpawnTick < 0)
+                _firstSpawnTick = Find.TickManager.TicksGame;
 
             // Sample tick cost every TickCheckInterval to avoid Stopwatch overhead every tick
             bool sample = (Find.TickManager.TicksGame % TickCheckInterval == 0);
@@ -697,10 +721,14 @@ namespace PawnChronicles
 
             var pawn = (Pawn)parent;
 
-            // Apply immediate stat effects (tradeoff middle-stage choices)
+            // Apply immediate stat effects (legacy skill-only path)
             if (choice.effects != null)
                 foreach (var fx in choice.effects)
                     fx.Apply(pawn);
+
+            // Apply pool-drawn effects (positive + negative pair)
+            choice.PositiveEntry?.Apply(pawn);
+            choice.NegativeEntry?.Apply(pawn);
 
             // Record the chosen path tag from the seed stage
             if (string.IsNullOrEmpty(chosenPathTag) && !string.IsNullOrEmpty(choice.tagDefName))
@@ -785,6 +813,21 @@ namespace PawnChronicles
         /// whether the narrative incident succeeded. The incident is the drama;
         /// this is the weight. Applied before CompleteEpic so it shows up immediately.
         /// </summary>
+        /// <summary>
+        /// Extracts a short substance tag from an addiction hediff defName.
+        /// E.g. "AlcoholAddiction" -> "alcohol", "PsychiteAddiction" -> "psychite".
+        /// Falls back to "general" if nothing matches.
+        /// </summary>
+        private static string DeriveSubstanceTag(string hediffDefName)
+        {
+            if (string.IsNullOrEmpty(hediffDefName)) return "general";
+            string lower = hediffDefName.ToLowerInvariant();
+            // Strip common suffixes/prefixes to get the substance name
+            foreach (string suffix in new[] { "addiction", "addicted", "tolerance" })
+                lower = lower.Replace(suffix, "").Trim('_').Trim();
+            return string.IsNullOrEmpty(lower) ? "general" : lower;
+        }
+
         private static void ApplyHardRoadCost(Pawn pawn)
         {
             var def = DefDatabase<ThoughtDef>.GetNamedSilentFail("PC_Thought_HardRoadCost");
@@ -861,6 +904,7 @@ namespace PawnChronicles
         public void EvaluateAndStartEpic()
         {
             if (chroniclesDisabled) return;
+            if (InSpawnGrace) return;
             if (parent is not Pawn pawn || !pawn.IsFreeColonist || hasActiveEpic)
                 return;
 
@@ -886,6 +930,7 @@ namespace PawnChronicles
         public void TryStartAddictionArc(HediffDef addictionDef)
         {
             if (addictionDef == null || hasActiveEpic || chroniclesDisabled) return;
+            if (InSpawnGrace) return;
             if (parent is not Pawn pawn || !pawn.IsFreeColonist) return;
 
             var arcDef = DefDatabase<PersonalEpicDef>.AllDefsListForReading
@@ -1016,16 +1061,36 @@ namespace PawnChronicles
                 }
                 else
                 {
-                    // Fixed middle/opening stages: no player choices, just wait for condition.
+                    // Fixed middle/opening stages: pool-drawn choices with stage-appropriate effects.
+                    string stageTag = EffectPoolDrawer.AddictionStageTag(role);
+                    // Derive substance tag from the arc's addiction hediff name (e.g. "alcohol", "psychite")
+                    string substanceTag = DeriveSubstanceTag(currentEpic?.addictionHediffDef ?? "");
+                    var poolTags = new[] { "addiction", stageTag, substanceTag };
+
                     var (condKey, condLabel, condBaseline, condDelta) =
                         StageWaitCondition.BuildForAddiction(pawn, role);
+
+                    var choices = EffectPoolDrawer.DrawChoices(
+                        pawn, poolTags, count: 3,
+                        waitDays: condKey == "time" ? condDelta / 60000f : 5f);
+
+                    // Override the condition on each choice to match this stage's actual wait
+                    foreach (var c in choices)
+                    {
+                        c.conditionKey   = condKey;
+                        c.conditionLabel = condLabel;
+                        c.baseline       = condBaseline;
+                        c.targetDelta    = condDelta;
+                    }
+
                     entry = new ArcStageEntry(
                         title, body, role,
-                        waitConditionLabel: condLabel,
-                        waitConditionKey:   condKey,
-                        waitBaselineValue:  condBaseline,
-                        waitTargetDelta:    condDelta,
+                        waitConditionLabel: "PC_Wait_ChooseProceed".Translate(),
+                        waitConditionKey:   "",
+                        waitBaselineValue:  0,
+                        waitTargetDelta:    0,
                         isClimax:           false);
+                    entry.choices = choices;
                 }
             }
             else if (isOpening)
@@ -1057,9 +1122,14 @@ namespace PawnChronicles
             }
             else
             {
-                // Middle stages: 2-3 tradeoff choices with immediate stat consequences.
+                // Middle stages: pool-drawn tradeoff choices (positive + negative paired).
                 // No walk-away - the player committed when they chose a path.
-                var choices = StageWaitCondition.BuildTradeoffChoices(pawn, activePathTag);
+                string midTag = activePathTag.ToLowerInvariant().Replace("pc_tag_", "");
+                var choices = EffectPoolDrawer.DrawChoices(
+                    pawn,
+                    tags: new[] { midTag, "general" },
+                    count: 3,
+                    waitDays: PawnChroniclesMod.Settings.middleWaitDays);
                 entry = new ArcStageEntry(
                     title, body, role,
                     waitConditionLabel: "PC_Wait_ChooseProceed".Translate(),

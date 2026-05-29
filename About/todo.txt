@@ -25,3 +25,18 @@ Luciferium arc (separate track - more complex than other addiction arcs):
   - Tone: expedition log, not recovery story. What the pawn found in the dark,
     what they had to do to get the serum, what they left behind.
   - RemoveHediff on success targets Addiction_Luciferium specifically.
+
+Modded drug support improvements:
+  - Inject [pc_addiction_name] as a grammar rule at resolve time in TriggerNextStage
+    for fixed addiction arcs. Get the name from ChemicalDef.label (linked via
+    ChemicalDef.addictionHediff == hediffDef), fallback to stripping " addiction"
+    from HediffDef.label. Update chemical fallback grammar entries to use
+    [pc_addiction_name] instead of hardcoded "the compound".
+  - Add retroactive check in Patch_Game_FinalizeInit: after normal EvaluateAndStartEpic,
+    walk each colonist's hediff set for any Hediff_Addiction and call
+    TryStartAddictionArc if no arc is running. Covers pawns already addicted on save load.
+  - Edge case: mods that implement addiction via a custom class NOT extending
+    Hediff_Addiction will bypass Patch 15's `is Hediff_Addiction` check. If this
+    becomes common (e.g. Odyssey ships custom mushroom hediff classes), widen the
+    check to also match HediffDef.hediffClass assignability or a custom tag/flag.
+  - Test against Odyssey mushroom content when released.

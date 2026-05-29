@@ -468,7 +468,17 @@ namespace PawnChronicles
                 if (op < worstOp) { worstOp = op; worstEnemy = other; }
             }
 
-            if (bestFriend != null && bestOp > 0)
+            // If no positive-opinion relation exists, fall back to whoever the pawn
+            // likes most (even neutral), then to any other free colonist on the map.
+            // pc_friend_name must always resolve so arc grammar doesn't fail for
+            // reclusive or newly arrived pawns.
+            if (bestFriend == null || bestOp <= 0)
+            {
+                bestFriend = pawn.MapHeld?.mapPawns?.FreeColonists
+                    ?.FirstOrDefault(p => p != pawn && p.RaceProps.Humanlike)
+                    ?? bestFriend;
+            }
+            if (bestFriend != null)
             {
                 Emit(rules, "pc_friend_name", bestFriend.LabelShort);
                 Emit(rules, "pc_friend_opinion", bestOp.ToString());
@@ -488,7 +498,14 @@ namespace PawnChronicles
         {
             if (pawn.Map == null)
             {
-                Emit(rules, "pc_world_location", "the void between worlds");
+                Emit(rules, "pc_world_location",  "the void between worlds");
+                Emit(rules, "pc_world_season",       "passing days");
+                Emit(rules, "pc_world_season_label", "passing days");
+                Emit(rules, "pc_world_weather",      "empty sky");
+                Emit(rules, "pc_world_biome",        "the dark between stars");
+                Emit(rules, "pc_world_time_of_day",  "still hours");
+                Emit(rules, "pc_world_hour",         "0");
+                Emit(rules, "pc_world_colony_name",  "the colony");
                 return;
             }
 

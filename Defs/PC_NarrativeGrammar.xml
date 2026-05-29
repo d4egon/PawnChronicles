@@ -179,7 +179,7 @@
         <li>addiction_alcohol_opening_body->[pawn_nameDef] started keeping a bottle near the [TerrainFeature]. Just for rough nights, [pawn_pronoun] said. [pc_colony_name] had plenty of those. Within a fortnight the bottle had moved to [pawn_possessive] bedside, and the rough nights found [pawn_objective] there.</li>
         <!--AMBROSIA-->
         <li>addiction_ambrosia_opening_title->Stuff of the Gods</li>
-        <li>addiction_ambrosia_opening_body->Some [Animal] knocked over the ambrosia grove during the storm and [pawn_nameDef] helped clear the damage, eating what seemed like a fair amount of fallen fruit. [pc_friend_name] described [pawn_possessive] expression afterward as devotional. [pawn_nameDef] said the fruit was medicinal and that [pc_friend_name]'s observation was not required.</li>
+        <li>addiction_ambrosia_opening_body->Some [Animal] trampled the ambrosia grove during a storm and [pawn_nameDef] helped clear the damage, eating what seemed like a fair amount of fallen fruit. [pc_friend_name] described [pawn_possessive] expression afterward as divine. [pawn_nameDef] said the fruit was medicinal and that [pc_friend_name]'s observation was not required.</li>
         <!--GO-JUICE-->
         <li>addiction_gojuice_opening_title->Speed, I Am Speed</li>
         <li>addiction_gojuice_opening_body->The [Enemy] raid left two colonists injured and one standing question: how had [pawn_nameDef] killed four of them alone, with a [Weapon] and what turned out to be an undisclosed dose of go-juice. The answer was noted in the colony log and not followed up on for approximately three weeks.</li>
@@ -377,6 +377,8 @@
         <li>wait_condition_ritual->[pawn_nameDef]'s arc will continue after [pawn_pronoun] participates in a ritual...</li>
         <li>wait_condition_tamed->[pawn_nameDef]'s story will continue after [pawn_pronoun] next tames an animal...</li>
         <li>wait_condition_time->[pawn_nameDef]'s story will continue when this [pc_world_season] passes, 15 days...</li>
+        <li>wait_condition_time->[pawn_nameDef]'s arc continues in 15 days...</li>
+        <li>wait_condition_time->15 days. Then [pawn_nameDef]'s story moves forward.</li>
         <li>wait_condition_withdrawal->[pawn_nameDef]'s arc continues when [pawn_pronoun] begins to withdraw...</li>
         <li>wait_condition_sobriety->[pawn_nameDef]'s arc continues when [pawn_possessive] system finally clears the dependency...</li>
         <li>wait_condition_mood_low->[pawn_nameDef]'s arc continues when [pawn_pronoun] reaches a low point...</li>
@@ -646,123 +648,245 @@
 
 
         <li>curiosity_isolation_opening_title->The Solitary Search</li>
+        <li>curiosity_isolation_opening_title->The [AdjectiveAngsty] [NaturalObject]</li>
+        <li>curiosity_isolation_opening_title->A [AdjectiveBadass] [ConceptAngsty]</li>
         <li>curiosity_opening_title->[pawn_nameDef]'s Great Inquiry</li>
         
         <li>opening_title->A New Chapter</li>
+        <li>opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
+        <li>opening_title->A [ColorBadass] [Animal]</li>
+        <li>opening_title->Something [AdjectiveAngsty] at the [TerrainFeature]</li>
         <li>default_title->The Chronicles of [pawn_nameDef]</li>
 
         <li>haunted_opening_title->The thing that never left</li>
+        <li>haunted_opening_title->The [AdjectiveAngsty] [TerrainFeature], Again</li>
+        <li>haunted_opening_title->A [ColorBadass] [ConceptAngsty]</li>
+        <li>haunted_opening_title->The [AdjectiveAngsty] [NaturalObject]</li>
         <li>haunted_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] had been back lately. [pawn_pronoun] thought [pawn_pronoun] had dealt with it.\n\n[pawn_pronoun] [pc_lex_verb_trauma].</li>
 
         <li>dream_opening_title->A dream that tasted like memory</li>
+        <li>dream_opening_title->The [AdjectiveAngsty] [Animal] Dream</li>
+        <li>dream_opening_title->A [ColorBadass] [TerrainFeature] in Sleep</li>
+        <li>dream_opening_title->[pawn_nameDef] and the [AdjectiveAngsty] [ConceptAngsty]</li>
         <li>dream_opening_body->[pawn_nameDef] woke up [pc_lex_tone], [pc_lex_scene]. The dream was about [TalkTopicHeavy]. [pc_thought_strongest_label] was in it.\n\n[pawn_pronoun] [pc_lex_verb_curiosity].</li>
 
         <li>omen_opening_title->A sign no one else would notice</li>
+        <li>omen_opening_title->A [ColorBadass] [Animal] at the [TerrainFeature]</li>
+        <li>omen_opening_title->The [AdjectiveAngsty] [NaturalObject]</li>
+        <li>omen_opening_title->Three [AdjectiveAngsty] Signs</li>
         <li>omen_opening_body->Three small things, [pc_lex_scene]. [pawn_nameDef] - a former [pc_backstory_adult_title] - noticed all of them.\n\n[pawn_pronoun] was [pc_lex_tone] [Trans] it. [pawn_pronoun] [pc_lex_verb_devotion].</li>
 
         <li>ghost_opening_title->Someone who should be dead</li>
+        <li>ghost_opening_title->A [AdjectiveAngsty] [PersonFamily]</li>
+        <li>ghost_opening_title->The [ColorBadass] [Community]</li>
+        <li>ghost_opening_title->The [AdjectiveBadass] [ConceptAngsty]</li>
         <li>ghost_opening_body->The name appeared in a report. Not a similar name. The name. [pc_lex_scene].\n\n[pawn_pronoun] read it twice. [pawn_pronoun] [pc_lex_verb_trauma].</li>
 
         <li>mirror_opening_title->Facing what [pawn_nameDef] became</li>
+        <li>mirror_opening_title->The [AdjectiveAngsty] [NaturalObject]</li>
+        <li>mirror_opening_title->A [ColorBadass] Reflection</li>
+        <li>mirror_opening_title->The [AdjectiveAngsty] [BodyPart]</li>
         <li>mirror_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene]. The reflection in the [AdjectiveNatural] [NaturalObject] did not lie. [pc_lex_wound_summary].\n\n[pawn_pronoun] did not look away.</li>
 
         <li>opening_title->Something reaches [pawn_nameDef]</li>
+        <li>opening_title->[pawn_nameDef] and the [AdjectiveAngsty] [NaturalObject]</li>
+        <li>opening_title->The [AdjectiveBadass] [ConceptAngsty]</li>
         <li>opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_lex_combat_posture]. [pc_thought_strongest_label] and [TalkTopicLight] have both been on [pawn_possessive] mind.\n\n[pawn_pronoun] is [VerbFriendly]. [pawn_pronoun] [pc_lex_verb_daily].</li>
 
         <li>trauma_opening_title->What [pawn_nameDef] still carries</li>
+        <li>trauma_opening_title->The [AdjectiveAngsty] [BodyPart]</li>
+        <li>trauma_opening_title->A [ColorBadass] [ConceptAngsty] at the [TerrainFeature]</li>
+        <li>trauma_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
+        <li>trauma_opening_title->What the [AdjectiveAngsty] [NaturalObject] Remembers</li>
         <li>trauma_opening_body->[pc_lex_wound_summary]. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] was back.\n\n[pawn_pronoun] [pc_lex_verb_trauma].</li>
 
         <li>trauma_underworld_opening_title->Word from the wrong people</li>
+        <li>trauma_underworld_opening_title->A [AdjectiveBadass] [PersonJob]</li>
+        <li>trauma_underworld_opening_title->The [ColorBadass] [Community]</li>
+        <li>trauma_underworld_opening_title->A [AdjectiveAngsty] [ConceptAngsty]</li>
         <li>trauma_underworld_opening_body->The contact was someone [pawn_nameDef] had not spoken to in years. They had something [pawn_pronoun] could not find through [Community] channels.\n\n[pawn_pronoun] [pc_lex_verb_underworld], [pc_lex_scene]. [pc_lex_social_anchor].</li>
 
         <li>trauma_loss_opening_title->What was taken from [pawn_nameDef]</li>
+        <li>trauma_loss_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
+        <li>trauma_loss_opening_title->A [ColorBadass] [ConceptAngsty]</li>
+        <li>trauma_loss_opening_title->The [AdjectiveAngsty] [NaturalObject], Gone</li>
         <li>trauma_loss_opening_body->[pc_lex_wound_summary]. [pawn_nameDef], [pc_lex_identity_echo], had been carrying this since [pc_thought_strongest_label].\n\n[pc_lex_transit] a name resurfaces. [pawn_pronoun] [pc_lex_verb_grief], [pc_lex_scene].</li>
 
         <li>loss_opening_title->An old thread resurfaces</li>
+        <li>loss_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
+        <li>loss_opening_title->A [ColorBadass] [Animal]</li>
+        <li>loss_opening_title->The [AdjectiveAngsty] [ConceptAngsty]</li>
         <li>loss_opening_body->The name appeared where it should not have. [pawn_nameDef], [pc_lex_identity_echo], read it twice.\n\n[pc_thought_strongest_label] surfaces. [pawn_pronoun] [pc_lex_verb_grief], [pc_lex_scene].</li>
 
         <li>grief_opening_title->Something [pawn_nameDef] cannot stop thinking about</li>
+        <li>grief_opening_title->The [AdjectiveAngsty] [NaturalObject]</li>
+        <li>grief_opening_title->A [ColorBadass] [ConceptAngsty]</li>
+        <li>grief_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
         <li>grief_opening_body->[pc_thought_strongest_label] surfaces. [pawn_nameDef] stood [pc_lex_scene], [pc_lex_tone].\n\n[pc_lex_transit] [pawn_pronoun] [pc_lex_verb_grief].</li>
 
         <li>grief_loss_opening_title->The thing [pawn_nameDef] had been avoiding</li>
+        <li>grief_loss_opening_title->The [AdjectiveAngsty] [ConceptAngsty]</li>
+        <li>grief_loss_opening_title->A [ColorBadass] [TerrainFeature]</li>
+        <li>grief_loss_opening_title->The [AdjectiveAngsty] [NaturalObject]</li>
         <li>grief_loss_opening_body->[pawn_nameDef], [pc_lex_identity_echo], had not asked directly in years. [pc_thought_strongest_label] found [pawn_objective] anyway, [pc_lex_scene].\n\n[pawn_pronoun] was [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_grief].</li>
 
         <li>underworld_opening_title->A familiar kind of offer</li>
+        <li>underworld_opening_title->A [AdjectiveBadass] [PersonJob]</li>
+        <li>underworld_opening_title->The [ColorBadass] [Community]</li>
+        <li>underworld_opening_title->The [AdjectiveBadass] [TerrainFeature]</li>
+        <li>underworld_opening_title->A [AdjectiveAngsty] [ConceptAngsty]</li>
         <li>underworld_opening_body->The message was not addressed to [pawn_nameDef] by name. It never was.\n\n[pawn_pronoun] [pc_lex_verb_underworld], [pc_lex_scene]. [pc_lex_identity_echo]. [pawn_pronoun] knew how these worked.</li>
 
         <li>duty_opening_title->An old obligation</li>
+        <li>duty_opening_title->The [AdjectiveBadass] [PersonJob]</li>
+        <li>duty_opening_title->A [AdjectiveBadass] [ConceptAngsty]</li>
+        <li>duty_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
         <li>duty_opening_body->The message was formal. Precise. Someone needed something. They chose [pawn_nameDef] - [pc_lex_identity_echo] - specifically.\n\n[pawn_pronoun] was [pc_lex_tone], [pc_lex_scene].\n\n[pawn_pronoun] [pc_lex_verb_duty].</li>
 
         <li>devotion_opening_title->A sign, perhaps</li>
+        <li>devotion_opening_title->A [AdjectiveFriendly] [TerrainFeature]</li>
+        <li>devotion_opening_title->The [AdjectiveFriendly] [ConceptPositive]</li>
+        <li>devotion_opening_title->A [ColorBadass] [NaturalObject]</li>
         <li>devotion_opening_body->[pawn_nameDef], [pc_ideo_name], stood [pc_lex_scene], [pc_lex_tone]. The circumstances were specific. The timing was specific.\n\n[pawn_pronoun] [pc_lex_verb_devotion].</li>
 
         <li>violence_opening_title->Something [pawn_nameDef] did not forget</li>
+        <li>violence_opening_title->The [AdjectiveBadass] [Weapon]</li>
+        <li>violence_opening_title->A [ColorBadass] [Enemy]</li>
+        <li>violence_opening_title->The [AdjectiveBadass] [TerrainFeature]</li>
+        <li>violence_opening_title->A [AdjectiveBadass] [ConceptAngsty]</li>
         <li>violence_opening_body->A name appeared where it should not have. [pawn_nameDef], [pc_record_kills] kills on [pawn_possessive] record, did not react visibly.\n\n[pc_thought_strongest_label] was back. [pawn_pronoun] [pc_lex_verb_violence], [pc_lex_scene].</li>
 
         <li>kinship_opening_title->A name [pawn_nameDef] thought was gone</li>
+        <li>kinship_opening_title->The [AdjectiveFriendly] [PersonFamily]</li>
+        <li>kinship_opening_title->A [AdjectiveFriendly] [Community]</li>
+        <li>kinship_opening_title->The [AdjectiveAngsty] [ConceptAngsty]</li>
         <li>kinship_opening_body->[pawn_nameDef] read it twice, then a third time. [pc_lex_social_anchor]. [pc_lex_scene].\n\n[pc_friend_name] was still out there. [pawn_pronoun] [pc_lex_verb_duty].</li>
 
         <li>curiosity_opening_title->A fragment of something larger</li>
+        <li>curiosity_opening_title->[pawn_nameDef]'s Great Inquiry</li>
+        <li>curiosity_opening_title->The [AdjectiveAngsty] [NaturalObject]</li>
+        <li>curiosity_opening_title->A [ColorBadass] [ConceptAngsty]</li>
+        <li>curiosity_opening_title->The [AdjectiveBadass] [TerrainFeature]</li>
         <li>curiosity_opening_body->Recovered data. A partial file referencing something with no record. [pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level] - [pc_lex_verb_curiosity], [pc_lex_scene].\n\n[pc_thought_strongest_label] surfaces.</li>
 
         <li>survival_opening_title->Something that should have stayed buried</li>
+        <li>survival_opening_title->A [AdjectiveBadass] [Animal] at the [TerrainFeature]</li>
+        <li>survival_opening_title->The [ColorBadass] [TerrainFeature]</li>
+        <li>survival_opening_title->A [AdjectiveBadass] [ConceptAngsty]</li>
         <li>survival_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_lex_wound_summary]. [ConceptAngsty] was back.\n\n[pawn_pronoun] [pc_lex_verb_survival].</li>
 
         <li>craft_opening_title->Something that demands to be built</li>
+        <li>craft_opening_title->The [AdjectiveFriendly] [TerrainFeature]</li>
+        <li>craft_opening_title->A [AdjectiveBadass] [NaturalObject]</li>
+        <li>craft_opening_title->The [AdjectiveFriendly] [ConceptPositive]</li>
         <li>craft_opening_body->The schematic arrived without a sender. [pawn_nameDef] - former [pc_backstory_adult_title], [pc_skill_best_label] at [pc_skill_best_level] - had seen something like this before.\n\n[pawn_pronoun] [pc_lex_verb_craft], [pc_lex_scene].</li>
 
         <li>noble_opening_title->A claim upon [pawn_nameDef]</li>
+        <li>noble_opening_title->The [AdjectiveBadass] [PersonFamily]</li>
+        <li>noble_opening_title->A [ColorBadass] [Community]</li>
+        <li>noble_opening_title->The [AdjectiveAngsty] [ConceptAngsty]</li>
         <li>noble_opening_body->A sealed letter arrived. [pawn_nameDef], [pc_lex_identity_echo], held it a moment, [pc_lex_scene].\n\n[pawn_pronoun] opened it. [pawn_pronoun] was [pc_lex_tone].</li>
 
         <li>animalfriend_opening_title->Where the animal went</li>
+        <li>animalfriend_opening_title->A [AdjectiveBadass] [AnimalBadass]</li>
+        <li>animalfriend_opening_title->The [AdjectiveNatural] [Animal]</li>
+        <li>animalfriend_opening_title->A [AdjectiveAngsty] [AnimalGroup]</li>
         <li>animalfriend_opening_body->[pc_lex_animal_moment].\n\n[pawn_nameDef] - [pc_lex_identity_echo] - watched it, [pc_lex_scene]. [pawn_pronoun] [pc_lex_verb_survival].</li>
 
         <li>wandering_opening_title->A destination presents itself</li>
+        <li>wandering_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
+        <li>wandering_opening_title->A [ColorBadass] [NaturalObject]</li>
+        <li>wandering_opening_title->The [AdjectiveBadass] [Community]</li>
         <li>wandering_opening_body->The rumour had followed [pawn_nameDef] through [Quantity_adjphrase] [Community]s. [pawn_pronoun] was [pc_lex_tone], [pc_lex_scene], [pc_lex_combat_posture].\n\n[pawn_pronoun] [pc_lex_verb_survival].</li>
 
         <li>healer_opening_title->A patient [pawn_nameDef] cannot help</li>
+        <li>healer_opening_title->The [AdjectiveAngsty] [PersonJob]</li>
+        <li>healer_opening_title->A [AdjectiveAngsty] [BodyPart]</li>
+        <li>healer_opening_title->The [ColorBadass] [ConceptAngsty]</li>
         <li>healer_opening_body->The case arrived through unofficial channels. [pawn_nameDef] - [pc_skill_best_label] at [pc_skill_best_level] - read it, [pc_lex_scene].\n\n[pawn_pronoun] was [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_duty].</li>
 
         <li>betrayal_opening_title->A name [pawn_nameDef] hoped never to see</li>
+        <li>betrayal_opening_title->A [AdjectiveBadass] [PersonJob]</li>
+        <li>betrayal_opening_title->The [AdjectiveAngsty] [ConceptAngsty]</li>
+        <li>betrayal_opening_title->A [ColorBadass] [Community]</li>
         <li>betrayal_opening_body->The name appeared on a trader's roster. [pawn_nameDef] - [pc_lex_identity_echo] - stood [pc_lex_scene], [pc_lex_tone].\n\n[pawn_pronoun] [pc_lex_secretive].</li>
 
         <li>resilience_opening_title->One more thing</li>
+        <li>resilience_opening_title->A [AdjectiveAngsty] [TerrainFeature]</li>
+        <li>resilience_opening_title->The [AdjectiveAngsty] [BodyPart]</li>
+        <li>resilience_opening_title->A [ColorBadass] [ConceptAngsty]</li>
         <li>resilience_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene]. [ConceptAngsty] was not new. [pc_thought_strongest_label] was.\n\n[pawn_pronoun] was [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_trauma].</li>
 
         <li>isolation_opening_title->Something that cannot be handled alone</li>
+        <li>isolation_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
+        <li>isolation_opening_title->A [AdjectiveAngsty] [ConceptAngsty]</li>
+        <li>isolation_opening_title->The [AdjectiveAngsty] [NaturalObject]</li>
         <li>isolation_opening_body->[pawn_nameDef], [pc_lex_identity_echo], had managed without help. [pc_thought_strongest_label] did not fit the usual approach.\n\n[pawn_pronoun] considers [pawn_possessive] options, [pc_lex_scene], [pc_lex_tone]. [pawn_pronoun] [pc_lex_secretive].</li>
 
         <li>refugee_opening_title->Word from somewhere [pawn_nameDef] left behind</li>
+        <li>refugee_opening_title->The [AdjectiveAngsty] [Community]</li>
+        <li>refugee_opening_title->A [ColorBadass] [TerrainFeature]</li>
+        <li>refugee_opening_title->The [AdjectiveBadass] [ConceptAngsty]</li>
         <li>refugee_opening_body->The message was specific. [pawn_nameDef] - [pc_lex_identity_echo] - did not expect it to arrive here.\n\n[pawn_pronoun] stood [pc_lex_scene], [pc_lex_combat_posture], [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_survival].</li>
 
         <li>scholar_opening_title->A page that should not exist</li>
+        <li>scholar_opening_title->The [AdjectiveAngsty] [NaturalObject]</li>
+        <li>scholar_opening_title->A [ColorBadass] [ConceptAngsty]</li>
+        <li>scholar_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
         <li>scholar_opening_body->Recovered data. A single fragment referencing something [pawn_nameDef] had spent years looking for. [pc_lex_identity_echo] - [pc_skill_best_label] at [pc_skill_best_level].\n\n[pawn_pronoun] [pc_lex_verb_curiosity], [pc_lex_scene].</li>
 
         <li>leadership_opening_title->Something only [pawn_nameDef] can do</li>
+        <li>leadership_opening_title->The [AdjectiveBadass] [PersonJob]</li>
+        <li>leadership_opening_title->A [AdjectiveBadass] [Community]</li>
+        <li>leadership_opening_title->The [AdjectiveAngsty] [ConceptAngsty]</li>
         <li>leadership_opening_body->The request was phrased politely. There was no one else.\n\n[pawn_nameDef] - [pc_lex_social_anchor] - listened to the full account, [pc_lex_scene].\n\n[pawn_pronoun] [pc_lex_verb_duty].</li>
 
         <li>faith_opening_title->A calling [pawn_nameDef] did not expect</li>
+        <li>faith_opening_title->A [AdjectiveFriendly] [TerrainFeature]</li>
+        <li>faith_opening_title->The [AdjectiveFriendly] [ConceptPositive]</li>
+        <li>faith_opening_title->A [ColorBadass] [NaturalObject]</li>
         <li>faith_opening_body->[pawn_nameDef], [pc_ideo_name], stood [pc_lex_scene], [pc_lex_tone]. The conviction was there. Not a vision - just a fact.\n\n[pawn_pronoun] prepared, [pc_lex_combat_posture]. [pawn_pronoun] [pc_lex_verb_devotion].</li>
 
         <li>decay_opening_title->Something [pawn_nameDef] cannot outrun</li>
+        <li>decay_opening_title->The [AdjectiveAngsty] [BodyPart]</li>
+        <li>decay_opening_title->A [ColorBadass] [ConceptAngsty]</li>
+        <li>decay_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
         <li>decay_opening_body->[pc_hediff_bad_list]. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_thought_strongest_label] was louder than usual.\n\n[pawn_pronoun] [pc_lex_verb_survival]. [pawn_pronoun] would deal with it later.</li>
 
         <li>pacifism_opening_title->Something that cannot be talked away</li>
+        <li>pacifism_opening_title->A [AdjectiveBadass] [Enemy]</li>
+        <li>pacifism_opening_title->The [AdjectiveAngsty] [Weapon]</li>
+        <li>pacifism_opening_title->The [AdjectiveBadass] [TerrainFeature]</li>
         <li>pacifism_opening_body->[pawn_nameDef] - [pc_lex_identity_echo] - had always believed [ConceptBadass] was not the answer.\n\nSomething had arrived that disagreed. [pawn_pronoun] stood [pc_lex_scene], [pc_lex_tone], [pc_lex_combat_posture].</li>
 
         <li>redemption_opening_title->The chance [pawn_nameDef] never asked for</li>
+        <li>redemption_opening_title->A [AdjectiveFriendly] [TerrainFeature]</li>
+        <li>redemption_opening_title->The [AdjectiveFriendly] [ConceptPositive]</li>
+        <li>redemption_opening_title->A [AdjectiveFriendly] [Community]</li>
         <li>redemption_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. Something was being offered. [pawn_pronoun] was [pc_lex_tone] [Trans] it.\n\n[pawn_pronoun] [pc_lex_verb_duty].</li>
 
         <li>corruption_opening_title->The path [pawn_nameDef] knows too well</li>
+        <li>corruption_opening_title->A [AdjectiveBadass] [PersonJob]</li>
+        <li>corruption_opening_title->The [ColorBadass] [TerrainFeature]</li>
+        <li>corruption_opening_title->A [AdjectiveAngsty] [ConceptAngsty]</li>
         <li>corruption_opening_body->The offer was familiar. [pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone].\n\n[pawn_pronoun] [pc_lex_secretive]. [pawn_pronoun] had done this before.</li>
 
         <li>threshold_opening_title->The line [pawn_nameDef] had not yet crossed</li>
+        <li>threshold_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
+        <li>threshold_opening_title->A [ColorBadass] [ConceptAngsty]</li>
+        <li>threshold_opening_title->The [AdjectiveBadass] [NaturalObject]</li>
         <li>threshold_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_lex_wound_summary]. [pc_thought_strongest_label] had not moved.\n\n[pawn_pronoun] [pc_lex_verb_trauma].</li>
 
         <li>echo_opening_title->Something that should have stayed silent</li>
+        <li>echo_opening_title->A [AdjectiveAngsty] [Community]</li>
+        <li>echo_opening_title->The [AdjectiveAngsty] [TerrainFeature]</li>
+        <li>echo_opening_title->The [ColorBadass] [ConceptAngsty]</li>
         <li>echo_opening_body->A name [pawn_nameDef] thought [pawn_pronoun] had left behind. [pc_lex_scene].\n\n[pawn_pronoun] is [pc_lex_tone]. [pawn_pronoun] [pc_lex_verb_trauma].</li>
 
         <li>rebirth_opening_title->The first breath after drowning</li>
+        <li>rebirth_opening_title->A [AdjectiveFriendly] [TerrainFeature]</li>
+        <li>rebirth_opening_title->The [AdjectiveFriendly] [NaturalObject]</li>
+        <li>rebirth_opening_title->A [AdjectiveFriendly] [ConceptPositive]</li>
         <li>rebirth_opening_body->[pawn_nameDef], [pc_lex_identity_echo], stood [pc_lex_scene], [pc_lex_tone]. [pc_lex_wound_summary]. [pc_thought_strongest_label] had changed.\n\n[pawn_pronoun] [pc_lex_verb_survival].</li>
 
         <!-- ═══════════════════════════════════════════════════════════════
@@ -1794,3 +1918,4 @@
     </rulePack>
   </RulePackDef>
 </Defs>
+          

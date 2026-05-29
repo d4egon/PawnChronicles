@@ -84,6 +84,28 @@ namespace PawnChronicles
 
         public List<ChoiceEffect> effects = new List<ChoiceEffect>();
 
+        // ── Pool-drawn effect entries ─────────────────────────────────────────────
+
+        /// <summary>DefName of the positive EffectEntryDef drawn from the pool.
+        /// Applied immediately when the player confirms this choice.</summary>
+        public string positiveEntryDefName = "";
+
+        /// <summary>DefName of the negative EffectEntryDef drawn from the pool.
+        /// Applied immediately alongside the positive entry.</summary>
+        public string negativeEntryDefName = "";
+
+        /// <summary>Resolve the positive entry at runtime (not saved directly).</summary>
+        public EffectEntryDef PositiveEntry =>
+            string.IsNullOrEmpty(positiveEntryDefName) ? null
+            : DefDatabase<EffectEntryDef>.GetNamedSilentFail(positiveEntryDefName);
+
+        /// <summary>Resolve the negative entry at runtime (not saved directly).</summary>
+        public EffectEntryDef NegativeEntry =>
+            string.IsNullOrEmpty(negativeEntryDefName) ? null
+            : DefDatabase<EffectEntryDef>.GetNamedSilentFail(negativeEntryDefName);
+
+        // ── Flags ─────────────────────────────────────────────────────────────────
+
         /// <summary>Hard Road: fires narrative incident on advance, CompleteEpic(true).</summary>
         public bool isHardRoad = false;
 
@@ -102,6 +124,8 @@ namespace PawnChronicles
             Scribe_Values.Look(ref baseline,       "baseline",       0);
             Scribe_Values.Look(ref targetDelta,    "targetDelta",    1);
             Scribe_Collections.Look(ref effects, "effects", LookMode.Deep);
+            Scribe_Values.Look(ref positiveEntryDefName, "positiveEntryDefName", "");
+            Scribe_Values.Look(ref negativeEntryDefName, "negativeEntryDefName", "");
             Scribe_Values.Look(ref isHardRoad,     "isHardRoad",     false);
             Scribe_Values.Look(ref isEasyOut,      "isEasyOut",      false);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
