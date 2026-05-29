@@ -81,3 +81,21 @@ ADDED
         in this pass — they feed the grammar resolver directly and require
         a larger refactor. Translators can handle grammar via DefInjected
         (PC_NarrativeGrammar.xml, PC_EntangledGrammar.xml).
+
+
+==========================
+TODO / FUTURE UPDATES
+==========================
+
+  - Addiction arcs: dedicated arc tracks per addiction type (alcohol, smokeleaf,
+    wake-up, go-juice, luciferium, flake, yayo, etc.). Each arc follows the pawn
+    through dependency, withdrawal, and either relapse or recovery. A successful
+    arc completion triggers a Harmony-patched cure that removes the addiction
+    hediff and grants a narrative epithet reflecting the struggle. Failure path
+    leaves the addiction in place with a corresponding epithet.
+
+  - Crafted condition categories (Bug 6 deferral): split the combined
+    ThingsConstructed + ThingsCrafted counter into per-workbench categories
+    (art bench, tailoring, construction, drug lab). Each category would have its
+    own Harmony patch, counter field, and grammar entry. Medium complexity -
+    requires one patch and one counter per work type.

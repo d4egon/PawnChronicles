@@ -1,3 +1,13 @@
 Possible things to add:
 
 Two-pawn arcs could evolve into the PsychicBond - a gene hediff that exists in biotech ?
+Addiction arcs: dedicated arc track per addiction type (alcohol, smokeleaf,
+wake-up, go-juice, luciferium, flake, yayo, etc.). Arc follows the pawn through
+dependency, withdrawal, and either relapse or recovery. Successful completion
+triggers a cure removing the addiction hediff and grants a matching narrative
+epithet. Failure leaves the addiction and gives a corresponding epithet.
+
+Crafted condition categories (deferred Bug 6): split the combined
+ThingsConstructed + ThingsCrafted counter into per-workbench categories (art
+bench, tailoring, construction, drug lab). Requires one Harmony patch and one
+counter field per work type.
