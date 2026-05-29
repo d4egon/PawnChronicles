@@ -12,7 +12,7 @@ ThingsConstructed + ThingsCrafted counter into per-workbench categories (art
 bench, tailoring, construction, drug lab). Requires one Harmony patch and one
 counter field per work type.
 
-Luciferium arc (separate track - more complex than other addiction arcs):
+Luciferium arc**** (separate track - more complex than other addiction arcs):
   - Unique 8-stage structure: opening, dependency, reckoning, quest, danger,
     crisis, success, failure.
   - Hard road fires a custom incident generating an AncientDanger-type world
@@ -40,3 +40,319 @@ Modded drug support improvements:
     becomes common (e.g. Odyssey ships custom mushroom hediff classes), widen the
     check to also match HediffDef.hediffClass assignability or a custom tag/flag.
   - Test against Odyssey mushroom content when released.
+
+
+
+****
+
+This is a genuinely interesting design problem because Luciferium is structurally different from every other addiction - you don't arc toward sobriety, you arc toward *reckoning*. Here's the full plan:
+
+---
+
+## The Luciferium Chronicle
+
+### Core Design Pillars
+
+**The Permanent Clock** - every stage has the Luciferium option because the pawn always needs the next dose. The question is never "do I take it" - it's "what do I trade for it this time."
+
+**The Guaranteed Choice** - mechanically, this means `EffectPoolDrawer` gets a new method: `DrawChoicesWithGuaranteed(guaranteed positive, heavy negative pool, count)`. Choice slot 1 is always `1x Luciferium + rotating heavy cost`. Slots 2-3 draw from the standard pool. The player always has the option to feed the habit.
+
+**The Cost Escalation** - the Luciferium choice's negative effect gets heavier as stages progress. Early stages cost opinion. Mid stages cost skills or trigger raids. Late stages cost mental breaks or fire incidents.
+
+**The Fork at Stage 13** - either accept the loop (sustained arc fires indefinitely) or commit to the facility questchain.
+
+---
+
+### The 13 Stages
+
+---
+
+**Stage 1 - Opening: "The Enhancement"**
+
+*No choices. Pure narrative hook.*
+
+Pawn took their first dose. The logs note a marked improvement in reaction time, pain tolerance, and general output. Nobody asked where it came from. The colony noted the improvement without noting the cost. The pawn filed the relevant information under "manageable."
+
+Wait condition: 7 days (first refill window)
+
+---
+
+**Stage 2 - "The Schedule"**
+
+*First choices appear.*
+
+The supply count came back lower than expected. The pawn did the arithmetic in private. The dose window is roughly six days. The available supply covers approximately four cycles. Nobody has been told.
+
+**Guaranteed choice:** *"Find the next dose"* - spawn 1x Luciferium / cost: -15 opinion with closest ally (the pawn asked for money and didn't explain why)
+
+Pool choices: standard general/addiction tags
+
+Wait condition: time (6 days)
+
+---
+
+**Stage 3 - "What the Medic Found"**
+
+*Social fallout begins.*
+
+The colony medic ran a standard wellness check. The blood panel was... clarifying. The conversation that followed was recorded in the colony log as "routine medical consultation." The pawn's account and the medic's account differ on several points.
+
+**Guaranteed choice:** *"Deflect and resupply"* - spawn 1x Luciferium / cost: social conflict with medic (-15 opinion), mental break risk (Catatonic chance)
+
+Pool choices: social/addiction tags
+
+Wait condition: social interactions (10)
+
+---
+
+**Stage 4 - "A Reliable Contact"**
+
+*First underworld element. A lead on supply.*
+
+Someone in a passing caravan knew someone who knew someone. The arrangement was informal, expensive, and required a question the pawn answered without hesitation. The caravan left. The supply did not run out that cycle.
+
+**Guaranteed choice:** *"Pay the contact"* - spawn 1x Luciferium / cost: -60 silver spawned removed (or -1 Social skill, the negotiation went poorly)
+
+Pool choices: underworld/social/crisis tags
+
+Wait condition: time (7 days)
+
+---
+
+**Stage 5 - "The Source"**
+
+*First real investigation beat. The supply chain has a name.*
+
+The contact mentioned a facility. Pre-collapse, military-adjacent. Someone was still running it, or running something out of it. The pawn wrote nothing down. They had a very good memory now.
+
+**Guaranteed choice:** *"Buy another cycle"* - spawn 1x Luciferium / cost: 750 raid points (debt collector - payment wasn't what was agreed)
+
+Pool choices: underworld/crisis/scholar tags
+
+Wait condition: kills (2) OR time (10 days) - the contact needs proof of capability
+
+---
+
+**Stage 6 - "The Middleman's Cut"**
+
+*The supply chain has friction. Someone is skimming.*
+
+The arrangement had changed. The contact had a partner now, or had always had one. The price reflected this. The pawn paid it. The pawn also began keeping track of names.
+
+**Guaranteed choice:** *"Pay the new rate"* - spawn 1x Luciferium / cost: passion loss (random) - the thing that used to matter matters less now
+
+Pool choices: underworld/betrayal/crisis tags
+
+Wait condition: time (6 days)
+
+---
+
+**Stage 7 - "A Missed Window"**
+
+*First real danger. The supply ran short.*
+
+The shipment was late. The pawn managed the gap with considerable effort and considerable concealment. The colony noticed a change in temperament and attributed it to stress. This was partially accurate.
+
+**Guaranteed choice:** *"Emergency acquisition - any cost"* - spawn 1x Luciferium / cost: Berserk mental break fires immediately
+
+Pool choices: crisis/withdrawal/violence tags
+
+Wait condition: mood low (crisis threshold)
+
+---
+
+**Stage 8 - "Deeper Obligations"**
+
+*The supply chain now owns something.*
+
+The contact had been helpful across six cycles. They mentioned this. They also mentioned what they expected in return. The pawn filed this under "future problem" and updated the timeline.
+
+**Guaranteed choice:** *"Accept the obligation"* - spawn 1x Luciferium / cost: -2 Social skill (the pawn agreed to something they cannot take back)
+
+Pool choices: underworld/duty/betrayal tags
+
+Wait condition: social (10 interactions, the obligation involves being seen)
+
+---
+
+**Stage 9 - "The Favor"**
+
+*The contact calls it in. Real moral cost.*
+
+The favor was specific. It involved someone in or near the colony. The pawn completed it. The colony log has a gap between 14:00 and 17:00 on that date that nobody has asked about.
+
+**Guaranteed choice:** *"Do what was asked"* - spawn 1x Luciferium / cost: relation damaged (RelationDamage) + Catatonic mental break on a random colonist (they saw something)
+
+Pool choices: crisis/violence/underworld/betrayal tags
+
+Wait condition: time (8 days)
+
+**HINT at the facility drops here** - the contact mentions, offhand, that the supply originates from a salvaged pre-collapse installation. They give partial coordinates. The pawn does not share this.
+
+---
+
+**Stage 10 - "The Coordinates"**
+
+*The lead is real. The path diverges begins to show.*
+
+The partial coordinates resolved into something specific when cross-referenced with orbital survey data. A structure. Pre-collapse. Still emitting a faint power signature. Someone had kept the lights on. The pawn told nobody.
+
+**Guaranteed choice:** *"Stay the course - another cycle"* - spawn 1x Luciferium / cost: -2 Medicine skill (the pawn's self-medication methodology is getting sloppy) + ToxicBuildup 0.35
+
+Pool choices: scholar/curiosity/survival/crisis tags
+
+Wait condition: time (7 days)
+
+---
+
+**Stage 11 - "The Toll"**
+
+*Physical and social damage is visible now.*
+
+The medic's latest report listed four items of concern and one observation framed as a question. The pawn answered the question. The medic made a note and asked for a follow-up in 10 days. The pawn agreed. The pawn had no intention of keeping the appointment.
+
+**Guaranteed choice:** *"Obtain and avoid the follow-up"* - spawn 1x Luciferium / cost: CatatonicBreakdown hediff 0.5 severity + social conflict
+
+Pool choices: decay/crisis/addiction/withdrawal tags
+
+Wait condition: mood low
+
+---
+
+**Stage 12 - "Diminishing Returns"**
+
+*The contact's supply is becoming unreliable. The facility is the only real answer.*
+
+The contact had become unreliable. Supply was arriving late, short, or not at all. The partial coordinates were complete now. The pawn had been running the logistics in their head for two weeks. The numbers worked. It would require help.
+
+**Guaranteed choice:** *"One more emergency purchase"* - spawn 1x Luciferium / cost: 1000 raid points (someone found out about the coordinates and wants them) + -1 Shooting skill
+
+Pool choices: crisis/survival/violence/underworld tags
+
+Wait condition: kills (3) OR time (12 days)
+
+---
+
+**Stage 13 - "The Reckoning" (Climax)**
+
+*The fork.*
+
+Two real options. No pool draws here - this is authored:
+
+**Option A - "Keep the arrangement"** (Easy Out / Perpetual Loop)
+The facility is a risk. The arrangement is working, more or less. The pawn will continue. The colony will continue to pay. The pawn files the coordinates somewhere safe and goes back to work.
+
+- Arc "completes" as a failure but immediately fires `PC_Arc_Luciferium_Sustained`
+- Pawn receives 2x Luciferium
+- Epithet: something dry about managed dependency
+
+**Option B - "Find the source"** (Hard Road / Questchain)
+The supply chain is unsustainable. The facility is the only exit. The pawn tells someone - one person - where they're going and why.
+
+- Fires the 5-quest facility chain
+- Wait condition: all 5 quests completed
+
+---
+
+### The Perpetual Loop (`PC_Arc_Luciferium_Sustained`)
+
+A shorter arc, 5 stages, that fires every time Option A is chosen. Each loop, costs escalate one tier:
+
+Loop 1: Opinion hits, small silver costs
+Loop 2: Skill losses, small raids
+Loop 3: Passion losses, medium raids, hediffs
+Loop 4+: Mental breaks, heavy raids, relation damage, passion destruction
+
+The loop always offers the Luciferium guaranteed choice. It never offers a way out. The player can break it by completing the facility questchain at any point (a new "pursue the coordinates" option appears from stage 3 of each loop).
+
+This models addiction as a narrative mechanic extremely well - it's not punishment, it's just the ongoing cost, and the player keeps agreeing to it.
+
+---
+
+### The Facility Questchain (5 Quests)
+
+**Quest 1 - "Signal Recovery"**
+
+Type: Map event / small incident
+The coordinates lead to a broadcast source. The signal is still transmitting - automated. The pawn needs to reach it and decode the full facility location.
+
+Implementation: `IncidentDef` fires a small enemy group (pirates who are also tracking the signal). Pawn survives, gets the full data. Or the pawn can pay 300 silver to a data broker for the same result.
+
+Reward: Full facility coordinates confirmed. Next quest unlocks.
+
+---
+
+**Quest 2 - "The Approach"**
+
+Type: Raid/defense event
+The facility is 2 days travel from the colony. Something is already there. Mechanoids (the facility's automated defense) or pirates (who got there first). A strike team is needed.
+
+Implementation: Mid-sized raid (800-1000 points) that fires at the colony while the pawn is "away" - the cost of attempting the approach. Player defends, pawn returns.
+
+Alternatively: pay 500 silver to hire a mercenary escort.
+
+Reward: Approach route cleared. Next quest unlocks.
+
+---
+
+**Quest 3 - "Inside"**
+
+Type: Ancient danger / ruin event
+The facility interior. Ancient mechanoid defenses still active. The pawn must spend time in the facility (time-based wait condition: 5 days of "investigation").
+
+Implementation: A timed incident sequence - mechanoid cluster appears at day 2, another at day 4. Survive both. This uses `FireIncident` from the effect system.
+
+Or: Intellectual skill check (level 10) to shut down the defense grid remotely before entering.
+
+Reward: Interior access. Research data recovered. Next quest unlocks.
+
+---
+
+**Quest 4 - "The Cache"**
+
+Type: Choice/decision point
+Deep in the facility: a pre-collapse medical bay. Two things are present.
+
+A - A working Healer Mech Serum. One dose. Enough.
+B - The synthesis formula. Requires 200 plasteel, 50 components, Intellectual 12, and 20 days.
+
+If the pawn takes Option A (the serum): immediate application, arc ends with `MechSerumHealer` applied. Done.
+If the pawn takes Option B (the formula): Quest 5 unlocks.
+
+---
+
+**Quest 5 - "Synthesis" (Optional)**
+
+Type: Crafting + skill check
+The formula is real. The materials exist. The process is documented. The pawn has 20 days to gather what's needed and complete the synthesis.
+
+Wait condition: specific material check (Plasteel 200, ComponentIndustrial 50) + Intellectual 12 skill check.
+
+Success: Synthesized serum applied. `MechSerumHealer` fires. Arc ends with a unique epithet - the only one in the game that references what they went through.
+
+Failure (skill check fails, or time expires): Formula corrupted. Back to the loop. The coordinates still exist. A future loop cycle can attempt the synthesis again with better preparation.
+
+---
+
+### Narrative Voice Notes
+
+Every stage title uses the grammar tag system (`[AdjectiveAngsty]`, `[TerrainFeature]` etc.) for variants, with 2-3 fixed authored titles as anchors. The body text follows the dry documentary style already established in the addiction arcs - specific, factual, no internal monologue, dry wit for the worst moments.
+
+The arc has its own grammar role prefix: `addiction_luciferium_*`.
+
+---
+
+### What Needs Building
+
+In order:
+
+1. `PC_Arc_Luciferium` PersonalEpicDef + 13 fixed stages XML
+2. `PC_Arc_Luciferium_Sustained` shorter loop arc
+3. Grammar rules for all 13 stages (title + body pairs)
+4. `DrawChoicesWithGuaranteed()` in EffectPoolDrawer
+5. New `PC_Effect_*_Luciferium_Cost_*` EffectEntryDef entries (escalating negatives always paired with 1x Luciferium)
+6. 5 QuestScriptDef entries for the facility chain
+7. `MechSerumHealer` application at arc completion (already in the completion system)
+8. New epithets for the loop and the cure
+
+The quest chain integration is the biggest new piece. Quests 1-3 can use existing incident firing (`incidentDef` field). Quest 4-5 need a custom `QuestScriptDef` since they involve specific choices and crafting checks - but `DynamicQuestBuilder.cs` is already in the project for exactly this.

@@ -192,9 +192,22 @@ namespace PawnChronicles
         private void TryApplyMentalBreak(Pawn pawn)
         {
             if (string.IsNullOrEmpty(mentalBreakDef)) return;
-            var def = DefDatabase<MentalBreakDef>.GetNamedSilentFail(mentalBreakDef);
-            if (def == null) { Log.Warning($"[PawnChronicles] EffectEntryDef {defName}: unknown MentalBreakDef '{mentalBreakDef}'"); return; }
-            def.Worker?.TryStart(pawn, null, causedByMood: false);
+            var breakDef = DefDatabase<MentalBreakDef>.GetNamedSilentFail(mentalBreakDef);
+            if (breakDef == null) { Log.Warning($"[PawnChronicles] EffectEntryDef {defName}: unknown MentalBreakDef '{mentalBreakDef}'"); return; }
+            if (pawn.mindState?.mentalStateHandler == null) return;
+
+            // TryStart respects arrival grace period and cooldowns - can silently fail.
+            // Force via the state handler to bypass cooldown. Still may fail if pawn
+            // was just added to the colony (vanilla ~6hr arrival grace on mindState init).
+            var stateDef = breakDef.mentalState;
+            bool started = false;
+            if (stateDef != null)
+                started = pawn.mindState.mentalStateHandler.TryStartMentalState(stateDef, null, forced: true);
+            else
+                started = breakDef.Worker?.TryStart(pawn, null, causedByMood: false) ?? false;
+
+            if (!started)
+                Log.Message($"[PawnChronicles] Mental break '{mentalBreakDef}' could not start on {pawn.LabelShort} - likely arrival grace period.");
         }
 
         private void TryApplyIncident(Pawn pawn)
