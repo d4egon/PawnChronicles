@@ -515,4 +515,19 @@
     </stages>
   </ThoughtDef>
 
+  <!-- Negative social memory: applied to both pawns when socialOpinion < 0 -->
+  <ThoughtDef>
+    <defName>PC_Thought_SocialConflict</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>things went badly between us</label>
+        <description>Something happened that left a bad feeling. It hasn't gone away.</description>
+        <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
 </Defs>

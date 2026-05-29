@@ -477,6 +477,8 @@
   <PC_Effect_Display_PassionLose>lose passion: {0}</PC_Effect_Display_PassionLose>
   <!-- {0} = signed opinion delta e.g. "+15" or "-20" -->
   <PC_Effect_Display_Opinion>{0} opinion</PC_Effect_Display_Opinion>
+  <PC_Effect_Display_OpinionPos>{0} opinion with closest ally</PC_Effect_Display_OpinionPos>
+  <PC_Effect_Display_OpinionNeg>{0} opinion with closest ally</PC_Effect_Display_OpinionNeg>
   <PC_Effect_Display_MentalBreak>mental break</PC_Effect_Display_MentalBreak>
   <PC_Effect_Display_Incident>incident fires</PC_Effect_Display_Incident>
   <!-- {0} = count, {1} = item label -->

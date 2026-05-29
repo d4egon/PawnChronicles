@@ -188,6 +188,13 @@ namespace PawnChronicles
             entry.waitConditionLabel = choice.conditionLabel;
             entry.waitBaselineValue  = choice.baseline;
             entry.waitTargetDelta    = choice.targetDelta;
+
+            // Apply pool-drawn effects to the initiator pawn
+            if (arc.initiator != null)
+            {
+                choice.PositiveEntry?.Apply(arc.initiator);
+                choice.NegativeEntry?.Apply(arc.initiator);
+            }
         }
 
         /// <summary>
@@ -295,9 +302,31 @@ namespace PawnChronicles
                 arc.InitiatorProfile, arc.PartnerProfile,
                 stage.StageRole, def.arcType);
 
-            // Build choices from initiator's top tags - condition activates on player pick
-            var choices = StageWaitCondition.BuildChoicesFor(
-                conditionPawn, conditionProfile, stage.StageRole, isClimax);
+            // Build pool-drawn tradeoff choices for this stage
+            List<StageChoice> choices;
+            if (isClimax)
+            {
+                // Climax keeps the tag-based path choices (hard road / easy out pattern)
+                choices = StageWaitCondition.BuildChoicesFor(
+                    conditionPawn, conditionProfile, stage.StageRole, isClimax: true);
+            }
+            else if (isOpening)
+            {
+                // Opening uses seed choices to pick the arc direction
+                choices = StageWaitCondition.BuildSeedChoices(conditionPawn, conditionProfile);
+            }
+            else
+            {
+                // Middle stages: pool-drawn positive+negative pairs
+                string dominantTag = conditionProfile.DominantTag()?.ToLowerInvariant()
+                    .Replace("pc_tag_", "") ?? "general";
+                string arcTypeTag  = def.arcType.ToString().ToLowerInvariant();
+                choices = EffectPoolDrawer.DrawChoices(
+                    conditionPawn,
+                    tags: new[] { dominantTag, arcTypeTag, "general" },
+                    count: 3,
+                    waitDays: PawnChroniclesMod.Settings.middleWaitDays);
+            }
 
             var entry = new ArcStageEntry(
                 title, body, stage.StageRole,

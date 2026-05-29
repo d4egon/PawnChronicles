@@ -170,21 +170,24 @@ namespace PawnChronicles
             if (socialOpinion == 0) return;
             if (pawn.Map == null) return;
 
-            // Find the colonist the pawn has the highest opinion of
+            // Find the colonist the pawn has the highest opinion of (closest ally)
             Pawn target = pawn.Map.mapPawns.FreeColonistsSpawned
                 .Where(p => p != pawn)
                 .OrderByDescending(p => pawn.relations?.OpinionOf(p) ?? 0)
                 .FirstOrDefault();
             if (target == null) return;
 
-            // Positive: use a custom def if available, else skip positive path
-            // Negative: use Insulted (confirmed vanilla social thought)
-            string thoughtName = socialOpinion > 0 ? "PC_Thought_SocialBond" : "Insulted";
+            string thoughtName = socialOpinion > 0 ? "PC_Thought_SocialBond" : "PC_Thought_SocialConflict";
             ThoughtDef td = DefDatabase<ThoughtDef>.GetNamedSilentFail(thoughtName);
-            if (td == null || !td.IsSocial) return;
+            if (td == null || !td.IsSocial)
+            {
+                Log.Warning($"[PawnChronicles] socialOpinion effect: ThoughtDef '{thoughtName}' not found or not social.");
+                return;
+            }
 
             pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(td, target);
             target.needs?.mood?.thoughts?.memories?.TryGainMemory(td, pawn);
+            Log.Message($"[PawnChronicles] Social opinion: {pawn.LabelShort} <-> {target.LabelShort} via {thoughtName}");
         }
 
         private void TryApplyMentalBreak(Pawn pawn)
@@ -279,7 +282,10 @@ namespace PawnChronicles
                 if (socialOpinion != 0)
                 {
                     string sign = socialOpinion > 0 ? "+" : "";
-                    return "PC_Effect_Display_Opinion".Translate($"{sign}{socialOpinion}");
+                    string key = socialOpinion > 0
+                        ? "PC_Effect_Display_OpinionPos"
+                        : "PC_Effect_Display_OpinionNeg";
+                    return key.Translate($"{sign}{socialOpinion}");
                 }
                 if (!string.IsNullOrEmpty(mentalBreakDef))
                     return "PC_Effect_Display_MentalBreak".Translate();
