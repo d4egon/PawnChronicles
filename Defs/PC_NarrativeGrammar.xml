@@ -171,207 +171,199 @@
       <!-- ═══════════════════════════════════════════════════════════════
              ADDICTION ARCS
         ═══════════════════════════════════════════════════════════════════ -->
-      <li>addiction_alcohol_opening_title->The Drunken Master</li>
-        <li>addiction_alcohol_opening_body->In a</li>
-        <li>addiction_ambrosia_opening_title->Stuff of the Gods</li>
-        <li>addiction_ambrosia_opening_body->While </li>
-        <li>addiction_gojuice_opening_title->Speed, I Am speed</li>
-        <li>addiction_gojuice_opening_body->What if</li>
-        <li>addiction_psychite_opening_title->The Chill Dependency</li>
-        <li>addiction_psychite_opening_body->There once was a</li>
-        <li>addiction_wakeup_opening_title->Sleep Is For The Dead</li>
-        <li>addiction_wakeup_opening_body->Finally</li>
-        <li>addiction_smokeleaf_opening_title->Mob Barley's Fangroup</li>
-        <li>addiction_smokeleaf_opening_body->Together, </li>
-        <li>addiction_chemical_opening_title->My Chemical Romance</li>
-        <li>addiction_chemical_opening_body->By the </li>
 
-        <!--(opening)-->
+        <!-- ── OPENING (first awareness) ─────────────────────────────────── -->
+
         <!--ALCOHOL-->
         <li>addiction_alcohol_opening_title->The Drunken Master</li>
-        <li>addiction_alcohol_opening_body-></li>
+        <li>addiction_alcohol_opening_body->[pawn_nameDef] started keeping a bottle near the [TerrainFeature]. Just for rough nights, [pawn_pronoun] said. [pc_colony_name] had plenty of those. Within a fortnight the bottle had moved to [pawn_possessive] bedside, and the rough nights found [pawn_objective] there.</li>
         <!--AMBROSIA-->
         <li>addiction_ambrosia_opening_title->Stuff of the Gods</li>
-        <li>addiction_ambrosia_opening_body-></li>
+        <li>addiction_ambrosia_opening_body->Some [Animal] knocked over the ambrosia grove during the storm and [pawn_nameDef] helped clear the damage, eating what seemed like a fair amount of fallen fruit. [pc_friend_name] described [pawn_possessive] expression afterward as devotional. [pawn_nameDef] said the fruit was medicinal and that [pc_friend_name]'s observation was not required.</li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_opening_title->Speed, I Am speed</li>
-        <li>addiction_gojuice_opening_body-></li>
+        <li>addiction_gojuice_opening_title->Speed, I Am Speed</li>
+        <li>addiction_gojuice_opening_body->The [Enemy] raid left two colonists injured and one standing question: how had [pawn_nameDef] killed four of them alone, with a [Weapon] and what turned out to be an undisclosed dose of go-juice. The answer was noted in the colony log and not followed up on for approximately three weeks.</li>
         <!--PSYCHITE-->
         <li>addiction_psychite_opening_title->The Chill Dependency</li>
-        <li>addiction_psychite_opening_body-></li>
+        <li>addiction_psychite_opening_body->[pawn_nameDef] had first taken psychite during the long siege, when the [TerrainFeature] was held and there was nothing to do. The waiting was considerably easier on it. [pawn_pronoun] noted this and began keeping a small supply for similar occasions. [pc_colony_name] provided a steady number of similar occasions.</li>
         <!--WAKE-UP-->
         <li>addiction_wakeup_opening_title->Sleep Is For The Dead</li>
-        <li>addiction_wakeup_opening_body-></li>
+        <li>addiction_wakeup_opening_body->[pawn_nameDef] had a list. The [TerrainFeature] needed maintenance. The [PersonJob] backlog had run long for two seasons. Wake-up, [pawn_pronoun] found, added six hours to a working day and asked nothing in return. [pawn_pronoun] did not look into what it asked for later.</li>
         <!--SMOKELEAF-->
         <li>addiction_smokeleaf_opening_title->Mob Barley's Fangroup</li>
-        <li>addiction_smokeleaf_opening_body-></li>
+        <li>addiction_smokeleaf_opening_body->[pawn_nameDef] had started smoking with the [Community] that gathered at the [TerrainFeature] in the evenings. It was social, [pawn_pronoun] told [pc_friend_name]. The people were interesting. The smokeleaf helped [pawn_pronoun] listen. [pc_friend_name] asked how much [pawn_pronoun] was smoking. [pawn_nameDef] said enough to be polite, then refilled [pawn_possessive] pipe.</li>
         <!--CHEMICAL-->
         <li>addiction_chemical_opening_title->My Chemical Romance</li>
-        <li>addiction_chemical_opening_body-></li>
-        
-        <!--(habit entrenched)-->
+        <li>addiction_chemical_opening_body->[pawn_nameDef] had acquired a supply through channels [pawn_pronoun] declined to specify. The colony's [PersonJob] recorded the outgoing inventory and asked no follow-up questions, which [pawn_nameDef] considered professional. [pc_friend_name] put the question in writing. [pawn_nameDef] acknowledged receiving it and did not respond.</li>
+
+        <!-- ── DEPENDENCY (habit entrenched) ──────────────────────────────── -->
 
         <!--ALCOHOL-->
-        <li>addiction_alcohol_dependency_title-></li>
-        <li>addiction_alcohol_dependency_body-></li>
+        <li>addiction_alcohol_dependency_title->On the House</li>
+        <li>addiction_alcohol_dependency_body->The trembling in [pawn_nameDef]'s hands only stopped around the third drink of the day. [pawn_pronoun] told [pc_friend_name] it was a circulation problem. [pc_friend_name] consulted the medic. The medic consulted the supply logs. The supply logs had their own conclusions.</li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_dependency_title-></li>
-        <li>addiction_ambrosia_dependency_body-></li>
+        <li>addiction_ambrosia_dependency_title->Divine Appointment</li>
+        <li>addiction_ambrosia_dependency_body->[pawn_nameDef] began scheduling [pawn_possessive] work shifts around the ambrosia grove's harvest window. When [pc_friend_name] raised the subject, [pawn_nameDef] explained that the grove produced better in [pc_world_season] and that moderate consumption had documented benefits. Neither statement was entirely false, which made things complicated.</li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_dependency_title-></li>
-        <li>addiction_gojuice_dependency_body-></li>
+        <li>addiction_gojuice_dependency_title->The Need for Speed</li>
+        <li>addiction_gojuice_dependency_body->[pawn_nameDef] had begun pre-dosing before any task that seemed like it might involve urgency. This covered most tasks. [pawn_pronoun] finished shifts in half the time and slept twelve hours afterward. [pc_friend_name] flagged the pattern to the medic, who put it in a report that [pawn_nameDef] reviewed and said showed a net positive trend.</li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_dependency_title-></li>
-        <li>addiction_psychite_dependency_body-></li>
+        <li>addiction_psychite_dependency_title->Smooth Edges</li>
+        <li>addiction_psychite_dependency_body->The [pc_world_weather], the noise of [pc_colony_name], the ongoing [PersonJob] disputes - psychite softened all of it to a workable frequency. [pawn_nameDef] was not in denial about the supply levels. [pawn_pronoun] described [pawn_reflexive] as managing a maintenance requirement, which was technically accurate and clearly not the point.</li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_dependency_title-></li>
-        <li>addiction_wakeup_dependency_body-></li>
+        <li>addiction_wakeup_dependency_title->The Schedule</li>
+        <li>addiction_wakeup_dependency_body->[pawn_nameDef]'s output for [pc_world_season] was roughly double the colony average. [pawn_possessive] sleep record showed the inverse. [pc_friend_name] charted both figures and brought them to the medic, who showed them to [pawn_nameDef]. [pawn_nameDef] noted the productivity column and asked if there was a concern.</li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_dependency_title-></li>
-        <li>addiction_smokeleaf_dependency_body-></li>
+        <li>addiction_smokeleaf_dependency_title->The Long Afternoon</li>
+        <li>addiction_smokeleaf_dependency_body->[pawn_nameDef]'s work output for [pc_world_season] was described in the colony log as adequate, eventually. [pawn_pronoun] had begun scheduling relaxation before work on the grounds that work went better when [pawn_pronoun] was calm. This was technically true and clearly not the point, as [pc_friend_name] noted in [pawn_possessive] own log entry.</li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_dependency_title-></li>
-        <li>addiction_chemical_dependency_body-></li>  
-        
-        <!--(relationships fraying)-->
+        <li>addiction_chemical_dependency_title->The Formula</li>
+        <li>addiction_chemical_dependency_body->[pawn_nameDef]'s compound had become a daily operating requirement alongside food and sleep, except [pawn_pronoun] tracked the compound with more precision than either. [pc_friend_name] reviewed the consumption log and brought it to the medic. The medic showed it to [pawn_nameDef]. [pawn_nameDef] confirmed the figures were accurate.</li>
+
+        <!-- ── SOCIAL (relationships fraying) ─────────────────────────────── -->
+
         <!--ALCOHOL-->
-        <li>addiction_alcohol_social_title->The [PersonFamily]'s [AdjectiveBadass][BodyPart]</li>
-        <li>addiction_alcohol_social_body-></li>
+        <li>addiction_alcohol_social_title->The [PersonFamily]'s [AdjectiveBadass] [BodyPart]</li>
+        <li>addiction_alcohol_social_body->[pc_friend_name] stopped asking [pawn_nameDef] to assist with [PersonJob] duties after the third incident. It was not the drinking that bothered them, [pc_friend_name] said later. It was that [pawn_nameDef] could not remember the incidents at all.</li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_social_title->A [PersonFamily]'s [Color][ConceptPositive]</li>
-        <li>addiction_ambrosia_social_body-></li>
+        <li>addiction_ambrosia_social_title->A [PersonFamily]'s [Color] [ConceptPositive]</li>
+        <li>addiction_ambrosia_social_body->A small colony [Community] had formed around the ambrosia grove by the end of [pc_world_season], with [pawn_nameDef] as its unofficial [PersonJob]. [pawn_pronoun] shared [pawn_possessive] supply with some generosity and retained the best of it with more. [pc_friend_name] attended once and did not return.</li>
         <!--GO-JUICE-->
         <li>addiction_gojuice_social_title->In [pawn_nameDef]'s [PersonFamily]'s [AnimalGroup] of [AnimalBadass]</li>
-        <li>addiction_gojuice_social_body-></li>
+        <li>addiction_gojuice_social_body->[pawn_nameDef] at operational speed was, by general agreement, difficult to be around. [pawn_pronoun] completed sentences too fast, anticipated objections before they were formed, and corrected [pc_friend_name]'s [PersonJob] work twice while [pc_friend_name] was still doing it. [pc_friend_name] requested separate shift assignments. The request was approved.</li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_social_title-></li>
-        <li>addiction_psychite_social_body-></li>
+        <li>addiction_psychite_social_title->[pawn_nameDef]'s [Color] [AdjectiveFriendly] Problem</li>
+        <li>addiction_psychite_social_body->[pc_friend_name] noticed [pawn_nameDef] had stopped attending [Community] meals. Then the [PersonJob] shifts ran shorter. Then one [pc_world_time_of_day] [pc_friend_name] found [pawn_objective] at the [TerrainFeature], watching a [Color] patch of [NaturalObject] with apparent satisfaction. [pawn_nameDef] said [pawn_pronoun] had been thinking. [pc_friend_name] began checking in more often.</li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_social_title-></li>
-        <li>addiction_wakeup_social_body-></li>
+        <li>addiction_wakeup_social_title->No Rest for the [PersonJob]</li>
+        <li>addiction_wakeup_social_body->[pawn_nameDef] had stopped eating meals with [pc_friend_name] on the grounds that meals consumed time [pawn_pronoun] had not budgeted. [pc_friend_name] began leaving food at [pawn_possessive] workstation, which [pawn_nameDef] ate standing up while reviewing [pawn_possessive] task queue. [pc_friend_name] did not consider this an improvement.</li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_social_title-></li>
-        <li>addiction_smokeleaf_social_body-></li>
+        <li>addiction_smokeleaf_social_title->An [AdjectiveFriendly] [PersonFamily]'s [Color] Afternoon</li>
+        <li>addiction_smokeleaf_social_body->[pc_friend_name] did not smoke but had taken to sitting with [pawn_nameDef] at the [TerrainFeature] in the evenings because the [pc_world_time_of_day] company was limited. [pawn_nameDef] was reliably [AdjectiveFriendly] on smokeleaf. [pawn_pronoun] was also reliably [AdjectiveFriendly] off it. [pc_friend_name] noted that the issue was not personality.</li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_social_title-></li>
-        <li>addiction_chemical_social_body-></li> 
+        <li>addiction_chemical_social_title->The [PersonFamily]'s [AdjectiveAngsty] [Apparel]</li>
+        <li>addiction_chemical_social_body->[pawn_nameDef] had become selectively available. [pc_friend_name] could locate [pawn_objective] at the [TerrainFeature] at predictable intervals, and the windows between were harder to account for. The colony's [PersonJob] had quietly stopped assigning [pawn_nameDef] to work requiring a fixed schedule. [pawn_nameDef] had not raised the issue.</li>
 
+        <!-- ── WITHDRAWAL (first attempt to stop) ─────────────────────────── -->
 
-        <!--(first attempt to stop)-->
         <!--ALCOHOL-->
-        <li>addiction_alcohol_withdrawal_title-></li>
-        <li>addiction_alcohol_withdrawal_body-></li>
+        <li>addiction_alcohol_withdrawal_title->Cold [TerrainFeature]</li>
+        <li>addiction_alcohol_withdrawal_body->[pawn_nameDef] announced [pawn_pronoun] was done. [pawn_possessive] hands filed a counter-argument the following morning. By the second day [pawn_pronoun] had dismantled and reassembled [pawn_possessive] [Weapon] four times, sweating through [pawn_possessive] [Apparel] in [pc_world_weather]. [pc_friend_name] kept watch and said nothing.</li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_withdrawal_title-></li>
-        <li>addiction_ambrosia_withdrawal_body-></li>
+        <li>addiction_ambrosia_withdrawal_title->The Earthly Plane</li>
+        <li>addiction_ambrosia_withdrawal_body->Without ambrosia, [pc_colony_name] was noticeably worse. The [pc_world_weather] was too loud. The [TerrainFeature] was the wrong [Color]. [pawn_nameDef] kept all of this to [pawn_reflexive], which [pc_friend_name] found more alarming than if [pawn_pronoun] had said it aloud.</li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_withdrawal_title-></li>
-        <li>addiction_gojuice_withdrawal_body-></li>
+        <li>addiction_gojuice_withdrawal_title->Crash Landing</li>
+        <li>addiction_gojuice_withdrawal_body->The go-juice supply ran out in [pc_world_season] and [pawn_nameDef] spent the following week at what [pawn_pronoun] described as an unreasonable pace. [pc_friend_name] noted [pawn_pronoun] was moving at a normal speed. [pawn_nameDef] said that was exactly the problem.</li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_withdrawal_title-></li>
-        <li>addiction_psychite_withdrawal_body-></li>
+        <li>addiction_psychite_withdrawal_title->The Edges Return</li>
+        <li>addiction_psychite_withdrawal_body->Without psychite, [pc_colony_name] arrived at full volume. [pawn_nameDef] had forgotten what that sounded like. The [Animal]s in the pen, the [PersonJob] disputes, the [pc_world_weather] - all of it present in a way [pawn_pronoun] had not experienced in some time. [pawn_pronoun] described this to [pc_friend_name] as a calibration issue.</li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_withdrawal_title-></li>
-        <li>addiction_wakeup_withdrawal_body-></li>
+        <li>addiction_wakeup_withdrawal_title->The Debt</li>
+        <li>addiction_wakeup_withdrawal_body->The wake-up supply ran out in [pc_world_season] and [pawn_nameDef]'s body called in the debt with interest. [pawn_pronoun] slept through two consecutive shifts, which [pc_friend_name] covered without comment. The [PersonJob] backlog grew back to its previous length in the time [pawn_pronoun] was unconscious. [pawn_nameDef] found this clarifying, on waking.</li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_withdrawal_title-></li>
-        <li>addiction_smokeleaf_withdrawal_body-></li>
+        <li>addiction_smokeleaf_withdrawal_title->The Itch</li>
+        <li>addiction_smokeleaf_withdrawal_body->[pawn_nameDef] had stopped smoking for a reason that changed depending on when [pawn_pronoun] was asked. By the third day [pawn_pronoun] had reorganized the [TerrainFeature] storage twice and consumed significantly more food than usual. [pc_friend_name] said [pawn_pronoun] seemed restless. [pawn_nameDef] said [pawn_pronoun] was thinking at a higher rate.</li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_withdrawal_title-></li>
-        <li>addiction_chemical_withdrawal_body-></li>
+        <li>addiction_chemical_withdrawal_title->The Chemistry of No</li>
+        <li>addiction_chemical_withdrawal_body->The compound was unavailable for three days. [pawn_nameDef] worked through [pawn_possessive] [pc_world_time_of_day] shift without communication, [pawn_possessive] [Apparel] on inside out, [pawn_possessive] [Weapon] cleaned twice before the shift started. [pc_friend_name] delivered food and left without comment. The [Animal]s in the area were louder than usual, or seemed so.</li>
 
+        <!-- ── CRISIS (rock bottom) ────────────────────────────────────────── -->
 
-        <!--(rock bottom)-->
         <!--ALCOHOL-->
-        <li>addiction_alcohol_crisis_title-></li>
-        <li>addiction_alcohol_crisis_body-></li>
+        <li>addiction_alcohol_crisis_title->Last Rounds</li>
+        <li>addiction_alcohol_crisis_body->[pawn_nameDef] was found near the [TerrainFeature] three hours after [pawn_pronoun] was supposed to be on watch. A [Animal] had wandered in from the [pc_world_biome] and left again undisturbed. [pc_colony_name] was lucky that night, though no one said so to [pawn_possessive] face.</li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_crisis_title-></li>
-        <li>addiction_ambrosia_crisis_body-></li>
+        <li>addiction_ambrosia_crisis_title->The Grove Does Not Wait</li>
+        <li>addiction_ambrosia_crisis_body->The ambrosia grove failed in [pc_world_season]. Blight, or possibly overharvesting - the botanist noted both in [pawn_possessive] report and looked at [pawn_nameDef] while doing so. [pawn_nameDef] spent three days inspecting the dead plants. [pawn_pronoun] called it assessment. [pc_friend_name] called it something else and noted it in the colony log.</li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_crisis_title-></li>
-        <li>addiction_gojuice_crisis_body-></li>
+        <li>addiction_gojuice_crisis_title->Friendly Fire Review</li>
+        <li>addiction_gojuice_crisis_body->During the [Enemy] incursion, [pawn_nameDef] had taken a dose and a half and discharged a [Weapon] in [pc_friend_name]'s direction. [pc_friend_name] survived. The [Enemy] did not. The colony held a review. [pc_friend_name] attended and said nothing, which was recorded as more impactful than any formal statement.</li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_crisis_title-></li>
-        <li>addiction_psychite_crisis_body-></li>
+        <li>addiction_psychite_crisis_title->A Long Way Down</li>
+        <li>addiction_psychite_crisis_body->[pawn_nameDef] was found near the [pc_world_biome] border during [pc_world_weather], uninjured, three hours after [pawn_possessive] last recorded location. The medic attributed the survival to luck. The dosage log showed [pawn_possessive] intake had doubled without [pawn_possessive] accounting for it, which the medic attributed to the psychite.</li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_crisis_title-></li>
-        <li>addiction_wakeup_crisis_body-></li>
+        <li>addiction_wakeup_crisis_title->Systems Failure</li>
+        <li>addiction_wakeup_crisis_body->[pawn_nameDef] collapsed at the [TerrainFeature] during [pc_world_weather]. The medic's report listed five contributing factors, with fatigue first and wake-up dependency second. [pawn_nameDef] said [pawn_pronoun] had felt it coming and intended to address it after [pawn_possessive] current project concluded. The medic noted the project had not concluded.</li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_crisis_title-></li>
-        <li>addiction_smokeleaf_crisis_body-></li>
+        <li>addiction_smokeleaf_crisis_title->Still Green</li>
+        <li>addiction_smokeleaf_crisis_body->[pawn_nameDef]'s smokeleaf habit had expanded into [pawn_possessive] work hours. [pawn_pronoun] was present for all shifts in the technical sense. [pc_friend_name] had started measuring [pawn_possessive] output in completed tasks rather than hours, because the hours were logged and the tasks were fewer. The [PersonJob] backlog had grown to a size [pc_friend_name] called a crisis and [pawn_nameDef] called a queue.</li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_crisis_title-></li>
-        <li>addiction_chemical_crisis_body-></li>
+        <li>addiction_chemical_crisis_title->Compound Interest</li>
+        <li>addiction_chemical_crisis_body->The medic assembled a report covering [pawn_nameDef]'s dependency timeline, current health readings, and a projected outcome the medic called conservative and [pawn_nameDef] called pessimistic. [pc_friend_name] attended the meeting and said nothing. [pawn_nameDef] found [pc_friend_name]'s silence more informative than the report.</li>
 
-        <!--(the fork)-->
-        <!--ALCOHOL-->
-        <li>addiction_alcohol_choice_title-></li>
-        <li>addiction_alcohol_choice_body-></li>
-        <!--AMBROSIA-->
-        <li>addiction_ambrosia_choice_title-></li>
-        <li>addiction_ambrosia_choice_body-></li>
-        <!--GO-JUICE-->
-        <li>addiction_gojuice_choice_title-></li>
-        <li>addiction_gojuice_choice_body-></li>
-        <!--PSYCHITE-->
-        <li>addiction_psychite_choice_title-></li>
-        <li>addiction_psychite_choice_body-></li>
-        <!--WAKE-UP-->
-        <li>addiction_wakeup_choice_title-></li>
-        <li>addiction_wakeup_choice_body-></li>
-        <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_choice_title-></li>
-        <li>addiction_smokeleaf_choice_body-></li>
-        <!--CHEMICAL-->
-        <li>addiction_chemical_choice_title-></li>
-        <li>addiction_chemical_choice_body-></li>
+        <!-- ── CHOICE (the fork) ───────────────────────────────────────────── -->
 
-        <!--(succes)-->
         <!--ALCOHOL-->
-        <li>addiction_alcohol_success_title-></li>
-        <li>addiction_alcohol_success_body-></li>
+        <li>addiction_alcohol_choice_title->On the Wagon</li>
+        <li>addiction_alcohol_choice_body->The medic laid it out plainly. The liver would not last another [pc_world_season] at the current rate. [pawn_nameDef] listened carefully, asked a few questions, and requested something to drink while [pawn_pronoun] considered the options. There was nothing available. [pawn_pronoun] considered the options anyway.</li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_success_title-></li>
-        <li>addiction_ambrosia_success_body-></li>
+        <li>addiction_ambrosia_choice_title->Mortal Concerns</li>
+        <li>addiction_ambrosia_choice_body->[pawn_nameDef] had two options: wait for the grove to be replanted, or find a way to stop waiting. [pc_friend_name] suggested a third option involving perspective and personal effort. [pawn_nameDef] thanked [pc_friend_name] for [pawn_possessive] time and went to look at the dead grove again.</li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_success_title-></li>
-        <li>addiction_gojuice_success_body-></li>
+        <li>addiction_gojuice_choice_title->Full Stop</li>
+        <li>addiction_gojuice_choice_body->The colony's go-juice supply was exhausted and no resupply was expected. [pawn_nameDef] had two weeks to decide whether to treat this as permanent. [pawn_pronoun] spent most of that time being difficult in ways [pawn_pronoun] later attributed to withdrawal and [pc_friend_name] privately attributed to [pawn_possessive] general character.</li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_success_title-></li>
-        <li>addiction_psychite_success_body-></li>
+        <li>addiction_psychite_choice_title->What Remains</li>
+        <li>addiction_psychite_choice_body->The medic's assessment ran to two pages. The dependency was significant. The long-term picture involved either sustained treatment or a shorter and more comfortable timeline. [pawn_nameDef] asked which option caused less immediate disruption. The medic said that was not the correct framing. [pawn_nameDef] said [pawn_pronoun] would think about it.</li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_success_title-></li>
-        <li>addiction_wakeup_success_body-></li>
+        <li>addiction_wakeup_choice_title->Diminishing Returns</li>
+        <li>addiction_wakeup_choice_body->The medic said the body, used as an instrument, eventually stopped being tunable. [pawn_nameDef] asked for a timeline. The medic said it was not a question of timelines. [pawn_nameDef] requested a second opinion. The medic said [pawn_pronoun] was welcome to seek one, and that [pawn_nameDef] should sleep while [pawn_pronoun] waited for the appointment.</li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_success_title-></li>
-        <li>addiction_smokeleaf_success_body-></li>
+        <li>addiction_smokeleaf_choice_title->Low and Slow</li>
+        <li>addiction_smokeleaf_choice_body->The smokeleaf supply was not running short, which meant the decision was [pawn_nameDef]'s to make without external pressure. [pc_friend_name] called this an opportunity for self-determination. [pawn_nameDef] said [pawn_pronoun] needed time to think about it. [pc_friend_name] privately considered this an answer in itself, but recorded nothing.</li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_success_title-></li>
-        <li>addiction_chemical_success_body-></li>
+        <li>addiction_chemical_choice_title->Cost Analysis</li>
+        <li>addiction_chemical_choice_body->[pawn_nameDef] had always considered [pawn_reflexive] a practical person. The medic's report was practical. The consumption log was practical. The compound was the only element [pawn_pronoun] had not entered into the liability column, and [pawn_pronoun] was aware that this said something about [pawn_possessive] method.</li>
 
-        <!--(failure)-->
+        <!-- ── SUCCESS ────────────────────────────────────────────────────── -->
+
         <!--ALCOHOL-->
-        <li>addiction_alcohol_failure_title-></li>
-        <li>addiction_alcohol_failure_body-></li>
+        <li>addiction_alcohol_success_title->Sober Reckoning</li>
+        <li>addiction_alcohol_success_body->[pawn_nameDef] did not drink for thirty days. Then sixty. Then [pawn_pronoun] stopped counting, on the grounds that people who counted still thought they might fail. [pc_friend_name] noticed the tremors had cleared. Neither of them mentioned it.</li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_failure_title-></li>
-        <li>addiction_ambrosia_failure_body-></li>
+        <li>addiction_ambrosia_success_title->Off the Vine</li>
+        <li>addiction_ambrosia_success_body->[pawn_nameDef] replanted the grove and did not eat from it. [pawn_pronoun] tended it through [pc_world_season] and the season after, and when it finally fruited [pawn_pronoun] directed the harvest to colony stores. [pc_friend_name] called it admirable. [pawn_nameDef] called it something to do. Both were accurate.</li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_failure_title-></li>
-        <li>addiction_gojuice_failure_body-></li>
+        <li>addiction_gojuice_success_title->Idle Speed</li>
+        <li>addiction_gojuice_success_body->[pawn_nameDef] adapted to operating at the speed of ordinary [PersonJob] work. This took longer than anticipated and involved significant recalibration. [pawn_pronoun] broke fewer things. [pawn_pronoun] discharged [pawn_possessive] [Weapon] in safer directions. [pc_friend_name] said [pawn_pronoun] seemed calmer. [pawn_nameDef] said [pawn_pronoun] felt slower. Both were correct.</li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_failure_title-></li>
-        <li>addiction_psychite_failure_body-></li>
+        <li>addiction_psychite_success_title->Unfiltered</li>
+        <li>addiction_psychite_success_body->[pawn_nameDef] stopped. [pc_colony_name] remained loud. [pawn_pronoun] developed a habit of sitting at the [TerrainFeature] in [pc_world_weather] without a dose, which [pc_friend_name] considered progress. After one [pc_world_season] the medic confirmed the dependency markers had cleared. [pawn_nameDef] said [pawn_pronoun] had already noticed.</li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_failure_title-></li>
-        <li>addiction_wakeup_failure_body-></li>
+        <li>addiction_wakeup_success_title->Rest Protocol</li>
+        <li>addiction_wakeup_success_body->[pawn_nameDef] slept eight hours a night for the first time in several [pc_world_season]s. [pawn_pronoun] found it inefficient and, after some adjustment, acceptable. [pawn_possessive] task list got shorter. [pc_friend_name] noted [pawn_possessive] hands had stopped moving during conversations. [pawn_nameDef] said [pawn_pronoun] had not noticed. [pc_friend_name] said [pawn_pronoun] clearly had.</li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_failure_title-></li>
-        <li>addiction_smokeleaf_failure_body-></li>
+        <li>addiction_smokeleaf_success_title->Clear Air</li>
+        <li>addiction_smokeleaf_success_body->[pawn_nameDef] stopped and the [TerrainFeature] gatherings continued without [pawn_objective]. [pawn_pronoun] sat with the [Community] anyway and found [pawn_pronoun] still had things to say without a pipe in [pawn_possessive] hand. [pc_friend_name] said [pawn_pronoun] had seemed sharper lately. [pawn_nameDef] said the [pc_world_time_of_day] light looked different. Both were true.</li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_failure_title-></li>
-        <li>addiction_chemical_failure_body-></li>
+        <li>addiction_chemical_success_title->Clean Synthesis</li>
+        <li>addiction_chemical_success_body->[pawn_nameDef] stopped. The process was not fast or clean but it was complete. [pawn_pronoun] told [pc_friend_name] [pawn_pronoun] had run the numbers and found the figures unsatisfactory. [pc_friend_name] said [pawn_pronoun] was glad to hear it. [pawn_nameDef] said glad was not quite the right word, but functional was, and that was the point.</li>
+
+        <!-- ── FAILURE ─────────────────────────────────────────────────────── -->
+
+        <!--ALCOHOL-->
+        <li>addiction_alcohol_failure_title->One for the Road</li>
+        <li>addiction_alcohol_failure_body->[pawn_nameDef] made it eleven days before [pc_friend_name] found [pawn_objective] at the [TerrainFeature] with an empty bottle and a prepared argument for why that one did not count. The argument was not strong. [pawn_pronoun] had clearly been refining it for eleven days and this was the best it got.</li>
+        <!--AMBROSIA-->
+        <li>addiction_ambrosia_failure_title->Back to the Garden</li>
+        <li>addiction_ambrosia_failure_body->[pawn_nameDef] lasted four days before returning to what remained of the grove. The surviving plants were in poor condition. [pawn_pronoun] harvested them anyway. [pc_friend_name] found [pawn_objective] asleep against the [TerrainFeature] the following morning, [pawn_possessive] [Apparel] stained [Color], a [Animal] grazing nearby with no interest in the situation.</li>
+        <!--GO-JUICE-->
+        <li>addiction_gojuice_failure_title->Tactical Necessity</li>
+        <li>addiction_gojuice_failure_body->A [Enemy] scouting party arrived on the fourteenth day and [pawn_nameDef] found a forgotten vial in [pawn_possessive] [Apparel]. [pawn_pronoun] told [pc_friend_name] it was a tactical requirement. The scouts were driven off. [pawn_nameDef] was awake for thirty-six hours afterward and listed the outcome as evidence the assessment had been correct.</li>
+        <!--PSYCHITE-->
+        <li>addiction_psychite_failure_title->Still Waters</li>
+        <li>addiction_psychite_failure_body->[pawn_nameDef] reduced [pawn_possessive] intake twice over the course of [pc_world_season] and increased it once and then stopped keeping the log. [pc_friend_name] raised the subject in the third month. [pawn_nameDef] listened, thanked [pc_friend_name], and changed the subject with more grace than was called for. The subject stayed changed.</li>
+        <!--WAKE-UP-->
+        <li>addiction_wakeup_failure_title->Just One More</li>
+        <li>addiction_wakeup_failure_body->[pawn_nameDef] lasted eight days before [pc_friend_name] found a new supply of wake-up in [pawn_possessive] [Apparel]. [pawn_nameDef] said it was for emergencies. The [PersonJob] work log showed six emergencies in the preceding two days. [pawn_nameDef] acknowledged [pc_friend_name]'s point, said [pawn_pronoun] would reconsider the definition, and went back to work.</li>
+        <!--SMOKELEAF-->
+        <li>addiction_smokeleaf_failure_title->One More Bowl</li>
+        <li>addiction_smokeleaf_failure_body->[pawn_nameDef] had cut down. This was accurate. [pawn_pronoun] had moved from constant to frequent, which was measurably less and still above the medic's recommendation. [pawn_nameDef] said the medic's frame of reference prioritised output over quality of life. This was not entirely wrong, which made it harder to argue with, and [pawn_nameDef] knew it.</li>
+        <!--CHEMICAL-->
+        <li>addiction_chemical_failure_title->Acceptable Losses</li>
+        <li>addiction_chemical_failure_body->[pawn_nameDef] presented [pc_friend_name] with a revised analysis in which the compound appeared in the asset column under a new category [pawn_nameDef] had created for the purpose. [pc_friend_name] challenged two of the assumptions. [pawn_nameDef] defended both at length and said [pawn_pronoun] would reconsider when the data warranted it. The data did not warrant it.</li>
+
 
         <!-- ═══════════════════════════════════════════════════════════════
              WAIT CONDITION LABELS - Chronicles tab
