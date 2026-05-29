@@ -171,6 +171,8 @@ namespace PawnChronicles
     // PATCH 6: Hediff added -> InvalidateProfile
     // Heavy health changes (scars, implants, new diseases) reshape who a pawn is.
     // =========================================================================
+    // PATCH 15: Addiction gained -> TryStartAddictionArc
+    // =========================================================================
     [HarmonyPatch(typeof(Hediff), nameof(Hediff.PostAdd))]
     public static class Patch_Hediff_PostAdd_InvalidateProfile
     {
@@ -190,10 +192,19 @@ namespace PawnChronicles
 
                 if (!significant) return;
 
-                pawn.GetComp<CompPersonalChronicles>()?.InvalidateProfile();
+                var comp = pawn.GetComp<CompPersonalChronicles>();
+                comp?.InvalidateProfile();
 
                 // Also invalidate any entangled partner
                 EntangledArcManager.Instance?.GetActiveArcForPawn(pawn)?.InvalidateProfiles();
+
+                // Patch 15: start an addiction arc when a new addiction hediff is added.
+                if (__instance is Hediff_Addiction && pawn.IsFreeColonist
+                    && comp != null && !comp.hasActiveEpic && !comp.chroniclesDisabled)
+                {
+                    LongEventHandler.ExecuteWhenFinished(() =>
+                        comp.TryStartAddictionArc(__instance.def));
+                }
             }
             catch { /* never crash the game over a narrative update */ }
         }

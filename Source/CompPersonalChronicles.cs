@@ -878,11 +878,39 @@ namespace PawnChronicles
                 StartEpic(epic);
         }
 
+        /// <summary>
+        /// Called when a pawn gains an addiction hediff. Finds the matching
+        /// addiction arc def and starts it. Falls back to PC_Arc_Addiction_Chemical
+        /// for any substance without a dedicated arc.
+        /// </summary>
+        public void TryStartAddictionArc(HediffDef addictionDef)
+        {
+            if (addictionDef == null || hasActiveEpic || chroniclesDisabled) return;
+            if (parent is not Pawn pawn || !pawn.IsFreeColonist) return;
+
+            var arcDef = DefDatabase<PersonalEpicDef>.AllDefsListForReading
+                .FirstOrDefault(d => d.addictionHediffDef == addictionDef.defName)
+                ?? DefDatabase<PersonalEpicDef>.GetNamedSilentFail("PC_Arc_Addiction_Chemical");
+
+            if (arcDef == null)
+            {
+                Log.Warning($"[PawnChronicles] No addiction arc found for {addictionDef.defName} and no chemical fallback.");
+                return;
+            }
+
+            StartEpic(arcDef);
+        }
+
         public void StartEpic(PersonalEpicDef epic, PawnNarrativeProfile? profile = null)
         {
-            if (epic.stagePool.NullOrEmpty())
+            if (!epic.IsFixed && epic.stagePool.NullOrEmpty())
             {
                 Log.Warning($"[PawnChronicles] Epic '{epic.defName}' has no stage pool.");
+                return;
+            }
+            if (epic.IsFixed && epic.fixedStageSequence.Count == 0)
+            {
+                Log.Warning($"[PawnChronicles] Epic '{epic.defName}' has empty fixedStageSequence.");
                 return;
             }
 
@@ -926,9 +954,25 @@ namespace PawnChronicles
             if (currentProfile == null)
                 currentProfile = PawnNarrativeProfile.BuildFor((Pawn)parent);
 
-            var stage = PremiseEvaluator.SelectNextStage(
-                currentEpic, currentProfile, usedStages, isClimax, isOpening,
-                preferredTagDefName);
+            // Fixed-sequence arcs (e.g. addiction) take their stage directly by index.
+            // Standard arcs use the tag-weighted selector.
+            QuestStageDef stage;
+            if (currentEpic.IsFixed)
+            {
+                int idx = currentStage;
+                if (idx < 0 || idx >= currentEpic.fixedStageSequence.Count)
+                {
+                    CompleteEpic(true);
+                    return;
+                }
+                stage = currentEpic.fixedStageSequence[idx];
+            }
+            else
+            {
+                stage = PremiseEvaluator.SelectNextStage(
+                    currentEpic, currentProfile, usedStages, isClimax, isOpening,
+                    preferredTagDefName);
+            }
 
             if (stage == null)
             {
@@ -939,7 +983,8 @@ namespace PawnChronicles
             usedStages.Add(stage);
 
             var pawn = (Pawn)parent;
-            string role = stage.StageRole;
+            // Use GrammarRole so addiction stages override the role key.
+            string role = stage.GrammarRole;
 
             var snapshot = StageWaitCondition.GetPawnSnapshot(pawn);
 
@@ -953,7 +998,37 @@ namespace PawnChronicles
                 : currentProfile.DominantTag() ?? "";
 
             ArcStageEntry entry;
-            if (isOpening)
+            if (currentEpic.IsFixed)
+            {
+                if (isClimax)
+                {
+                    // Addiction climax: hard road (sobriety) vs easy out (immediate failure).
+                    var choices = StageWaitCondition.BuildAddictionClimaxDoors(pawn);
+                    entry = new ArcStageEntry(
+                        title, body, role,
+                        waitConditionLabel: "PC_Wait_ChoosePathForward".Translate(),
+                        waitConditionKey:   "",
+                        waitBaselineValue:  0,
+                        waitTargetDelta:    0,
+                        isClimax:           true);
+                    entry.isSkillCheck = false;
+                    entry.choices      = choices;
+                }
+                else
+                {
+                    // Fixed middle/opening stages: no player choices, just wait for condition.
+                    var (condKey, condLabel, condBaseline, condDelta) =
+                        StageWaitCondition.BuildForAddiction(pawn, role);
+                    entry = new ArcStageEntry(
+                        title, body, role,
+                        waitConditionLabel: condLabel,
+                        waitConditionKey:   condKey,
+                        waitBaselineValue:  condBaseline,
+                        waitTargetDelta:    condDelta,
+                        isClimax:           false);
+                }
+            }
+            else if (isOpening)
             {
                 // Seed stage: 3 tag-path choices, no immediate effects, picks the arc direction.
                 var choices = StageWaitCondition.BuildSeedChoices(pawn, currentProfile);
@@ -1113,6 +1188,23 @@ namespace PawnChronicles
                     EpicOutcomeApplicator.Apply(pawn, outcome, success);
             }
 
+            // Addiction cure: remove the addiction hediff on successful completion.
+            if (success && !string.IsNullOrEmpty(epic.addictionHediffDef))
+            {
+                var addictionHediffDef = DefDatabase<HediffDef>.GetNamedSilentFail(epic.addictionHediffDef);
+                if (addictionHediffDef != null)
+                {
+                    var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(addictionHediffDef);
+                    if (hediff != null)
+                    {
+                        pawn.health.RemoveHediff(hediff);
+                        Messages.Message(
+                            "PC_AddictionCured".Translate(pawn.LabelShort),
+                            pawn, MessageTypeDefOf.PositiveEvent, true);
+                    }
+                }
+            }
+
             // Capture BEFORE clearing - both are consumed by StoreNarrativeEpithet
             var outcomeProfile = currentProfile ?? GetOrBuildProfile();
             var outcomePathTag = chosenPathTag;
@@ -1215,7 +1307,11 @@ namespace PawnChronicles
             if (adulthoodDef != null && !string.IsNullOrEmpty(adulthoodDef.description))
                 backstoryHook = TrimToOneSentence(adulthoodDef.description);
 
-            string role    = success ? NarrativeGrammarResolver.RoleSuccess : NarrativeGrammarResolver.RoleFailure;
+            // Use custom grammar role for outcome body if the epic specifies one
+            // (e.g. addiction arcs use "addiction_alcohol_success" rather than "success").
+            string role = success
+                ? (epic.successGrammarRole ?? NarrativeGrammarResolver.RoleSuccess)
+                : (epic.failureGrammarRole ?? NarrativeGrammarResolver.RoleFailure);
             string outcomeTail = NarrativeGrammarResolver.ResolveBody(pawn, profile, role);
 
             string body = string.IsNullOrEmpty(backstoryHook)

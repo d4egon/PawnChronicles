@@ -377,6 +377,9 @@
         <li>wait_condition_ritual->[pawn_nameDef]'s arc will continue after [pawn_pronoun] participates in a ritual...</li>
         <li>wait_condition_tamed->[pawn_nameDef]'s story will continue after [pawn_pronoun] next tames an animal...</li>
         <li>wait_condition_time->[pawn_nameDef]'s story will continue when this [pc_world_season] passes, 15 days...</li>
+        <li>wait_condition_withdrawal->[pawn_nameDef]'s arc continues when [pawn_pronoun] begins to withdraw...</li>
+        <li>wait_condition_sobriety->[pawn_nameDef]'s arc continues when [pawn_possessive] system finally clears the dependency...</li>
+        <li>wait_condition_mood_low->[pawn_nameDef]'s arc continues when [pawn_pronoun] reaches a low point...</li>
 
         <!-- ═══════════════════════════════════════════════════════════════
              COMPOSITION POOLS

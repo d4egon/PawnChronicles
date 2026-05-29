@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    ═══════════════════════════════════════════════════════════════════════════
+    ADDICTION ARC STAGE DEFS
+    ═══════════════════════════════════════════════════════════════════════════
+    Fixed-sequence stages for each addiction arc. Each uses grammarRoleOverride
+    so the resolver finds addiction_{substance}_{stage}_{title/body} keys.
+    Six stages per substance: opening, dependency, social, withdrawal, crisis, choice.
+    "choice" is the climax stage - presents hard road (sobriety) vs easy out.
+    ═══════════════════════════════════════════════════════════════════════════
+  -->
+
+  <!-- ═══════ ALCOHOL ═══════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Alcohol_Opening</defName>
+    <label>The Drunken Master</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <grammarRoleOverride>addiction_alcohol_opening</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Alcohol_Dependency</defName>
+    <label>On the House</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_alcohol_dependency</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Alcohol_Social</defName>
+    <label>The Relationship Toll</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_alcohol_social</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Alcohol_Withdrawal</defName>
+    <label>Cold TerrainFeature</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_alcohol_withdrawal</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Alcohol_Crisis</defName>
+    <label>Last Rounds</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_alcohol_crisis</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Alcohol_Choice</defName>
+    <label>On the Wagon</label>
+    <isOpening>false</isOpening>
+    <isMiddle>false</isMiddle>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <grammarRoleOverride>addiction_alcohol_choice</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- ═══════ AMBROSIA ══════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Ambrosia_Opening</defName>
+    <label>Stuff of the Gods</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <grammarRoleOverride>addiction_ambrosia_opening</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Ambrosia_Dependency</defName>
+    <label>Divine Appointment</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_ambrosia_dependency</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Ambrosia_Social</defName>
+    <label>The Grove Community</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_ambrosia_social</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Ambrosia_Withdrawal</defName>
+    <label>The Earthly Plane</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_ambrosia_withdrawal</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Ambrosia_Crisis</defName>
+    <label>The Grove Does Not Wait</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_ambrosia_crisis</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Ambrosia_Choice</defName>
+    <label>Mortal Concerns</label>
+    <isOpening>false</isOpening>
+    <isMiddle>false</isMiddle>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <grammarRoleOverride>addiction_ambrosia_choice</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- ═══════ GO-JUICE ══════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_GoJuice_Opening</defName>
+    <label>Speed, I Am Speed</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <grammarRoleOverride>addiction_gojuice_opening</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_GoJuice_Dependency</defName>
+    <label>The Need for Speed</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_gojuice_dependency</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_GoJuice_Social</defName>
+    <label>Difficult to Be Around</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_gojuice_social</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_GoJuice_Withdrawal</defName>
+    <label>Crash Landing</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_gojuice_withdrawal</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_GoJuice_Crisis</defName>
+    <label>Friendly Fire Review</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_gojuice_crisis</grammarRoleOverride>
+    <onStartIncident>
+      <type>SmallRaid</type>
+      <chance>0.4</chance>
+      <incidentPoints>100</incidentPoints>
+      <bridgeRole>gojuice_crisis_consequence</bridgeRole>
+    </onStartIncident>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_GoJuice_Choice</defName>
+    <label>Full Stop</label>
+    <isOpening>false</isOpening>
+    <isMiddle>false</isMiddle>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <grammarRoleOverride>addiction_gojuice_choice</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- ═══════ PSYCHITE ══════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Psychite_Opening</defName>
+    <label>The Chill Dependency</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <grammarRoleOverride>addiction_psychite_opening</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Psychite_Dependency</defName>
+    <label>Smooth Edges</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_psychite_dependency</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Psychite_Social</defName>
+    <label>The Soft Disappearance</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_psychite_social</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Psychite_Withdrawal</defName>
+    <label>The Edges Return</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_psychite_withdrawal</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Psychite_Crisis</defName>
+    <label>A Long Way Down</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_psychite_crisis</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Psychite_Choice</defName>
+    <label>What Remains</label>
+    <isOpening>false</isOpening>
+    <isMiddle>false</isMiddle>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <grammarRoleOverride>addiction_psychite_choice</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- ═══════ WAKE-UP ═══════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_WakeUp_Opening</defName>
+    <label>Sleep Is For The Dead</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <grammarRoleOverride>addiction_wakeup_opening</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_WakeUp_Dependency</defName>
+    <label>The Schedule</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_wakeup_dependency</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_WakeUp_Social</defName>
+    <label>No Rest for the PersonJob</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_wakeup_social</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_WakeUp_Withdrawal</defName>
+    <label>The Debt</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_wakeup_withdrawal</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_WakeUp_Crisis</defName>
+    <label>Systems Failure</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_wakeup_crisis</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_WakeUp_Choice</defName>
+    <label>Diminishing Returns</label>
+    <isOpening>false</isOpening>
+    <isMiddle>false</isMiddle>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <grammarRoleOverride>addiction_wakeup_choice</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- ═══════ SMOKELEAF ═════════════════════════════════════════════════════ -->
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Smokeleaf_Opening</defName>
+    <label>Mob Barley's Fangroup</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <grammarRoleOverride>addiction_smokeleaf_opening</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Smokeleaf_Dependency</defName>
+    <label>The Long Afternoon</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_smokeleaf_dependency</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Smokeleaf_Social</defName>
+    <label>An Afternoon Problem</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_smokeleaf_social</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Smokeleaf_Withdrawal</defName>
+    <label>The Itch</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_smokeleaf_withdrawal</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Smokeleaf_Crisis</defName>
+    <label>Still Green</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_smokeleaf_crisis</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Smokeleaf_Choice</defName>
+    <label>Low and Slow</label>
+    <isOpening>false</isOpening>
+    <isMiddle>false</isMiddle>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <grammarRoleOverride>addiction_smokeleaf_choice</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <!-- ═══════ CHEMICAL (generic fallback) ══════════════════════════════════ -->
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Chemical_Opening</defName>
+    <label>My Chemical Romance</label>
+    <isOpening>true</isOpening>
+    <isMiddle>false</isMiddle>
+    <grammarRoleOverride>addiction_chemical_opening</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Chemical_Dependency</defName>
+    <label>The Formula</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_chemical_dependency</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Chemical_Social</defName>
+    <label>Selective Availability</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_chemical_social</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Chemical_Withdrawal</defName>
+    <label>The Chemistry of No</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_chemical_withdrawal</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Chemical_Crisis</defName>
+    <label>Compound Interest</label>
+    <isOpening>false</isOpening>
+    <isMiddle>true</isMiddle>
+    <grammarRoleOverride>addiction_chemical_crisis</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+  <PawnChronicles.QuestStageDef>
+    <defName>PC_AddStage_Chemical_Choice</defName>
+    <label>Cost Analysis</label>
+    <isOpening>false</isOpening>
+    <isMiddle>false</isMiddle>
+    <isClimax>true</isClimax>
+    <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <grammarRoleOverride>addiction_chemical_choice</grammarRoleOverride>
+  </PawnChronicles.QuestStageDef>
+
+</Defs>

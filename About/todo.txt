@@ -11,3 +11,17 @@ Crafted condition categories (deferred Bug 6): split the combined
 ThingsConstructed + ThingsCrafted counter into per-workbench categories (art
 bench, tailoring, construction, drug lab). Requires one Harmony patch and one
 counter field per work type.
+
+Luciferium arc (separate track - more complex than other addiction arcs):
+  - Unique 8-stage structure: opening, dependency, reckoning, quest, danger,
+    crisis, success, failure.
+  - Hard road fires a custom incident generating an AncientDanger-type world
+    site with a HealerMechSerum guaranteed in loot, anchored to the pawn.
+  - New wait conditions: wait_condition_site_generated (site spawned),
+    wait_condition_site_cleared (pawn cleared it).
+  - Harmony patch: detect HealerMechSerum used on the pawn OR site cleared.
+  - Failure path fires automatically if luciferium supply runs out before
+    site is cleared (withdrawal imminent check).
+  - Tone: expedition log, not recovery story. What the pawn found in the dark,
+    what they had to do to get the serum, what they left behind.
+  - RemoveHediff on success targets Addiction_Luciferium specifically.

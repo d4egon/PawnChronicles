@@ -247,7 +247,17 @@
   <PC_WaitFallback_Ritual>after {0}'s next observance</PC_WaitFallback_Ritual>
   <PC_WaitFallback_Tamed>after {0} next bonds with an animal</PC_WaitFallback_Tamed>
   <PC_WaitFallback_Time>as {0}'s story unfolds</PC_WaitFallback_Time>
+  <PC_WaitFallback_Withdrawal>when {0} begins to withdraw</PC_WaitFallback_Withdrawal>
+  <PC_WaitFallback_Sobriety>when {0} clears the dependency</PC_WaitFallback_Sobriety>
+  <PC_WaitFallback_MoodLow>when {0} reaches a low point</PC_WaitFallback_MoodLow>
   <PC_WaitFallback_Default>as {0}'s story continues</PC_WaitFallback_Default>
+
+  <!-- Addiction arc UI strings -->
+  <PC_Addiction_HardRoad_Label>fight through it</PC_Addiction_HardRoad_Label>
+  <PC_Addiction_HardRoad_Hint>The addiction clears when the body finally lets go. There is no shortcut.</PC_Addiction_HardRoad_Hint>
+  <PC_Addiction_EasyOut_Label>give in</PC_Addiction_EasyOut_Label>
+  <PC_Addiction_EasyOut_Hint>The dependency stays. The arc closes on its own terms.</PC_Addiction_EasyOut_Hint>
+  <PC_AddictionCured>{0} has broken free of the addiction.</PC_AddictionCured>
 
   <!-- Condition hints (shown in choice mechanical hint) -->
   <PC_CondHint_Kills>Requires: next kill</PC_CondHint_Kills>

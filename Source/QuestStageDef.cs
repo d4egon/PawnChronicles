@@ -54,6 +54,15 @@ namespace PawnChronicles
         // ── Stage role string ─────────────────────────────────────────────────
 
         /// <summary>
+        /// When set, overrides the grammar key used for title/body resolution.
+        /// The key cascade becomes: {primary}_{grammarRoleOverride}_{type},
+        /// {grammarRoleOverride}_{type}, default_{type}.
+        /// Used by addiction arc stages (e.g. "addiction_alcohol_opening").
+        /// Leave null for all standard arc stages.
+        /// </summary>
+        public string grammarRoleOverride = null;
+
+        /// <summary>
         /// The grammar role key for this stage.
         /// Passed into the quest Slate as "epicStageRole".
         /// </summary>
@@ -69,6 +78,14 @@ namespace PawnChronicles
                 return NarrativeGrammarResolver.RoleMiddle;
             }
         }
+
+        /// <summary>
+        /// Grammar role used for title/body resolution. Returns grammarRoleOverride
+        /// when set, otherwise falls back to StageRole. Use this everywhere grammar
+        /// is resolved; use StageRole/QuestScript for quest dispatch only.
+        /// </summary>
+        public string GrammarRole =>
+            !string.IsNullOrEmpty(grammarRoleOverride) ? grammarRoleOverride : StageRole;
 
         /// <summary>
         /// Returns the universal quest script for this stage's role.

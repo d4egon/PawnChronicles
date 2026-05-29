@@ -20,6 +20,45 @@ namespace PawnChronicles
         public List<NarrativeTagRequirement> tagRequirements = new();
         public int stageCount = 3;
 
+        // ── Fixed sequence (addiction arcs) ───────────────────────────────────
+
+        /// <summary>
+        /// When populated, the arc advances through these stages in order rather
+        /// than selecting from stagePool. Used by addiction arcs where the
+        /// narrative sequence is predetermined.
+        /// </summary>
+        public List<QuestStageDef> fixedStageSequence = new List<QuestStageDef>();
+
+        /// <summary>True when this epic uses a fixed stage sequence.</summary>
+        public bool IsFixed => fixedStageSequence != null && fixedStageSequence.Count > 0;
+
+        // ── Addiction arc fields ──────────────────────────────────────────────
+
+        /// <summary>
+        /// HediffDef.defName of the addiction this arc tracks.
+        /// e.g. "AlcoholAddiction". When set and the arc completes with success,
+        /// this hediff is removed from the pawn.
+        /// </summary>
+        public string addictionHediffDef = null;
+
+        /// <summary>
+        /// HediffDef.defName of the matching withdrawal hediff.
+        /// e.g. "AlcoholWithdrawal". Used for wait condition label flavour.
+        /// </summary>
+        public string withdrawalHediffDef = null;
+
+        /// <summary>
+        /// Overrides "success" as the grammar role for the outcome narrative body.
+        /// e.g. "addiction_alcohol_success". Falls back to RoleSuccess if null.
+        /// </summary>
+        public string successGrammarRole = null;
+
+        /// <summary>
+        /// Overrides "failure" as the grammar role for the outcome narrative body.
+        /// e.g. "addiction_alcohol_failure". Falls back to RoleFailure if null.
+        /// </summary>
+        public string failureGrammarRole = null;
+
         // ── Outcomes ──────────────────────────────────────────────────────────
 
         /// <summary>Short epithet shown in the Bio tab pill on success. Falls back to epic.label.</summary>

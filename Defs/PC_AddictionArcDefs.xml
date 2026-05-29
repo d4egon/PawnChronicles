@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    ═══════════════════════════════════════════════════════════════════════════
+    ADDICTION ARC DEFS
+    ═══════════════════════════════════════════════════════════════════════════
+    Fixed-sequence personal epics triggered when a pawn gains an addiction hediff.
+    TryStartAddictionArc matches addictionHediffDef to select the correct arc.
+    PC_Arc_Addiction_Chemical is the fallback for any unmatched addiction.
+
+    Arc flow (6 stages):
+      opening -> dependency -> social -> withdrawal -> crisis -> choice (climax)
+      success: addiction hediff removed, successGrammarRole body resolved
+      failure: addiction remains, failureGrammarRole body resolved
+    ═══════════════════════════════════════════════════════════════════════════
+  -->
+
+  <!-- ── Alcohol ─────────────────────────────────────────────────────────── -->
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Arc_Addiction_Alcohol</defName>
+    <label>The Drunken Master</label>
+    <modus>Kindle</modus>
+    <stageCount>6</stageCount>
+    <addictionHediffDef>AlcoholAddiction</addictionHediffDef>
+    <withdrawalHediffDef>AlcoholWithdrawal</withdrawalHediffDef>
+    <successGrammarRole>addiction_alcohol_success</successGrammarRole>
+    <failureGrammarRole>addiction_alcohol_failure</failureGrammarRole>
+    <redeemedEpithet>Sober Reckoning</redeemedEpithet>
+    <corruptedEpithet>One for the Road</corruptedEpithet>
+    <fixedStageSequence>
+      <li>PC_AddStage_Alcohol_Opening</li>
+      <li>PC_AddStage_Alcohol_Dependency</li>
+      <li>PC_AddStage_Alcohol_Social</li>
+      <li>PC_AddStage_Alcohol_Withdrawal</li>
+      <li>PC_AddStage_Alcohol_Crisis</li>
+      <li>PC_AddStage_Alcohol_Choice</li>
+    </fixedStageSequence>
+  </PawnChronicles.PersonalEpicDef>
+
+  <!-- ── Ambrosia ────────────────────────────────────────────────────────── -->
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Arc_Addiction_Ambrosia</defName>
+    <label>Stuff of the Gods</label>
+    <modus>Kindle</modus>
+    <stageCount>6</stageCount>
+    <addictionHediffDef>AmbrosiaAddiction</addictionHediffDef>
+    <withdrawalHediffDef>AmbrosiaWithdrawal</withdrawalHediffDef>
+    <successGrammarRole>addiction_ambrosia_success</successGrammarRole>
+    <failureGrammarRole>addiction_ambrosia_failure</failureGrammarRole>
+    <redeemedEpithet>Off the Vine</redeemedEpithet>
+    <corruptedEpithet>Back to the Garden</corruptedEpithet>
+    <fixedStageSequence>
+      <li>PC_AddStage_Ambrosia_Opening</li>
+      <li>PC_AddStage_Ambrosia_Dependency</li>
+      <li>PC_AddStage_Ambrosia_Social</li>
+      <li>PC_AddStage_Ambrosia_Withdrawal</li>
+      <li>PC_AddStage_Ambrosia_Crisis</li>
+      <li>PC_AddStage_Ambrosia_Choice</li>
+    </fixedStageSequence>
+  </PawnChronicles.PersonalEpicDef>
+
+  <!-- ── Go-Juice ────────────────────────────────────────────────────────── -->
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Arc_Addiction_GoJuice</defName>
+    <label>Speed, I Am Speed</label>
+    <modus>Kindle</modus>
+    <stageCount>6</stageCount>
+    <addictionHediffDef>GoJuiceAddiction</addictionHediffDef>
+    <withdrawalHediffDef>GoJuiceWithdrawal</withdrawalHediffDef>
+    <successGrammarRole>addiction_gojuice_success</successGrammarRole>
+    <failureGrammarRole>addiction_gojuice_failure</failureGrammarRole>
+    <redeemedEpithet>Idle Speed</redeemedEpithet>
+    <corruptedEpithet>Tactical Necessity</corruptedEpithet>
+    <fixedStageSequence>
+      <li>PC_AddStage_GoJuice_Opening</li>
+      <li>PC_AddStage_GoJuice_Dependency</li>
+      <li>PC_AddStage_GoJuice_Social</li>
+      <li>PC_AddStage_GoJuice_Withdrawal</li>
+      <li>PC_AddStage_GoJuice_Crisis</li>
+      <li>PC_AddStage_GoJuice_Choice</li>
+    </fixedStageSequence>
+  </PawnChronicles.PersonalEpicDef>
+
+  <!-- ── Psychite ────────────────────────────────────────────────────────── -->
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Arc_Addiction_Psychite</defName>
+    <label>The Chill Dependency</label>
+    <modus>Kindle</modus>
+    <stageCount>6</stageCount>
+    <addictionHediffDef>PsychiteAddiction</addictionHediffDef>
+    <withdrawalHediffDef>PsychiteWithdrawal</withdrawalHediffDef>
+    <successGrammarRole>addiction_psychite_success</successGrammarRole>
+    <failureGrammarRole>addiction_psychite_failure</failureGrammarRole>
+    <redeemedEpithet>Unfiltered</redeemedEpithet>
+    <corruptedEpithet>Still Waters</corruptedEpithet>
+    <fixedStageSequence>
+      <li>PC_AddStage_Psychite_Opening</li>
+      <li>PC_AddStage_Psychite_Dependency</li>
+      <li>PC_AddStage_Psychite_Social</li>
+      <li>PC_AddStage_Psychite_Withdrawal</li>
+      <li>PC_AddStage_Psychite_Crisis</li>
+      <li>PC_AddStage_Psychite_Choice</li>
+    </fixedStageSequence>
+  </PawnChronicles.PersonalEpicDef>
+
+  <!-- ── Wake-Up ─────────────────────────────────────────────────────────── -->
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Arc_Addiction_WakeUp</defName>
+    <label>Sleep Is For The Dead</label>
+    <modus>Kindle</modus>
+    <stageCount>6</stageCount>
+    <addictionHediffDef>WakeUpAddiction</addictionHediffDef>
+    <withdrawalHediffDef>WakeUpWithdrawal</withdrawalHediffDef>
+    <successGrammarRole>addiction_wakeup_success</successGrammarRole>
+    <failureGrammarRole>addiction_wakeup_failure</failureGrammarRole>
+    <redeemedEpithet>Rest Protocol</redeemedEpithet>
+    <corruptedEpithet>Just One More</corruptedEpithet>
+    <fixedStageSequence>
+      <li>PC_AddStage_WakeUp_Opening</li>
+      <li>PC_AddStage_WakeUp_Dependency</li>
+      <li>PC_AddStage_WakeUp_Social</li>
+      <li>PC_AddStage_WakeUp_Withdrawal</li>
+      <li>PC_AddStage_WakeUp_Crisis</li>
+      <li>PC_AddStage_WakeUp_Choice</li>
+    </fixedStageSequence>
+  </PawnChronicles.PersonalEpicDef>
+
+  <!-- ── Smokeleaf ───────────────────────────────────────────────────────── -->
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Arc_Addiction_Smokeleaf</defName>
+    <label>Mob Barley's Fangroup</label>
+    <modus>Kindle</modus>
+    <stageCount>6</stageCount>
+    <addictionHediffDef>SmokeleafAddiction</addictionHediffDef>
+    <withdrawalHediffDef>SmokeleafWithdrawal</withdrawalHediffDef>
+    <successGrammarRole>addiction_smokeleaf_success</successGrammarRole>
+    <failureGrammarRole>addiction_smokeleaf_failure</failureGrammarRole>
+    <redeemedEpithet>Clear Air</redeemedEpithet>
+    <corruptedEpithet>One More Bowl</corruptedEpithet>
+    <fixedStageSequence>
+      <li>PC_AddStage_Smokeleaf_Opening</li>
+      <li>PC_AddStage_Smokeleaf_Dependency</li>
+      <li>PC_AddStage_Smokeleaf_Social</li>
+      <li>PC_AddStage_Smokeleaf_Withdrawal</li>
+      <li>PC_AddStage_Smokeleaf_Crisis</li>
+      <li>PC_AddStage_Smokeleaf_Choice</li>
+    </fixedStageSequence>
+  </PawnChronicles.PersonalEpicDef>
+
+  <!-- ── Chemical (generic fallback) ────────────────────────────────────── -->
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Arc_Addiction_Chemical</defName>
+    <label>My Chemical Romance</label>
+    <modus>Kindle</modus>
+    <stageCount>6</stageCount>
+    <!-- No addictionHediffDef - this is the fallback for any unmatched addiction.
+         RemoveHediff will not fire on success; the arc resolves narratively only. -->
+    <successGrammarRole>addiction_chemical_success</successGrammarRole>
+    <failureGrammarRole>addiction_chemical_failure</failureGrammarRole>
+    <redeemedEpithet>Clean Synthesis</redeemedEpithet>
+    <corruptedEpithet>Acceptable Losses</corruptedEpithet>
+    <fixedStageSequence>
+      <li>PC_AddStage_Chemical_Opening</li>
+      <li>PC_AddStage_Chemical_Dependency</li>
+      <li>PC_AddStage_Chemical_Social</li>
+      <li>PC_AddStage_Chemical_Withdrawal</li>
+      <li>PC_AddStage_Chemical_Crisis</li>
+      <li>PC_AddStage_Chemical_Choice</li>
+    </fixedStageSequence>
+  </PawnChronicles.PersonalEpicDef>
+
+</Defs>

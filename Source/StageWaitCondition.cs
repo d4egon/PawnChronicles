@@ -75,6 +75,23 @@ namespace PawnChronicles
                     return (comp?.ritualParticipationCount ?? 0) >= target;
                 }
                 case "time": return Find.TickManager.TicksGame >= target;
+                case "withdrawal":
+                {
+                    var comp = pawn.GetComp<CompPersonalChronicles>();
+                    string addictionDef = comp?.currentEpic?.addictionHediffDef;
+                    if (string.IsNullOrEmpty(addictionDef)) return false;
+                    var hediff = pawn.health.hediffSet.hediffs
+                        .OfType<Hediff_Addiction>()
+                        .FirstOrDefault(h => h.def.defName == addictionDef);
+                    return hediff?.CurStageIndex == 1; // WithdrawalStageIndex = 1
+                }
+                case "sobriety":
+                {
+                    var comp = pawn.GetComp<CompPersonalChronicles>();
+                    string addictionDef = comp?.currentEpic?.addictionHediffDef;
+                    if (string.IsNullOrEmpty(addictionDef)) return true;
+                    return !pawn.health.hediffSet.hediffs.Any(h => h.def.defName == addictionDef);
+                }
             }
 
             // 2. DYNAMIC FALLBACK: If key isn't hardcoded, try to resolve it as a Def
@@ -142,6 +159,73 @@ namespace PawnChronicles
 
         private static (string key, string label, int baseline, int targetDelta) BuildTimeCondition(Pawn pawn, int days) =>
             ("time", ResolveConditionLabel(pawn, "wait_condition_time"), Find.TickManager.TicksGame, days * 60000);
+
+        private static (string key, string label, int baseline, int targetDelta) BuildWithdrawalCondition(Pawn pawn) =>
+            ("withdrawal", ResolveConditionLabel(pawn, "wait_condition_withdrawal"), 0, 1);
+
+        private static (string key, string label, int baseline, int targetDelta) BuildSobrietyCondition(Pawn pawn) =>
+            ("sobriety", ResolveConditionLabel(pawn, "wait_condition_sobriety"), 0, 0);
+
+        /// <summary>
+        /// Selects the appropriate wait condition for a fixed addiction arc stage.
+        /// grammarRole is the stage's full grammar role, e.g. "addiction_alcohol_withdrawal".
+        /// The stage type is derived from the final segment.
+        /// </summary>
+        public static (string key, string label, int baseline, int targetDelta)
+            BuildForAddiction(Pawn pawn, string grammarRole)
+        {
+            string[] parts = grammarRole.Split('_');
+            string stage = parts.Length > 0 ? parts[parts.Length - 1] : "";
+            return stage switch
+            {
+                "opening"    => BuildTimeCondition(pawn, 15),
+                "dependency" => BuildTimeCondition(pawn, 15),
+                "social"     => BuildSocialCondition(pawn),
+                "withdrawal" => BuildWithdrawalCondition(pawn),
+                "crisis"     => ("mood_low",
+                                 ResolveConditionLabel(pawn, "wait_condition_mood_low"),
+                                 0, 0),
+                _            => BuildTimeCondition(pawn, 15)
+            };
+        }
+
+        /// <summary>
+        /// Builds the two climax choices for an addiction arc:
+        /// hard road waits for sobriety (addiction hediff gone),
+        /// easy out resolves immediately.
+        /// </summary>
+        public static List<StageChoice> BuildAddictionClimaxDoors(Pawn pawn)
+        {
+            return new List<StageChoice>
+            {
+                new StageChoice
+                {
+                    tagDefName     = "",
+                    actionLabel    = "PC_Addiction_HardRoad_Label".Translate(),
+                    mechanicalHint = "PC_Addiction_HardRoad_Hint".Translate(),
+                    conditionKey   = "sobriety",
+                    conditionLabel = ResolveConditionLabel(pawn, "wait_condition_sobriety"),
+                    baseline       = 0,
+                    targetDelta    = 0,
+                    effects        = new List<ChoiceEffect>(),
+                    isHardRoad     = true,
+                    isEasyOut      = false
+                },
+                new StageChoice
+                {
+                    tagDefName     = "",
+                    actionLabel    = "PC_Addiction_EasyOut_Label".Translate(),
+                    mechanicalHint = "PC_Addiction_EasyOut_Hint".Translate(),
+                    conditionKey   = "time",
+                    conditionLabel = "PC_Wait_TakeItNow".Translate(),
+                    baseline       = Find.TickManager.TicksGame,
+                    targetDelta    = 0,
+                    effects        = new List<ChoiceEffect>(),
+                    isHardRoad     = false,
+                    isEasyOut      = true
+                }
+            };
+        }
 
         // ─────────────────────────────────────────────────────────────────────
         //  CLIMAX SKILL CHECK - maps dominant tag to a skill + threshold
@@ -250,9 +334,12 @@ namespace PawnChronicles
                 "wait_condition_crafted" => "PC_WaitFallback_Crafted".Translate(name),
                 "wait_condition_social"  => "PC_WaitFallback_Social".Translate(name),
                 "wait_condition_ritual"  => "PC_WaitFallback_Ritual".Translate(name),
-                "wait_condition_tamed"   => "PC_WaitFallback_Tamed".Translate(name),
-                "wait_condition_time"    => "PC_WaitFallback_Time".Translate(name),
-                _                        => "PC_WaitFallback_Default".Translate(name)
+                "wait_condition_tamed"      => "PC_WaitFallback_Tamed".Translate(name),
+                "wait_condition_time"       => "PC_WaitFallback_Time".Translate(name),
+                "wait_condition_withdrawal" => "PC_WaitFallback_Withdrawal".Translate(name),
+                "wait_condition_sobriety"   => "PC_WaitFallback_Sobriety".Translate(name),
+                "wait_condition_mood_low"   => "PC_WaitFallback_MoodLow".Translate(name),
+                _                           => "PC_WaitFallback_Default".Translate(name)
             };
         }
 

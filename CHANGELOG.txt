@@ -4,6 +4,37 @@ PawnChronicles — Changelog
 [Unreleased]
 ------------
 ADDED
+  - Addiction arc system: 7 dedicated arcs (alcohol, ambrosia, go-juice, psychite,
+    wake-up, smokeleaf, chemical fallback). Each arc is a 6-stage fixed sequence
+    triggered when a colonist gains the matching addiction hediff. Successful
+    completion removes the addiction hediff from the pawn.
+  - PC_AddictionArcDefs.xml: 7 PersonalEpicDef entries with fixedStageSequence,
+    addictionHediffDef, successGrammarRole, failureGrammarRole, epithets.
+  - PC_AddictionStageDefs.xml: 42 QuestStageDef entries (6 per substance), each
+    with grammarRoleOverride so grammar resolves to addiction_{substance}_{stage}.
+  - New PersonalEpicDef fields: fixedStageSequence, IsFixed, addictionHediffDef,
+    withdrawalHediffDef, successGrammarRole, failureGrammarRole.
+  - New QuestStageDef fields: grammarRoleOverride, GrammarRole property.
+  - New StageWaitCondition methods: BuildForAddiction, BuildAddictionClimaxDoors,
+    BuildWithdrawalCondition, BuildSobrietyCondition.
+  - New wait condition keys: "withdrawal" (pawn is in withdrawal stage of addiction
+    hediff), "sobriety" (addiction hediff no longer present).
+  - New grammar entries: wait_condition_withdrawal, wait_condition_sobriety,
+    wait_condition_mood_low.
+  - New keyed strings: PC_Addiction_HardRoad_Label/Hint, PC_Addiction_EasyOut_Label/Hint,
+    PC_AddictionCured, PC_WaitFallback_Withdrawal/Sobriety/MoodLow.
+  - Patch 15 (merged into Patch 6): Hediff.PostAdd detects Hediff_Addiction on free
+    colonists and calls TryStartAddictionArc via LongEventHandler.
+  - CompPersonalChronicles.TryStartAddictionArc: matches addiction to arc def,
+    falls back to PC_Arc_Addiction_Chemical for unrecognised substances.
+  - CompPersonalChronicles.CompleteEpic: removes addiction hediff on success when
+    epic.addictionHediffDef is set.
+  - GenerateArcOutcomeNarrative: uses epic.successGrammarRole/failureGrammarRole
+    when set, falling back to standard "success"/"failure" roles.
+  - TriggerNextStage: uses stage.GrammarRole instead of stage.StageRole for
+    grammar resolution; handles fixed-sequence arcs and addiction climax doors.
+
+ADDED
   - New Harmony patch (Patch 13): tracks every social interaction a colonist
     completes. Both initiator and recipient get credited. Count persists in
     save data (socialInteractionCount, save version 4).
@@ -86,13 +117,6 @@ ADDED
 ==========================
 TODO / FUTURE UPDATES
 ==========================
-
-  - Addiction arcs: dedicated arc tracks per addiction type (alcohol, smokeleaf,
-    wake-up, go-juice, luciferium, flake, yayo, etc.). Each arc follows the pawn
-    through dependency, withdrawal, and either relapse or recovery. A successful
-    arc completion triggers a Harmony-patched cure that removes the addiction
-    hediff and grants a narrative epithet reflecting the struggle. Failure path
-    leaves the addiction in place with a corresponding epithet.
 
   - Crafted condition categories (Bug 6 deferral): split the combined
     ThingsConstructed + ThingsCrafted counter into per-workbench categories
