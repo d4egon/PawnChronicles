@@ -188,190 +188,190 @@
 
         <!--(opening)-->
         <!--ALCOHOL-->
-        <li>addiction_alcohol_opening_title</li>
-        <li>addiction_alcohol_opening_body</li>
+        <li>addiction_alcohol_opening_title->The Drunken Master</li>
+        <li>addiction_alcohol_opening_body-></li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_opening_title</li>
-        <li>addiction_ambrosia_opening_body</li>
+        <li>addiction_ambrosia_opening_title->Stuff of the Gods</li>
+        <li>addiction_ambrosia_opening_body-></li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_opening_title</li>
-        <li>addiction_gojuice_opening_body</li>
+        <li>addiction_gojuice_opening_title->Speed, I Am speed</li>
+        <li>addiction_gojuice_opening_body-></li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_opening_title</li>
-        <li>addiction_psychite_opening_body</li>
+        <li>addiction_psychite_opening_title->The Chill Dependency</li>
+        <li>addiction_psychite_opening_body-></li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_opening_title</li>
-        <li>addiction_wakeup_opening_body</li>
+        <li>addiction_wakeup_opening_title->Sleep Is For The Dead</li>
+        <li>addiction_wakeup_opening_body-></li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_opening_title</li>
-        <li>addiction_smokeleaf_opening_body</li>
+        <li>addiction_smokeleaf_opening_title->Mob Barley's Fangroup</li>
+        <li>addiction_smokeleaf_opening_body-></li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_opening_title</li>
-        <li>addiction_chemical_opening_body</li>
+        <li>addiction_chemical_opening_title->My Chemical Romance</li>
+        <li>addiction_chemical_opening_body-></li>
         
         <!--(habit entrenched)-->
 
         <!--ALCOHOL-->
-        <li>addiction_alcohol_dependency_title</li>
-        <li>addiction_alcohol_dependency_body</li>
+        <li>addiction_alcohol_dependency_title-></li>
+        <li>addiction_alcohol_dependency_body-></li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_dependency_title</li>
-        <li>addiction_ambrosia_dependency_body</li>
+        <li>addiction_ambrosia_dependency_title-></li>
+        <li>addiction_ambrosia_dependency_body-></li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_dependency_title</li>
-        <li>addiction_gojuice_dependency_body</li>
+        <li>addiction_gojuice_dependency_title-></li>
+        <li>addiction_gojuice_dependency_body-></li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_dependency_title</li>
-        <li>addiction_psychite_dependency_body</li>
+        <li>addiction_psychite_dependency_title-></li>
+        <li>addiction_psychite_dependency_body-></li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_dependency_title</li>
-        <li>addiction_wakeup_dependency_body</li>
+        <li>addiction_wakeup_dependency_title-></li>
+        <li>addiction_wakeup_dependency_body-></li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_dependency_title</li>
-        <li>addiction_smokeleaf_dependency_body</li>
+        <li>addiction_smokeleaf_dependency_title-></li>
+        <li>addiction_smokeleaf_dependency_body-></li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_dependency_title</li>
-        <li>addiction_chemical_dependency_body</li>  
-
+        <li>addiction_chemical_dependency_title-></li>
+        <li>addiction_chemical_dependency_body-></li>  
+        
         <!--(relationships fraying)-->
         <!--ALCOHOL-->
-        <li>addiction_alcohol_social_title</li>
-        <li>addiction_alcohol_social_body</li>
+        <li>addiction_alcohol_social_title->The [PersonFamily]'s [AdjectiveBadass][BodyPart]</li>
+        <li>addiction_alcohol_social_body-></li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_social_title</li>
-        <li>addiction_ambrosia_social_body</li>
+        <li>addiction_ambrosia_social_title->A [PersonFamily]'s [Color][ConceptPositive]</li>
+        <li>addiction_ambrosia_social_body-></li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_social_title</li>
-        <li>addiction_gojuice_social_body</li>
+        <li>addiction_gojuice_social_title->In [pawn_nameDef]'s [PersonFamily]'s [AnimalGroup] of [AnimalBadass]</li>
+        <li>addiction_gojuice_social_body-></li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_social_title</li>
-        <li>addiction_psychite_social_body</li>
+        <li>addiction_psychite_social_title-></li>
+        <li>addiction_psychite_social_body-></li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_social_title</li>
-        <li>addiction_wakeup_social_body</li>
+        <li>addiction_wakeup_social_title-></li>
+        <li>addiction_wakeup_social_body-></li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_social_title</li>
-        <li>addiction_smokeleaf_social_body</li>
+        <li>addiction_smokeleaf_social_title-></li>
+        <li>addiction_smokeleaf_social_body-></li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_social_title</li>
-        <li>addiction_chemical_social_body</li> 
+        <li>addiction_chemical_social_title-></li>
+        <li>addiction_chemical_social_body-></li> 
 
 
         <!--(first attempt to stop)-->
         <!--ALCOHOL-->
-        <li>addiction_alcohol_withdrawal_title</li>
-        <li>addiction_alcohol_withdrawal_body</li>
+        <li>addiction_alcohol_withdrawal_title-></li>
+        <li>addiction_alcohol_withdrawal_body-></li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_withdrawal_title</li>
-        <li>addiction_ambrosia_withdrawal_body</li>
+        <li>addiction_ambrosia_withdrawal_title-></li>
+        <li>addiction_ambrosia_withdrawal_body-></li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_withdrawal_title</li>
-        <li>addiction_gojuice_withdrawal_body</li>
+        <li>addiction_gojuice_withdrawal_title-></li>
+        <li>addiction_gojuice_withdrawal_body-></li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_withdrawal_title</li>
-        <li>addiction_psychite_withdrawal_body</li>
+        <li>addiction_psychite_withdrawal_title-></li>
+        <li>addiction_psychite_withdrawal_body-></li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_withdrawal_title</li>
-        <li>addiction_wakeup_withdrawal_body</li>
+        <li>addiction_wakeup_withdrawal_title-></li>
+        <li>addiction_wakeup_withdrawal_body-></li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_withdrawal_title</li>
-        <li>addiction_smokeleaf_withdrawal_body</li>
+        <li>addiction_smokeleaf_withdrawal_title-></li>
+        <li>addiction_smokeleaf_withdrawal_body-></li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_withdrawal_title</li>
-        <li>addiction_chemical_withdrawal_body</li>
+        <li>addiction_chemical_withdrawal_title-></li>
+        <li>addiction_chemical_withdrawal_body-></li>
 
 
         <!--(rock bottom)-->
         <!--ALCOHOL-->
-        <li>addiction_alcohol_crisis_title</li>
-        <li>addiction_alcohol_crisis_body</li>
+        <li>addiction_alcohol_crisis_title-></li>
+        <li>addiction_alcohol_crisis_body-></li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_crisis_title</li>
-        <li>addiction_ambrosia_crisis_body</li>
+        <li>addiction_ambrosia_crisis_title-></li>
+        <li>addiction_ambrosia_crisis_body-></li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_crisis_title</li>
-        <li>addiction_gojuice_crisis_body</li>
+        <li>addiction_gojuice_crisis_title-></li>
+        <li>addiction_gojuice_crisis_body-></li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_crisis_title</li>
-        <li>addiction_psychite_crisis_body</li>
+        <li>addiction_psychite_crisis_title-></li>
+        <li>addiction_psychite_crisis_body-></li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_crisis_title</li>
-        <li>addiction_wakeup_crisis_body</li>
+        <li>addiction_wakeup_crisis_title-></li>
+        <li>addiction_wakeup_crisis_body-></li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_crisis_title</li>
-        <li>addiction_smokeleaf_crisis_body</li>
+        <li>addiction_smokeleaf_crisis_title-></li>
+        <li>addiction_smokeleaf_crisis_body-></li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_crisis_title</li>
-        <li>addiction_chemical_crisis_body</li>
+        <li>addiction_chemical_crisis_title-></li>
+        <li>addiction_chemical_crisis_body-></li>
 
         <!--(the fork)-->
         <!--ALCOHOL-->
-        <li>addiction_alcohol_choice_title</li>
-        <li>addiction_alcohol_choice_body</li>
+        <li>addiction_alcohol_choice_title-></li>
+        <li>addiction_alcohol_choice_body-></li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_choice_title</li>
-        <li>addiction_ambrosia_choice_body</li>
+        <li>addiction_ambrosia_choice_title-></li>
+        <li>addiction_ambrosia_choice_body-></li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_choice_title</li>
-        <li>addiction_gojuice_choice_body</li>
+        <li>addiction_gojuice_choice_title-></li>
+        <li>addiction_gojuice_choice_body-></li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_choice_title</li>
-        <li>addiction_psychite_choice_body</li>
+        <li>addiction_psychite_choice_title-></li>
+        <li>addiction_psychite_choice_body-></li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_choice_title</li>
-        <li>addiction_wakeup_choice_body</li>
+        <li>addiction_wakeup_choice_title-></li>
+        <li>addiction_wakeup_choice_body-></li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_choice_title</li>
-        <li>addiction_smokeleaf_choice_body</li>
+        <li>addiction_smokeleaf_choice_title-></li>
+        <li>addiction_smokeleaf_choice_body-></li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_choice_title</li>
-        <li>addiction_chemical_choice_body</li>
+        <li>addiction_chemical_choice_title-></li>
+        <li>addiction_chemical_choice_body-></li>
 
         <!--(succes)-->
         <!--ALCOHOL-->
-        <li>addiction_alcohol_success_title</li>
-        <li>addiction_alcohol_success_body</li>
+        <li>addiction_alcohol_success_title-></li>
+        <li>addiction_alcohol_success_body-></li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_success_title</li>
-        <li>addiction_ambrosia_success_body</li>
+        <li>addiction_ambrosia_success_title-></li>
+        <li>addiction_ambrosia_success_body-></li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_success_title</li>
-        <li>addiction_gojuice_success_body</li>
+        <li>addiction_gojuice_success_title-></li>
+        <li>addiction_gojuice_success_body-></li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_success_title</li>
-        <li>addiction_psychite_success_body</li>
+        <li>addiction_psychite_success_title-></li>
+        <li>addiction_psychite_success_body-></li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_success_title</li>
-        <li>addiction_wakeup_success_body</li>
+        <li>addiction_wakeup_success_title-></li>
+        <li>addiction_wakeup_success_body-></li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_success_title</li>
-        <li>addiction_smokeleaf_success_body</li>
+        <li>addiction_smokeleaf_success_title-></li>
+        <li>addiction_smokeleaf_success_body-></li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_success_title</li>
-        <li>addiction_chemical_success_body</li>
+        <li>addiction_chemical_success_title-></li>
+        <li>addiction_chemical_success_body-></li>
 
         <!--(failure)-->
         <!--ALCOHOL-->
-        <li>addiction_alcohol_failure_title</li>
-        <li>addiction_alcohol_failure_body</li>
+        <li>addiction_alcohol_failure_title-></li>
+        <li>addiction_alcohol_failure_body-></li>
         <!--AMBROSIA-->
-        <li>addiction_ambrosia_failure_title</li>
-        <li>addiction_ambrosia_failure_body</li>
+        <li>addiction_ambrosia_failure_title-></li>
+        <li>addiction_ambrosia_failure_body-></li>
         <!--GO-JUICE-->
-        <li>addiction_gojuice_failure_title</li>
-        <li>addiction_gojuice_failure_body</li>
+        <li>addiction_gojuice_failure_title-></li>
+        <li>addiction_gojuice_failure_body-></li>
         <!--PSYCHITE-->
-        <li>addiction_psychite_failure_title</li>
-        <li>addiction_psychite_failure_body</li>
+        <li>addiction_psychite_failure_title-></li>
+        <li>addiction_psychite_failure_body-></li>
         <!--WAKE-UP-->
-        <li>addiction_wakeup_failure_title</li>
-        <li>addiction_wakeup_failure_body</li>
+        <li>addiction_wakeup_failure_title-></li>
+        <li>addiction_wakeup_failure_body-></li>
         <!--SMOKELEAF-->
-        <li>addiction_smokeleaf_failure_title</li>
-        <li>addiction_smokeleaf_failure_body</li>
+        <li>addiction_smokeleaf_failure_title-></li>
+        <li>addiction_smokeleaf_failure_body-></li>
         <!--CHEMICAL-->
-        <li>addiction_chemical_failure_title</li>
-        <li>addiction_chemical_failure_body</li>
+        <li>addiction_chemical_failure_title-></li>
+        <li>addiction_chemical_failure_body-></li>
 
         <!-- ═══════════════════════════════════════════════════════════════
              WAIT CONDITION LABELS - Chronicles tab
