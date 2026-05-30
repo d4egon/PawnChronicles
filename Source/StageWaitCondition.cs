@@ -2,6 +2,7 @@ using System.Linq;
 using Verse;
 using Verse.Grammar;
 using RimWorld;
+using RimWorld.Planet;
 using System.Collections.Generic;
 
 namespace PawnChronicles
@@ -95,7 +96,7 @@ namespace PawnChronicles
                 case "site_cleared":
                 {
                     var comp = pawn.GetComp<CompPersonalChronicles>();
-                    if (comp == null || comp.lucifSiteTile < 0) return true;
+                    if (comp == null || comp.lucifSiteTile.Equals(default(PlanetTile))) return true;
                     return !Find.WorldObjects.AnyWorldObjectAt(comp.lucifSiteTile);
                 }
             }
@@ -184,19 +185,24 @@ namespace PawnChronicles
             string stage = parts.Length > 0 ? parts[parts.Length - 1] : "";
             return stage switch
             {
-                "opening"    => BuildTimeCondition(pawn, 5),
-                "dependency" => BuildTimeCondition(pawn, 5),
-                "social"     => BuildSocialCondition(pawn),
-                "reckoning"  => BuildSocialCondition(pawn),
-                "quest"      => BuildTimeCondition(pawn, 3),
-                "danger"     => ("site_cleared",
-                                 ResolveConditionLabel(pawn, "wait_condition_site_cleared"),
-                                 0, 0),
-                "withdrawal" => BuildWithdrawalCondition(pawn),
-                "crisis"     => ("mood_low",
-                                 ResolveConditionLabel(pawn, "wait_condition_mood_low"),
-                                 0, 0),
-                _            => BuildTimeCondition(pawn, 3)
+                // Standard 6-stage addiction arc stages
+                "opening"          => BuildTimeCondition(pawn, 5),
+                "dependency"       => BuildTimeCondition(pawn, 5),
+                "social"           => BuildSocialCondition(pawn),
+                "withdrawal"       => BuildWithdrawalCondition(pawn),
+                "crisis"           => ("mood_low", ResolveConditionLabel(pawn, "wait_condition_mood_low"), 0, 0),
+                // 13-stage luciferium arc stages
+                "realizing"        => BuildTimeCondition(pawn, 4),
+                "calculation"      => BuildTimeCondition(pawn, 5),
+                "moral_decline"    => BuildSocialCondition(pawn),
+                "devils_advocate"  => BuildTimeCondition(pawn, 4),
+                "expedition"       => BuildTimeCondition(pawn, 5),
+                "delving"          => BuildKillCondition(pawn),
+                "cost"             => BuildInjuredCondition(pawn),
+                "desperation"      => ("withdrawal", ResolveConditionLabel(pawn, "wait_condition_withdrawal"), 0, 1),
+                "quest"            => ("site_cleared", ResolveConditionLabel(pawn, "wait_condition_site_cleared"), 0, 0),
+                "reckoning"        => BuildSocialCondition(pawn),
+                _                  => BuildTimeCondition(pawn, 3)
             };
         }
 
@@ -385,10 +391,11 @@ namespace PawnChronicles
                 "wait_condition_ritual"  => "PC_WaitFallback_Ritual".Translate(name),
                 "wait_condition_tamed"      => "PC_WaitFallback_Tamed".Translate(name),
                 "wait_condition_time"       => "PC_WaitFallback_Time".Translate(name),
-                "wait_condition_withdrawal" => "PC_WaitFallback_Withdrawal".Translate(name),
-                "wait_condition_sobriety"   => "PC_WaitFallback_Sobriety".Translate(name),
-                "wait_condition_mood_low"   => "PC_WaitFallback_MoodLow".Translate(name),
-                _                           => "PC_WaitFallback_Default".Translate(name)
+                "wait_condition_withdrawal"   => "PC_WaitFallback_Withdrawal".Translate(name),
+                "wait_condition_sobriety"     => "PC_WaitFallback_Sobriety".Translate(name),
+                "wait_condition_mood_low"     => "PC_WaitFallback_MoodLow".Translate(name),
+                "wait_condition_site_cleared" => "PC_WaitFallback_SiteCleared".Translate(name),
+                _                             => "PC_WaitFallback_Default".Translate(name)
             };
         }
 

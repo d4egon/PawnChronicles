@@ -40,6 +40,12 @@ namespace PawnChronicles
         public bool isLuciferiumArc = false;
 
         /// <summary>
+        /// When true, this arc is The Decline loop. CompPersonalChronicles increments
+        /// luciferiumDeclineCycles on each completion and restarts the arc.
+        /// </summary>
+        public bool isLuciferiumDecline = false;
+
+        /// <summary>
         /// HediffDef.defName of the addiction this arc tracks.
         /// e.g. "AlcoholAddiction". When set and the arc completes with success,
         /// this hediff is removed from the pawn.

@@ -148,14 +148,59 @@
     </fixedStageSequence>
   </PawnChronicles.PersonalEpicDef>
 
+  <!-- ── Luciferium (13-stage) ───────────────────────────────────────────── -->
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Arc_Addiction_Luciferium</defName>
+    <label>The Devil's Bargain</label>
+    <modus>Kindle</modus>
+    <stageCount>13</stageCount>
+    <isLuciferiumArc>true</isLuciferiumArc>
+    <!-- addictionHediffDef needed for TryStartAddictionArc matching. Auto-cure is blocked by isLuciferiumArc check in CompleteEpic. -->
+    <addictionHediffDef>LuciferiumAddiction</addictionHediffDef>
+    <successGrammarRole>addiction_luciferium_success</successGrammarRole>
+    <failureGrammarRole>addiction_luciferium_failure</failureGrammarRole>
+    <redeemedEpithet>Forever Indebted</redeemedEpithet>
+    <corruptedEpithet>The Cost Was Too Great</corruptedEpithet>
+    <fixedStageSequence>
+      <li>PC_LucStage_Opening</li>
+      <li>PC_LucStage_Dependency</li>
+      <li>PC_LucStage_Realizing</li>
+      <li>PC_LucStage_Calculation</li>
+      <li>PC_LucStage_MoralDecline</li>
+      <li>PC_LucStage_DevilsAdvocate</li>
+      <li>PC_LucStage_Expedition</li>
+      <li>PC_LucStage_Delving</li>
+      <li>PC_LucStage_Cost</li>
+      <li>PC_LucStage_Desperation</li>
+      <li>PC_LucStage_Crisis</li>
+      <li>PC_LucStage_Quest</li>
+      <li>PC_LucStage_Resolution</li>
+    </fixedStageSequence>
+  </PawnChronicles.PersonalEpicDef>
+
+  <!-- ── Luciferium - The Decline (loop arc) ──────────────────────────────── -->
+  <PawnChronicles.PersonalEpicDef>
+    <defName>PC_Arc_Luciferium_Decline</defName>
+    <label>The Decline</label>
+    <modus>Kindle</modus>
+    <stageCount>1</stageCount>
+    <isLuciferiumDecline>true</isLuciferiumDecline>
+    <successGrammarRole>luciferium_decline_cycle</successGrammarRole>
+    <failureGrammarRole>luciferium_decline_cycle</failureGrammarRole>
+    <redeemedEpithet>Holding Together</redeemedEpithet>
+    <corruptedEpithet>Holding Together</corruptedEpithet>
+    <fixedStageSequence>
+      <li>PC_LucStage_DeclineCycle</li>
+    </fixedStageSequence>
+  </PawnChronicles.PersonalEpicDef>
+
   <!-- ── Chemical (generic fallback) ────────────────────────────────────── -->
   <PawnChronicles.PersonalEpicDef>
     <defName>PC_Arc_Addiction_Chemical</defName>
     <label>My Chemical Romance</label>
     <modus>Kindle</modus>
     <stageCount>6</stageCount>
-    <!-- No addictionHediffDef - this is the fallback for any unmatched addiction.
-         RemoveHediff will not fire on success; the arc resolves narratively only. -->
+    <!-- No addictionHediffDef - fallback for any unmatched addiction. -->
     <successGrammarRole>addiction_chemical_success</successGrammarRole>
     <failureGrammarRole>addiction_chemical_failure</failureGrammarRole>
     <redeemedEpithet>Clean Synthesis</redeemedEpithet>

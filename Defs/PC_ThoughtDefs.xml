@@ -498,25 +498,43 @@
     </li></stages>
   </ThoughtDef>
 
-  <!-- ── Social opinion thoughts (used by EffectEntryDef socialOpinion) ── -->
+  <!-- ═══════════════════════════════════════════════════════════════
+       LUCIFERIUM DECLINE THOUGHTS
+  ═══════════════════════════════════════════════════════════════════ -->
 
-  <!-- Positive social memory: applied to both pawns when socialOpinion > 0 -->
   <ThoughtDef>
-    <defName>PC_Thought_SocialBond</defName>
-    <thoughtClass>Thought_MemorySocial</thoughtClass>
-    <durationDays>12</durationDays>
+    <defName>PC_Thought_LuciferiumDecline</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>3</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>opened up to them</label>
-        <description>We talked honestly for once. It helped.</description>
-        <baseMoodEffect>4</baseMoodEffect>
-        <baseOpinionOffset>15</baseOpinionOffset>
+        <label>the price of it</label>
+        <description>The luciferium is running whatever it wants now. Three days of weight that nothing shifts.</description>
+        <baseMoodEffect>-30</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
 
-  <!-- Negative social memory: applied to both pawns when socialOpinion < 0 -->
+  <!-- ═══════════════════════════════════════════════════════════════
+       SOCIAL OPINION THOUGHTS
+       Applied by EffectEntryDef.TryApplySocialOpinion between pawn
+       and their closest ally. Thought_MemorySocial affects opinion.
+  ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThoughtDef>
+    <defName>PC_Thought_SocialBond</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>stood by me through it</label>
+        <baseOpinionOffset>25</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+
   <ThoughtDef>
     <defName>PC_Thought_SocialConflict</defName>
     <thoughtClass>Thought_MemorySocial</thoughtClass>
@@ -524,10 +542,8 @@
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>things went badly between us</label>
-        <description>Something happened that left a bad feeling. It hasn't gone away.</description>
-        <baseMoodEffect>-6</baseMoodEffect>
-        <baseOpinionOffset>-15</baseOpinionOffset>
+        <label>made things harder</label>
+        <baseOpinionOffset>-30</baseOpinionOffset>
       </li>
     </stages>
   </ThoughtDef>

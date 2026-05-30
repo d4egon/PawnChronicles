@@ -1922,73 +1922,77 @@
         <li>pc_lex_memory_flash->the last [AdjectiveNatural] thing before [pc_backstory_child_title] changed everything</li>
 
         <!-- ═══════════════════════════════════════════════════════════════
-             MOMENT ASSEMBLERS
+             LUCIFERIUM ARC - 13 stages + Decline loop
+             Tone: expedition log, underworld descent, documentary.
+             Every stage is a choice moment - player always knows why.
+        ════════════════════════════════════════════════════════════════ -->
 
-             [pc_lex_moment]          - generic, draws from all 5 pools
-             [pc_lex_moment_<theme>]  - swaps L2 for the themed signal pool
+        <!-- Stage 1 -->
+        <li>addiction_luciferium_opening_title->The Devil's Bargain</li>
+        <li>addiction_luciferium_opening_body->[pawn_nameDef] had taken the first dose during the [pc_world_season] season, when the medic was out of everything else. The improvement was immediate and total. [pawn_pronoun] read the supply notes that evening and understood, with a [PersonJob]'s precision, exactly what [pawn_pronoun] had agreed to.</li>
 
-             5 generic templates × 12 anchors × 13 signals × 16 sensory
-             = ~12,000 combinations per pool of generic entries alone.
-             Themed assemblers reuse the same templates with focused signals.
-        ═══════════════════════════════════════════════════════════════════ -->
+        <!-- Stage 2 -->
+        <li>addiction_luciferium_dependency_title->The Supply Problem</li>
+        <li>addiction_luciferium_dependency_body->[pawn_nameDef] had begun running the numbers. Six days per dose. Current supply at [pc_colony_name]: enough for [Quantity_adjphrase] months, if the traders held to schedule. [pc_friend_name] found [pawn_objective] at the [TerrainFeature] one [pc_world_time_of_day] recalculating for the fourth time. [pawn_nameDef] said [pawn_pronoun] was checking the math. [pc_friend_name] said the math was fine. That was not quite the problem [pawn_nameDef] was describing.</li>
 
-        <!-- Generic assembler -->
-        <li>pc_lex_moment->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_signal]. [pc_lex_sensory].</li>
-        <li>pc_lex_moment->[pc_lex_sensory]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_signal].</li>
-        <li>pc_lex_moment->[pawn_nameDef] [pc_lex_anchor]. [pc_lex_sensory]. [pc_lex_body_signal].</li>
-        <li>pc_lex_moment->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_subtext]. [pc_lex_sensory].</li>
-        <li>pc_lex_moment->[pc_lex_memory_flash]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_signal].</li>
+        <!-- Stage 3 -->
+        <li>addiction_luciferium_realizing_title->Realizing</li>
+        <li>addiction_luciferium_realizing_body->The denial had been holding for several weeks, which [pawn_nameDef] knew was longer than it had any right to. The numbers were there every time [pawn_pronoun] ran them. The traders were unreliable. The colony stores were finite. [pc_friend_name] asked [pawn_objective] once if [pawn_pronoun] was all right. [pawn_nameDef] said the numbers were manageable. This was not the same as saying yes.</li>
 
-        <!-- Themed assemblers -->
-        <li>pc_lex_moment_violence->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_violence]. [pc_lex_sensory].</li>
-        <li>pc_lex_moment_violence->[pc_lex_sensory]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_violence].</li>
-        <li>pc_lex_moment_violence->[pc_lex_memory_flash]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_violence].</li>
+        <!-- Stage 4 -->
+        <li>addiction_luciferium_calculation_title->The Calculation</li>
+        <li>addiction_luciferium_calculation_body->[pawn_nameDef] had three columns now. Confirmed sources. Probable sources. Sources that required a level of compromise [pawn_pronoun] had not yet committed to. The third column was longer than [pawn_pronoun] had expected. [pawn_pronoun] did not show the document to [pc_friend_name]. [pc_friend_name] noticed [pawn_possessive] [BodyPart] moving over it and did not ask what it was.</li>
 
-        <li>pc_lex_moment_grief->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_grief]. [pc_lex_sensory].</li>
-        <li>pc_lex_moment_grief->[pc_lex_sensory]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_grief].</li>
-        <li>pc_lex_moment_grief->[pc_lex_memory_flash]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_grief].</li>
+        <!-- Stage 5 -->
+        <li>addiction_luciferium_moral_decline_title->Moral Decline</li>
+        <li>addiction_luciferium_moral_decline_body->The first dirty deal had a [PersonJob] behind it that [pawn_nameDef] would not have spoken to under ordinary circumstances. The terms were clear. The source was reliable. [pawn_nameDef] paid what was asked, took what was offered, and told [pc_friend_name] the supply had come through a [Community] contact. That was technically accurate. [pc_friend_name] did not ask for the name.</li>
 
-        <li>pc_lex_moment_curiosity->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_curiosity]. [pc_lex_sensory].</li>
-        <li>pc_lex_moment_curiosity->[pc_lex_sensory]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_curiosity].</li>
+        <!-- Stage 6 -->
+        <li>addiction_luciferium_devils_advocate_title->Devil's Advocate</li>
+        <li>addiction_luciferium_devils_advocate_body->[pawn_nameDef] had begun arguing [pawn_reflexive] back into level ground. This was just logistics. Every [PersonJob] on the Rim worked with people they would not invite home. The luciferium kept [pawn_possessive] body running. Everything else was a version of that same calculation made by someone with the luxury of not needing it. [pc_friend_name] said [pawn_pronoun] seemed different lately. [pawn_nameDef] said [pawn_pronoun] was focused.</li>
 
-        <li>pc_lex_moment_craft->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_craft]. [pc_lex_sensory].</li>
-        <li>pc_lex_moment_craft->[pc_lex_sensory]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_craft].</li>
+        <!-- Stage 7 -->
+        <li>addiction_luciferium_expedition_title->Expedition</li>
+        <li>addiction_luciferium_expedition_body->[pawn_nameDef] had left [pc_colony_name] without a full explanation. The contact was a [PersonJob] who operated out of a [TerrainFeature] three days from the colony perimeter. There had been bribes. There had been a conversation with a [PersonBadass] whose [Weapon] was visible throughout. [pawn_nameDef] came back with a supply extension and a name [pawn_pronoun] had agreed not to use. [pc_friend_name] asked where [pawn_pronoun] had been. [pawn_nameDef] said running a supply line. This was true in the way most things [pawn_pronoun] said were true.</li>
 
-        <li>pc_lex_moment_kinship->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_kinship]. [pc_lex_sensory].</li>
-        <li>pc_lex_moment_kinship->[pc_lex_memory_flash]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_kinship].</li>
+        <!-- Stage 8 -->
+        <li>addiction_luciferium_delving_title->Dungeon Delving</li>
+        <li>addiction_luciferium_delving_body->The garrison had been on the contact's list as a secondary option. Pre-collapse military. Active security. The kind of place that still had things in it because the things inside had discouraged collection. [pawn_nameDef] went in with [pawn_possessive] [pc_weapon_label] and a timeline. The security systems were older than [pawn_pronoun] expected, which helped. What was inside with them was not older than [pawn_pronoun] expected, which did not.</li>
 
-        <li>pc_lex_moment_trauma->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_trauma]. [pc_lex_sensory].</li>
-        <li>pc_lex_moment_trauma->[pc_lex_memory_flash]. [pawn_nameDef] [pc_lex_anchor], [pc_lex_body_trauma].</li>
+        <!-- Stage 9 -->
+        <li>addiction_luciferium_cost_title->The Cost</li>
+        <li>addiction_luciferium_cost_body->[pawn_nameDef] returned from the garrison with what [pawn_pronoun] came for and a [BodyPart] that would remember the trip. [pawn_pronoun] filed no report. [pc_friend_name] looked at the wound and looked at [pawn_nameDef] and said nothing, which [pawn_nameDef] found more uncomfortable than the alternative. The supply had been extended. The cost had been specific. [pawn_nameDef] began working out which contact was next on the list.</li>
 
-        <li>pc_lex_moment_devotion->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_devotion]. [pc_lex_sensory].</li>
-        <li>pc_lex_moment_resilience->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_resilience]. [pc_lex_sensory].</li>
-        <li>pc_lex_moment_wandering->[pawn_nameDef] [pc_lex_anchor] - [pc_lex_body_wandering]. [pc_lex_sensory].</li>
+        <!-- Stage 10 -->
+        <li>addiction_luciferium_desperation_title->Desperation</li>
+        <li>addiction_luciferium_desperation_body->The supply window had closed to [Quantity_adjphrase] weeks. The last contact had not responded. [pawn_nameDef] had woken twice this [pc_world_season] from something [pawn_pronoun] could not fully describe - the mechanites losing cohesion in ways the body registered before the mind did. [pc_friend_name] found [pawn_objective] checking [pawn_possessive] supplies at [pc_world_time_of_day] and said [pawn_pronoun] looked like [pawn_pronoun] was running out of road. [pawn_nameDef] said [pawn_pronoun] was working on it.</li>
 
-        <!-- ═══════════════════════════════════════════════════════════════
-             MOMENT-SEEDED EMBER BODIES
-             New entries on existing keys - GrammarResolver picks randomly.
-             Each opens with a themed moment, then the actual ember beat.
-        ═══════════════════════════════════════════════════════════════════ -->
+        <!-- Stage 11 -->
+        <li>addiction_luciferium_crisis_title->Crisis</li>
+        <li>addiction_luciferium_crisis_body->One option left. There was a facility [pawn_nameDef] had been avoiding since the first time [pawn_pronoun] saw it on the contact's map. Deeper in. More dangerous. The kind of place where a [PersonJob] who went looking for something specific did not always come back with what they expected. [pawn_nameDef] had everything [pawn_pronoun] needed. [pawn_pronoun] checked [pawn_possessive] [pc_weapon_label] twice and did not sleep well.</li>
 
-        <li>violence_ember_body->[pc_lex_moment_violence]\n\n[pawn_nameDef] could spend time with [pc_weapon_label] today. The maintenance, the practice - the familiar weight of it in [pawn_possessive] hands.</li>
-        <li>grief_ember_body->[pc_lex_moment_grief]\n\nThe weight surfaces. [pawn_nameDef] could sit with it today instead of keeping ahead of it.</li>
-        <li>curiosity_ember_body->[pc_lex_moment_curiosity]\n\nThe question has been sitting there. [pawn_nameDef] hasn't had time to follow it properly. Today might be different.</li>
-        <li>craft_ember_body->[pc_lex_moment_craft]\n\n[pawn_nameDef] could make something today - not for the colony. Just for [pawn_possessive]self. The materials have been waiting.</li>
+        <!-- Stage 12 - site spawns here -->
+        <li>addiction_luciferium_quest_title->The Quest</li>
+        <li>addiction_luciferium_quest_body->The ruins were on the map. [pawn_nameDef] had paid for the information twice and earned it once. The garrison was abandoned by everything except what the garrison had put there to stay. A healer mech serum was confirmed in the pre-collapse inventory. The inventory was pre-collapse. The confirmation was from a [PersonJob] who had gone in and come out, which was its own kind of confidence. [pawn_nameDef] made [pawn_possessive] preparations. [pc_friend_name] noted [pawn_possessive] preparations and said nothing this time either.</li>
 
-        <li>devotion_ember_body->[pc_lex_moment_devotion]\n\nThe day offered a quiet window. [pawn_nameDef] could take a moment for [pc_ideo_name] observance - [pc_lex_scene], nothing elaborate.</li>
+        <!-- Stage 13 - climax -->
+        <li>addiction_luciferium_resolution_title->Returning / Forever Indebted</li>
+        <li>addiction_luciferium_resolution_body->[pawn_nameDef] stood [pc_lex_scene] with what [pawn_pronoun] had come back from the garrison carrying. The serum was there. The cost of getting it was specific and would not be reducing. [pc_friend_name] was somewhere in [pc_colony_name], not yet knowing what [pawn_nameDef] had done or what [pawn_pronoun] owed. The mechanites in [pawn_possessive] blood were running the same calculation they always ran. [pawn_nameDef] had [Quantity_adjphrase] days to decide what came next.</li>
 
-        <li>resilience_ember_body->[pc_lex_moment_resilience]\n\n[pawn_nameDef] was still here. That was worth noting, [pc_lex_scene], even if only to [pawn_possessive]self.</li>
+        <!-- Success -->
+        <li>addiction_luciferium_success_title->Forever Indebted</li>
+        <li>addiction_luciferium_success_body->[pawn_nameDef] used the serum. The medic confirmed what [pawn_nameDef] already knew: the mechanites were clearing. [pawn_pronoun] did not describe the path that got [pawn_objective] to that point to anyone in [pc_colony_name]. [pc_friend_name] said [pawn_pronoun] seemed different. [pawn_nameDef] said [pawn_pronoun] had been handling something. The supply contacts still had [pawn_possessive] name. The [PersonJob] at the garrison would still remember [pawn_possessive] face. Some of what [pawn_pronoun] owed could not be paid back to anyone who was still alive to collect it.</li>
 
-        <li>wandering_ember_body->[pc_lex_moment_wandering]\n\nThe edge of [pc_colony_name] was facing outward. [pawn_nameDef] could stand there today - not to leave. Just to remember the world is larger than [pc_colony_name]</li>
+        <!-- Failure - begins The Decline -->
+        <li>addiction_luciferium_failure_title->The Cost Was Too Great</li>
+        <li>addiction_luciferium_failure_body->[pawn_nameDef] did not use the serum. Whatever the reason [pawn_pronoun] gave [pawn_reflexive], the path through the garrison and out the other side was not one [pawn_pronoun] chose to take. The supply problem remained a supply problem. The contacts were still there. The math had not changed. [pc_friend_name] noted that [pawn_nameDef] looked like someone who had made a decision and was not sure yet how to live with it. [pawn_nameDef] said [pawn_pronoun] was still working on the plan.</li>
 
-        <li>kinship_ember_body->[pc_lex_moment_kinship]\n\n[pc_friend_name], whom [pawn_nameDef] does not talk to enough, stood close by. </li>
-
-        <li>trauma_ember_body->[pc_lex_moment_trauma]\n\n[pc_hediff_0_label].. This [pc_world_time_of_day] might be the time to stop [AdjectiveAngsty] about it.</li>
-
-        <li>ember_body->[pc_lex_moment]\n\nA small gap opens in the day. [pawn_nameDef] could do something with it - or not. Both are choices.</li>
-        <li>animalfriend_ember_body->[pc_lex_moment]\n\n[pc_lex_animal_moment] is close today. [pawn_nameDef] could spend a few hours in that particular company. Neither species would need to explain why.</li>
+        <!-- ─── DECLINE CYCLE ─────────────────────────────────────────── -->
+        <li>luciferium_decline_cycle_title->Still Running the Numbers</li>
+        <li>luciferium_decline_cycle_body->[pawn_nameDef] was [pc_age_bio] years old, [pc_lex_identity_echo], and still tracking [pawn_possessive] supply to the day. The mechanites were holding. The cost of holding them was not decreasing. [pc_friend_name] had stopped asking direct questions. [pawn_nameDef] had stopped giving direct answers. [pc_colony_name] continued, which was the point, and the price of the point continued to be what it was.</li>
 
       </rulesStrings>
     </rulePack>
   </RulePackDef>
+
 </Defs>

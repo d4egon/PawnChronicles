@@ -4,6 +4,7 @@ using System.Linq;
 using Verse;
 using Verse.AI;
 using RimWorld;
+using RimWorld.Planet;
 using RimWorld.QuestGen;
 using UnityEngine;
 
@@ -98,8 +99,10 @@ namespace PawnChronicles
 
         public string? PendingSignal = null;
         public int activeQuestId = -1;
-        /// <summary>World map tile of the luciferium quest site. -1 when not active.</summary>
-        public int lucifSiteTile = -1;
+        /// <summary>World map tile of the luciferium quest site.</summary>
+        public PlanetTile lucifSiteTile = default;
+        /// <summary>How many Decline loop cycles have completed. Drives escalating consequences.</summary>
+        public int luciferiumDeclineCycles = 0;
 
         private QuestStageDef? _pendingRetryStage = null;
         private bool _pendingRetryIsOpening = false;
@@ -185,6 +188,22 @@ namespace PawnChronicles
         public IReadOnlyList<string> ChronicleLog => _chronicleEntries.AsReadOnly();
         private List<string> _chronicleEntries = new();
 
+        // ── Active Embers ─────────────────────────────────────────────────────
+        private List<ActiveEmber> activeEmbers = new List<ActiveEmber>();
+        public int ActiveEmberCount => activeEmbers?.Count ?? 0;
+
+        // ── Completed Epics ───────────────────────────────────────────────────
+        public IEnumerable<PersonalEpicDef> CompletedEpics =>
+            completedEpicDefNames
+                .Select(n => DefDatabase<PersonalEpicDef>.GetNamedSilentFail(n))
+                .Where(d => d != null);
+
+        public bool HasCompletedEpic(PersonalEpicDef epic) =>
+            epic != null && completedEpicDefNames.Contains(epic.defName);
+
+        public bool HasCompletedEpic(string defName) =>
+            !string.IsNullOrEmpty(defName) && completedEpicDefNames.Contains(defName);
+
         // ── Entangled Arc ──────────────────────────────────────────────────────
         /// <summary>Returns this pawn's active entangled arc, or null.</summary>
         public EntangledArcState? GetEntangledArc()
@@ -220,7 +239,8 @@ namespace PawnChronicles
             Scribe_Values.Look(ref ticksSinceLastProgress, "ticksSinceLastProgress", 0);
             Scribe_Values.Look(ref PendingSignal, "pendingSignal");
             Scribe_Values.Look(ref activeQuestId, "activeQuestId", -1);
-            Scribe_Values.Look(ref lucifSiteTile, "lucifSiteTile", -1);
+            Scribe_Values.Look(ref lucifSiteTile, "lucifSiteTile", default(PlanetTile));
+            Scribe_Values.Look(ref luciferiumDeclineCycles, "luciferiumDeclineCycles", 0);
 
             Scribe_Defs.Look(ref _pendingRetryStage, "pendingRetryStage");
             Scribe_Values.Look(ref _pendingRetryIsOpening, "pendingRetryIsOpening", false);
@@ -237,6 +257,8 @@ namespace PawnChronicles
             catch { arcEntries = null; }
             try { Scribe_Collections.Look(ref _chronicleEntries, "chronicleEntries", LookMode.Value); }
             catch { _chronicleEntries = null; }
+            try { Scribe_Collections.Look(ref activeEmbers, "activeEmbers", LookMode.Deep); }
+            catch { activeEmbers = null; }
 
             try { Scribe_Deep.Look(ref _hellfireChain, "hellfireChain"); }
             catch { _hellfireChain = null; }
@@ -270,6 +292,7 @@ namespace PawnChronicles
                 arcEntries            ??= new List<ArcStageEntry>();
                 _chronicleEntries     ??= new List<string>();
                 _tagCooldowns         ??= new Dictionary<string, int>();
+                activeEmbers          ??= new List<ActiveEmber>();
 
                 // ── Migration ──────────────────────────────────────────────
                 // v0 -> v2: tag cooldowns didn't exist; just initialise empty.
@@ -534,6 +557,27 @@ namespace PawnChronicles
         // Legacy overloads
         public void FireEmber(Pawn pawn) => FireEmberFallback(currentProfile ?? GetOrBuildProfile(), "");
         public void FireSpark(Pawn pawn, string triggerKey) => FireSparkFallback(currentProfile ?? GetOrBuildProfile());
+
+        // ── Chronicle log ────────────────────────────────────────────────────
+        public void AddChronicleEntry(string entry)
+        {
+            if (string.IsNullOrEmpty(entry)) return;
+            _chronicleEntries ??= new List<string>();
+            _chronicleEntries.Add(entry);
+            // Cap log at 200 entries to prevent unbounded growth
+            while (_chronicleEntries.Count > 200)
+                _chronicleEntries.RemoveAt(0);
+        }
+
+        // ── Narrative epithet ─────────────────────────────────────────────────
+        private void StoreNarrativeEpithet(Pawn pawn, PersonalEpicDef epic, bool success,
+            PawnNarrativeProfile profile, string pathTag)
+        {
+            if (epic == null) return;
+            _narrativeEpithet        = success ? epic.redeemedEpithet : epic.corruptedEpithet;
+            _narrativeEpithetDesc    = epic.label ?? "";
+            _narrativeEpithetSuccess = success;
+        }
 
         // ── Debug entry points (called by PawnChroniclesDebugActions) ──────────
         public void Debug_ForceSpark()     => FireSparkFallback(GetOrBuildProfile());
@@ -1071,7 +1115,56 @@ namespace PawnChronicles
             ArcStageEntry entry;
             if (currentEpic.IsFixed)
             {
-                if (isClimax)
+                if (isClimax && currentEpic.isLuciferiumDecline)
+                {
+                    // Decline cycle: present escalating consequences as visible choices.
+                    // The player always sees what they're choosing and why.
+                    string declineTier = luciferiumDeclineCycles <= 5  ? "luciferium_decline_mild"
+                                       : luciferiumDeclineCycles <= 14 ? "luciferium_decline_moderate"
+                                       :                                  "luciferium_decline_severe";
+
+                    var choices = EffectPoolDrawer.DrawChoices(
+                        pawn, new[] { declineTier }, count: 3, waitDays: 6f);
+
+                    // All choices immediate - the consequence fires now, arc restarts in 6 days
+                    var sixDays = (int)(6f * 60000f);
+                    foreach (var c in choices)
+                    {
+                        c.conditionKey   = "time";
+                        c.conditionLabel = "PC_Wait_DeclineCycle".Translate();
+                        c.baseline       = Find.TickManager.TicksGame;
+                        c.targetDelta    = sixDays;
+                    }
+
+                    // Cycle 27+: add Sanguophage placeholder choice
+                    if (luciferiumDeclineCycles >= 27)
+                    {
+                        choices.Add(new StageChoice
+                        {
+                            tagDefName     = "",
+                            actionLabel    = "PC_Luciferium_Sanguophage_Label".Translate(),
+                            mechanicalHint = "PC_Luciferium_Sanguophage_Hint".Translate(),
+                            conditionKey   = "time",
+                            conditionLabel = "PC_Wait_DeclineCycle".Translate(),
+                            baseline       = Find.TickManager.TicksGame,
+                            targetDelta    = 0,
+                            effects        = new List<ChoiceEffect>(),
+                            isHardRoad     = true,
+                            isEasyOut      = false
+                        });
+                    }
+
+                    entry = new ArcStageEntry(
+                        title, body, role,
+                        waitConditionLabel: "PC_Wait_ChooseProceed".Translate(),
+                        waitConditionKey:   "",
+                        waitBaselineValue:  0,
+                        waitTargetDelta:    0,
+                        isClimax:           true);
+                    entry.isSkillCheck = false;
+                    entry.choices      = choices;
+                }
+                else if (isClimax)
                 {
                     // Luciferium climax: "use the serum" vs "accept the end".
                     // Standard addiction climax: hard road (sobriety) vs easy out.
@@ -1287,13 +1380,17 @@ namespace PawnChronicles
                     EpicOutcomeApplicator.Apply(pawn, outcome, success);
             }
 
-            // Addiction cure: remove the addiction hediff on successful completion.
-            if (success && !string.IsNullOrEmpty(epic.addictionHediffDef))
+            // Luciferium arc: does NOT auto-cure addiction. Healing requires HealerMechSerum used in gameplay.
+            // (PC_LuciferiumPatch.xml sets everCurableByItem=true on LuciferiumAddiction.)
+
+            // Standard addiction arcs: remove hediff on success.
+            // Luciferium is NOT cured here - only HealerMechSerum in gameplay does it.
+            if (success && !string.IsNullOrEmpty(epic.addictionHediffDef) && !epic.isLuciferiumArc)
             {
-                var addictionHediffDef = DefDatabase<HediffDef>.GetNamedSilentFail(epic.addictionHediffDef);
-                if (addictionHediffDef != null)
+                var addHediffDef = DefDatabase<HediffDef>.GetNamedSilentFail(epic.addictionHediffDef);
+                if (addHediffDef != null)
                 {
-                    var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(addictionHediffDef);
+                    var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(addHediffDef);
                     if (hediff != null)
                     {
                         pawn.health.RemoveHediff(hediff);
@@ -1304,9 +1401,12 @@ namespace PawnChronicles
                 }
             }
 
-            // Capture BEFORE clearing - both are consumed by StoreNarrativeEpithet
+            // Capture BEFORE clearing
             var outcomeProfile = currentProfile ?? GetOrBuildProfile();
-            var outcomePathTag = chosenPathTag;
+            var outcomePathTag  = chosenPathTag;
+
+            bool wasLuciferiumArc     = epic.isLuciferiumArc;
+            bool wasLuciferiumDecline = epic.isLuciferiumDecline;
 
             hasActiveEpic          = false;
             currentEpic            = null;
@@ -1316,191 +1416,32 @@ namespace PawnChronicles
             currentProfile         = null;
             PendingSignal          = null;
             activeQuestId          = -1;
-            lucifSiteTile          = -1;
-            _pendingRetryStage     = null;
-            usedStages.Clear();
+            lucifSiteTile          = default;
 
             StoreNarrativeEpithet(pawn, epic, success, outcomeProfile, outcomePathTag);
 
-            if (HellfireChain != null)
+            // Luciferium main arc failure -> start The Decline
+            if (!success && wasLuciferiumArc)
             {
-                HellfireEvaluator.OnLinkCompleted(pawn, this, HellfireChain, success);
+                var declineArc = DefDatabase<PersonalEpicDef>.GetNamedSilentFail("PC_Arc_Luciferium_Decline");
+                if (declineArc != null)
+                    StartEpic(declineArc);
                 return;
             }
 
-            EvaluateAndStartEpic();
-        }
-
-        public void AddChronicleEntry(string entry)
-        {
-            if (string.IsNullOrEmpty(entry)) return;
-
-            _chronicleEntries.Add(
-                $"[{GenDate.DateFullStringAt(GenTicks.TicksAbs, Find.WorldGrid.LongLatOf(((Pawn)parent).Tile))}] {entry}");
-
-            while (_chronicleEntries.Count > PawnChroniclesMod.Settings.maxChronicleEntriesPerPawn)
-                _chronicleEntries.RemoveAt(0);
-        }
-
-        private void StoreNarrativeEpithet(Pawn pawn, PersonalEpicDef epic, bool success,
-            PawnNarrativeProfile profile, string pathTag = "")
-        {
-            var (title, body) = GenerateArcOutcomeNarrative(pawn, epic, success, profile, pathTag);
-            _narrativeEpithet        = title;
-            _narrativeEpithetSuccess = success;
-            _narrativeEpithetDesc    = body;
-            ApplyBackstorySkillDelta(pawn, success);
-            Messages.Message($"{pawn.LabelShort} - {title}", pawn,
-                success ? MessageTypeDefOf.PositiveEvent : MessageTypeDefOf.NegativeEvent);
-            AddChronicleEntry($"Arc complete: {title}");
-        }
-
-        /// <summary>
-        /// Builds the runtime narrative epithet (title) and body text for arc completion.
-        ///
-        /// Title cascade:
-        ///   1. Tagged epithet matching the chosen path tag
-        ///   2. Epic's redeemedEpithet / corruptedEpithet
-        ///   3. Pawn's adulthood backstory title (e.g. "Former Coal Miner")
-        ///   4. Epic label fallback
-        ///
-        /// Body:
-        ///   One-sentence hook from the adulthood description, then a grammar-resolved
-        ///   outcome tail ("But now...") that uses the pawn's tags and profile.
-        /// </summary>
-        private static (string title, string body) GenerateArcOutcomeNarrative(
-            Pawn pawn, PersonalEpicDef epic, bool success, PawnNarrativeProfile profile,
-            string pathTag = "")
-        {
-            // ── Title ─────────────────────────────────────────────────────────────
-            string title = null;
-            var tagged = epic.taggedEpithets
-                ?.Where(e => e.onSuccess == success &&
-                             (e.tag == null || e.tag == pathTag) &&
-                             e.epithet != null)
-                .OrderByDescending(e => e.tag != null ? 1 : 0)
-                .FirstOrDefault();
-
-            if (tagged?.epithet != null)
-                title = tagged.epithet;
-            else if (success)
-                title = epic.redeemedEpithet;
-            else
-                title = epic.corruptedEpithet;
-
-            // Fall back to pawn's adulthood backstory title
-            if (string.IsNullOrEmpty(title))
+            // Luciferium Decline loop -> increment counter and restart if still addicted
+            if (wasLuciferiumDecline)
             {
-                var adulthood = pawn.story?.Adulthood;
-                if (adulthood != null)
-                    title = adulthood.TitleCapFor(pawn.gender);
+                luciferiumDeclineCycles++;
+                var declineArc = DefDatabase<PersonalEpicDef>.GetNamedSilentFail("PC_Arc_Luciferium_Decline");
+                var lucHediff  = DefDatabase<HediffDef>.GetNamedSilentFail("LuciferiumAddiction");
+                if (declineArc != null && lucHediff != null && pawn.health.hediffSet.HasHediff(lucHediff))
+                    StartEpic(declineArc);
+                return;
             }
 
-            if (string.IsNullOrEmpty(title))
-                title = epic.label ?? "PC_ArcComplete".Translate();
-
-            // ── Body ──────────────────────────────────────────────────────────────
-            // Take one sentence from the adulthood description as a narrative hook,
-            // then append a grammar-resolved outcome tail.
-            string backstoryHook = "";
-            var adulthoodDef = pawn.story?.Adulthood;
-            if (adulthoodDef != null && !string.IsNullOrEmpty(adulthoodDef.description))
-                backstoryHook = TrimToOneSentence(adulthoodDef.description);
-
-            // Use custom grammar role for outcome body if the epic specifies one
-            // (e.g. addiction arcs use "addiction_alcohol_success" rather than "success").
-            string role = success
-                ? (epic.successGrammarRole ?? NarrativeGrammarResolver.RoleSuccess)
-                : (epic.failureGrammarRole ?? NarrativeGrammarResolver.RoleFailure);
-            string outcomeTail = NarrativeGrammarResolver.ResolveBody(pawn, profile, role);
-
-            string body = string.IsNullOrEmpty(backstoryHook)
-                ? outcomeTail
-                : $"{backstoryHook}\n\n{outcomeTail}";
-
-            return (title, body);
-        }
-
-        /// <summary>
-        /// Trims a multi-sentence string to just the first sentence.
-        /// Strips basic XML tags before trimming.
-        /// </summary>
-        private static string TrimToOneSentence(string text)
-        {
-            if (string.IsNullOrEmpty(text)) return text;
-
-            // Strip common rich-text tags
-            text = text.Replace("<b>", "").Replace("</b>", "")
-                       .Replace("<i>", "").Replace("</i>", "").Trim();
-
-            for (int i = 0; i < text.Length; i++)
-            {
-                char c = text[i];
-                if (c != '.' && c != '!' && c != '?') continue;
-
-                // Accept if at end of string, or next char is whitespace/newline
-                if (i == text.Length - 1 || char.IsWhiteSpace(text[i + 1]) || text[i + 1] == '\n')
-                    return text.Substring(0, i + 1);
-            }
-
-            return text; // no sentence boundary found - return whole string
-        }
-
-        /// <summary>
-        /// On arc success: grants a small XP boost to each positive skill gain on the
-        /// pawn's adulthood backstory (things they were already good at deepen further).
-        /// On failure: applies a minor erosion to those same skills.
-        /// </summary>
-        private static void ApplyBackstorySkillDelta(Pawn pawn, bool success)
-        {
-            if (pawn.skills == null || pawn.story?.Adulthood == null) return;
-
-            var gains = pawn.story.Adulthood.skillGains;
-            if (gains.NullOrEmpty()) return;
-
-            foreach (var gain in gains)
-            {
-                if (gain.skill == null || gain.amount <= 0) continue;
-
-                var skill = pawn.skills.GetSkill(gain.skill);
-                if (skill == null || skill.TotallyDisabled) continue;
-
-                // Success: solidify strengths (+12000 XP per point of skill gain).
-                // Failure: erode slightly (−1000 XP per point - noticeable but not crippling).
-                float xp = success ? gain.amount * 12000f : gain.amount * -10000f;
-                skill.Learn(xp, direct: true);
-            }
-        }
-
-        public int ActiveEmberCount => 0;
-
-        public override IEnumerable<Gizmo> CompGetGizmosExtra()
-        {
-            if (!DebugSettings.godMode) yield break;
-            if (parent is not Pawn pawn) yield break;
-
-            foreach (var g in PawnChroniclesDebugGizmos.GetGizmos(pawn, this))
-                yield return g;
-        }
-
-        public IEnumerable<PersonalEpicDef> CompletedEpics =>
-            completedEpicDefNames
-                .Select(n => DefDatabase<PersonalEpicDef>.GetNamedSilentFail(n))
-                .Where(d => d != null)!;
-
-        public bool HasCompletedEpic(PersonalEpicDef epic) =>
-            epic != null && completedEpicDefNames.Contains(epic.defName);
-    }
-
-    public static class PawnChroniclesExtensions
-    {
-        public static PawnNarrativeProfile GetNarrativeProfile(this Pawn pawn)
-        {
-            if (pawn == null)
-                return PawnNarrativeProfile.BuildFor(null!);
-
-            return pawn.GetComp<CompPersonalChronicles>()?.GetOrBuildProfile()
-                   ?? PawnNarrativeProfile.BuildFor(pawn);
+            // Any other arc completed - reset decline counter
+            luciferiumDeclineCycles = 0;
         }
     }
 }

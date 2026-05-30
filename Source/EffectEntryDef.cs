@@ -68,6 +68,9 @@ namespace PawnChronicles
         // that have no corresponding MentalBreakDef
         public string mentalStateDef = "";
 
+        // Apply a memory thought to the pawn (ThoughtDef defName, Thought_Memory class)
+        public string moodThoughtDef = "";
+
         // Incident to fire (IncidentDef defName)
         public string incidentDef = "";
 
@@ -96,6 +99,7 @@ namespace PawnChronicles
             TryApplySocialOpinion(pawn);
             TryApplyMentalBreak(pawn);
             TryApplyMentalState(pawn);
+            TryApplyMoodThought(pawn);
             TryApplyIncident(pawn);
             TryApplySpawnItem(pawn);
             TryApplyHediff(pawn);
@@ -215,6 +219,14 @@ namespace PawnChronicles
                 Log.Message($"[PawnChronicles] Mental break '{mentalBreakDef}' could not start on {pawn.LabelShort} - likely arrival grace period.");
         }
 
+        private void TryApplyMoodThought(Pawn pawn)
+        {
+            if (string.IsNullOrEmpty(moodThoughtDef)) return;
+            var def = DefDatabase<ThoughtDef>.GetNamedSilentFail(moodThoughtDef);
+            if (def == null) { Log.Warning($"[PawnChronicles] EffectEntryDef {defName}: unknown ThoughtDef '{moodThoughtDef}'"); return; }
+            pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(def);
+        }
+
         private void TryApplyMentalState(Pawn pawn)
         {
             if (string.IsNullOrEmpty(mentalStateDef)) return;
@@ -323,6 +335,13 @@ namespace PawnChronicles
                     return "PC_Effect_Display_MentalBreak".Translate();
                 if (!string.IsNullOrEmpty(mentalStateDef))
                     return "PC_Effect_Display_MentalBreak".Translate();
+                if (!string.IsNullOrEmpty(moodThoughtDef))
+                {
+                    var def = DefDatabase<ThoughtDef>.GetNamedSilentFail(moodThoughtDef);
+                    float moodVal = def?.stages?[0]?.baseMoodEffect ?? 0f;
+                    string sign = moodVal > 0 ? "+" : "";
+                    return $"{sign}{(int)moodVal} mood ({def?.label ?? moodThoughtDef}, {(def?.durationDays ?? 0)}d)";
+                }
                 if (!string.IsNullOrEmpty(incidentDef))
                     return "PC_Effect_Display_Incident".Translate();
                 if (!string.IsNullOrEmpty(spawnItemDef))

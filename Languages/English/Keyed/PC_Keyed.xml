@@ -470,6 +470,9 @@
   <PC_Climax_HardRoad_Default>See it through</PC_Climax_HardRoad_Default>
 
   <!-- ── Effect pool display strings ───────────────────────────────────── -->
+  <!-- {0} = positive effect label, {1} = negative effect label -->
+  <PC_Effect_HintFormat>{0} / {1}</PC_Effect_HintFormat>
+
   <PC_Effect_Display_GainPassion>gain passion</PC_Effect_Display_GainPassion>
   <PC_Effect_Display_LosePassion>lose passion</PC_Effect_Display_LosePassion>
   <!-- {0} = skill label -->
@@ -478,22 +481,28 @@
   <!-- {0} = signed opinion delta e.g. "+15" or "-20" -->
   <PC_Effect_Display_Opinion>{0} opinion</PC_Effect_Display_Opinion>
   <PC_Effect_Display_OpinionPos>{0} opinion with closest ally</PC_Effect_Display_OpinionPos>
-  <PC_Effect_Display_OpinionNeg>{0} opinion with closest ally</PC_Effect_Display_OpinionNeg>
+  <!-- ── Luciferium arc ────────────────────────────────────────────────── -->
+  <!-- {0} = pawn label short -->
+  <PC_Luciferium_SiteFound_Label>Ruins located</PC_Luciferium_SiteFound_Label>
+  <PC_Luciferium_SiteFound_Desc>{0} has found a lead on a pre-collapse facility. A site has appeared on the world map. Clear it before the supply runs out.</PC_Luciferium_SiteFound_Desc>
+  <PC_Luciferium_HardRoad_Label>use the serum</PC_Luciferium_HardRoad_Label>
+  <PC_Luciferium_HardRoad_Hint>The mechanites come out. The addiction ends. What was left behind in the ruins stays there.</PC_Luciferium_HardRoad_Hint>
+  <PC_Luciferium_EasyOut_Label>accept the cost</PC_Luciferium_EasyOut_Label>
+  <PC_Luciferium_EasyOut_Hint>The supply problem remains a supply problem. Keep running the numbers.</PC_Luciferium_EasyOut_Hint>
+  <PC_WaitFallback_SiteCleared>when {0} clears the ruins</PC_WaitFallback_SiteCleared>
+  <!-- ── Luciferium Decline loop ───────────────────────────────────────── -->
+  <PC_Wait_DeclineCycle>Next cycle in 6 days</PC_Wait_DeclineCycle>
+  <PC_Luciferium_Sanguophage_Label>follow the contact</PC_Luciferium_Sanguophage_Label>
+  <PC_Luciferium_Sanguophage_Hint>Someone knows about the mechanites. They have not explained how. They want something first.</PC_Luciferium_Sanguophage_Hint>
+
+
   <PC_Effect_Display_MentalBreak>mental break</PC_Effect_Display_MentalBreak>
-  <PC_Effect_Display_Incident>incident fires</PC_Effect_Display_Incident>
+  <PC_Effect_Display_Incident>incident</PC_Effect_Display_Incident>
   <!-- {0} = count, {1} = item label -->
   <PC_Effect_Display_SpawnItem>find {0}x {1}</PC_Effect_Display_SpawnItem>
   <PC_Effect_Display_Raid>raid incoming</PC_Effect_Display_Raid>
-  <!-- {0} = positive DisplayLabel, {1} = negative DisplayLabel -->
-  <PC_Effect_HintFormat>{0}  /  {1}</PC_Effect_HintFormat>
-
-  <!-- Hard Road hint consequences -->
-  <PC_Climax_Consequence_SmallRaid>enemies arrive</PC_Climax_Consequence_SmallRaid>
-  <PC_Climax_Consequence_MentalBreak>the weight breaks surface</PC_Climax_Consequence_MentalBreak>
-  <PC_Climax_Consequence_FriendlyArrives>someone comes who needs you</PC_Climax_Consequence_FriendlyArrives>
-  <PC_Climax_Consequence_HostileArrives>a rival walks onto the map</PC_Climax_Consequence_HostileArrives>
-  <PC_Climax_Consequence_Default>something arrives</PC_Climax_Consequence_Default>
-  <!-- {0} = path name, {1} = consequence string -->
-  <PC_Climax_HintFormat>[{0} path]  {1}  ·  Redeemed backstory on success</PC_Climax_HintFormat>
+  <!-- {0} = signed opinion value e.g. "+25" -->
+  <PC_Effect_Display_OpinionPos>{0} opinion with closest ally</PC_Effect_Display_OpinionPos>
+  <PC_Effect_Display_OpinionNeg>{0} opinion with closest ally</PC_Effect_Display_OpinionNeg>
 
 </LanguageData>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    ═══════════════════════════════════════════════════════════════════════════
+    LUCIFERIUM DECLINE EFFECT POOL
+    ═══════════════════════════════════════════════════════════════════════════
+    Tags:
+      luciferium_decline_mild     cycles 1-5
+      luciferium_decline_moderate cycles 6-14
+      luciferium_decline_severe   cycles 15-26+
+    All entries are negative (isPositive=false).
+    All entries are player-visible choices - nothing fires silently.
+    Labels are imperative ("let the anger out") so they read as
+    declarations of what the pawn does. Consequences are shown in the
+    hint line beneath.
+    ═══════════════════════════════════════════════════════════════════════════
+  -->
+
+  <!-- ── MILD (cycles 1-5) ──────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Mild_OpinionBurn</defName>
+    <label>let the frustration show</label>
+    <consequence>let the frustration show</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_mild</li></tags>
+    <socialOpinion>-40</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Mild_SkillSocial</defName>
+    <label>stop trying with people</label>
+    <consequence>stop trying with people</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_mild</li></tags>
+    <skillLevelDef>Social</skillLevelDef>
+    <skillLevel>-2</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Mild_SkillIntellect</defName>
+    <label>let the focus go</label>
+    <consequence>let the focus go</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_mild</li></tags>
+    <skillLevelDef>Intellectual</skillLevelDef>
+    <skillLevel>-2</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Mild_Mood</defName>
+    <label>carry the weight for a while</label>
+    <consequence>carry the weight for a while</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_mild</li></tags>
+    <moodThoughtDef>PC_Thought_LuciferiumDecline</moodThoughtDef>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Mild_SkillCraft</defName>
+    <label>let the hands go idle</label>
+    <consequence>let the hands go idle</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_mild</li></tags>
+    <skillLevelDef>Crafting</skillLevelDef>
+    <skillLevel>-3</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── MODERATE (cycles 6-14) ─────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Mod_SmallRaid</defName>
+    <label>let the wrong people know where you are</label>
+    <consequence>let the wrong people know where you are</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_moderate</li></tags>
+    <raidPoints>200</raidPoints>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Mod_OpinionCrash</defName>
+    <label>burn the bridge you've been standing on</label>
+    <consequence>burn the bridge you've been standing on</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_moderate</li></tags>
+    <socialOpinion>-50</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Mod_SkillMedicine</defName>
+    <label>stop caring about the body</label>
+    <consequence>stop caring about the body</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_moderate</li></tags>
+    <skillLevelDef>Medicine</skillLevelDef>
+    <skillLevel>-3</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Mod_MoodAndOpinion</defName>
+    <label>take it out on someone nearby</label>
+    <consequence>take it out on someone nearby</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_moderate</li></tags>
+    <socialOpinion>-30</socialOpinion>
+    <moodThoughtDef>PC_Thought_LuciferiumDecline</moodThoughtDef>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Mod_RaidAndSkill</defName>
+    <label>make a deal you cannot afford</label>
+    <consequence>make a deal you cannot afford</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_moderate</li></tags>
+    <raidPoints>300</raidPoints>
+    <skillLevelDef>Social</skillLevelDef>
+    <skillLevel>-2</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── SEVERE (cycles 15-26+) ─────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Sev_Berserk</defName>
+    <label>let the rage out</label>
+    <consequence>let the rage out</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_severe</li></tags>
+    <mentalStateDef>Berserk</mentalStateDef>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Sev_LargeRaid</defName>
+    <label>draw something down on the colony</label>
+    <consequence>draw something down on the colony</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_severe</li></tags>
+    <raidPoints>500</raidPoints>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Sev_BerserkAndOpinion</defName>
+    <label>stop holding it together in front of people</label>
+    <consequence>stop holding it together in front of people</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_severe</li></tags>
+    <mentalStateDef>Berserk</mentalStateDef>
+    <socialOpinion>-50</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Sev_SkillCollapse</defName>
+    <label>give up on the things that used to matter</label>
+    <consequence>give up on the things that used to matter</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_severe</li></tags>
+    <skillLevelDef>Intellectual</skillLevelDef>
+    <skillLevel>-3</skillLevel>
+    <moodThoughtDef>PC_Thought_LuciferiumDecline</moodThoughtDef>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_LucDecline_Sev_RaidAndBerserk</defName>
+    <label>let the worst of it out all at once</label>
+    <consequence>let the worst of it out all at once</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_decline_severe</li></tags>
+    <raidPoints>400</raidPoints>
+    <mentalStateDef>Berserk</mentalStateDef>
+  </PawnChronicles.EffectEntryDef>
+
+</Defs>
