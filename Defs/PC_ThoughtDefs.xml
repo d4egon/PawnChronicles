@@ -127,7 +127,7 @@
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>something I tried to do went wrong</label>
+        <label>tried something, but it went wrong</label>
         <description>It didn't go the way I needed it to. I came out the other side, but not unchanged, and not with what I went for.</description>
         <baseMoodEffect>-12</baseMoodEffect>
       </li>
@@ -141,7 +141,7 @@
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>I was too late</label>
+        <label>was too late</label>
         <description>There was nothing left to find. Or the trail had gone cold long before I got there. Either way - I was too late. That is the specific weight of it.</description>
         <baseMoodEffect>-25</baseMoodEffect>
       </li>
@@ -183,7 +183,7 @@
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>some questions are better as questions</label>
+        <label>some questions are better left alone</label>
         <description>I found the answer. I didn't expect to wish I hadn't. Some things are better left as questions - this was one of them.</description>
         <baseMoodEffect>-18</baseMoodEffect>
       </li>
@@ -232,19 +232,19 @@
     <stages>
       <!-- 0: violence -->
       <li>
-        <label>surprise</label>
+        <label>was surprise</label>
         <description>Booh! I was surprised. Woah, my body is almost spinning! Who would DO such a thing?</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
       <!-- 1: social / nurture / healer -->
       <li>
-        <label>someone needed something</label>
+        <label>something was needed</label>
         <description>A small thing was asked for and I gave it away without much thought. It left a trace in my heart.</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
       <!-- 2: craft -->
       <li>
-        <label>the hands knew what to do</label>
+        <label>the hands knew what they had to do</label>
         <description>It felt good to do something practical today!</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>

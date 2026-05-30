@@ -35,6 +35,11 @@ namespace PawnChronicles
         // ── Addiction arc fields ──────────────────────────────────────────────
 
         /// <summary>
+        /// When true, this arc uses the luciferium-specific site spawning and climax logic.
+        /// </summary>
+        public bool isLuciferiumArc = false;
+
+        /// <summary>
         /// HediffDef.defName of the addiction this arc tracks.
         /// e.g. "AlcoholAddiction". When set and the arc completes with success,
         /// this hediff is removed from the pawn.

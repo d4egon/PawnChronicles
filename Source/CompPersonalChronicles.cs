@@ -98,6 +98,8 @@ namespace PawnChronicles
 
         public string? PendingSignal = null;
         public int activeQuestId = -1;
+        /// <summary>World map tile of the luciferium quest site. -1 when not active.</summary>
+        public int lucifSiteTile = -1;
 
         private QuestStageDef? _pendingRetryStage = null;
         private bool _pendingRetryIsOpening = false;
@@ -218,6 +220,7 @@ namespace PawnChronicles
             Scribe_Values.Look(ref ticksSinceLastProgress, "ticksSinceLastProgress", 0);
             Scribe_Values.Look(ref PendingSignal, "pendingSignal");
             Scribe_Values.Look(ref activeQuestId, "activeQuestId", -1);
+            Scribe_Values.Look(ref lucifSiteTile, "lucifSiteTile", -1);
 
             Scribe_Defs.Look(ref _pendingRetryStage, "pendingRetryStage");
             Scribe_Values.Look(ref _pendingRetryIsOpening, "pendingRetryIsOpening", false);
@@ -630,6 +633,22 @@ namespace PawnChronicles
                 return;
             }
 
+            // Luciferium danger stage: auto-fail if withdrawal triggers before site is cleared.
+            if (currentEpic?.isLuciferiumArc == true && entry.waitConditionKey == "site_cleared")
+            {
+                var addHediff = pawn.health.hediffSet.hediffs
+                    .OfType<Hediff_Addiction>()
+                    .FirstOrDefault(h => h.def.defName == "LuciferiumAddiction");
+                if (addHediff?.CurStageIndex == 1)
+                {
+                    if (pawn.Spawned)
+                        Messages.Message(
+                            $"{pawn.LabelShort}'s luciferium ran out. The arc ends.",
+                            pawn, MessageTypeDefOf.NegativeEvent, true);
+                    PendingSignal = "PawnEpic_Failure";
+                }
+            }
+
             // Climax skill-check deadline - auto-fail when the 30-day window expires
             if (entry.isClimax && entry.isSkillCheck
                 && entry.climaxDeadlineTick > 0
@@ -769,9 +788,9 @@ namespace PawnChronicles
             CompleteEpic(false);
         }
 
-        /// <summary>
-        /// Fires the thematically appropriate narrative incident for the climax Hard Road.
-        /// Derives incident type from the pawn's chosen path tag.
+       /// <summary>
+        /// Fires a narrative letter describing the climax event (Hard Road path).
+        /// Uses a normal Letter instead of NarrativeIncidentFirer for better control over title/body.
         /// </summary>
         private void FireClimaxIncident(Pawn pawn)
         {
@@ -780,32 +799,35 @@ namespace PawnChronicles
             string tag = (chosenPathTag ?? "").ToLowerInvariant().Replace("pc_tag_", "");
             string incidentTypeKey = StageWaitCondition.GetClimaxIncidentType(tag);
 
-            // Scale incident points with arc intensity.
-            // Sum the top-2 tag scores (0–200 range) and map to 300–900 points.
-            // A Hellfire pawn (two tags at ~80–100) hits 700–900; a Kindle pawn hits 300–400.
+            // Scale incident points (kept for logging / future use)
             var profile   = currentProfile ?? GetOrBuildProfile();
             float topSum  = profile.Scores.Values
-                .OrderByDescending(v => v).Take(2).Sum();           // 0–200
+                .OrderByDescending(v => v).Take(2).Sum();
             float points  = Mathf.Lerp(300f, 900f, Mathf.Clamp01(topSum / 160f));
 
-            var incident = new NarrativeIncident
+            Log.Message($"[PawnChronicles] Climax incident: {incidentTypeKey} {points:F0}pts (topSum={topSum:F0}) for {pawn.LabelShort}");
+
+            // Build a rich, explanatory letter body
+            string incidentDesc = incidentTypeKey switch
             {
-                type = incidentTypeKey switch
-                {
-                    "SmallRaid"       => NarrativeIncidentType.SmallRaid,
-                    "MentalBreak"     => NarrativeIncidentType.MentalBreak,
-                    "FriendlyArrives" => NarrativeIncidentType.FriendlyArrives,
-                    "HostileArrives"  => NarrativeIncidentType.HostileArrives,
-                    _                 => NarrativeIncidentType.SmallRaid
-                },
-                chance             = 1f,
-                incidentPoints     = points,
-                bypassGracePeriod  = true   // climax is earned - always fires
+                "SmallRaid"       => "A raid has turned up on your doorstep — drawn by " + pawn.LabelShort + "'s growing reputation.",
+                "MentalBreak"     => pawn.LabelShort + " has reached a breaking point. The tension of their arc boils over.",
+                "FriendlyArrives" => "Help arrives — allies responding to " + pawn.LabelShort + "'s call.",
+                "HostileArrives"  => "Hostile forces have arrived, provoked by " + pawn.LabelShort + "'s path.",
+                _                 => "The climax of " + pawn.LabelShort + "'s arc manifests dramatically."
             };
 
-            string body = $"{pawn.LabelShort}'s arc reaches its crisis point.";
-            NarrativeIncidentFirer.Fire(pawn, incident, body, profile);
-            Log.Message($"[PawnChronicles] Climax incident: {incidentTypeKey} {points:F0}pts (topSum={topSum:F0}) for {pawn.LabelShort}");
+            string narrativeBody = NarrativeGrammarResolver.ResolveBody(pawn, profile, "climax_crisis")
+                                ?? "The moment of truth has arrived.";
+
+            string fullBody = $"{incidentDesc}\n\n{narrativeBody}";
+
+            // Send proper letter
+            Find.LetterStack.ReceiveLetter(
+                $"{pawn.LabelShort}'s arc reaches its crisis point",
+                fullBody,
+                LetterDefOf.NeutralEvent, 
+                pawn);
         }
 
         /// <summary>
@@ -1042,13 +1064,20 @@ namespace PawnChronicles
                 : !string.IsNullOrEmpty(preferredTagDefName) ? preferredTagDefName
                 : currentProfile.DominantTag() ?? "";
 
+            // Luciferium arc: spawn the world site when the quest stage fires.
+            if (stage.spawnWorldSite && currentEpic?.isLuciferiumArc == true)
+                LuciferiumArcManager.SpawnSite(pawn, this);
+
             ArcStageEntry entry;
             if (currentEpic.IsFixed)
             {
                 if (isClimax)
                 {
-                    // Addiction climax: hard road (sobriety) vs easy out (immediate failure).
-                    var choices = StageWaitCondition.BuildAddictionClimaxDoors(pawn);
+                    // Luciferium climax: "use the serum" vs "accept the end".
+                    // Standard addiction climax: hard road (sobriety) vs easy out.
+                    var choices = currentEpic.isLuciferiumArc
+                        ? StageWaitCondition.BuildLuciferiumClimaxDoors(pawn)
+                        : StageWaitCondition.BuildAddictionClimaxDoors(pawn);
                     entry = new ArcStageEntry(
                         title, body, role,
                         waitConditionLabel: "PC_Wait_ChoosePathForward".Translate(),
@@ -1287,6 +1316,7 @@ namespace PawnChronicles
             currentProfile         = null;
             PendingSignal          = null;
             activeQuestId          = -1;
+            lucifSiteTile          = -1;
             _pendingRetryStage     = null;
             usedStages.Clear();
 

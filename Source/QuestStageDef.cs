@@ -63,6 +63,12 @@ namespace PawnChronicles
         public string grammarRoleOverride = null;
 
         /// <summary>
+        /// When true, entering this stage spawns the luciferium quest site on the world map.
+        /// Only used by PC_LucStage_Quest.
+        /// </summary>
+        public bool spawnWorldSite = false;
+
+        /// <summary>
         /// The grammar role key for this stage.
         /// Passed into the quest Slate as "epicStageRole".
         /// </summary>

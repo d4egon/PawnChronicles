@@ -30,7 +30,7 @@ namespace PawnChronicles
     /// THE LADDER
     /// ═══════════════════════════════════════════════════════════════════════
     ///
-    /// Spark ── RETROACTIVE. A single moment the game noticed and stamped.
+    /// Spark - RETROACTIVE. A single moment the game noticed and stamped.
     ///   Fires when a trigger threshold is crossed (first kill, pain spike,
     ///   skill milestone, a death witnessed nearby, a bond formed). The thing
     ///   already happened. Grammar composes a sentence from what the scraper
@@ -39,7 +39,7 @@ namespace PawnChronicles
     ///   chronicle entry. Never appears in the quest tab. No button to click.
     ///   Fires at most a few times per day. The world leaves a mark on the pawn.
     ///
-    /// Ember ── RETROACTIVE. 1-3 small flavor moments, running in parallel.
+    /// Ember - RETROACTIVE. 1-3 small flavor moments, running in parallel.
     ///   Daily texture - relationship friction, a health moment, a mood beat,
     ///   a skill practice, a world reaction. Fires on cooldown when the scraper
     ///   finds something worth noting (sick family member, rivalry tension, pain
@@ -47,21 +47,21 @@ namespace PawnChronicles
     ///   a small mood buff. A pawn can have active Embers AND an active arc
     ///   simultaneously. The world acknowledges the pawn's daily life.
     ///
-    /// Kindle ── PROSPECTIVE. 3-stage short arc. The first real demand.
+    /// Kindle - PROSPECTIVE. 3-stage short arc. The first real demand.
     ///   Something ignites, something complicates it, something resolves it.
     ///   Appears in the quest tab with a timer. Requires the player to act -
     ///   tend to something, move someone, keep a condition met. Low stakes:
     ///   mood consequence only, no backstory change. Most pawns cycle through
     ///   several Kindles before qualifying for Flame. Missing it has a cost.
     ///
-    /// Flame ── PROSPECTIVE. 4-stage arc. The world starts to notice.
+    /// Flame - PROSPECTIVE. 4-stage arc. The world starts to notice.
     ///   Two complications before the resolution. Stage selection diverges
     ///   meaningfully by pawn profile - a Trauma-dominant pawn and a
     ///   Violence-dominant pawn run the same Flame and experience different
     ///   stage sequences. Minor faction relation shifts. No backstory swap
     ///   but a chronicle note is written. Demands real player decisions.
     ///
-    /// Fire ── PROSPECTIVE. 5-stage arc. The pawn is changed permanently.
+    /// Fire - PROSPECTIVE. 5-stage arc. The pawn is changed permanently.
     ///   The full dramatic arc: inciting moment, complication, crisis, turning
     ///   point, resolution. Adulthood backstory is replaced on completion -
     ///   success and failure both leave permanent marks. World events are
@@ -69,7 +69,7 @@ namespace PawnChronicles
     ///   engage with the world to resolve it. Chains into Inferno if the
     ///   pawn's updated profile clears the threshold.
     ///
-    /// Inferno ── PROSPECTIVE. 5-stage arc with a mid-arc branch.
+    /// Inferno - PROSPECTIVE. 5-stage arc with a mid-arc branch.
     ///   At stage 2 the pawn's CURRENT dominant tag (not arc-start profile)
     ///   forces a branch - two parallel middle paths that reconverge at the
     ///   climax. World consequences are mandatory, not optional: every Inferno
@@ -77,7 +77,7 @@ namespace PawnChronicles
     ///   Must have completed a Fire arc to qualify. The world is permanently
     ///   marked by what the pawn does here.
     ///
-    /// Hellfire ── PROSPECTIVE. A chain of 2-4 linked epics, escalating.
+    /// Hellfire - PROSPECTIVE. A chain of 2-4 linked epics, escalating.
     ///   Not a single arc - a meta-arc. Each link is a full epic that inherits
     ///   the pawn's current profile and escalates world consequence tier.
     ///   The chain breaks on any failure. Success across all links spawns a
@@ -106,13 +106,13 @@ namespace PawnChronicles
     /// ═══════════════════════════════════════════════════════════════════════
     /// QUICK REFERENCE
     /// ═══════════════════════════════════════════════════════════════════════
-    ///   Spark    ── retro  ─ no quest tab ─ 1 moment  ─ world notices pawn
-    ///   Ember    ── retro  ─ no quest tab ─ 1-3 beats ─ pawn notices world
-    ///   Kindle   ── pros   ─ quest tab   ─ 3 stages  ─ mood consequence
-    ///   Flame    ── pros   ─ quest tab   ─ 4 stages  ─ faction touch
-    ///   Fire     ── pros   ─ quest tab   ─ 5 stages  ─ backstory swap
-    ///   Inferno  ── pros   ─ quest tab   ─ 5 stages  ─ branching + world event
-    ///   Hellfire ── pros   ─ quest tab   ─ 2-4 epics ─ permanent world mark
+    ///   Spark    -- retro  ─ no quest tab ─ 1 moment  ─ world notices pawn
+    ///   Ember    -- retro  ─ no quest tab ─ 1-3 beats ─ pawn notices world
+    ///   Kindle   -- pros   ─ quest tab   ─ 3 stages  ─ mood consequence
+    ///   Flame    -- pros   ─ quest tab   ─ 4 stages  ─ faction touch
+    ///   Fire     -- pros   ─ quest tab   ─ 5 stages  ─ backstory swap
+    ///   Inferno  -- pros   ─ quest tab   ─ 5 stages  ─ branching + world event
+    ///   Hellfire -- pros   ─ quest tab   ─ 2-4 epics ─ permanent world mark
     /// </summary>
     public enum EpicModus
     {

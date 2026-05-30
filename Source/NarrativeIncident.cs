@@ -58,7 +58,7 @@ namespace PawnChronicles
         // ── Item spawns ───────────────────────────────────────────────────────
         /// <summary>ThingDef defName to spawn near the pawn.</summary>
         public string thingDef;
-        public int            count   = 1;
+        public int count = 1;
         public QualityCategory quality = QualityCategory.Normal;
         /// <summary>ThingDef defName for material (null = default stuff for that def).</summary>
         public string stuffDef;

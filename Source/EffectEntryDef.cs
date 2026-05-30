@@ -64,6 +64,10 @@ namespace PawnChronicles
         // Mental break to trigger (MentalBreakDef defName)
         public string mentalBreakDef = "";
 
+        // Mental state to trigger directly (MentalStateDef defName) - for states like Terror
+        // that have no corresponding MentalBreakDef
+        public string mentalStateDef = "";
+
         // Incident to fire (IncidentDef defName)
         public string incidentDef = "";
 
@@ -91,6 +95,7 @@ namespace PawnChronicles
             TryApplyAnyPassion(pawn);
             TryApplySocialOpinion(pawn);
             TryApplyMentalBreak(pawn);
+            TryApplyMentalState(pawn);
             TryApplyIncident(pawn);
             TryApplySpawnItem(pawn);
             TryApplyHediff(pawn);
@@ -210,6 +215,17 @@ namespace PawnChronicles
                 Log.Message($"[PawnChronicles] Mental break '{mentalBreakDef}' could not start on {pawn.LabelShort} - likely arrival grace period.");
         }
 
+        private void TryApplyMentalState(Pawn pawn)
+        {
+            if (string.IsNullOrEmpty(mentalStateDef)) return;
+            var stateDef = DefDatabase<MentalStateDef>.GetNamedSilentFail(mentalStateDef);
+            if (stateDef == null) { Log.Warning($"[PawnChronicles] EffectEntryDef {defName}: unknown MentalStateDef '{mentalStateDef}'"); return; }
+            if (pawn.mindState?.mentalStateHandler == null) return;
+            bool started = pawn.mindState.mentalStateHandler.TryStartMentalState(stateDef, null, forced: true);
+            if (!started)
+                Log.Message($"[PawnChronicles] Mental state '{mentalStateDef}' could not start on {pawn.LabelShort}.");
+        }
+
         private void TryApplyIncident(Pawn pawn)
         {
             if (string.IsNullOrEmpty(incidentDef)) return;
@@ -304,6 +320,8 @@ namespace PawnChronicles
                     return key.Translate($"{sign}{opinionVal}");
                 }
                 if (!string.IsNullOrEmpty(mentalBreakDef))
+                    return "PC_Effect_Display_MentalBreak".Translate();
+                if (!string.IsNullOrEmpty(mentalStateDef))
                     return "PC_Effect_Display_MentalBreak".Translate();
                 if (!string.IsNullOrEmpty(incidentDef))
                     return "PC_Effect_Display_Incident".Translate();

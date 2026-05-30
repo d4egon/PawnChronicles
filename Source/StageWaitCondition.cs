@@ -92,6 +92,12 @@ namespace PawnChronicles
                     if (string.IsNullOrEmpty(addictionDef)) return true;
                     return !pawn.health.hediffSet.hediffs.Any(h => h.def.defName == addictionDef);
                 }
+                case "site_cleared":
+                {
+                    var comp = pawn.GetComp<CompPersonalChronicles>();
+                    if (comp == null || comp.lucifSiteTile < 0) return true;
+                    return !Find.WorldObjects.AnyWorldObjectAt(comp.lucifSiteTile);
+                }
             }
 
             // 2. DYNAMIC FALLBACK: If key isn't hardcoded, try to resolve it as a Def
@@ -181,11 +187,54 @@ namespace PawnChronicles
                 "opening"    => BuildTimeCondition(pawn, 5),
                 "dependency" => BuildTimeCondition(pawn, 5),
                 "social"     => BuildSocialCondition(pawn),
+                "reckoning"  => BuildSocialCondition(pawn),
+                "quest"      => BuildTimeCondition(pawn, 3),
+                "danger"     => ("site_cleared",
+                                 ResolveConditionLabel(pawn, "wait_condition_site_cleared"),
+                                 0, 0),
                 "withdrawal" => BuildWithdrawalCondition(pawn),
                 "crisis"     => ("mood_low",
                                  ResolveConditionLabel(pawn, "wait_condition_mood_low"),
                                  0, 0),
                 _            => BuildTimeCondition(pawn, 3)
+            };
+        }
+
+        /// <summary>
+        /// Builds the luciferium climax doors.
+        /// Hard road: use the serum (immediate, success - addiction removed in CompleteEpic).
+        /// Easy out: accept the dependency continues (immediate, failure).
+        /// </summary>
+        public static List<StageChoice> BuildLuciferiumClimaxDoors(Pawn pawn)
+        {
+            return new List<StageChoice>
+            {
+                new StageChoice
+                {
+                    tagDefName     = "",
+                    actionLabel    = "PC_Luciferium_HardRoad_Label".Translate(),
+                    mechanicalHint = "PC_Luciferium_HardRoad_Hint".Translate(),
+                    conditionKey   = "time",
+                    conditionLabel = "PC_Wait_TakeItNow".Translate(),
+                    baseline       = Find.TickManager.TicksGame,
+                    targetDelta    = 0,
+                    effects        = new List<ChoiceEffect>(),
+                    isHardRoad     = true,
+                    isEasyOut      = false
+                },
+                new StageChoice
+                {
+                    tagDefName     = "",
+                    actionLabel    = "PC_Luciferium_EasyOut_Label".Translate(),
+                    mechanicalHint = "PC_Luciferium_EasyOut_Hint".Translate(),
+                    conditionKey   = "time",
+                    conditionLabel = "PC_Wait_TakeItNow".Translate(),
+                    baseline       = Find.TickManager.TicksGame,
+                    targetDelta    = 0,
+                    effects        = new List<ChoiceEffect>(),
+                    isHardRoad     = false,
+                    isEasyOut      = true
+                }
             };
         }
 

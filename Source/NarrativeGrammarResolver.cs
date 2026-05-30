@@ -238,6 +238,12 @@ namespace PawnChronicles
             // ── LAYER 0: RimWorld built-in pawn grammar ──
             request.Rules.AddRange(GrammarUtility.RulesForPawn("pawn", pawn));
 
+            // pawn_reflexive is not emitted by GrammarUtility - add it manually
+            string reflexive = pawn.gender == Gender.Female ? "herself"
+                             : pawn.gender == Gender.Male   ? "himself"
+                             :                                "themselves";
+            request.Rules.Add(new Rule_String("pawn_reflexive", reflexive));
+
             // ── LAYER 1: Exhaustive data scrape (Raw Facts) ──
             // Skip heavy scraping for dead, unspawned, or non-mapHeld pawns
             // (world pawns, caravans without a home map, etc.) - they have no

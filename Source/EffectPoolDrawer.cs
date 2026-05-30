@@ -77,7 +77,7 @@ namespace PawnChronicles
                 choices.Add(new StageChoice
                 {
                     tagDefName           = "",
-                    actionLabel          = pos.label,
+                    actionLabel          = pos.label + ", but " + neg.label,
                     mechanicalHint       = hint,
                     conditionKey         = "time",
                     conditionLabel       = "PC_Wait_ChooseProceed".Translate(),

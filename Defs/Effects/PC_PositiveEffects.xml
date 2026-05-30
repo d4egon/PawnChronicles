@@ -11,7 +11,6 @@
        ══════════════════════════════════════════════════════════════════════ -->
 
   <!-- ── Skill level gains ─────────────────────────────────────────────── -->
-
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Pos_CraftingSkill</defName>
     <label>lean into the work</label>
@@ -73,16 +72,6 @@
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_AnimalsSkill</defName>
-    <label>spend time with the animals</label>
-    <consequence>spend time with the animals</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>animalfriend</li><li>general</li></tags>
-    <skillLevelDef>Animals</skillLevelDef>
-    <skillLevel>1</skillLevel>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Pos_CookingSkill</defName>
     <label>find comfort in routine</label>
     <consequence>find comfort in routine</consequence>
@@ -102,8 +91,18 @@
     <skillLevel>1</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
-  <!-- ── Skill XP gains ─────────────────────────────────────────────────── -->
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_AnimalsSkill</defName>
+    <label>spend time with the animals</label>
+    <consequence>spend time with the animals</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>animalfriend</li><li>general</li></tags>
+    <skillLevelDef>Animals</skillLevelDef>
+    <skillLevel>1</skillLevel>
+  </PawnChronicles.EffectEntryDef>
 
+
+  <!-- ── Skill XP gains ──────────────────────────────────────────────── -->
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Pos_CraftingXP</defName>
     <label>keep your hands busy</label>
@@ -111,16 +110,6 @@
     <isPositive>true</isPositive>
     <tags><li>general</li><li>craft</li></tags>
     <skillXpDef>Crafting</skillXpDef>
-    <skillXP>8000</skillXP>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_IntellectualXP</defName>
-    <label>document the experience</label>
-    <consequence>document the experience</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>general</li><li>scholar</li><li>addiction</li></tags>
-    <skillXpDef>Intellectual</skillXpDef>
     <skillXP>8000</skillXP>
   </PawnChronicles.EffectEntryDef>
 
@@ -134,8 +123,18 @@
     <skillXP>8000</skillXP>
   </PawnChronicles.EffectEntryDef>
 
-  <!-- ── Passion gains ──────────────────────────────────────────────────── -->
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_IntellectualXP</defName>
+    <label>document the experience</label>
+    <consequence>document the experience</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>general</li><li>scholar</li><li>addiction</li></tags>
+    <skillXpDef>Intellectual</skillXpDef>
+    <skillXP>8000</skillXP>
+  </PawnChronicles.EffectEntryDef>
 
+
+  <!-- ── Passion gains ────────────────────────────────────────────────── -->
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Pos_GainPassion</defName>
     <label>discover a new calling</label>
@@ -175,8 +174,8 @@
     <passion>1</passion>
   </PawnChronicles.EffectEntryDef>
 
-  <!-- ── Social opinion gains ───────────────────────────────────────────── -->
 
+  <!-- ── Social opinion gains ───────────────────────────────────────────── -->
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Pos_OpinionUp_Small</defName>
     <label>lean on someone</label>
@@ -195,8 +194,8 @@
     <socialOpinion>25</socialOpinion>
   </PawnChronicles.EffectEntryDef>
 
-  <!-- ── Spawn items ────────────────────────────────────────────────────── -->
 
+  <!-- ── Spawn items ────────────────────────────────────────────────────── -->
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Pos_FindStash</defName>
     <label>find a hidden stash</label>
@@ -217,417 +216,26 @@
     <spawnCount>8</spawnCount>
   </PawnChronicles.EffectEntryDef>
 
-  <!-- ── More skill level gains ─────────────────────────────────────────── -->
 
+  <!-- ── Odyssey items ──────────────────────────────────────────────────── -->
   <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_PlantsSkill</defName>
-    <label>tend to something growing</label>
-    <consequence>tend to something growing</consequence>
+    <defName>PC_Effect_Pos_FindPsilocap</defName>
+    <label>find a growth of psilocap</label>
+    <consequence>find a growth of psilocap</consequence>
     <isPositive>true</isPositive>
-    <tags><li>general</li><li>survival</li><li>wandering</li><li>animalfriend</li></tags>
-    <skillLevelDef>Plants</skillLevelDef>
-    <skillLevel>1</skillLevel>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_ConstructionSkill</defName>
-    <label>build something solid</label>
-    <consequence>build something solid</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>craft</li><li>duty</li><li>resilience</li></tags>
-    <skillLevelDef>Construction</skillLevelDef>
-    <skillLevel>1</skillLevel>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_MiningSkill</defName>
-    <label>dig a little deeper</label>
-    <consequence>dig a little deeper</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>survival</li><li>underworld</li><li>isolation</li></tags>
-    <skillLevelDef>Mining</skillLevelDef>
-    <skillLevel>1</skillLevel>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- Crisis-tier skill boosts (+2) -->
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_CraftingSkill_Major</defName>
-    <label>let the work become instinct</label>
-    <consequence>let the work become instinct</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>crisis</li><li>craft</li><li>artist</li></tags>
-    <skillLevelDef>Crafting</skillLevelDef>
-    <skillLevel>2</skillLevel>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_SocialSkill_Major</defName>
-    <label>learn how people work</label>
-    <consequence>learn how people work</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>crisis</li><li>kinship</li><li>social</li><li>addiction</li></tags>
-    <skillLevelDef>Social</skillLevelDef>
-    <skillLevel>2</skillLevel>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_MedicineSkill_Major</defName>
-    <label>become fluent in pain</label>
-    <consequence>become fluent in pain</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>crisis</li><li>healer</li><li>withdrawal</li><li>decay</li></tags>
-    <skillLevelDef>Medicine</skillLevelDef>
-    <skillLevel>2</skillLevel>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_ShootingSkill_Major</defName>
-    <label>let the reflex sharpen under pressure</label>
-    <consequence>let the reflex sharpen under pressure</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>crisis</li><li>violence</li><li>duty</li><li>survival</li></tags>
-    <skillLevelDef>Shooting</skillLevelDef>
-    <skillLevel>2</skillLevel>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- ── More skill XP gains ─────────────────────────────────────────────── -->
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_SocialXP</defName>
-    <label>read the room better than before</label>
-    <consequence>read the room better than before</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>general</li><li>kinship</li><li>devotion</li><li>social</li></tags>
-    <skillXpDef>Social</skillXpDef>
-    <skillXP>8000</skillXP>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_ShootingXP</defName>
-    <label>keep your aim sharp</label>
-    <consequence>keep your aim sharp</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>violence</li><li>duty</li><li>survival</li></tags>
-    <skillXpDef>Shooting</skillXpDef>
-    <skillXP>8000</skillXP>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_AnimalsXP</defName>
-    <label>spend time with the animals</label>
-    <consequence>spend time with the animals</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>animalfriend</li><li>wandering</li><li>survival</li></tags>
-    <skillXpDef>Animals</skillXpDef>
-    <skillXP>8000</skillXP>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_ArtisticXP</defName>
-    <label>put the feeling somewhere useful</label>
-    <consequence>put the feeling somewhere useful</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>artist</li><li>craft</li><li>grief</li><li>crisis</li></tags>
-    <skillXpDef>Artistic</skillXpDef>
-    <skillXP>8000</skillXP>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_PlantsXP</defName>
-    <label>let something grow that wasn't there before</label>
-    <consequence>let something grow that wasn't there before</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>general</li><li>survival</li><li>wandering</li><li>redemption</li></tags>
-    <skillXpDef>Plants</skillXpDef>
-    <skillXP>8000</skillXP>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- ── More passion gains ─────────────────────────────────────────────── -->
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_GainPassion_Violence</defName>
-    <label>find a grim kind of purpose</label>
-    <consequence>find a grim kind of purpose</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>violence</li><li>duty</li><li>survival</li><li>betrayal</li></tags>
-    <passionSkillDef>Shooting</passionSkillDef>
-    <passion>1</passion>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_GainPassion_Animals</defName>
-    <label>let something in the wilds stay with you</label>
-    <consequence>let something in the wilds stay with you</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>animalfriend</li><li>wandering</li><li>survival</li></tags>
-    <passionSkillDef>Animals</passionSkillDef>
-    <passion>1</passion>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_GainPassion_Scholar</defName>
-    <label>let the question become an obsession</label>
-    <consequence>let the question become an obsession</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>scholar</li><li>curiosity</li><li>augmentation</li></tags>
-    <passionSkillDef>Intellectual</passionSkillDef>
-    <passion>1</passion>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_GainPassion_Artistic</defName>
-    <label>let the urge to create intensify</label>
-    <consequence>let the urge to create intensify</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>artist</li><li>craft</li><li>grief</li></tags>
-    <passionSkillDef>Artistic</passionSkillDef>
-    <passion>1</passion>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- ── More social opinion gains ──────────────────────────────────────── -->
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_OpinionUp_Kinship</defName>
-    <label>let something honest pass between you</label>
-    <consequence>let something honest pass between you</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>kinship</li><li>grief</li><li>loss</li><li>devotion</li></tags>
-    <socialOpinion>20</socialOpinion>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- ══════════════════════════════════════════════════════════════════════
-       DRUG STASHES
-       ══════════════════════════════════════════════════════════════════════ -->
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Stash_Beer</defName>
-    <label>find a hidden bottle</label>
-    <consequence>find a hidden bottle</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>alcohol</li><li>dependency</li><li>social</li></tags>
-    <spawnItemDef>Beer</spawnItemDef>
-    <spawnCount>8</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Stash_SmokeleafJoint</defName>
-    <label>find a rolled joint in an old pocket</label>
-    <consequence>find a rolled joint in an old pocket</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>smokeleaf</li><li>dependency</li><li>social</li></tags>
-    <spawnItemDef>SmokeleafJoint</spawnItemDef>
-    <spawnCount>6</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Stash_PsychiteTea</defName>
-    <label>find a pouch of psychite tea</label>
-    <consequence>find a pouch of psychite tea</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>psychite</li><li>dependency</li></tags>
-    <spawnItemDef>PsychiteTea</spawnItemDef>
-    <spawnCount>6</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Stash_Yayo</defName>
-    <label>find a stash of yayo</label>
-    <consequence>find a stash of yayo</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>psychite</li><li>crisis</li><li>underworld</li></tags>
-    <spawnItemDef>Yayo</spawnItemDef>
+    <tags><li>scholar</li><li>curiosity</li><li>wandering</li></tags>
+    <spawnItemDef>Drug_Psilocap</spawnItemDef>
     <spawnCount>4</spawnCount>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Stash_Flake</defName>
-    <label>find a foil packet of flake</label>
-    <consequence>find a foil packet of flake</consequence>
+    <defName>PC_Effect_Pos_FindSentienceCatalyst</defName>
+    <label>recover a sentience catalyst</label>
+    <consequence>recover a sentience catalyst</consequence>
     <isPositive>true</isPositive>
-    <tags><li>psychite</li><li>crisis</li><li>underworld</li></tags>
-    <spawnItemDef>Flake</spawnItemDef>
-    <spawnCount>5</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Stash_GoJuice</defName>
-    <label>find a forgotten vial of go-juice</label>
-    <consequence>find a forgotten vial of go-juice</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>gojuice</li><li>dependency</li><li>violence</li></tags>
-    <spawnItemDef>GoJuice</spawnItemDef>
-    <spawnCount>4</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Stash_WakeUp</defName>
-    <label>find a blister pack of wake-up</label>
-    <consequence>find a blister pack of wake-up</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>wakeup</li><li>dependency</li><li>crisis</li></tags>
-    <spawnItemDef>WakeUp</spawnItemDef>
-    <spawnCount>6</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- ══════════════════════════════════════════════════════════════════════
-       SUPPLY DROPS
-       ══════════════════════════════════════════════════════════════════════ -->
-
-  <!-- Medicine / Healer -->
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_MedicineHerbal</defName>
-    <label>find a bundle of herbal medicine</label>
-    <consequence>find a bundle of herbal medicine</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>healer</li><li>nurture</li><li>survival</li><li>general</li></tags>
-    <spawnItemDef>MedicineHerbal</spawnItemDef>
-    <spawnCount>8</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_MedicineIndustrial</defName>
-    <label>locate a medical supply cache</label>
-    <consequence>locate a medical supply cache</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>healer</li><li>crisis</li><li>withdrawal</li><li>decay</li></tags>
-    <spawnItemDef>MedicineIndustrial</spawnItemDef>
-    <spawnCount>5</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_Penoxycyline</defName>
-    <label>find a course of penoxycyline</label>
-    <consequence>find a course of penoxycyline</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>healer</li><li>survival</li><li>refugee</li></tags>
-    <spawnItemDef>Penoxycyline</spawnItemDef>
-    <spawnCount>4</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- Crafting / Construction -->
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_Steel</defName>
-    <label>salvage a usable stack of steel</label>
-    <consequence>salvage a usable stack of steel</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>craft</li><li>duty</li><li>resilience</li><li>general</li></tags>
-    <spawnItemDef>Steel</spawnItemDef>
-    <spawnCount>40</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_Components</defName>
-    <label>find a crate of components</label>
-    <consequence>find a crate of components</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>craft</li><li>scholar</li><li>curiosity</li><li>augmentation</li></tags>
-    <spawnItemDef>ComponentIndustrial</spawnItemDef>
-    <spawnCount>6</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_Synthread</defName>
-    <label>uncover a bolt of synthread</label>
-    <consequence>uncover a bolt of synthread</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>artist</li><li>craft</li><li>noble</li></tags>
-    <spawnItemDef>Synthread</spawnItemDef>
-    <spawnCount>15</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- Food / Survival -->
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_SurvivalPack</defName>
-    <label>find a cache of survival rations</label>
-    <consequence>find a cache of survival rations</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>survival</li><li>wandering</li><li>refugee</li><li>general</li></tags>
-    <spawnItemDef>MealSurvivalPack</spawnItemDef>
-    <spawnCount>6</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_MealSimple</defName>
-    <label>find food left behind</label>
-    <consequence>find food left behind</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>general</li><li>kinship</li><li>devotion</li></tags>
-    <spawnItemDef>MealSimple</spawnItemDef>
-    <spawnCount>5</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_MealFine</defName>
-    <label>find a fine meal from somewhere</label>
-    <consequence>find a fine meal from somewhere</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>noble</li><li>kinship</li><li>social</li><li>leadership</li></tags>
-    <spawnItemDef>MealFine</spawnItemDef>
-    <spawnCount>4</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_Chocolate</defName>
-    <label>find something sweet in a jacket pocket</label>
-    <consequence>find something sweet in a jacket pocket</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>general</li><li>grief</li><li>loss</li><li>resilience</li></tags>
-    <spawnItemDef>Chocolate</spawnItemDef>
-    <spawnCount>5</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- Social / Noble / Wealth -->
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_Silver</defName>
-    <label>come across some unexpected silver</label>
-    <consequence>come across some unexpected silver</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>noble</li><li>underworld</li><li>leadership</li><li>crisis</li></tags>
-    <spawnItemDef>Silver</spawnItemDef>
-    <spawnCount>60</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- Animal / Nature -->
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_InsectJelly</defName>
-    <label>find a hive cache nearby</label>
-    <consequence>find a hive cache nearby</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>animalfriend</li><li>survival</li><li>wandering</li></tags>
-    <spawnItemDef>InsectJelly</spawnItemDef>
-    <spawnCount>12</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_Pemmican</defName>
-    <label>dig up a traveler's food cache</label>
-    <consequence>dig up a traveler's food cache</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>wandering</li><li>survival</li><li>refugee</li></tags>
-    <spawnItemDef>Pemmican</spawnItemDef>
-    <spawnCount>10</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <!-- Advanced / Scholar / Augmentation -->
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_SpacerComponents</defName>
-    <label>recover advanced components from a wreck</label>
-    <consequence>recover advanced components from a wreck</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>scholar</li><li>curiosity</li><li>augmentation</li><li>crisis</li></tags>
-    <spawnItemDef>ComponentSpacer</spawnItemDef>
-    <spawnCount>2</spawnCount>
-  </PawnChronicles.EffectEntryDef>
-
-  <PawnChronicles.EffectEntryDef>
-    <defName>PC_Effect_Pos_Supply_Neutroamine</defName>
-    <label>locate a vial of neutroamine</label>
-    <consequence>locate a vial of neutroamine</consequence>
-    <isPositive>true</isPositive>
-    <tags><li>healer</li><li>scholar</li><li>underworld</li></tags>
-    <spawnItemDef>Neutroamine</spawnItemDef>
-    <spawnCount>8</spawnCount>
+    <tags><li>scholar</li><li>augmentation</li></tags>
+    <spawnItemDef>SentienceCatalyst</spawnItemDef>
+    <spawnCount>1</spawnCount>
   </PawnChronicles.EffectEntryDef>
 
 </Defs>
