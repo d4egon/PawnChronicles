@@ -99,6 +99,29 @@ namespace PawnChronicles
                     if (comp == null || comp.lucifSiteTile.Equals(default(PlanetTile))) return true;
                     return !Find.WorldObjects.AnyWorldObjectAt(comp.lucifSiteTile);
                 }
+                case "expedition_cleared":
+                {
+                    // Arc advances once the pawn has left home at least once and returned.
+                    // The site-gone check is intentionally omitted: the cartel warehouse is
+                    // non-hostile, so the site never "clears" via combat. The player visits,
+                    // does the exchange or walks out, comes home.
+                    var comp = pawn.GetComp<CompPersonalChronicles>();
+                    if (comp == null) return true;
+
+                    bool onHomeMap = pawn.Map != null && pawn.Map.IsPlayerHome;
+
+                    // Lazily set the departed flag the first time the pawn is away from home.
+                    if (!onHomeMap)
+                        comp.expeditionPawnDeparted = true;
+
+                    return comp.expeditionPawnDeparted && onHomeMap;
+                }
+                case "delving_cleared":
+                {
+                    var comp = pawn.GetComp<CompPersonalChronicles>();
+                    if (comp == null || comp.lucifDelvingTile.Equals(default(PlanetTile))) return true;
+                    return !Find.WorldObjects.AnyWorldObjectAt(comp.lucifDelvingTile);
+                }
             }
 
             // 2. DYNAMIC FALLBACK: If key isn't hardcoded, try to resolve it as a Def

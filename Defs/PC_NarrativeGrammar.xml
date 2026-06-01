@@ -223,21 +223,21 @@
         <li>pc_lex_sound_badass->rifle crack</li>
         <li>pc_lex_sound_badass->furious snarl</li>
         <!-- general sounds-->
-        <li>pc_lex_sound->creak</li>
-        <li>pc_lex_sound->drip</li>
-        <li>pc_lex_sound->rustle</li>
-        <li>pc_lex_sound->whisper</li>
-        <li>pc_lex_sound->clang</li>
-        <li>pc_lex_sound->howl</li>
-        <li>pc_lex_sound->scream</li>
-        <li>pc_lex_sound->thunder</li>
-        <li>pc_lex_sound->wind</li>
-        <li>pc_lex_sound->crackle</li>
+        <li>pc_lex_sound->creaking</li>
+        <li>pc_lex_sound->dripping</li>
+        <li>pc_lex_sound->rustling</li>
+        <li>pc_lex_sound->whispering</li>
+        <li>pc_lex_sound->clanging</li>
+        <li>pc_lex_sound->howling</li>
+        <li>pc_lex_sound->screaming</li>
+        <li>pc_lex_sound->rumbling thunder</li>
+        <li>pc_lex_sound->gushing wind</li>
+        <li>pc_lex_sound->crackling lightning</li>
         <li>pc_lex_sound->footsteps</li>
-        <li>pc_lex_sound->distant rumble</li>
-        <li>pc_lex_sound->mechanical hum</li>
-        <li>pc_lex_sound->glass shatter</li>
-        <li>pc_lex_sound->door slam</li>
+        <li>pc_lex_sound->distant rumblign</li>
+        <li>pc_lex_sound->mechanical humming</li>
+        <li>pc_lex_sound->glass shattering</li>
+        <li>pc_lex_sound->door slamming</li>
 
       <!-- ═══════════════════════════════════════════════════════════════
              BUGS
@@ -283,7 +283,7 @@
         <li>addiction_gojuice_dependency_body->[pawn_nameDef] had begun pre-dosing before any task that seemed like it might involve urgency. This covered most tasks. [pawn_pronoun] finished shifts in half the time and slept twelve hours afterward. [pc_friend_name] flagged the pattern to the medic, who put it in a report that [pawn_nameDef] reviewed and said showed a net positive trend.</li>
         <!--PSYCHITE-->
         <li>addiction_psychite_dependency_title->Smooth Edges</li>
-        <li>addiction_psychite_dependency_body->The [pc_world_weather], the noise of [pc_colony_name], the ongoing [PersonJob] disputes - psychite softened all of it to a workable frequency. [pawn_nameDef] was not in denial about the supply levels. [pawn_pronoun] described [pawn_reflexive] as managing a maintenance requirement, which was technically accurate and clearly not the point.</li>
+        <li>addiction_psychite_dependency_body->In [pc_world_weather] weather, the noise of [pc_colony_name], the ongoing [PersonJob] disputes - psychite softened all of it to a workable frequency. [pawn_nameDef] was not in denial about the supply levels. [pawn_pronoun] described [pawn_reflexive] as managing a maintenance requirement, which was technically accurate and clearly not the point.</li>
         <!--WAKE-UP-->
         <li>addiction_wakeup_dependency_title->The Schedule</li>
         <li>addiction_wakeup_dependency_body->[pawn_nameDef]'s output for [pc_world_season] was roughly double the colony average. [pawn_possessive] sleep record showed the inverse. [pc_friend_name] charted both figures and brought them to the medic, who showed them to [pawn_nameDef]. [pawn_nameDef] noted the productivity column and asked if there was a concern.</li>
@@ -331,7 +331,7 @@
         <li>addiction_gojuice_withdrawal_body->The go-juice supply ran out in [pc_world_season] and [pawn_nameDef] spent the following week at what [pawn_pronoun] described as an unreasonable pace. [pc_friend_name] noted [pawn_pronoun] was moving at a normal speed. [pawn_nameDef] said that was exactly the problem.</li>
         <!--PSYCHITE-->
         <li>addiction_psychite_withdrawal_title->The Edges Return</li>
-        <li>addiction_psychite_withdrawal_body->Without psychite, [pc_colony_name] arrived at full volume. [pawn_nameDef] had forgotten what that sounded like. The [Animal]s in the pen, the [PersonJob] disputes, the [pc_world_weather] - all of it present in a way [pawn_pronoun] had not experienced in some time. [pawn_pronoun] described this to [pc_friend_name] as a calibration issue.</li>
+        <li>addiction_psychite_withdrawal_body->Without psychite, [pc_colony_name] arrived at full volume. [pawn_nameDef] had forgotten what that sounded like. The [Animal]s in the pen, the [PersonJob] disputes, in [pc_world_weather] weather - all of it present in a way [pawn_pronoun] had not experienced in some time. [pawn_pronoun] described this to [pc_friend_name] as a calibration issue.</li>
         <!--WAKE-UP-->
         <li>addiction_wakeup_withdrawal_title->The Debt</li>
         <li>addiction_wakeup_withdrawal_body->The wake-up supply ran out in [pc_world_season] and [pawn_nameDef]'s body called in the debt with interest. [pawn_pronoun] slept through two consecutive shifts, which [pc_friend_name] covered without comment. The [PersonJob] backlog grew back to its previous length in the time [pawn_pronoun] was unconscious. [pawn_nameDef] found this clarifying, on waking.</li>
@@ -355,10 +355,10 @@
         <li>addiction_gojuice_crisis_body->During the [Enemy] incursion, [pawn_nameDef] had taken a dose and a half and discharged a [Weapon] in [pc_friend_name]'s direction. [pc_friend_name] survived. The [Enemy] did not. The colony held a review. [pc_friend_name] attended and said nothing, which was recorded as more impactful than any formal statement.</li>
         <!--PSYCHITE-->
         <li>addiction_psychite_crisis_title->A Long Way Down</li>
-        <li>addiction_psychite_crisis_body->[pawn_nameDef] was found near the [pc_world_biome] border during [pc_world_weather], uninjured, three hours after [pawn_possessive] last recorded location. The medic attributed the survival to luck. The dosage log showed [pawn_possessive] intake had doubled without [pawn_possessive] accounting for it, which the medic attributed to the psychite.</li>
+        <li>addiction_psychite_crisis_body->[pawn_nameDef] was found near the [pc_world_biome] border during [pc_world_weather] sky, uninjured, three hours after [pawn_possessive] last recorded location. The medic attributed the survival to luck. The dosage log showed [pawn_possessive] intake had doubled without [pawn_possessive] accounting for it, which the medic attributed to the psychite.</li>
         <!--WAKE-UP-->
         <li>addiction_wakeup_crisis_title->Systems Failure</li>
-        <li>addiction_wakeup_crisis_body->[pawn_nameDef] collapsed at the [TerrainFeature] during [pc_world_weather]. The medic's report listed five contributing factors, with fatigue first and wake-up dependency second. [pawn_nameDef] said [pawn_pronoun] had felt it coming and intended to address it after [pawn_possessive] current project concluded. The medic noted the project had not concluded.</li>
+        <li>addiction_wakeup_crisis_body->[pawn_nameDef] collapsed at the [TerrainFeature] during [pc_world_weather] sky. The medic's report listed five contributing factors, with fatigue first and wake-up dependency second. [pawn_nameDef] said [pawn_pronoun] had felt it coming and intended to address it after [pawn_possessive] current project concluded. The medic noted the project had not concluded.</li>
         <!--SMOKELEAF-->
         <li>addiction_smokeleaf_crisis_title->Still Green</li>
         <li>addiction_smokeleaf_crisis_body->[pawn_nameDef]'s smokeleaf habit had expanded into [pawn_possessive] work hours. [pawn_pronoun] was present for all shifts in the technical sense. [pc_friend_name] had started measuring [pawn_possessive] output in completed tasks rather than hours, because the hours were logged and the tasks were fewer. The [PersonJob] backlog had grown to a size [pc_friend_name] called a crisis and [pawn_nameDef] called a queue.</li>
@@ -450,9 +450,9 @@
         <li>wait_condition_social->[pawn_possessive] arc will continue after 10 social interactions with other colonists...</li>
         <li>wait_condition_ritual->[pawn_nameDef]'s arc will continue after [pawn_pronoun] participates in a ritual...</li>
         <li>wait_condition_tamed->[pawn_nameDef]'s story will continue after [pawn_pronoun] next tames an animal...</li>
-        <li>wait_condition_time->[pawn_nameDef]'s story will continue when this [pc_world_season] passes, 15 days...</li>
-        <li>wait_condition_time->[pawn_nameDef]'s arc continues in 15 days...</li>
-        <li>wait_condition_time->15 days. Then [pawn_nameDef]'s story moves forward.</li>
+        <li>wait_condition_time->[pawn_nameDef]'s story will continue as time passes on...</li>
+        <li>wait_condition_time->[pawn_nameDef]'s arc after some time...</li>
+        <li>wait_condition_time->After some time has passed - Then [pawn_nameDef]'s story moves forward...</li>
         <li>wait_condition_withdrawal->[pawn_nameDef]'s arc continues when [pawn_pronoun] begins to withdraw...</li>
         <li>wait_condition_sobriety->[pawn_nameDef]'s arc continues when [pawn_possessive] system finally clears the dependency...</li>
         <li>wait_condition_mood_low->[pawn_nameDef]'s arc continues when [pawn_pronoun] reaches a low point...</li>
@@ -466,12 +466,12 @@
         <!-- Scene / Atmosphere -->
         <!-- weather anchored -->
         <li>pc_lex_scene->beneath [pc_world_weather] skies</li>
-        <li>pc_lex_scene->in [pc_world_weather]</li>
-        <li>pc_lex_scene->standing in [pc_world_weather]</li>
-        <li>pc_lex_scene->among [TreeType]s, [pc_world_weather]</li>
-        <li>pc_lex_scene->at the [TerrainFeature], [pc_world_weather]</li>
-        <li>pc_lex_scene->outside [pc_colony_name], [pc_world_weather]</li>
-        <li>pc_lex_scene->watching [pc_world_weather] come down on [pc_colony_name]</li>
+        <li>pc_lex_scene->in [pc_world_weather] weather</li>
+        <li>pc_lex_scene->standing in [pc_world_weather] weather</li>
+        <li>pc_lex_scene->among [TreeType]s, observing the [pc_world_weather] weather</li>
+        <li>pc_lex_scene->at the [TerrainFeature], in [pc_world_weather] weather</li>
+        <li>pc_lex_scene->outside [pc_colony_name], in [pc_world_weather] weather</li>
+        <li>pc_lex_scene->watching [pc_world_weather] weather over [pc_colony_name]</li>
         <!-- time anchored -->
         <li>pc_lex_scene->in the [pc_world_time_of_day] light</li>
         <li>pc_lex_scene->[pc_world_time_of_day] in [pc_world_biome]</li>
@@ -1370,7 +1370,7 @@
         <li>spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - [pc_lex_tag_verb] today, [pc_lex_scene].</li>
         <li>spark_body->[pawn_nameDef] kept moving. [pc_lex_scene]. [pc_lex_moral_state].</li>
         <li>spark_body->A [pc_world_time_of_day] thought found [pawn_nameDef] while [pawn_pronoun] worked. [pc_lex_world_feel].</li>
-        <li>spark_body->[pawn_nameDef], [pc_lex_demeanor], paused [pc_lex_scene]. The thought of '[pc_thought_strongest_label]' surfaced briefly.</li>
+        <li>spark_body->[pawn_nameDef], [pc_lex_demeanor], paused and observed the [pc_lex_scene]. The thought of '[pc_thought_strongest_label]' surfaced briefly.</li>
         <li>spark_body->[pawn_nameDef] had been doing [pc_skill_best_label] for [pc_age_bio] years. [pc_lex_scene].</li>
         <li>spark_body->The [pc_world_biome] outside [pc_colony_name] today. [pawn_nameDef] noticed it and went back to work.</li>
         <li>spark_body->[pawn_nameDef] - [pc_lex_combat_posture] - thought of [pc_backstory_child_title] briefly. [pc_lex_scene].</li>
@@ -1381,7 +1381,7 @@
         <li>spark_body->[pawn_nameDef] - [pc_lex_identity_echo]. Still, [pc_lex_scene].</li>
         <li>spark_body->The day offered [pawn_nameDef] a small thing. [pawn_pronoun] took it. [pc_lex_scene].</li>
         <li>spark_body->[pawn_nameDef] is [pc_lex_moral_state], [pc_lex_scene].</li>
-        <li>spark_body->A quiet found [pawn_nameDef] during [pc_world_time_of_day]. [pc_lex_social_anchor].</li>
+        <li>spark_body->A quietness found [pawn_nameDef] during [pc_world_time_of_day]. [pc_lex_social_anchor].</li>
         <li>spark_body->[pawn_nameDef] caught [pawn_possessive]self thinking of [pc_backstory_adult_title] work. [pc_lex_scene].</li>
         <li>spark_body->The [pc_world_weather] today. [pc_lex_world_feel].</li>
         <li>spark_body->[pawn_nameDef] spent ten minutes looking for a tool [pawn_pronoun] was holding the whole time. [pc_lex_scene].</li>
@@ -1445,7 +1445,7 @@
         <li>curiosity_spark_body->Something in [pc_world_biome] catches [pawn_nameDef]'s attention. A pattern. Worth noting.</li>
         <li>scholar_spark_body->[pawn_nameDef] made a note [pc_lex_scene]. [pawn_pronoun] always made notes. [pc_lex_moral_state].</li>
         <li>scholar_spark_body->An idea connects to another in [pawn_nameDef]'s mind during [pc_world_time_of_day] work. Quietly useful.</li>
-        <li>devotion_spark_body->[pawn_nameDef] takes a breath [pc_lex_scene] and feels the conviction settle. [pc_lex_moral_state].</li>
+        <li>devotion_spark_body->[pawn_nameDef] takes a breath in the [AdjectiveFriendly] [pc_lex_scene] and feels the conviction settle. [pawn_pronoun] is [pc_lex_moral_state].</li>
         <li>devotion_spark_body->The belief arrived quietly during [pc_world_time_of_day] work - certain and undemanding.</li>
         <li>faith_spark_body->[pawn_nameDef] gives brief thanks in [pawn_possessive] own way. [pc_lex_world_feel].</li>
         <li>faith_spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - observes something [pc_lex_scene] and calls it what it is.</li>
@@ -1456,7 +1456,7 @@
         <li>isolation_spark_body->[pawn_nameDef] works [pc_lex_scene] without needing anyone to notice. [pc_lex_moral_state].</li>
         <li>isolation_spark_body->[pawn_nameDef] finds [pawn_possessive] own company sufficient today, [pc_world_time_of_day]. [pc_lex_scene].</li>
         <li>isolation_spark_body->The quiet around [pawn_nameDef] was chosen, not imposed. [pc_lex_world_feel]. [pawn_pronoun] preferred it.</li>
-        <li>resilience_spark_body->[pawn_nameDef] takes stock: [pc_lex_wound_summary]. [pc_lex_moral_state]. Still ahead of the alternative.</li>
+        <li>resilience_spark_body->[pawn_nameDef] takes stock: [pc_lex_wound_summary]. [pawn_pronoun] [pc_lex_moral_state].</li>
         <li>resilience_spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - had been through worse. That counted, [pc_lex_scene].</li>
         <li>survival_spark_body->[pawn_nameDef] - [pc_lex_identity_echo] - notices: still here. [pc_lex_scene].</li>
         <li>wandering_spark_body->[pawn_nameDef] looks toward the edge of [pc_colony_name], [pc_world_time_of_day]. Not to leave. Just to remember something from [pawn_possessive] past.</li>
@@ -1951,9 +1951,9 @@
         <li>addiction_luciferium_devils_advocate_title->Devil's Advocate</li>
         <li>addiction_luciferium_devils_advocate_body->[pawn_nameDef] had begun arguing [pawn_reflexive] back into level ground. This was just logistics. Every [PersonJob] on the Rim worked with people they would not invite home. The luciferium kept [pawn_possessive] body running. Everything else was a version of that same calculation made by someone with the luxury of not needing it. [pc_friend_name] said [pawn_pronoun] seemed different lately. [pawn_nameDef] said [pawn_pronoun] was focused.</li>
 
-        <!-- Stage 7 -->
+        <!-- Stage 7 - site spawns when this fires. Arc holds until pawn returns. -->
         <li>addiction_luciferium_expedition_title->Expedition</li>
-        <li>addiction_luciferium_expedition_body->[pawn_nameDef] had left [pc_colony_name] without a full explanation. The contact was a [PersonJob] who operated out of a [TerrainFeature] three days from the colony perimeter. There had been bribes. There had been a conversation with a [PersonBadass] whose [Weapon] was visible throughout. [pawn_nameDef] came back with a supply extension and a name [pawn_pronoun] had agreed not to use. [pc_friend_name] asked where [pawn_pronoun] had been. [pawn_nameDef] said running a supply line. This was true in the way most things [pawn_pronoun] said were true.</li>
+        <li>addiction_luciferium_expedition_body->A contact has been identified. A gunsmith, operating out of a warehouse roughly a day's march from [pc_colony_name]. The supply is [pc_luc_stock_phrase]. [pawn_nameDef] has not told [pc_friend_name] where [pawn_pronoun] is going. The site is marked on the map. [pawn_pronoun] needs to make the trip, complete the meeting, and return. The arc will not move until [pawn_pronoun] does.</li>
 
         <!-- Stage 8 -->
         <li>addiction_luciferium_delving_title->Dungeon Delving</li>

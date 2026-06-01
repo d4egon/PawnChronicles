@@ -380,20 +380,28 @@
     <grammarRoleOverride>addiction_luciferium_devils_advocate</grammarRoleOverride>
   </PawnChronicles.QuestStageDef>
 
+  <!-- Stage 7: quest spawns AncientWarehouse. Arc holds until expedition_cleared. -->
   <PawnChronicles.QuestStageDef>
     <defName>PC_LucStage_Expedition</defName>
     <label>Expedition</label>
     <isOpening>false</isOpening>
     <isMiddle>true</isMiddle>
+    <waitConditionKeyOverride>expedition_cleared</waitConditionKeyOverride>
     <grammarRoleOverride>addiction_luciferium_expedition</grammarRoleOverride>
+    <questScriptDefNameOverride>PC_Quest_LuciferiumExpedition</questScriptDefNameOverride>
+    <branchTags><li>WorldConsequence</li></branchTags>
   </PawnChronicles.QuestStageDef>
 
+  <!-- Stage 8: quest spawns AncientGarrison. Arc holds until delving_cleared. -->
   <PawnChronicles.QuestStageDef>
     <defName>PC_LucStage_Delving</defName>
     <label>Dungeon Delving</label>
     <isOpening>false</isOpening>
     <isMiddle>true</isMiddle>
+    <waitConditionKeyOverride>delving_cleared</waitConditionKeyOverride>
     <grammarRoleOverride>addiction_luciferium_delving</grammarRoleOverride>
+    <questScriptDefNameOverride>PC_Quest_LuciferiumDelving</questScriptDefNameOverride>
+    <branchTags><li>WorldConsequence</li></branchTags>
   </PawnChronicles.QuestStageDef>
 
   <PawnChronicles.QuestStageDef>
@@ -420,14 +428,15 @@
     <grammarRoleOverride>addiction_luciferium_crisis</grammarRoleOverride>
   </PawnChronicles.QuestStageDef>
 
-  <!-- Stage 12: site spawns here, wait for site_cleared -->
+  <!-- Stage 12: quest spawns the AncientGarrison site via QuestNode_Root_Site. -->
   <PawnChronicles.QuestStageDef>
     <defName>PC_LucStage_Quest</defName>
     <label>The Quest</label>
     <isOpening>false</isOpening>
     <isMiddle>true</isMiddle>
-    <spawnWorldSite>true</spawnWorldSite>
     <grammarRoleOverride>addiction_luciferium_quest</grammarRoleOverride>
+    <questScriptDefNameOverride>PC_Quest_LuciferiumFacility</questScriptDefNameOverride>
+    <branchTags><li>WorldConsequence</li></branchTags>
   </PawnChronicles.QuestStageDef>
 
   <!-- Stage 13: climax -->

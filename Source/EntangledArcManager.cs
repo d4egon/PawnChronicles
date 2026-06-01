@@ -66,6 +66,9 @@ namespace PawnChronicles
         //  TICK
         // ─────────────────────────────────────────────────────────────────────
 
+        private int _lastAddictionSweepTick = 0;
+        private const int AddictionSweepInterval = 60000; // once per in-game day
+
         public override void GameComponentTick()
         {
             int tick = Find.TickManager.TicksGame;
@@ -83,6 +86,34 @@ namespace PawnChronicles
             {
                 _lastEvalTick = tick;
                 TryEvaluateNewPairs();
+            }
+
+            // Daily addiction sweep: catch any colonist with an active addiction hediff
+            // but no running arc. Covers mid-save mod installs and edge cases.
+            if (tick - _lastAddictionSweepTick >= AddictionSweepInterval)
+            {
+                _lastAddictionSweepTick = tick;
+                SweepForUnarcedAddictions();
+            }
+        }
+
+        private static void SweepForUnarcedAddictions()
+        {
+            if (Find.Maps == null) return;
+            foreach (var map in Find.Maps)
+            {
+                foreach (var pawn in map.mapPawns.FreeColonists)
+                {
+                    var comp = pawn.GetComp<CompPersonalChronicles>();
+                    if (comp == null || comp.hasActiveEpic || comp.chroniclesDisabled) continue;
+                    if (pawn.health?.hediffSet == null) continue;
+
+                    var addiction = pawn.health.hediffSet.hediffs
+                        .OfType<Hediff_Addiction>()
+                        .FirstOrDefault();
+                    if (addiction != null)
+                        comp.TryStartAddictionArc(addiction.def);
+                }
             }
         }
 

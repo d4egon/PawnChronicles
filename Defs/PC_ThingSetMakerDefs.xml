@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    ═══════════════════════════════════════════════════════════════════
+    PAWNCHRONICLES REWARD POOLS
+    ═══════════════════════════════════════════════════════════════════
+    Three pools, each pulled by a utility script in PC_QuestRewardDefs.xml.
+
+    PC_Luciferium_QuestLoot  - expedition contact / facility reward
+                               luciferium-focused, rare high-value items
+    PC_Reward_Delving        - garrison raid loot
+                               military hardware, stimulants, anti-toxins
+    PC_Reward_ArcMilestone   - general arc stage completion
+                               silver, medicine, components
+    ═══════════════════════════════════════════════════════════════════
+  -->
+
+  <!-- ── EXPEDITION / FACILITY - luciferium and high-value contraband ─── -->
+  <ThingSetMakerDef>
+    <defName>PC_Luciferium_QuestLoot</defName>
+    <debugParams>
+      <totalMarketValueRange>1500~3000</totalMarketValueRange>
+    </debugParams>
+    <root Class="ThingSetMaker_Sum">
+      <resolveInOrder>true</resolveInOrder>
+      <options>
+
+        <li>
+          <maxMarketValue>3000</maxMarketValue>
+          <thingSetMaker Class="ThingSetMaker_RandomOption">
+            <options>
+
+              <!-- Luciferium - the whole point of the arc -->
+              <li>
+                <weight>3</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter>
+                      <thingDefs><li>Luciferium</li></thingDefs>
+                    </filter>
+                    <countRange>1~2</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Ultratech medicine - cartel medics keep good stock -->
+              <li>
+                <weight>2</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter>
+                      <thingDefs><li>MedicineUltratech</li></thingDefs>
+                    </filter>
+                    <countRange>4~10</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Penoxycyline - useful contraband, widely traded -->
+              <li>
+                <weight>1.5</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter>
+                      <thingDefs><li>Penoxycyline</li></thingDefs>
+                    </filter>
+                    <countRange>15~30</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Rare high-value items - very low chance, jackpot tier -->
+              <li>
+                <weight>0.05</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter>
+                      <thingDefs>
+                        <li>ArchotechArm</li>
+                        <li>ArchotechEye</li>
+                        <li>ArchotechLeg</li>
+                        <li>MechSerumHealer</li>
+                        <li>MechSerumResurrector</li>
+                        <li>TechprofSubpersonaCore</li>
+                        <li>VanometricPowerCell</li>
+                        <li>OrbitalTargeterBombardment</li>
+                        <li>OrbitalTargeterPowerBeam</li>
+                        <li>PsychicEmanator</li>
+                        <li>Shell_AntigrainWarhead</li>
+                        <li MayRequire="Ludeon.RimWorld.Biotech">ArchiteCapsule</li>
+                      </thingDefs>
+                    </filter>
+                    <countRange>1</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Royalty contraband - cartel moves prestige gear -->
+              <li MayRequire="Ludeon.RimWorld.Royalty">
+                <weight>0.4</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter>
+                      <thingDefs>
+                        <li>Apparel_ArmorHelmetReconPrestige</li>
+                        <li>Apparel_Gunlink</li>
+                        <li>Gun_ChargeBlasterHeavy</li>
+                      </thingDefs>
+                    </filter>
+                    <countRange>1</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+            </options>
+          </thingSetMaker>
+        </li>
+
+        <!-- Filler: silver if market value headroom remains -->
+        <li>
+          <minMarketValue>100</minMarketValue>
+          <minTotalMarketValue>3000</minTotalMarketValue>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <filter><thingDefs><li>Silver</li></thingDefs></filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+
+      </options>
+    </root>
+  </ThingSetMakerDef>
+
+
+  <!-- ── DELVING - pre-collapse garrison military cache ───────────────── -->
+  <ThingSetMakerDef>
+    <defName>PC_Reward_Delving</defName>
+    <debugParams>
+      <totalMarketValueRange>800~2000</totalMarketValueRange>
+    </debugParams>
+    <root Class="ThingSetMaker_Sum">
+      <resolveInOrder>true</resolveInOrder>
+      <options>
+
+        <li>
+          <maxMarketValue>2000</maxMarketValue>
+          <thingSetMaker Class="ThingSetMaker_RandomOption">
+            <options>
+
+              <!-- Military stimulants - what soldiers ran on -->
+              <li>
+                <weight>2.5</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter>
+                      <thingDefs>
+                        <li>GoJuice</li>
+                        <li>WakeUp</li>
+                      </thingDefs>
+                    </filter>
+                    <countRange>8~16</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Penoxycyline - standard military anti-toxin stock -->
+              <li>
+                <weight>2.5</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter>
+                      <thingDefs><li>Penoxycyline</li></thingDefs>
+                    </filter>
+                    <countRange>10~25</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Ultratech medicine - garrison had a medic -->
+              <li>
+                <weight>2</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter>
+                      <thingDefs><li>MedicineUltratech</li></thingDefs>
+                    </filter>
+                    <countRange>3~8</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Military weapon - good condition armoury find -->
+              <li>
+                <weight>1.5</weight>
+                <thingSetMaker Class="ThingSetMaker_MarketValue">
+                  <fixedParams>
+                    <qualityGenerator>Reward</qualityGenerator>
+                    <allowNonStackableDuplicates>false</allowNonStackableDuplicates>
+                    <filter>
+                      <thingDefs>
+                        <li>Gun_ChargeRifle</li>
+                        <li>Gun_SniperRifle</li>
+                        <li>Gun_HeavySMG</li>
+                        <li>MeleeWeapon_LongSword</li>
+                      </thingDefs>
+                    </filter>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Luciferium - rare garrison stockpile, the whole reason to go -->
+              <li>
+                <weight>0.8</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter>
+                      <thingDefs><li>Luciferium</li></thingDefs>
+                    </filter>
+                    <countRange>1~2</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+            </options>
+          </thingSetMaker>
+        </li>
+
+        <!-- Filler: plasteel or gold for remaining value -->
+        <li>
+          <minMarketValue>80</minMarketValue>
+          <minTotalMarketValue>2000</minTotalMarketValue>
+          <thingSetMaker Class="ThingSetMaker_RandomOption">
+            <options>
+              <li>
+                <weight>1</weight>
+                <thingSetMaker Class="ThingSetMaker_MarketValue">
+                  <fixedParams><filter><thingDefs><li>Plasteel</li></thingDefs></filter></fixedParams>
+                </thingSetMaker>
+              </li>
+              <li>
+                <weight>1</weight>
+                <thingSetMaker Class="ThingSetMaker_MarketValue">
+                  <fixedParams><filter><thingDefs><li>Gold</li></thingDefs></filter></fixedParams>
+                </thingSetMaker>
+              </li>
+            </options>
+          </thingSetMaker>
+        </li>
+
+      </options>
+    </root>
+  </ThingSetMakerDef>
+
+
+  <!-- ── ARC MILESTONE - general epic stage completion reward ─────────── -->
+  <ThingSetMakerDef>
+    <defName>PC_Reward_ArcMilestone</defName>
+    <debugParams>
+      <totalMarketValueRange>500~1500</totalMarketValueRange>
+    </debugParams>
+    <root Class="ThingSetMaker_Sum">
+      <resolveInOrder>true</resolveInOrder>
+      <options>
+
+        <li>
+          <maxMarketValue>1500</maxMarketValue>
+          <thingSetMaker Class="ThingSetMaker_RandomOption">
+            <options>
+
+              <!-- Silver - the universal reward -->
+              <li>
+                <weight>3</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter><thingDefs><li>Silver</li></thingDefs></filter>
+                    <countRange>100~300</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Ultratech medicine - useful to anyone -->
+              <li>
+                <weight>2</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter><thingDefs><li>MedicineUltratech</li></thingDefs></filter>
+                    <countRange>3~8</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Industrial components - practical and valued -->
+              <li>
+                <weight>2</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter>
+                    <countRange>10~25</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Spacer components - rarer, higher tier reward -->
+              <li>
+                <weight>0.8</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter>
+                    <countRange>3~8</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+              <!-- Gold - concentrated value -->
+              <li>
+                <weight>1</weight>
+                <thingSetMaker Class="ThingSetMaker_StackCount">
+                  <fixedParams>
+                    <filter><thingDefs><li>Gold</li></thingDefs></filter>
+                    <countRange>20~60</countRange>
+                  </fixedParams>
+                </thingSetMaker>
+              </li>
+
+            </options>
+          </thingSetMaker>
+        </li>
+
+        <!-- Filler: silver -->
+        <li>
+          <minMarketValue>50</minMarketValue>
+          <minTotalMarketValue>1500</minTotalMarketValue>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams><filter><thingDefs><li>Silver</li></thingDefs></filter></fixedParams>
+          </thingSetMaker>
+        </li>
+
+      </options>
+    </root>
+  </ThingSetMakerDef>
+
+</Defs>

@@ -1,5 +1,8 @@
 Possible things to add:
 
+Genetics arc - flavor content around gene manipulation, xenogerm use, or inherited traits. Could tie into the existing pawn chronicle system as a separate arc track.
+
+
 Two-pawn arcs could evolve into the PsychicBond - a gene hediff that exists in biotech ?
 Addiction arcs: dedicated arc track per addiction type (alcohol, smokeleaf,
 wake-up, go-juice, luciferium, flake, yayo, etc.). Arc follows the pawn through

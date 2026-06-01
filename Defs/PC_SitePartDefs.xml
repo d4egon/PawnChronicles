@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Luciferium expedition meeting site (Stage 7).
+    A small roofed meeting room generated at the map centre.
+    PC_Cartel_Broker spawns inside with QuestPart_BegForItems active.
+    Player gives 75 silver -> 1 luciferium dropped at colony.
+  -->
+
+  <SitePartDef>
+    <defName>PC_SitePart_LuciferiumMeeting</defName>
+    <label>cartel meeting room</label>
+    <description>A secured meeting location prepared by Lucifer's Cartel. A broker is waiting inside.</description>
+    <workerClass>PawnChronicles.SitePartWorker_LuciferiumMeeting</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/AncientMercenaries</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <requiresFaction>true</requiresFaction>
+    <handlesWorldObjectTimeoutInspectString>true</handlesWorldObjectTimeoutInspectString>
+  </SitePartDef>
+
+  <!--
+    Linked GenStep: builds the meeting room and spawns the broker inside.
+    Order 700 = after base terrain gen, before pawn scatter.
+  -->
+  <GenStepDef>
+    <defName>PC_GenStep_LuciferiumMeeting</defName>
+    <linkWithSite>PC_SitePart_LuciferiumMeeting</linkWithSite>
+    <order>700</order>
+    <genStep Class="PawnChronicles.GenStep_LuciferiumMeeting"/>
+  </GenStepDef>
+
+</Defs>

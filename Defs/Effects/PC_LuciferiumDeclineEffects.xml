@@ -140,8 +140,8 @@
 
   <PawnChronicles.EffectEntryDef>
     <defName>PC_LucDecline_Sev_BerserkAndOpinion</defName>
-    <label>stop holding it together in front of people</label>
-    <consequence>stop holding it together in front of people</consequence>
+    <label>go crazy</label>
+    <consequence>go crazy</consequence>
     <isPositive>false</isPositive>
     <tags><li>luciferium_decline_severe</li></tags>
     <mentalStateDef>Berserk</mentalStateDef>

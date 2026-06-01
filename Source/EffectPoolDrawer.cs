@@ -124,6 +124,57 @@ namespace PawnChronicles
             return false;
         }
 
+        // ── Luciferium supply ─────────────────────────────────────────────────────
+
+        /// <summary>
+        /// Builds the guaranteed "secure the supply" choice for luciferium arc stages.
+        /// Pairs PC_Effect_Pos_LuciferiumSupply with a random luciferium_supply_cost negative.
+        /// Returns null if either pool is missing entries.
+        /// </summary>
+        public static StageChoice BuildLuciferiumSupplyChoice(
+            Pawn pawn,
+            string condKey, string condLabel, int condBaseline, int condDelta)
+        {
+            var supplyDef = DefDatabase<EffectEntryDef>.GetNamedSilentFail("PC_Effect_Pos_LuciferiumSupply");
+            if (supplyDef == null)
+            {
+                Log.Warning("[PawnChronicles] BuildLuciferiumSupplyChoice: PC_Effect_Pos_LuciferiumSupply not found.");
+                return null;
+            }
+
+            var allDefs = DefDatabase<EffectEntryDef>.AllDefsListForReading;
+            var costPool = allDefs
+                .Where(d => !d.isPositive && d.tags != null && d.tags.Contains("luciferium_supply_cost"))
+                .ToList()
+                .InRandomOrder()
+                .ToList();
+
+            if (costPool.Count == 0)
+            {
+                Log.Warning("[PawnChronicles] BuildLuciferiumSupplyChoice: no luciferium_supply_cost negatives found.");
+                return null;
+            }
+
+            var neg = costPool[0];
+            string hint = "PC_Effect_HintFormat".Translate(supplyDef.DisplayLabel, neg.DisplayLabel);
+
+            return new StageChoice
+            {
+                tagDefName           = "",
+                actionLabel          = supplyDef.label + ", but " + neg.label,
+                mechanicalHint       = hint,
+                conditionKey         = condKey,
+                conditionLabel       = condLabel,
+                baseline             = condBaseline,
+                targetDelta          = condDelta,
+                effects              = new List<ChoiceEffect>(),
+                positiveEntryDefName = supplyDef.defName,
+                negativeEntryDefName = neg.defName,
+                isHardRoad           = false,
+                isEasyOut            = false
+            };
+        }
+
         // ── Tag helpers ───────────────────────────────────────────────────────────
 
         /// <summary>

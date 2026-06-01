@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    LUCIFER'S CARTEL PAWN KINDS
+    All operators: BowlerHat + Duster over DevilstrandCloth pants + shirt.
+    Dark charcoal uniform. High resistance/will - trained professionals who don't talk.
+  -->
+
+  <!-- ── OPERATOR - standard armed operative ──────────────────────────────── -->
+  <PawnKindDef>
+    <defName>PC_Cartel_Operator</defName>
+    <label>operator</label>
+    <race>Human</race>
+    <defaultFactionType>PC_Faction_LucifersCartel</defaultFactionType>
+    <combatPower>90</combatPower>
+    <aiAvoidCover>false</aiAvoidCover>
+    <initialResistanceRange>4~7</initialResistanceRange>
+    <initialWillRange>3~6</initialWillRange>
+    <skills>
+      <li><skill>Shooting</skill><range>7~20</range></li>
+    </skills>
+    <weaponMoney>400~650</weaponMoney>
+    <weaponTags>
+      <li>IndustrialGunSimple</li>
+      <li>IndustrialGunAdvanced</li>
+    </weaponTags>
+    <apparelRequired>
+      <li>Apparel_BowlerHat</li>
+      <li>Apparel_Duster</li>
+      <li>Apparel_Pants</li>
+      <li>Apparel_CollarShirt</li>
+    </apparelRequired>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+    </specificApparelRequirements>
+    <apparelColor>(0.15, 0.15, 0.15)</apparelColor>
+    <apparelMoney>150~250</apparelMoney>
+    <minGenerationAge>20</minGenerationAge>
+    <maxGenerationAge>55</maxGenerationAge>
+  </PawnKindDef>
+
+  <!-- ── ENFORCER - melee close-quarters muscle ───────────────────────────── -->
+  <PawnKindDef>
+    <defName>PC_Cartel_Enforcer</defName>
+    <label>enforcer</label>
+    <race>Human</race>
+    <defaultFactionType>PC_Faction_LucifersCartel</defaultFactionType>
+    <combatPower>110</combatPower>
+    <aiAvoidCover>false</aiAvoidCover>
+    <initialResistanceRange>5~9</initialResistanceRange>
+    <initialWillRange>4~8</initialWillRange>
+    <skills>
+      <li><skill>Melee</skill><range>7~20</range></li>
+    </skills>
+    <weaponMoney>200~400</weaponMoney>
+    <weaponTags>
+      <li>IndustrialMeleeAdvanced</li>
+      <li>IndustrialMelee</li>
+    </weaponTags>
+    <apparelRequired>
+      <li>Apparel_BowlerHat</li>
+      <li>Apparel_Duster</li>
+      <li>Apparel_Pants</li>
+      <li>Apparel_CollarShirt</li>
+    </apparelRequired>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+    </specificApparelRequirements>
+    <apparelColor>(0.15, 0.15, 0.15)</apparelColor>
+    <apparelMoney>150~250</apparelMoney>
+    <minGenerationAge>22</minGenerationAge>
+    <maxGenerationAge>55</maxGenerationAge>
+  </PawnKindDef>
+
+  <!-- ── MARKSMAN - precision ranged operative ─────────────────────────────── -->
+  <PawnKindDef>
+    <defName>PC_Cartel_Marksman</defName>
+    <label>marksman</label>
+    <race>Human</race>
+    <defaultFactionType>PC_Faction_LucifersCartel</defaultFactionType>
+    <combatPower>120</combatPower>
+    <aiAvoidCover>true</aiAvoidCover>
+    <initialResistanceRange>5~8</initialResistanceRange>
+    <initialWillRange>4~7</initialWillRange>
+    <skills>
+      <li><skill>Shooting</skill><range>10~20</range></li>
+    </skills>
+    <weaponMoney>600~1400</weaponMoney>
+    <weaponTags>
+      <li>Sniper</li>
+      <li>SpacerGun</li>
+      <li>IndustrialGunAdvanced</li>
+    </weaponTags>
+    <apparelRequired>
+      <li>Apparel_BowlerHat</li>
+      <li>Apparel_Duster</li>
+      <li>Apparel_Pants</li>
+      <li>Apparel_CollarShirt</li>
+    </apparelRequired>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+    </specificApparelRequirements>
+    <apparelColor>(0.15, 0.15, 0.15)</apparelColor>
+    <apparelMoney>150~250</apparelMoney>
+    <minGenerationAge>22</minGenerationAge>
+    <maxGenerationAge>55</maxGenerationAge>
+  </PawnKindDef>
+
+  <!-- ── HANDLER - field commander / boss ──────────────────────────────────── -->
+  <PawnKindDef>
+    <defName>PC_Cartel_Handler</defName>
+    <label>handler</label>
+    <race>Human</race>
+    <defaultFactionType>PC_Faction_LucifersCartel</defaultFactionType>
+    <combatPower>160</combatPower>
+    <aiAvoidCover>true</aiAvoidCover>
+    <initialResistanceRange>7~12</initialResistanceRange>
+    <initialWillRange>6~10</initialWillRange>
+    <skills>
+      <li><skill>Shooting</skill><range>10~20</range></li>
+    </skills>
+    <weaponMoney>900~2000</weaponMoney>
+    <weaponTags>
+      <li>SpacerGun</li>
+      <li>IndustrialGunAdvanced</li>
+      <li>Sniper</li>
+    </weaponTags>
+    <apparelRequired>
+      <li>Apparel_BowlerHat</li>
+      <li>Apparel_Duster</li>
+      <li>Apparel_Pants</li>
+      <li>Apparel_CollarShirt</li>
+    </apparelRequired>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+    </specificApparelRequirements>
+    <apparelColor>(0.15, 0.15, 0.15)</apparelColor>
+    <apparelMoney>200~350</apparelMoney>
+    <factionLeader>true</factionLeader>
+    <minGenerationAge>28</minGenerationAge>
+    <maxGenerationAge>60</maxGenerationAge>
+    <isFighter>true</isFighter>
+  </PawnKindDef>
+
+  <!-- ── CIVILIAN - non-combat operatives at settlements ───────────────────── -->
+  <PawnKindDef>
+    <defName>PC_Cartel_Civilian</defName>
+    <label>civilian operative</label>
+    <race>Human</race>
+    <defaultFactionType>PC_Faction_LucifersCartel</defaultFactionType>
+    <combatPower>35</combatPower>
+    <isFighter>false</isFighter>
+    <initialResistanceRange>2~5</initialResistanceRange>
+    <initialWillRange>2~4</initialWillRange>
+    <weaponMoney>200~400</weaponMoney>
+    <weaponTags>
+      <li>IndustrialGunSimple</li>
+    </weaponTags>
+    <apparelRequired>
+      <li>Apparel_BowlerHat</li>
+      <li>Apparel_Duster</li>
+      <li>Apparel_Pants</li>
+      <li>Apparel_CollarShirt</li>
+    </apparelRequired>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+    </specificApparelRequirements>
+    <apparelColor>(0.15, 0.15, 0.15)</apparelColor>
+    <apparelMoney>150~250</apparelMoney>
+    <minGenerationAge>18</minGenerationAge>
+    <maxGenerationAge>65</maxGenerationAge>
+  </PawnKindDef>
+
+  <!-- ── BROKER - caravan trader / expedition contact ──────────────────────── -->
+  <PawnKindDef>
+    <defName>PC_Cartel_Broker</defName>
+    <label>broker</label>
+    <race>Human</race>
+    <defaultFactionType>PC_Faction_LucifersCartel</defaultFactionType>
+    <combatPower>45</combatPower>
+    <isFighter>false</isFighter>
+    <trader>true</trader>
+    <initialResistanceRange>2~5</initialResistanceRange>
+    <initialWillRange>2~4</initialWillRange>
+    <weaponMoney>200~400</weaponMoney>
+    <weaponTags>
+      <li>IndustrialGunSimple</li>
+    </weaponTags>
+    <apparelRequired>
+      <li>Apparel_BowlerHat</li>
+      <li>Apparel_Duster</li>
+      <li>Apparel_Pants</li>
+      <li>Apparel_CollarShirt</li>
+    </apparelRequired>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>DevilstrandCloth</stuff>
+      </li>
+    </specificApparelRequirements>
+    <apparelColor>(0.15, 0.15, 0.15)</apparelColor>
+    <apparelMoney>150~250</apparelMoney>
+    <minGenerationAge>22</minGenerationAge>
+    <maxGenerationAge>60</maxGenerationAge>
+  </PawnKindDef>
+
+</Defs>

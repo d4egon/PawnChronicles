@@ -47,4 +47,193 @@
     </root>
   </QuestScriptDef>
 
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Stage 7 - Expedition (AncientWarehouse contact site)
+       Player travels to the warehouse. A PC_Cartel_Broker spawns there
+       when the map generates, carrying 1 luciferium.
+       expedition_cleared requires: pawn left home + site gone + returned.
+  ═══════════════════════════════════════════════════════════════════ -->
+  <QuestScriptDef>
+    <defName>PC_Quest_LuciferiumExpedition</defName>
+    <expireDaysRange>20~20</expireDaysRange>
+    <autoAccept>true</autoAccept>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <!-- Resolve narrative text, set quest name/description, send letter -->
+        <li Class="PawnChronicles.QuestNode_LuciferiumExpeditionNarrative" />
+
+        <!-- Required by QuestNode_Root_Site -->
+        <li Class="QuestNode_GetMap" />
+        <li Class="QuestNode_SubScript">
+          <def>Util_GetDefaultRewardValueFromPoints</def>
+        </li>
+
+        <!-- Spawn the cartel meeting site. SitePartWorker generates the broker
+             into part.things + slate; GenStep_LuciferiumMeeting builds the room. -->
+        <li Class="QuestNode_Root_Site">
+          <sitePartDef>PC_SitePart_LuciferiumMeeting</sitePartDef>
+          <factionDef>PC_Faction_LucifersCartel</factionDef>
+          <distanceFromColonyRange>5~20</distanceFromColonyRange>
+          <desperateIgnoreDistance>true</desperateIgnoreDistance>
+        </li>
+
+        <!-- Store site tile in comp for expedition_cleared condition -->
+        <li Class="PawnChronicles.QuestNode_LuciferiumExpeditionRegisterSite" />
+
+        <!-- Spawn broker, wire exchange mechanic + payment reward + timed leave.
+             Quest ends Success internally when silver is handed over. -->
+        <li Class="PawnChronicles.QuestNode_LuciferiumExpeditionSetupBroker" />
+
+        <!-- Timeout: 20 days to reach the site, cancelled once the player enters.
+             The broker handles their own 2-day timeout once the map loads. -->
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>1200000</delayTicks>
+          <inSignalDisable>$site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>Contact gone</label>
+                <text>The warehouse was not reached in time. The broker moved on.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Stage 8 - Dungeon Delving (AncientGarrison raid)
+       Pawn goes into the garrison and comes back with supplies.
+       Reward: luciferium / weapon / drugs (randomised).
+  ═══════════════════════════════════════════════════════════════════ -->
+  <QuestScriptDef>
+    <defName>PC_Quest_LuciferiumDelving</defName>
+    <autoAccept>true</autoAccept>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="PawnChronicles.QuestNode_LuciferiumDelvingNarrative" />
+        <li Class="QuestNode_GetMap" />
+        <li Class="QuestNode_SubScript">
+          <def>Util_GetDefaultRewardValueFromPoints</def>
+        </li>
+        <li Class="QuestNode_Root_Site">
+          <sitePartDef>OpportunitySite_AncientGarrison</sitePartDef>
+          <distanceFromColonyRange>5~25</distanceFromColonyRange>
+          <desperateIgnoreDistance>true</desperateIgnoreDistance>
+        </li>
+        <li Class="PawnChronicles.QuestNode_LuciferiumDelvingRegisterSite" />
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>1800000</delayTicks>
+          <inSignalDisable>$site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>Garrison secured</label>
+                <text>The garrison was not reached in time. The opportunity passed.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="PawnChronicles.QuestNode_LuciferiumDelvingDeliver" />
+              <li Class="QuestNode_End">
+                <outcome>Success</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+  <!--
+    Dedicated quest for Stage 12 of the luciferium arc.
+
+    Flow:
+      1. LuciferiumFacilityNarrative  - resolves grammar, sets quest name/description, sends letter
+      2. QuestNode_Root_Site          - spawns AncientGarrison on world map, stores as $site
+      3. LuciferiumFacilityRegisterSite - stores $site.Tile in comp.lucifSiteTile for arc tracking
+      4. QuestNode_WorldObjectTimeout - fail the quest if site is never entered (30 days)
+      5. QuestNode_NoWorldObject      - fires when site is cleared
+         -> LuciferiumFacilityDeliver - drop pods a HealerMechSerum to the colony
+         -> QuestNode_End Success
+  -->
+  <QuestScriptDef>
+    <defName>PC_Quest_LuciferiumFacility</defName>
+    <autoAccept>true</autoAccept>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+        <!-- Set narrative text and send opening letter -->
+        <li Class="PawnChronicles.QuestNode_LuciferiumFacilityNarrative" />
+
+        <!-- Required by QuestNode_Root_Site to determine proximity to player colony -->
+        <li Class="QuestNode_GetMap" />
+
+        <!-- Set threat points so the garrison generates defenders -->
+        <li Class="QuestNode_SubScript">
+          <def>Util_GetDefaultRewardValueFromPoints</def>
+        </li>
+
+        <!-- Spawn the AncientGarrison site on the world map, stored as $site -->
+        <li Class="QuestNode_Root_Site">
+          <sitePartDef>OpportunitySite_AncientGarrison</sitePartDef>
+          <distanceFromColonyRange>5~25</distanceFromColonyRange>
+          <desperateIgnoreDistance>true</desperateIgnoreDistance>
+        </li>
+
+        <!-- Store the site tile in the pawn's comp so the arc's site_cleared condition works -->
+        <li Class="PawnChronicles.QuestNode_LuciferiumFacilityRegisterSite" />
+
+        <!-- Timeout: 30 days, disabled once the pawn enters the map -->
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>1800000</delayTicks>
+          <inSignalDisable>$site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>Ruins lost</label>
+                <text>The facility could not be reached in time. The luciferium arc continues without the serum.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- Site cleared: deliver serum and end quest successfully -->
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="PawnChronicles.QuestNode_LuciferiumFacilityDeliver" />
+              <li Class="QuestNode_End">
+                <outcome>Success</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
 </Defs>

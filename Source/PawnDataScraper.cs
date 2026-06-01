@@ -85,6 +85,8 @@ namespace PawnChronicles
             ScrapeHediffSummary(pawn, rules);
             ScrapeTraitSummary(pawn, rules);
             ScrapeSkillSummary(pawn, rules);
+            ScrapeFactions(pawn, rules);
+            ScrapeLuciferiumState(pawn, rules);
 
             // ── Depth-gated narrative symbols ──────────────────────────────────
             var settings = PawnChroniclesSettings.Current;
@@ -1025,6 +1027,108 @@ namespace PawnChronicles
                     .FirstOrDefault();
                 if (best != null)
                     Emit(rules, "pc_lex_dominant_skill_label", best.def.label);
+            }
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        //  FACTIONS - leaders of nearby/known factions
+        // ─────────────────────────────────────────────────────────────────────
+
+        private static void ScrapeFactions(Pawn pawn, List<Rule> rules)
+        {
+            if (Find.FactionManager == null) return;
+
+            // Non-player factions with a living leader, sorted: non-hostile first, then by name.
+            var factions = Find.FactionManager.AllFactions
+                .Where(f => !f.IsPlayer && !f.defeated && f.leader != null && !f.leader.Dead)
+                .OrderBy(f => f.HostileTo(Faction.OfPlayer) ? 1 : 0)
+                .ThenBy(f => f.Name)
+                .Take(6)
+                .ToList();
+
+            Emit(rules, "pc_faction_count", factions.Count.ToString());
+
+            for (int i = 0; i < factions.Count; i++)
+            {
+                var f = factions[i];
+                Emit(rules, $"pc_faction_{i}_name",     f.Name);
+                Emit(rules, $"pc_faction_{i}_leader",   f.leader.LabelShort);
+                Emit(rules, $"pc_faction_{i}_hostile",  f.HostileTo(Faction.OfPlayer) ? "true" : "false");
+                Emit(rules, $"pc_faction_{i}_techLevel", f.def.techLevel.ToString().ToLower());
+            }
+
+            // Convenience: nearest non-hostile faction with a leader
+            var friendly = factions.FirstOrDefault(f => !f.HostileTo(Faction.OfPlayer));
+            if (friendly != null)
+            {
+                Emit(rules, "pc_friendly_faction_name",   friendly.Name);
+                Emit(rules, "pc_friendly_faction_leader", friendly.leader.LabelShort);
+            }
+
+            // Convenience: most dangerous hostile faction (closest to player in relations)
+            var hostile = factions.FirstOrDefault(f => f.HostileTo(Faction.OfPlayer));
+            if (hostile != null)
+            {
+                Emit(rules, "pc_hostile_faction_name",   hostile.Name);
+                Emit(rules, "pc_hostile_faction_leader", hostile.leader.LabelShort);
+            }
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        //  LUCIFERIUM STATE - stock in colony, days until withdrawal
+        // ─────────────────────────────────────────────────────────────────────
+
+        private static void ScrapeLuciferiumState(Pawn pawn, List<Rule> rules)
+        {
+            if (pawn.Map == null) return;
+
+            var lucDef = DefDatabase<ThingDef>.GetNamedSilentFail("Luciferium");
+            if (lucDef != null)
+            {
+                int stock = pawn.Map.resourceCounter.GetCount(lucDef);
+                Emit(rules, "pc_luc_stock", stock.ToString());
+                Emit(rules, "pc_luc_stock_phrase", stock switch
+                {
+                    0     => "none left",
+                    1     => "one dose left",
+                    2     => "two doses left",
+                    <= 5  => $"{stock} doses in storage",
+                    <= 10 => "enough for a few cycles",
+                    _     => "a substantial supply"
+                });
+            }
+
+            // Silver and colony wealth - useful for "can they buy their way out" narrative
+            int silver = pawn.Map.resourceCounter.GetCount(ThingDefOf.Silver);
+            Emit(rules, "pc_silver_count", silver.ToString());
+            Emit(rules, "pc_silver_phrase", silver switch
+            {
+                < 50   => "nearly nothing",
+                < 200  => "not much",
+                < 500  => "some",
+                < 2000 => "a reasonable amount",
+                _      => "enough to make problems go away"
+            });
+
+            // Days until luciferium withdrawal for this pawn
+            var addiction = pawn.health?.hediffSet?.hediffs
+                .OfType<Hediff_Addiction>()
+                .FirstOrDefault(h => h.def.defName == "LuciferiumAddiction");
+            if (addiction != null)
+            {
+                // LuciferiumAddiction severity rises at ~0.0167/day without doses.
+                // Stage 0 (dependency) ends at severity 0.5. We estimate days remaining.
+                float severityLeft = System.Math.Max(0f, 0.5f - addiction.Severity);
+                int daysLeft = (int)(severityLeft / 0.0167f);
+                Emit(rules, "pc_luc_days_left", daysLeft.ToString());
+                Emit(rules, "pc_luc_urgency", daysLeft switch
+                {
+                    <= 0  => "overdue",
+                    <= 2  => "critical",
+                    <= 5  => "urgent",
+                    <= 10 => "pressing",
+                    _     => "manageable"
+                });
             }
         }
 

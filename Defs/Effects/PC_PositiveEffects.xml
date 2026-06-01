@@ -238,4 +238,15 @@
     <spawnCount>1</spawnCount>
   </PawnChronicles.EffectEntryDef>
 
+  <!-- ── Luciferium supply (guaranteed choice in luciferium arc) ──────── -->
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_LuciferiumSupply</defName>
+    <label>secure the supply</label>
+    <consequence>secure the supply</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>luciferium_supply</li></tags>
+    <spawnItemDef>Luciferium</spawnItemDef>
+    <spawnCount>1</spawnCount>
+  </PawnChronicles.EffectEntryDef>
+
 </Defs>

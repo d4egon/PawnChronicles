@@ -235,4 +235,46 @@
     <raidPoints>500</raidPoints>
   </PawnChronicles.EffectEntryDef>
 
+  <!-- ── Luciferium supply costs (paired with PC_Effect_Pos_LuciferiumSupply) ─ -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LucCost_DrawHeat</defName>
+    <label>draw heat from the wrong people (raid incoming)</label>
+    <consequence>draw heat from the wrong people (raid incoming)</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_supply_cost</li></tags>
+    <raidPoints>500</raidPoints>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LucCost_BurnBridge</defName>
+    <label>burn the bridge that got you there (-50 opinion, -3 Social)</label>
+    <consequence>burn the bridge that got you there (-50 opinion, -3 Social)</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_supply_cost</li></tags>
+    <socialOpinion>-50</socialOpinion>
+    <skillLevelDef>Social</skillLevelDef>
+    <skillLevel>-3</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LucCost_LoseControl</defName>
+    <label>lose control and status (berserk, -40 opinion)</label>
+    <consequence>lose control and status (berserk, -40 opinion)</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_supply_cost</li></tags>
+    <mentalStateDef>Berserk</mentalStateDef>
+    <socialOpinion>-40</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LucCost_PayInFull</defName>
+    <label>pay what it actually costs (raid incoming, -30 mood for 3 days)</label>
+    <consequence>pay what it actually costs (raid incoming, -30 mood for 3 days)</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_supply_cost</li></tags>
+    <raidPoints>400</raidPoints>
+    <moodThoughtDef>PC_Thought_LuciferiumDecline</moodThoughtDef>
+  </PawnChronicles.EffectEntryDef>
+
 </Defs>

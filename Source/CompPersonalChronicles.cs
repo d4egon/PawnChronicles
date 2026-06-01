@@ -99,8 +99,14 @@ namespace PawnChronicles
 
         public string? PendingSignal = null;
         public int activeQuestId = -1;
-        /// <summary>World map tile of the luciferium quest site.</summary>
+        /// <summary>World map tile of the luciferium quest site (ancient garrison, stage 12).</summary>
         public PlanetTile lucifSiteTile = default;
+        /// <summary>World map tile of the luciferium expedition site (warehouse contact, stage 7).</summary>
+        public PlanetTile lucifExpeditionTile = default;
+        /// <summary>World map tile of the luciferium delving site (garrison, stage 8).</summary>
+        public PlanetTile lucifDelvingTile = default;
+        /// <summary>Set to true once the pawn has left their home map during the expedition stage.</summary>
+        public bool expeditionPawnDeparted = false;
         /// <summary>How many Decline loop cycles have completed. Drives escalating consequences.</summary>
         public int luciferiumDeclineCycles = 0;
 
@@ -239,8 +245,11 @@ namespace PawnChronicles
             Scribe_Values.Look(ref ticksSinceLastProgress, "ticksSinceLastProgress", 0);
             Scribe_Values.Look(ref PendingSignal, "pendingSignal");
             Scribe_Values.Look(ref activeQuestId, "activeQuestId", -1);
-            Scribe_Values.Look(ref lucifSiteTile, "lucifSiteTile", default(PlanetTile));
-            Scribe_Values.Look(ref luciferiumDeclineCycles, "luciferiumDeclineCycles", 0);
+            Scribe_Values.Look(ref lucifSiteTile,           "lucifSiteTile",           default(PlanetTile));
+            Scribe_Values.Look(ref lucifExpeditionTile,     "lucifExpeditionTile",     default(PlanetTile));
+            Scribe_Values.Look(ref lucifDelvingTile,           "lucifDelvingTile",           default(PlanetTile));
+            Scribe_Values.Look(ref expeditionPawnDeparted,      "expeditionPawnDeparted",     false);
+            Scribe_Values.Look(ref luciferiumDeclineCycles,    "luciferiumDeclineCycles",    0);
 
             Scribe_Defs.Look(ref _pendingRetryStage, "pendingRetryStage");
             Scribe_Values.Look(ref _pendingRetryIsOpening, "pendingRetryIsOpening", false);
@@ -1112,6 +1121,8 @@ namespace PawnChronicles
             if (stage.spawnWorldSite && currentEpic?.isLuciferiumArc == true)
                 LuciferiumArcManager.SpawnSite(pawn, this);
 
+            // Expedition site is now spawned by PC_Quest_LuciferiumExpedition via QuestNode_Root_Site.
+
             ArcStageEntry entry;
             if (currentEpic.IsFixed)
             {
@@ -1192,8 +1203,20 @@ namespace PawnChronicles
                     var (condKey, condLabel, condBaseline, condDelta) =
                         StageWaitCondition.BuildForAddiction(pawn, role);
 
+                    // Stage-level wait condition override (e.g. expedition_cleared for the expedition stage).
+                    if (!string.IsNullOrEmpty(stage?.waitConditionKeyOverride))
+                    {
+                        condKey      = stage.waitConditionKeyOverride;
+                        condLabel    = "PC_Wait_ExpeditionReturn".Translate();
+                        condBaseline = 0;
+                        condDelta    = 0;
+                    }
+
+                    // Luciferium arc: draw only 2 random choices, then inject the guaranteed supply choice.
+                    int drawCount = currentEpic.isLuciferiumArc ? 2 : 3;
+
                     var choices = EffectPoolDrawer.DrawChoices(
-                        pawn, poolTags, count: 3,
+                        pawn, poolTags, count: drawCount,
                         waitDays: condKey == "time" ? condDelta / 60000f : 5f);
 
                     // Override the condition on each choice to match this stage's actual wait
@@ -1203,6 +1226,15 @@ namespace PawnChronicles
                         c.conditionLabel = condLabel;
                         c.baseline       = condBaseline;
                         c.targetDelta    = condDelta;
+                    }
+
+                    // Inject guaranteed "secure the supply" choice for luciferium arc
+                    if (currentEpic.isLuciferiumArc)
+                    {
+                        var supplyChoice = EffectPoolDrawer.BuildLuciferiumSupplyChoice(
+                            pawn, condKey, condLabel, condBaseline, condDelta);
+                        if (supplyChoice != null)
+                            choices.Insert(0, supplyChoice);
                     }
 
                     entry = new ArcStageEntry(
@@ -1333,6 +1365,14 @@ namespace PawnChronicles
             slate.Set("pawn", pawn);
             slate.Set("epicStageRole", stage.StageRole);
             slate.Set("currentQuestStageDef", stage);
+
+            // Pass site tiles so dedicated quest scripts can reference them
+            if (!lucifSiteTile.Equals(default(PlanetTile)))
+                slate.Set("lucifSiteTile", lucifSiteTile);
+            if (!lucifExpeditionTile.Equals(default(PlanetTile)))
+                slate.Set("lucifExpeditionTile", lucifExpeditionTile);
+            if (!lucifDelvingTile.Equals(default(PlanetTile)))
+                slate.Set("lucifDelvingTile", lucifDelvingTile);
 
             if (currentProfile != null)
             {

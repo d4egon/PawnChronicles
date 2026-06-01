@@ -485,6 +485,29 @@
   <!-- {0} = pawn label short -->
   <PC_Luciferium_SiteFound_Label>Ruins located</PC_Luciferium_SiteFound_Label>
   <PC_Luciferium_SiteFound_Desc>{0} has found a lead on a pre-collapse facility. A site has appeared on the world map. Clear it before the supply runs out.</PC_Luciferium_SiteFound_Desc>
+  <PC_Luciferium_DelvingComplete_Label>Garrison cleared</PC_Luciferium_DelvingComplete_Label>
+  <PC_Luciferium_DelvingComplete_Desc>{0} returned from the garrison with supplies.</PC_Luciferium_DelvingComplete_Desc>
+  <PC_Luciferium_SerumDelivered_Label>Serum recovered</PC_Luciferium_SerumDelivered_Label>
+  <PC_Luciferium_SerumDelivered_Desc>{0} cleared the facility. A healer mech serum has been delivered to the colony.</PC_Luciferium_SerumDelivered_Desc>
+  <PC_Luciferium_ExpeditionSite_Label>Contact located</PC_Luciferium_ExpeditionSite_Label>
+  <PC_Luciferium_ExpeditionSite_Desc>{0} has a lead on a supply contact operating out of a warehouse roughly a day's march from the colony. The site has appeared on the world map. The arc will not continue until {0} makes the trip and returns home.</PC_Luciferium_ExpeditionSite_Desc>
+  <PC_Wait_ExpeditionReturn>waiting for contact to depart</PC_Wait_ExpeditionReturn>
+  <PC_Luciferium_ContactDeparts_Label>Contact departed</PC_Luciferium_ContactDeparts_Label>
+  <PC_Luciferium_ContactDeparts_Desc>{0}'s contact left the colony. They left one unit of luciferium behind. The supply network is noted.</PC_Luciferium_ContactDeparts_Desc>
+  <!-- Luciferium quest labels/descriptions - factual, not narrative -->
+  <PC_LucQuest_Expedition_Label>Supply contact: {0}</PC_LucQuest_Expedition_Label>
+  <PC_LucQuest_Expedition_Desc>A contact from Lucifer's Cartel has agreed to meet {0} at a nearby location. The site has appeared on the world map. The contact expects payment in silver. Take 75.</PC_LucQuest_Expedition_Desc>
+  <PC_LucQuest_Delving_Label>The garrison: {0}</PC_LucQuest_Delving_Label>
+  <PC_LucQuest_Delving_Desc>Intel from the contact points to a pre-collapse military garrison. {0} has a window to raid it for supplies before the location goes cold. The site has appeared on the world map.</PC_LucQuest_Delving_Desc>
+  <PC_LucQuest_Facility_Label>The facility: {0}</PC_LucQuest_Facility_Label>
+  <PC_LucQuest_Facility_Desc>A pre-collapse facility has been located. {0} needs what is inside. The site has appeared on the world map. Clear it.</PC_LucQuest_Facility_Desc>
+
+  <PC_Luciferium_ContactPaid_Label>Supply delivered</PC_Luciferium_ContactPaid_Label>
+  <PC_Luciferium_ContactPaid_Desc>The contact's network forwarded the goods. One unit of luciferium has arrived at the colony.</PC_Luciferium_ContactPaid_Desc>
+  <PC_Luciferium_BrokerDead_Label>Contact lost</PC_Luciferium_BrokerDead_Label>
+  <PC_Luciferium_BrokerDead_Desc>The broker did not survive. The supply chain is disrupted. There will be no delivery.</PC_Luciferium_BrokerDead_Desc>
+  <PC_Luciferium_BrokerArrested_Label>Contact taken</PC_Luciferium_BrokerArrested_Label>
+  <PC_Luciferium_BrokerArrested_Desc>We know.</PC_Luciferium_BrokerArrested_Desc>
   <PC_Luciferium_HardRoad_Label>use the serum</PC_Luciferium_HardRoad_Label>
   <PC_Luciferium_HardRoad_Hint>The mechanites come out. The addiction ends. What was left behind in the ruins stays there.</PC_Luciferium_HardRoad_Hint>
   <PC_Luciferium_EasyOut_Label>accept the cost</PC_Luciferium_EasyOut_Label>

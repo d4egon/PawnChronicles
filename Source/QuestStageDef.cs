@@ -69,6 +69,19 @@ namespace PawnChronicles
         public bool spawnWorldSite = false;
 
         /// <summary>
+        /// When true, entering this stage spawns the luciferium expedition site (warehouse/contact)
+        /// ~15 tiles from the colony. Arc does not advance until the site is cleared and the pawn
+        /// returns home. Only used by PC_LucStage_Expedition.
+        /// </summary>
+        public bool spawnExpeditionSite = false;
+
+        /// <summary>
+        /// If set, overrides the wait condition key for this stage instead of deriving it from
+        /// the grammar role. Used by expedition stage to force "expedition_cleared".
+        /// </summary>
+        public string waitConditionKeyOverride = null;
+
+        /// <summary>
         /// The grammar role key for this stage.
         /// Passed into the quest Slate as "epicStageRole".
         /// </summary>
@@ -94,13 +107,26 @@ namespace PawnChronicles
             !string.IsNullOrEmpty(grammarRoleOverride) ? grammarRoleOverride : StageRole;
 
         /// <summary>
-        /// Returns the universal quest script for this stage's role.
-        /// Never null - always routes to one of the three PC_Quest_Epic* scripts.
+        /// If set, overrides the quest script used for this stage instead of the default routing.
+        /// Use for stages that need dedicated quest logic (e.g. PC_Quest_LuciferiumFacility).
+        /// </summary>
+        public string questScriptDefNameOverride = null;
+
+        /// <summary>
+        /// Returns the quest script for this stage.
+        /// Checks questScriptDefNameOverride first, then falls back to standard routing.
         /// </summary>
         public QuestScriptDef QuestScript
         {
             get
             {
+                if (!string.IsNullOrEmpty(questScriptDefNameOverride))
+                {
+                    var overrideScript = DefDatabase<QuestScriptDef>.GetNamedSilentFail(questScriptDefNameOverride);
+                    if (overrideScript != null) return overrideScript;
+                    Log.Error($"[PawnChronicles] QuestStageDef {defName}: questScriptDefNameOverride '{questScriptDefNameOverride}' not found.");
+                }
+
                 if (isClimax)
                     return outcomeSetsSuccess
                         ? DefDatabase<QuestScriptDef>.GetNamed("PC_Quest_EpicSuccess")

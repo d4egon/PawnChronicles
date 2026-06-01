@@ -283,12 +283,6 @@ namespace PawnChronicles
             var activeLabels = dominant.Where(t => profile.Scores[t] >= PawnNarrativeProfile.ActiveThreshold).Select(t => t.label);
             request.Rules.Add(new Rule_String("epicActiveTags", string.Join(", ", activeLabels)));
 
-            var lexiconRules = Lexicon.GetDerivedRules(pawn, profile);
-                if (lexiconRules != null)
-                {
-                    request.Rules.AddRange(lexiconRules);
-                }
-
             return request;
         }
 
