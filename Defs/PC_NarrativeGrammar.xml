@@ -1977,7 +1977,7 @@
 
         <!-- Stage 13 - climax -->
         <li>addiction_luciferium_resolution_title->Returning / Forever Indebted</li>
-        <li>addiction_luciferium_resolution_body->[pawn_nameDef] stood [pc_lex_scene] with what [pawn_pronoun] had come back from the garrison carrying. The serum was there. The cost of getting it was specific and would not be reducing. [pc_friend_name] was somewhere in [pc_colony_name], not yet knowing what [pawn_nameDef] had done or what [pawn_pronoun] owed. The mechanites in [pawn_possessive] blood were running the same calculation they always ran. [pawn_nameDef] had [Quantity_adjphrase] days to decide what came next.</li>
+        <li>addiction_luciferium_resolution_body->[pawn_nameDef] came back from the facility with the serum. The mechanites were still there. [pc_friend_name] was somewhere in [pc_colony_name], not yet knowing the full account of what [pawn_pronoun] had done or who [pawn_pronoun] had dealt with to get here.\n\nThe serum was in [pawn_possessive] hands. Using it meant the mechanites cleared. Not using it meant the supply problem remained a supply problem. [pawn_nameDef] had not decided yet.</li>
 
         <!-- Success -->
         <li>addiction_luciferium_success_title->Forever Indebted</li>
@@ -1987,9 +1987,6 @@
         <li>addiction_luciferium_failure_title->The Cost Was Too Great</li>
         <li>addiction_luciferium_failure_body->[pawn_nameDef] did not use the serum. Whatever the reason [pawn_pronoun] gave [pawn_reflexive], the path through the garrison and out the other side was not one [pawn_pronoun] chose to take. The supply problem remained a supply problem. The contacts were still there. The math had not changed. [pc_friend_name] noted that [pawn_nameDef] looked like someone who had made a decision and was not sure yet how to live with it. [pawn_nameDef] said [pawn_pronoun] was still working on the plan.</li>
 
-        <!-- ─── DECLINE CYCLE ─────────────────────────────────────────── -->
-        <li>luciferium_decline_cycle_title->Still Running the Numbers</li>
-        <li>luciferium_decline_cycle_body->[pawn_nameDef] was [pc_age_bio] years old, [pc_lex_identity_echo], and still tracking [pawn_possessive] supply to the day. The mechanites were holding. The cost of holding them was not decreasing. [pc_friend_name] had stopped asking direct questions. [pawn_nameDef] had stopped giving direct answers. [pc_colony_name] continued, which was the point, and the price of the point continued to be what it was.</li>
 
       </rulesStrings>
     </rulePack>

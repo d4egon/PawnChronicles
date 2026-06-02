@@ -18,7 +18,7 @@
     <isPositive>true</isPositive>
     <tags><li>general</li></tags>
     <skillLevelDef>Crafting</skillLevelDef>
-    <skillLevel>1</skillLevel>
+    <skillLevel>2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -28,7 +28,7 @@
     <isPositive>true</isPositive>
     <tags><li>general</li><li>social</li><li>addiction</li></tags>
     <skillLevelDef>Social</skillLevelDef>
-    <skillLevel>1</skillLevel>
+    <skillLevel>2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -38,7 +38,7 @@
     <isPositive>true</isPositive>
     <tags><li>general</li><li>addiction</li><li>withdrawal</li></tags>
     <skillLevelDef>Medicine</skillLevelDef>
-    <skillLevel>1</skillLevel>
+    <skillLevel>2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -48,7 +48,7 @@
     <isPositive>true</isPositive>
     <tags><li>general</li><li>dependency</li></tags>
     <skillLevelDef>Intellectual</skillLevelDef>
-    <skillLevel>1</skillLevel>
+    <skillLevel>2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -58,7 +58,7 @@
     <isPositive>true</isPositive>
     <tags><li>violence</li><li>duty</li><li>survival</li></tags>
     <skillLevelDef>Shooting</skillLevelDef>
-    <skillLevel>1</skillLevel>
+    <skillLevel>2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -68,7 +68,7 @@
     <isPositive>true</isPositive>
     <tags><li>violence</li><li>trauma</li><li>withdrawal</li></tags>
     <skillLevelDef>Melee</skillLevelDef>
-    <skillLevel>1</skillLevel>
+    <skillLevel>2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -78,7 +78,7 @@
     <isPositive>true</isPositive>
     <tags><li>general</li><li>dependency</li><li>alcohol</li></tags>
     <skillLevelDef>Cooking</skillLevelDef>
-    <skillLevel>1</skillLevel>
+    <skillLevel>2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -88,7 +88,7 @@
     <isPositive>true</isPositive>
     <tags><li>general</li><li>artist</li><li>crisis</li></tags>
     <skillLevelDef>Artistic</skillLevelDef>
-    <skillLevel>1</skillLevel>
+    <skillLevel>2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -98,7 +98,7 @@
     <isPositive>true</isPositive>
     <tags><li>animalfriend</li><li>general</li></tags>
     <skillLevelDef>Animals</skillLevelDef>
-    <skillLevel>1</skillLevel>
+    <skillLevel>2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
 
@@ -110,7 +110,7 @@
     <isPositive>true</isPositive>
     <tags><li>general</li><li>craft</li></tags>
     <skillXpDef>Crafting</skillXpDef>
-    <skillXP>8000</skillXP>
+    <skillXP>80000</skillXP>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -120,7 +120,7 @@
     <isPositive>true</isPositive>
     <tags><li>addiction</li><li>withdrawal</li><li>healer</li></tags>
     <skillXpDef>Medicine</skillXpDef>
-    <skillXP>8000</skillXP>
+    <skillXP>80000</skillXP>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -130,7 +130,7 @@
     <isPositive>true</isPositive>
     <tags><li>general</li><li>scholar</li><li>addiction</li></tags>
     <skillXpDef>Intellectual</skillXpDef>
-    <skillXP>8000</skillXP>
+    <skillXP>80000</skillXP>
   </PawnChronicles.EffectEntryDef>
 
 

@@ -156,6 +156,13 @@ namespace PawnChronicles
         public EpicOutcome successOutcome;
         public EpicOutcome failureOutcome;
 
+        // ── Faction relation on complete ──────────────────────────────────────
+        // Applied when the player advances past this stage.
+        // Use to shift goodwill (or force hostility) with a faction as a story beat.
+        // E.g. PC_LucStage_Crisis uses this to make Lucifer's Cartel hostile.
+        public string onCompleteFactionDef = null;
+        public int    onCompleteFactionRelationDelta = 0;
+
         // ── Narrative incident ────────────────────────────────────────────────
         // Fires when this stage is triggered. Sends a combined letter:
         //   [narrative body] + separator + [bridge explanation of why this event]

@@ -96,7 +96,9 @@ namespace PawnChronicles
                 case "site_cleared":
                 {
                     var comp = pawn.GetComp<CompPersonalChronicles>();
-                    if (comp == null || comp.lucifSiteTile.Equals(default(PlanetTile))) return true;
+                    if (comp == null) return false;
+                    // Site not yet registered - SpawnSite hasn't run yet, so it cannot be cleared.
+                    if (comp.lucifSiteTile.Equals(default(PlanetTile))) return false;
                     return !Find.WorldObjects.AnyWorldObjectAt(comp.lucifSiteTile);
                 }
                 case "expedition_cleared":
@@ -119,7 +121,9 @@ namespace PawnChronicles
                 case "delving_cleared":
                 {
                     var comp = pawn.GetComp<CompPersonalChronicles>();
-                    if (comp == null || comp.lucifDelvingTile.Equals(default(PlanetTile))) return true;
+                    if (comp == null) return false;
+                    // Site not yet registered - cannot be cleared.
+                    if (comp.lucifDelvingTile.Equals(default(PlanetTile))) return false;
                     return !Find.WorldObjects.AnyWorldObjectAt(comp.lucifDelvingTile);
                 }
             }
@@ -255,7 +259,7 @@ namespace PawnChronicles
                 {
                     tagDefName     = "",
                     actionLabel    = "PC_Luciferium_EasyOut_Label".Translate(),
-                    mechanicalHint = "PC_Luciferium_EasyOut_Hint".Translate(),
+                    mechanicalHint = "PC_Luciferium_EasyOut_Hint".Translate(pawn.LabelShort),
                     conditionKey   = "time",
                     conditionLabel = "PC_Wait_TakeItNow".Translate(),
                     baseline       = Find.TickManager.TicksGame,

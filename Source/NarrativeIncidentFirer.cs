@@ -376,7 +376,7 @@ namespace PawnChronicles
             if (skill == null) return;
 
             // xpChange: positive = grant XP, negative = drain passion (we just grant XP)
-            float xp = incident.skillXp != 0 ? incident.skillXp : 500f;
+            float xp = incident.skillXp != 0 ? incident.skillXp : 5000f;
             skill.Learn(xp, direct: true);
             Log.Message($"[PawnChronicles] SkillChange: {def.defName} +{xp} XP on {pawn.LabelShort}");
         }

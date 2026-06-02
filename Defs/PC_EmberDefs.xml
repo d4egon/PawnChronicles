@@ -146,7 +146,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Mining</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -224,7 +224,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Crafting</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -235,7 +235,7 @@
     <weight>1</weight>
     <type>SkillChange</type>
     <skillDef>Artistic</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -280,7 +280,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Crafting</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -326,7 +326,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Cooking</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -382,7 +382,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Medicine</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -438,7 +438,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Construction</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -494,7 +494,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Shooting</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -528,7 +528,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Intellectual</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -573,7 +573,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Plants</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -632,7 +632,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Plants</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -667,7 +667,7 @@
     <weight>2</weight>
     <type>SkillChange</type>
     <skillDef>Animals</skillDef>
-    <skillXp>2000</skillXp>
+    <skillXp>20000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>
@@ -723,7 +723,7 @@
     <weight>1</weight>
     <type>SkillChange</type>
     <skillDef>Intellectual</skillDef>
-    <skillXp>200</skillXp>
+    <skillXp>2000</skillXp>
   </PawnChronicles.EmberConsequenceDef>
 
   <PawnChronicles.EmberConsequenceDef>

@@ -29,7 +29,6 @@ namespace PawnChronicles
         // label is inherited from Def - use that as the choice button text.
 
         /// <summary>One-line flavour consequence shown in the hint block.</summary>
-        [MustTranslate]
         public string consequence = "";
 
         // ── Pool membership ───────────────────────────────────────────────────────
@@ -359,5 +358,59 @@ namespace PawnChronicles
                 return consequence;
             }
         }
+
+        /// <summary>
+        /// Pawn-specific version of DisplayLabel. Resolves "any passion" to the actual
+        /// skill that would be affected, and "social opinion" to the actual ally name.
+        /// Falls back to DisplayLabel for effects that don't depend on the pawn.
+        /// </summary>
+        public string DisplayLabelFor(Pawn pawn)
+        {
+            if (pawn == null) return DisplayLabel;
+
+            // anyPassion: name the specific skill that would be gained or lost
+            if (anyPassion != 0 && pawn.skills != null)
+            {
+                if (anyPassion < 0)
+                {
+                    var candidate = pawn.skills.skills
+                        .Where(s => !s.TotallyDisabled && s.passion != Passion.None)
+                        .OrderByDescending(s => (int)s.passion)
+                        .FirstOrDefault();
+                    if (candidate != null)
+                        return "PC_Effect_Display_PassionLose".Translate(candidate.def.label);
+                }
+                else
+                {
+                    var candidate = pawn.skills.skills
+                        .Where(s => !s.TotallyDisabled && s.passion != Passion.Major)
+                        .OrderByDescending(s => s.Level)
+                        .FirstOrDefault();
+                    if (candidate != null)
+                        return "PC_Effect_Display_PassionGain".Translate(candidate.def.label);
+                }
+            }
+
+            // socialOpinion: name the actual closest ally
+            if (socialOpinion != 0 && pawn.MapHeld != null)
+            {
+                string thoughtName = socialOpinion > 0 ? "PC_Thought_SocialBond" : "PC_Thought_SocialConflict";
+                var tDef = DefDatabase<ThoughtDef>.GetNamedSilentFail(thoughtName);
+                int opinionVal = (int)(tDef?.stages?[0]?.baseOpinionOffset ?? socialOpinion);
+                string sign = opinionVal > 0 ? "+" : "";
+
+                var ally = pawn.MapHeld.mapPawns.FreeColonists
+                    .Where(p => p != pawn)
+                    .OrderByDescending(p => pawn.relations?.OpinionOf(p) ?? 0)
+                    .FirstOrDefault();
+
+                string target = ally?.LabelShort ?? "closest ally";
+                string key = opinionVal > 0 ? "PC_Effect_Display_OpinionPos" : "PC_Effect_Display_OpinionNeg";
+                return $"{key.Translate($"{sign}{opinionVal}")} ({target})";
+            }
+
+            return DisplayLabel;
+        }
     }
 }
+

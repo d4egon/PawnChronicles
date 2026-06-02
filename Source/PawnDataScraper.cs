@@ -480,11 +480,13 @@ namespace PawnChronicles
                     ?.FirstOrDefault(p => p != pawn && p.RaceProps.Humanlike)
                     ?? bestFriend;
             }
-            if (bestFriend != null)
-            {
-                Emit(rules, "pc_friend_name", bestFriend.LabelShort);
-                Emit(rules, "pc_friend_opinion", bestOp.ToString());
-            }
+            // Always emit pc_friend_name so grammar never fails on it.
+            // Fall back to colony name if truly no one is found (caravan, solo pawn, etc.).
+            string friendName = bestFriend?.LabelShort
+                ?? pawn.Faction?.Name
+                ?? "the others";
+            Emit(rules, "pc_friend_name", friendName);
+            Emit(rules, "pc_friend_opinion", bestOp.ToString());
             if (worstEnemy != null && worstOp < 0)
             {
                 Emit(rules, "pc_rival_name", worstEnemy.LabelShort);

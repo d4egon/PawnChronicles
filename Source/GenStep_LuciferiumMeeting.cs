@@ -31,7 +31,7 @@ namespace PawnChronicles
         private const string TorchDefName     = "TorchLamp";        // VERIFY: correct vanilla defName?
         private const string FloorDefName     = "Concrete";         // VERIFY: correct TerrainDef defName?
         private const string StuffDefName     = "Steel";
-        private const string WallStuffName    = "Slate";
+        private const string WallStuffName    = "BlocksSlate";
 
         // ── Room dimensions ───────────────────────────────────────────────────
         // Half-extent including walls. Room is (2*Extent+1) x (2*Extent+1).

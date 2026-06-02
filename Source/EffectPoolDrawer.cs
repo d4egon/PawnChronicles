@@ -72,7 +72,7 @@ namespace PawnChronicles
                 var pos = positives[i];
                 var neg = negatives[i];
 
-                string hint = "PC_Effect_HintFormat".Translate(pos.DisplayLabel, neg.DisplayLabel);
+                string hint = "PC_Effect_HintFormat".Translate(pos.DisplayLabelFor(pawn), neg.DisplayLabelFor(pawn));
 
                 choices.Add(new StageChoice
                 {
@@ -156,7 +156,7 @@ namespace PawnChronicles
             }
 
             var neg = costPool[0];
-            string hint = "PC_Effect_HintFormat".Translate(supplyDef.DisplayLabel, neg.DisplayLabel);
+            string hint = "PC_Effect_HintFormat".Translate(supplyDef.DisplayLabelFor(pawn), neg.DisplayLabelFor(pawn));
 
             return new StageChoice
             {

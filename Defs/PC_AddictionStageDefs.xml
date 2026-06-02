@@ -426,6 +426,8 @@
     <isOpening>false</isOpening>
     <isMiddle>true</isMiddle>
     <grammarRoleOverride>addiction_luciferium_crisis</grammarRoleOverride>
+    <onCompleteFactionDef>PC_Faction_LucifersCartel</onCompleteFactionDef>
+    <onCompleteFactionRelationDelta>-200</onCompleteFactionRelationDelta>
   </PawnChronicles.QuestStageDef>
 
   <!-- Stage 12: quest spawns the AncientGarrison site via QuestNode_Root_Site. -->
@@ -450,16 +452,6 @@
     <grammarRoleOverride>addiction_luciferium_resolution</grammarRoleOverride>
   </PawnChronicles.QuestStageDef>
 
-  <!-- Decline single repeating stage -->
-  <PawnChronicles.QuestStageDef>
-    <defName>PC_LucStage_DeclineCycle</defName>
-    <label>The Decline</label>
-    <isOpening>true</isOpening>
-    <isMiddle>false</isMiddle>
-    <isClimax>true</isClimax>
-    <outcomeSetsSuccess>true</outcomeSetsSuccess>
-    <grammarRoleOverride>luciferium_decline_cycle</grammarRoleOverride>
-  </PawnChronicles.QuestStageDef>
 
   <!-- ═══════ CHEMICAL (generic fallback) ══════════════════════════════════ -->
 

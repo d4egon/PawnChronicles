@@ -178,21 +178,6 @@
     </fixedStageSequence>
   </PawnChronicles.PersonalEpicDef>
 
-  <!-- ── Luciferium - The Decline (loop arc) ──────────────────────────────── -->
-  <PawnChronicles.PersonalEpicDef>
-    <defName>PC_Arc_Luciferium_Decline</defName>
-    <label>The Decline</label>
-    <modus>Kindle</modus>
-    <stageCount>1</stageCount>
-    <isLuciferiumDecline>true</isLuciferiumDecline>
-    <successGrammarRole>luciferium_decline_cycle</successGrammarRole>
-    <failureGrammarRole>luciferium_decline_cycle</failureGrammarRole>
-    <redeemedEpithet>Holding Together</redeemedEpithet>
-    <corruptedEpithet>Holding Together</corruptedEpithet>
-    <fixedStageSequence>
-      <li>PC_LucStage_DeclineCycle</li>
-    </fixedStageSequence>
-  </PawnChronicles.PersonalEpicDef>
 
   <!-- ── Chemical (generic fallback) ────────────────────────────────────── -->
   <PawnChronicles.PersonalEpicDef>

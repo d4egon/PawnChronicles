@@ -560,7 +560,7 @@ namespace PawnChronicles
 
             var skill = pawn.skills.GetSkill(target);
             if (skill != null && !skill.TotallyDisabled)
-                skill.Learn(300f, direct: true);
+                skill.Learn(3000f, direct: true);
         }
 
         // Legacy overloads
@@ -586,6 +586,18 @@ namespace PawnChronicles
             _narrativeEpithet        = success ? epic.redeemedEpithet : epic.corruptedEpithet;
             _narrativeEpithetDesc    = epic.label ?? "";
             _narrativeEpithetSuccess = success;
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        // DEV GIZMOS
+        // ─────────────────────────────────────────────────────────────────────
+        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        {
+            if (!DebugSettings.godMode) yield break;
+            if (parent is not Pawn pawn) yield break;
+
+            foreach (var g in PawnChroniclesDebugGizmos.GetGizmos(pawn, this))
+                yield return g;
         }
 
         // ── Debug entry points (called by PawnChroniclesDebugActions) ──────────
@@ -635,7 +647,10 @@ namespace PawnChronicles
             {
                 string signal = PendingSignal;
                 PendingSignal = null;
-                CompleteEpic(signal == "PawnEpic_Success");
+                if (signal == "PawnEpic_StageComplete")
+                    ProgressEpic();
+                else
+                    CompleteEpic(signal == "PawnEpic_Success");
                 return;
             }
 
@@ -946,6 +961,27 @@ namespace PawnChronicles
             try { OnStageResolved?.Invoke(entry, success); }
             catch (Exception ex) { Log.Error($"[PawnChronicles] OnStageResolved handler threw: {ex}"); }
 
+            // Apply faction relation delta if the stage def requests it
+            if (!string.IsNullOrEmpty(entry.stageDefName))
+            {
+                var stageDef = DefDatabase<QuestStageDef>.GetNamedSilentFail(entry.stageDefName);
+                if (stageDef != null
+                    && !string.IsNullOrEmpty(stageDef.onCompleteFactionDef)
+                    && stageDef.onCompleteFactionRelationDelta != 0)
+                {
+                    var faction = Find.FactionManager.AllFactions
+                        .FirstOrDefault(f => f.def.defName == stageDef.onCompleteFactionDef);
+                    if (faction != null)
+                        faction.TryAffectGoodwillWith(
+                            Faction.OfPlayer,
+                            stageDef.onCompleteFactionRelationDelta,
+                            canSendMessage: true,
+                            canSendHostilityLetter: true);
+                    else
+                        Log.Warning($"[PawnChronicles] onCompleteFactionDef '{stageDef.onCompleteFactionDef}' not found.");
+                }
+            }
+
             // Carry the chosen tag forward to bias the next stage selection
             string? preferredTag = (entry.chosenIndex >= 0 && entry.choices != null && entry.choices.Count > entry.chosenIndex)
                 ? entry.choices[entry.chosenIndex].tagDefName
@@ -1126,56 +1162,7 @@ namespace PawnChronicles
             ArcStageEntry entry;
             if (currentEpic.IsFixed)
             {
-                if (isClimax && currentEpic.isLuciferiumDecline)
-                {
-                    // Decline cycle: present escalating consequences as visible choices.
-                    // The player always sees what they're choosing and why.
-                    string declineTier = luciferiumDeclineCycles <= 5  ? "luciferium_decline_mild"
-                                       : luciferiumDeclineCycles <= 14 ? "luciferium_decline_moderate"
-                                       :                                  "luciferium_decline_severe";
-
-                    var choices = EffectPoolDrawer.DrawChoices(
-                        pawn, new[] { declineTier }, count: 3, waitDays: 6f);
-
-                    // All choices immediate - the consequence fires now, arc restarts in 6 days
-                    var sixDays = (int)(6f * 60000f);
-                    foreach (var c in choices)
-                    {
-                        c.conditionKey   = "time";
-                        c.conditionLabel = "PC_Wait_DeclineCycle".Translate();
-                        c.baseline       = Find.TickManager.TicksGame;
-                        c.targetDelta    = sixDays;
-                    }
-
-                    // Cycle 27+: add Sanguophage placeholder choice
-                    if (luciferiumDeclineCycles >= 27)
-                    {
-                        choices.Add(new StageChoice
-                        {
-                            tagDefName     = "",
-                            actionLabel    = "PC_Luciferium_Sanguophage_Label".Translate(),
-                            mechanicalHint = "PC_Luciferium_Sanguophage_Hint".Translate(),
-                            conditionKey   = "time",
-                            conditionLabel = "PC_Wait_DeclineCycle".Translate(),
-                            baseline       = Find.TickManager.TicksGame,
-                            targetDelta    = 0,
-                            effects        = new List<ChoiceEffect>(),
-                            isHardRoad     = true,
-                            isEasyOut      = false
-                        });
-                    }
-
-                    entry = new ArcStageEntry(
-                        title, body, role,
-                        waitConditionLabel: "PC_Wait_ChooseProceed".Translate(),
-                        waitConditionKey:   "",
-                        waitBaselineValue:  0,
-                        waitTargetDelta:    0,
-                        isClimax:           true);
-                    entry.isSkillCheck = false;
-                    entry.choices      = choices;
-                }
-                else if (isClimax)
+                if (isClimax)
                 {
                     // Luciferium climax: "use the serum" vs "accept the end".
                     // Standard addiction climax: hard road (sobriety) vs easy out.
@@ -1203,11 +1190,17 @@ namespace PawnChronicles
                     var (condKey, condLabel, condBaseline, condDelta) =
                         StageWaitCondition.BuildForAddiction(pawn, role);
 
-                    // Stage-level wait condition override (e.g. expedition_cleared for the expedition stage).
+                    // Stage-level wait condition override - each quest stage gets a specific label.
                     if (!string.IsNullOrEmpty(stage?.waitConditionKeyOverride))
                     {
-                        condKey      = stage.waitConditionKeyOverride;
-                        condLabel    = "PC_Wait_ExpeditionReturn".Translate();
+                        condKey = stage.waitConditionKeyOverride;
+                        condLabel = condKey switch
+                        {
+                            "expedition_cleared" => "PC_Wait_ExpeditionQuest".Translate(),
+                            "delving_cleared"    => "PC_Wait_DelvingQuest".Translate(),
+                            "site_cleared"       => "PC_Wait_FacilityQuest".Translate(),
+                            _                    => "PC_Wait_QuestActive".Translate()
+                        };
                         condBaseline = 0;
                         condDelta    = 0;
                     }
@@ -1319,10 +1312,14 @@ namespace PawnChronicles
                 }
                 else if (isClimax)
                 {
-                    // Join only non-empty parts so we never get stacked separator lines
-                    // when body or waitConditionLabel failed to resolve.
+                    // For the luciferium resolution climax, append a clear mechanical summary
+                    // so the player knows what the two choices do before opening Chronicles.
+                    string mechanicalSummary = "";
+                    if (currentEpic?.isLuciferiumArc == true)
+                        mechanicalSummary = $"Open {pawn.LabelShort}'s Chronicles tab to make the final choice.\n\n\"Use the serum\" - the addiction ends. The arc closes in success.\n\"Leave it\" - the serum is not used. The arc closes. The dependency continues.";
+
                     string letterBody = string.Join("\n\n",
-                        new[] { title, body, entry.waitConditionLabel }
+                        new[] { title, body, mechanicalSummary, entry.waitConditionLabel }
                             .Where(s => !string.IsNullOrWhiteSpace(s)));
                     Find.LetterStack.ReceiveLetter(
                         $"{pawn.LabelShort}: the arc reaches its end",

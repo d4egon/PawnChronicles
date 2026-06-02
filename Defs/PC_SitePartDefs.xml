@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!--
-    Luciferium expedition meeting site (Stage 7).
-    A small roofed meeting room generated at the map centre.
-    PC_Cartel_Broker spawns inside with QuestPart_BegForItems active.
-    Player gives 75 silver -> 1 luciferium dropped at colony.
-  -->
-
   <SitePartDef>
     <defName>PC_SitePart_LuciferiumMeeting</defName>
     <label>cartel meeting room</label>
@@ -20,15 +13,28 @@
     <handlesWorldObjectTimeoutInspectString>true</handlesWorldObjectTimeoutInspectString>
   </SitePartDef>
 
-  <!--
-    Linked GenStep: builds the meeting room and spawns the broker inside.
-    Order 700 = after base terrain gen, before pawn scatter.
-  -->
   <GenStepDef>
     <defName>PC_GenStep_LuciferiumMeeting</defName>
     <linkWithSite>PC_SitePart_LuciferiumMeeting</linkWithSite>
     <order>700</order>
     <genStep Class="PawnChronicles.GenStep_LuciferiumMeeting"/>
   </GenStepDef>
+
+  <SitePartDef ParentName="AncientStructureSiteBase">
+    <defName>PC_SitePart_CartelFacility</defName>
+    <label>cartel facility</label>
+    <description>An ancient structure seized by Lucifer's Cartel. Armed personnel are stationed throughout. Intel suggests a healer mech serum is stored inside.</description>
+    <workerClass>PawnChronicles.SitePartWorker_CartelFacility</workerClass>
+    <requiresFaction>true</requiresFaction>
+    <forceExitAndRemoveMapCountdownDurationDays>5</forceExitAndRemoveMapCountdownDurationDays>
+  </SitePartDef>
+
+  <SitePartDef ParentName="AncientStructureSiteBase">
+    <defName>PC_SitePart_LuciferiumStash</defName>
+    <label>luciferium stash</label>
+    <description>An abandoned warehouse rumoured to contain a cache of luciferium. Ancient security systems are still active inside.</description>
+    <workerClass>PawnChronicles.SitePartWorker_LuciferiumStash</workerClass>
+    <forceExitAndRemoveMapCountdownDurationDays>3</forceExitAndRemoveMapCountdownDurationDays>
+  </SitePartDef>
 
 </Defs>

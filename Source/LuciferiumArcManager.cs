@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 using RimWorld;
 using RimWorld.Planet;
@@ -24,9 +25,38 @@ namespace PawnChronicles
     {
         private const string SitePartDefName            = "OpportunitySite_AncientGarrison";
         private const string ExpeditionSitePartDefName  = "OpportunitySite_AncientWarehouse";
+        private const string CartelFactionDefName       = "PC_Faction_LucifersCartel";
+
+        /// <summary>
+        /// Ensures Lucifer's Cartel exists as a world faction. If it failed to generate
+        /// at world gen (e.g. mid-campaign mod install), this generates it on demand so
+        /// the arc can proceed. Returns the faction, or null if the FactionDef is missing.
+        /// </summary>
+        public static Faction EnsureCartelFactionExists()
+        {
+            // Already exists - nothing to do.
+            var existing = Find.FactionManager.AllFactions
+                .FirstOrDefault(f => f.def.defName == CartelFactionDefName);
+            if (existing != null)
+                return existing;
+
+            var factionDef = DefDatabase<FactionDef>.GetNamedSilentFail(CartelFactionDefName);
+            if (factionDef == null)
+            {
+                Log.Error($"[PawnChronicles] EnsureCartelFactionExists: FactionDef '{CartelFactionDefName}' not found.");
+                return null;
+            }
+
+            Log.Warning($"[PawnChronicles] Lucifer's Cartel not found in world - generating now.");
+            var faction = FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms(factionDef));
+            Find.FactionManager.Add(faction);
+            return faction;
+        }
 
         public static void SpawnSite(Pawn pawn, CompPersonalChronicles comp)
         {
+            EnsureCartelFactionExists();
+
             var partDef = DefDatabase<SitePartDef>.GetNamedSilentFail(SitePartDefName);
             if (partDef == null)
             {
@@ -68,12 +98,10 @@ namespace PawnChronicles
 
         /// <summary>
         /// Called when site_cleared fires and the arc advances past the quest stage.
-        /// Delivers a HealerMechSerum to the pawn's home map and closes the facility quest.
+        /// The serum is on the map - no drop pod delivery needed. Just closes the quest.
         /// </summary>
         public static void OnFacilityCleared(Pawn pawn, CompPersonalChronicles comp)
         {
-            DeliverSerum(pawn);
-
             // Close the facility quest if it is still open
             if (comp.activeQuestId >= 0)
             {
@@ -84,34 +112,6 @@ namespace PawnChronicles
             }
         }
 
-        private static void DeliverSerum(Pawn pawn)
-        {
-            var map = pawn?.MapHeld ?? Find.AnyPlayerHomeMap;
-            if (map == null) return;
-
-            var serumDef = DefDatabase<ThingDef>.GetNamedSilentFail("HealerMechSerum");
-            if (serumDef == null)
-            {
-                Log.Warning("[PawnChronicles] LuciferiumArcManager.DeliverSerum: HealerMechSerum not found.");
-                return;
-            }
-
-            var serum    = ThingMaker.MakeThing(serumDef);
-            var dropSpot = DropCellFinder.TradeDropSpot(map);
-
-            DropPodUtility.DropThingsNear(dropSpot, map,
-                new List<Thing> { serum },
-                openDelay: 110,
-                leaveSlag: false,
-                canInstaDropDuringInit: false);
-
-            Find.LetterStack.ReceiveLetter(
-                "PC_Luciferium_SerumDelivered_Label".Translate(),
-                "PC_Luciferium_SerumDelivered_Desc".Translate(pawn?.LabelShort ?? "Unknown"),
-                LetterDefOf.PositiveEvent,
-                new LookTargets(map.Parent));
-        }
-
         /// <summary>
         /// Spawns the expedition site - an ancient warehouse used by the luciferium contact,
         /// roughly 15 tiles from the colony. The pawn must travel there and return home before
@@ -119,6 +119,8 @@ namespace PawnChronicles
         /// </summary>
         public static void SpawnExpeditionSite(Pawn pawn, CompPersonalChronicles comp)
         {
+            EnsureCartelFactionExists();
+
             var partDef = DefDatabase<SitePartDef>.GetNamedSilentFail(ExpeditionSitePartDefName);
             if (partDef == null)
             {

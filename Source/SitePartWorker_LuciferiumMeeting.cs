@@ -25,12 +25,14 @@ namespace PawnChronicles
             base.Notify_GeneratedByQuestGen(part, slate, outExtraDescriptionRules, outExtraDescriptionConstants);
 
             var brokerKind = DefDatabase<PawnKindDef>.GetNamedSilentFail("PC_Cartel_Broker");
-            // Use the site's faction (set by QuestNode_Root_Site to PC_Faction_LucifersCartel)
-            Faction faction = part.site?.Faction;
+
+            // The site is neutral ground (OfAncientsHostile) - the broker's faction
+            // is always the cartel regardless of who owns the tile.
+            Faction faction = LuciferiumArcManager.EnsureCartelFactionExists();
 
             if (brokerKind == null || faction == null)
             {
-                Log.Warning("[PawnChronicles] SitePartWorker_LuciferiumMeeting: missing PawnKindDef or faction.");
+                Log.Warning("[PawnChronicles] SitePartWorker_LuciferiumMeeting: missing broker PawnKindDef or cartel faction.");
                 return;
             }
 

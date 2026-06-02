@@ -10,6 +10,7 @@ namespace PawnChronicles
     /// <summary>
     /// Runs before QuestNode_Root_Site in PC_Quest_LuciferiumFacility.
     /// Sets quest name/description from the narrative grammar and sends the opening letter.
+    /// Uses ThreatBig (red letter) - this is a dangerous assault on the cartel's base.
     /// </summary>
     public class QuestNode_LuciferiumFacilityNarrative : QuestNode
     {
@@ -24,7 +25,8 @@ namespace PawnChronicles
             string pawnName = pawn?.LabelShort ?? "Unknown";
 
             string title = "PC_LucQuest_Facility_Label".Translate(pawnName);
-            string body  = "PC_LucQuest_Facility_Desc".Translate(pawnName);
+            string warning = "PC_LucQuest_Facility_Warning".Translate();
+            string body  = "PC_LucQuest_Facility_Desc".Translate(pawnName) + "\n\n" + warning;
 
             quest.name        = title;
             quest.description = body;
@@ -32,7 +34,7 @@ namespace PawnChronicles
             QuestGen.AddQuestDescriptionRules(new List<Rule> { new Rule_String("questDescription", body) });
 
             string inSignal = slate.Get<string>("inSignal");
-            quest.Letter(LetterDefOf.NeutralEvent, inSignal, text: body, label: title);
+            quest.Letter(LetterDefOf.ThreatBig, inSignal, text: body, label: title);
         }
     }
 
@@ -45,6 +47,8 @@ namespace PawnChronicles
     {
         protected override bool TestRunInt(Slate slate) => true;
 
+        private const string CartelFactionDef = "PC_Faction_LucifersCartel";
+
         protected override void RunInt()
         {
             var slate = QuestGen.slate;
@@ -56,6 +60,15 @@ namespace PawnChronicles
             if (comp == null) return;
 
             comp.lucifSiteTile = site.Tile;
+
+            // Assign Lucifer's Cartel as the owning faction so the site reads as a hostile base.
+            var cartel = Find.FactionManager.AllFactions
+                .FirstOrDefault(f => f.def.defName == CartelFactionDef);
+            if (cartel != null && site.Faction == null)
+                site.SetFaction(cartel);
+            else if (cartel == null)
+                Log.Warning("[PawnChronicles] LuciferiumFacilityRegisterSite: cartel faction not found.");
+
             Log.Message($"[PawnChronicles] LuciferiumFacility: site registered at tile {site.Tile} for {pawn.LabelShort}.");
         }
     }
