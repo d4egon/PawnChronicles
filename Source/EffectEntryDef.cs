@@ -29,7 +29,6 @@ namespace PawnChronicles
         // label is inherited from Def - use that as the choice button text.
 
         /// <summary>One-line flavour consequence shown in the hint block.</summary>
-        [MustTranslate]
         public string consequence = "";
 
         // ── Pool membership ───────────────────────────────────────────────────────
@@ -68,6 +67,9 @@ namespace PawnChronicles
         // that have no corresponding MentalBreakDef
         public string mentalStateDef = "";
 
+        // Apply a memory thought to the pawn (ThoughtDef defName, Thought_Memory class)
+        public string moodThoughtDef = "";
+
         // Incident to fire (IncidentDef defName)
         public string incidentDef = "";
 
@@ -96,6 +98,7 @@ namespace PawnChronicles
             TryApplySocialOpinion(pawn);
             TryApplyMentalBreak(pawn);
             TryApplyMentalState(pawn);
+            TryApplyMoodThought(pawn);
             TryApplyIncident(pawn);
             TryApplySpawnItem(pawn);
             TryApplyHediff(pawn);
@@ -215,6 +218,14 @@ namespace PawnChronicles
                 Log.Message($"[PawnChronicles] Mental break '{mentalBreakDef}' could not start on {pawn.LabelShort} - likely arrival grace period.");
         }
 
+        private void TryApplyMoodThought(Pawn pawn)
+        {
+            if (string.IsNullOrEmpty(moodThoughtDef)) return;
+            var def = DefDatabase<ThoughtDef>.GetNamedSilentFail(moodThoughtDef);
+            if (def == null) { Log.Warning($"[PawnChronicles] EffectEntryDef {defName}: unknown ThoughtDef '{moodThoughtDef}'"); return; }
+            pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(def);
+        }
+
         private void TryApplyMentalState(Pawn pawn)
         {
             if (string.IsNullOrEmpty(mentalStateDef)) return;
@@ -323,6 +334,13 @@ namespace PawnChronicles
                     return "PC_Effect_Display_MentalBreak".Translate();
                 if (!string.IsNullOrEmpty(mentalStateDef))
                     return "PC_Effect_Display_MentalBreak".Translate();
+                if (!string.IsNullOrEmpty(moodThoughtDef))
+                {
+                    var def = DefDatabase<ThoughtDef>.GetNamedSilentFail(moodThoughtDef);
+                    float moodVal = def?.stages?[0]?.baseMoodEffect ?? 0f;
+                    string sign = moodVal > 0 ? "+" : "";
+                    return $"{sign}{(int)moodVal} mood ({def?.label ?? moodThoughtDef}, {(def?.durationDays ?? 0)}d)";
+                }
                 if (!string.IsNullOrEmpty(incidentDef))
                     return "PC_Effect_Display_Incident".Translate();
                 if (!string.IsNullOrEmpty(spawnItemDef))
@@ -340,5 +358,59 @@ namespace PawnChronicles
                 return consequence;
             }
         }
+
+        /// <summary>
+        /// Pawn-specific version of DisplayLabel. Resolves "any passion" to the actual
+        /// skill that would be affected, and "social opinion" to the actual ally name.
+        /// Falls back to DisplayLabel for effects that don't depend on the pawn.
+        /// </summary>
+        public string DisplayLabelFor(Pawn pawn)
+        {
+            if (pawn == null) return DisplayLabel;
+
+            // anyPassion: name the specific skill that would be gained or lost
+            if (anyPassion != 0 && pawn.skills != null)
+            {
+                if (anyPassion < 0)
+                {
+                    var candidate = pawn.skills.skills
+                        .Where(s => !s.TotallyDisabled && s.passion != Passion.None)
+                        .OrderByDescending(s => (int)s.passion)
+                        .FirstOrDefault();
+                    if (candidate != null)
+                        return "PC_Effect_Display_PassionLose".Translate(candidate.def.label);
+                }
+                else
+                {
+                    var candidate = pawn.skills.skills
+                        .Where(s => !s.TotallyDisabled && s.passion != Passion.Major)
+                        .OrderByDescending(s => s.Level)
+                        .FirstOrDefault();
+                    if (candidate != null)
+                        return "PC_Effect_Display_PassionGain".Translate(candidate.def.label);
+                }
+            }
+
+            // socialOpinion: name the actual closest ally
+            if (socialOpinion != 0 && pawn.MapHeld != null)
+            {
+                string thoughtName = socialOpinion > 0 ? "PC_Thought_SocialBond" : "PC_Thought_SocialConflict";
+                var tDef = DefDatabase<ThoughtDef>.GetNamedSilentFail(thoughtName);
+                int opinionVal = (int)(tDef?.stages?[0]?.baseOpinionOffset ?? socialOpinion);
+                string sign = opinionVal > 0 ? "+" : "";
+
+                var ally = pawn.MapHeld.mapPawns.FreeColonists
+                    .Where(p => p != pawn)
+                    .OrderByDescending(p => pawn.relations?.OpinionOf(p) ?? 0)
+                    .FirstOrDefault();
+
+                string target = ally?.LabelShort ?? "closest ally";
+                string key = opinionVal > 0 ? "PC_Effect_Display_OpinionPos" : "PC_Effect_Display_OpinionNeg";
+                return $"{key.Translate($"{sign}{opinionVal}")} ({target})";
+            }
+
+            return DisplayLabel;
+        }
     }
 }
+

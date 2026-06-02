@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!--
-    All signal wiring, site spawning, drop pods, and letter generation
-    is handled entirely inside QuestNode_EpicStage.RunInt() in C#.
-    These XML scripts just invoke that node with the correct role/signal.
-    expireDaysRange gives the player a window before the quest auto-expires.
-  -->
-
   <QuestScriptDef>
     <defName>PC_Quest_EpicStage</defName>
     <expireDaysRange>30~30</expireDaysRange>
@@ -42,6 +35,132 @@
         <li Class="PawnChronicles.QuestNode_EpicStage">
           <signal>PawnEpic_Failure</signal>
           <stageRole>failure</stageRole>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+  <QuestScriptDef>
+    <defName>PC_Quest_LuciferiumExpedition</defName>
+    <autoAccept>true</autoAccept>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="PawnChronicles.QuestNode_LuciferiumExpeditionNarrative" />
+        <li Class="QuestNode_GetMap" />
+        <li Class="QuestNode_SubScript">
+          <def>Util_GetDefaultRewardValueFromPoints</def>
+        </li>
+        <li Class="PawnChronicles.QuestNode_SetCartelFaction" />
+        <li Class="QuestNode_Root_Site">
+          <sitePartDef>PC_SitePart_LuciferiumMeeting</sitePartDef>
+          <distanceFromColonyRange>5~20</distanceFromColonyRange>
+          <desperateIgnoreDistance>true</desperateIgnoreDistance>
+        </li>
+        <li Class="PawnChronicles.QuestNode_LuciferiumExpeditionRegisterSite" />
+        <li Class="PawnChronicles.QuestNode_LuciferiumExpeditionSetupBroker" />
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>1200000</delayTicks>
+          <inSignalDisable>$site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>Contact gone</label>
+                <text>The warehouse was not reached in time. The broker moved on.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+  <QuestScriptDef>
+    <defName>PC_Quest_LuciferiumDelving</defName>
+    <autoAccept>true</autoAccept>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="PawnChronicles.QuestNode_LuciferiumDelvingNarrative" />
+        <li Class="QuestNode_GetMap" />
+        <li Class="QuestNode_SubScript">
+          <def>Util_GetDefaultRewardValueFromPoints</def>
+        </li>
+        <li Class="QuestNode_Root_Site">
+          <sitePartDef>PC_SitePart_LuciferiumStash</sitePartDef>
+          <distanceFromColonyRange>5~25</distanceFromColonyRange>
+          <desperateIgnoreDistance>true</desperateIgnoreDistance>
+        </li>
+        <li Class="PawnChronicles.QuestNode_LuciferiumDelvingRegisterSite" />
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>1800000</delayTicks>
+          <inSignalDisable>$site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>Warehouse lost</label>
+                <text>The warehouse was not reached in time. The cache is gone.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>Warehouse cleared</label>
+                <text>The warehouse has been cleared. Whatever was inside is now yours to keep.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Success</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+  <QuestScriptDef>
+    <defName>PC_Quest_LuciferiumFacility</defName>
+    <autoAccept>true</autoAccept>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="PawnChronicles.QuestNode_LuciferiumFacilityNarrative" />
+        <li Class="QuestNode_GetMap" />
+        <li Class="QuestNode_SubScript">
+          <def>Util_GetDefaultRewardValueFromPoints</def>
+        </li>
+        <li Class="QuestNode_SubScript">
+          <def>Util_SetupAncientStructureCommon</def>
+        </li>
+        <li Class="QuestNode_Root_AncientStructure">
+          <structureMutator>AncientGarrison</structureMutator>
+          <sitePartDef>PC_SitePart_CartelFacility</sitePartDef>
+        </li>
+        <li Class="PawnChronicles.QuestNode_LuciferiumFacilityRegisterSite" />
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>Serum stolen</label>
+                <text>The cartel facility has been cleared. Whatever was taken is yours.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Success</outcome>
+              </li>
+            </nodes>
+          </node>
         </li>
       </nodes>
     </root>

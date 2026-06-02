@@ -586,7 +586,7 @@
     </tagRequirements>
     <successOutcome>
       <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
-      <bestSkillXP>2500</bestSkillXP>
+      <bestSkillXP>25000</bestSkillXP>
       <inspirationDef>Inspired_Creativity</inspirationDef>
       <inspirationChance>0.2</inspirationChance>
     </successOutcome>
@@ -644,8 +644,8 @@
     </tagRequirements>
     <successOutcome>
       <moodThought>PC_Thought_ArcSuccess_Built</moodThought>
-      <skillGains><li><skill>Crafting</skill><xp>3500</xp></li></skillGains>
-      <bestSkillXP>3500</bestSkillXP>
+      <skillGains><li><skill>Crafting</skill><xp>35000</xp></li></skillGains>
+      <bestSkillXP>35000</bestSkillXP>
       <itemDrops><li><thingDef>ComponentIndustrial</thingDef><count>5</count></li></itemDrops>
       <inspirationDef>Inspired_Creativity</inspirationDef>
       <inspirationChance>0.35</inspirationChance>
@@ -670,7 +670,7 @@
     </tagRequirements>
     <successOutcome>
       <moodThought>PC_Thought_ArcSuccess_Answered</moodThought>
-      <skillGains><li><skill>Intellectual</skill><xp>4000</xp></li></skillGains>
+      <skillGains><li><skill>Intellectual</skill><xp>40000</xp></li></skillGains>
       <inspirationDef>Inspired_Creativity</inspirationDef>
       <inspirationChance>0.2</inspirationChance>
     </successOutcome>
@@ -725,8 +725,8 @@
     </tagRequirements>
     <successOutcome>
       <moodThought>PC_Thought_ArcSuccess_Answered</moodThought>
-      <skillGains><li><skill>Intellectual</skill><xp>4200</xp></li></skillGains>
-      <bestSkillXP>4200</bestSkillXP>
+      <skillGains><li><skill>Intellectual</skill><xp>42000</xp></li></skillGains>
+      <bestSkillXP>42000</bestSkillXP>
       <inspirationDef>Inspired_Creativity</inspirationDef>
       <inspirationChance>0.35</inspirationChance>
     </successOutcome>

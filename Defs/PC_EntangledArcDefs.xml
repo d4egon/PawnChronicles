@@ -296,8 +296,8 @@
     <initiatorSuccessOutcome>
       <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
       <skillGains>
-        <li><skill>Melee</skill><xp>18000</xp></li>
-        <li><skill>Shooting</skill><xp>6000</xp></li>
+        <li><skill>Melee</skill><xp>180000</xp></li>
+        <li><skill>Shooting</skill><xp>60000</xp></li>
       </skillGains>
       <inspirationDef>Inspired_Creativity</inspirationDef>
       <inspirationChance>0.23</inspirationChance>
@@ -305,7 +305,7 @@
     <partnerSuccessOutcome>
       <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
       <skillGains>
-        <li><skill>Melee</skill><xp>6000</xp></li>
+        <li><skill>Melee</skill><xp>60000</xp></li>
       </skillGains>
     </partnerSuccessOutcome>
     <initiatorFailureOutcome>
@@ -348,7 +348,7 @@
     <initiatorSuccessOutcome>
       <moodThought>PC_Thought_ArcSuccess_Restored</moodThought>
       <skillGains>
-        <li><skill>Social</skill><xp>18000</xp></li>
+        <li><skill>Social</skill><xp>180000</xp></li>
       </skillGains>
       <inspirationDef>Inspired_Creativity</inspirationDef>
       <inspirationChance>0.45</inspirationChance>
@@ -356,7 +356,7 @@
     <partnerSuccessOutcome>
       <moodThought>PC_Thought_ArcSuccess_Restored</moodThought>
       <skillGains>
-        <li><skill>Social</skill><xp>18000</xp></li>
+        <li><skill>Social</skill><xp>180000</xp></li>
       </skillGains>
       <inspirationDef>Inspired_Creativity</inspirationDef>
       <inspirationChance>0.45</inspirationChance>
@@ -402,14 +402,14 @@
     <initiatorSuccessOutcome>
       <moodThought>PC_Thought_ArcSuccess_Built</moodThought>
       <skillGains>
-        <li><skill>Intellectual</skill><xp>12000</xp></li>
+        <li><skill>Intellectual</skill><xp>120000</xp></li>
       </skillGains>
       <inspirationDef>Inspired_Creativity</inspirationDef>
       <inspirationChance>0.30</inspirationChance>
     </initiatorSuccessOutcome>
     <partnerSuccessOutcome>
       <moodThought>PC_Thought_ArcSuccess_Found</moodThought>
-      <bestSkillXP>6750</bestSkillXP>
+      <bestSkillXP>67500</bestSkillXP>
       <inspirationDef>Inspired_Creativity</inspirationDef>
       <inspirationChance>0.60</inspirationChance>
     </partnerSuccessOutcome>
@@ -441,13 +441,13 @@
     <initiatorSuccessOutcome>
       <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
       <skillGains>
-        <li><skill>Social</skill><xp>18000</xp></li>
+        <li><skill>Social</skill><xp>180000</xp></li>
       </skillGains>
     </initiatorSuccessOutcome>
     <partnerSuccessOutcome>
       <moodThought>PC_Thought_ArcSuccess_Resolved</moodThought>
       <skillGains>
-        <li><skill>Social</skill><xp>18000</xp></li>
+        <li><skill>Social</skill><xp>180000</xp></li>
       </skillGains>
     </partnerSuccessOutcome>
     <initiatorFailureOutcome>

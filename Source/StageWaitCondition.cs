@@ -2,6 +2,7 @@ using System.Linq;
 using Verse;
 using Verse.Grammar;
 using RimWorld;
+using RimWorld.Planet;
 using System.Collections.Generic;
 
 namespace PawnChronicles
@@ -95,8 +96,35 @@ namespace PawnChronicles
                 case "site_cleared":
                 {
                     var comp = pawn.GetComp<CompPersonalChronicles>();
-                    if (comp == null || comp.lucifSiteTile < 0) return true;
+                    if (comp == null) return false;
+                    // Site not yet registered - SpawnSite hasn't run yet, so it cannot be cleared.
+                    if (comp.lucifSiteTile.Equals(default(PlanetTile))) return false;
                     return !Find.WorldObjects.AnyWorldObjectAt(comp.lucifSiteTile);
+                }
+                case "expedition_cleared":
+                {
+                    // Arc advances once the pawn has left home at least once and returned.
+                    // The site-gone check is intentionally omitted: the cartel warehouse is
+                    // non-hostile, so the site never "clears" via combat. The player visits,
+                    // does the exchange or walks out, comes home.
+                    var comp = pawn.GetComp<CompPersonalChronicles>();
+                    if (comp == null) return true;
+
+                    bool onHomeMap = pawn.Map != null && pawn.Map.IsPlayerHome;
+
+                    // Lazily set the departed flag the first time the pawn is away from home.
+                    if (!onHomeMap)
+                        comp.expeditionPawnDeparted = true;
+
+                    return comp.expeditionPawnDeparted && onHomeMap;
+                }
+                case "delving_cleared":
+                {
+                    var comp = pawn.GetComp<CompPersonalChronicles>();
+                    if (comp == null) return false;
+                    // Site not yet registered - cannot be cleared.
+                    if (comp.lucifDelvingTile.Equals(default(PlanetTile))) return false;
+                    return !Find.WorldObjects.AnyWorldObjectAt(comp.lucifDelvingTile);
                 }
             }
 
@@ -184,19 +212,24 @@ namespace PawnChronicles
             string stage = parts.Length > 0 ? parts[parts.Length - 1] : "";
             return stage switch
             {
-                "opening"    => BuildTimeCondition(pawn, 5),
-                "dependency" => BuildTimeCondition(pawn, 5),
-                "social"     => BuildSocialCondition(pawn),
-                "reckoning"  => BuildSocialCondition(pawn),
-                "quest"      => BuildTimeCondition(pawn, 3),
-                "danger"     => ("site_cleared",
-                                 ResolveConditionLabel(pawn, "wait_condition_site_cleared"),
-                                 0, 0),
-                "withdrawal" => BuildWithdrawalCondition(pawn),
-                "crisis"     => ("mood_low",
-                                 ResolveConditionLabel(pawn, "wait_condition_mood_low"),
-                                 0, 0),
-                _            => BuildTimeCondition(pawn, 3)
+                // Standard 6-stage addiction arc stages
+                "opening"          => BuildTimeCondition(pawn, 5),
+                "dependency"       => BuildTimeCondition(pawn, 5),
+                "social"           => BuildSocialCondition(pawn),
+                "withdrawal"       => BuildWithdrawalCondition(pawn),
+                "crisis"           => ("mood_low", ResolveConditionLabel(pawn, "wait_condition_mood_low"), 0, 0),
+                // 13-stage luciferium arc stages
+                "realizing"        => BuildTimeCondition(pawn, 4),
+                "calculation"      => BuildTimeCondition(pawn, 5),
+                "moral_decline"    => BuildSocialCondition(pawn),
+                "devils_advocate"  => BuildTimeCondition(pawn, 4),
+                "expedition"       => BuildTimeCondition(pawn, 5),
+                "delving"          => BuildKillCondition(pawn),
+                "cost"             => BuildInjuredCondition(pawn),
+                "desperation"      => ("withdrawal", ResolveConditionLabel(pawn, "wait_condition_withdrawal"), 0, 1),
+                "quest"            => ("site_cleared", ResolveConditionLabel(pawn, "wait_condition_site_cleared"), 0, 0),
+                "reckoning"        => BuildSocialCondition(pawn),
+                _                  => BuildTimeCondition(pawn, 3)
             };
         }
 
@@ -226,7 +259,7 @@ namespace PawnChronicles
                 {
                     tagDefName     = "",
                     actionLabel    = "PC_Luciferium_EasyOut_Label".Translate(),
-                    mechanicalHint = "PC_Luciferium_EasyOut_Hint".Translate(),
+                    mechanicalHint = "PC_Luciferium_EasyOut_Hint".Translate(pawn.LabelShort),
                     conditionKey   = "time",
                     conditionLabel = "PC_Wait_TakeItNow".Translate(),
                     baseline       = Find.TickManager.TicksGame,
@@ -385,10 +418,11 @@ namespace PawnChronicles
                 "wait_condition_ritual"  => "PC_WaitFallback_Ritual".Translate(name),
                 "wait_condition_tamed"      => "PC_WaitFallback_Tamed".Translate(name),
                 "wait_condition_time"       => "PC_WaitFallback_Time".Translate(name),
-                "wait_condition_withdrawal" => "PC_WaitFallback_Withdrawal".Translate(name),
-                "wait_condition_sobriety"   => "PC_WaitFallback_Sobriety".Translate(name),
-                "wait_condition_mood_low"   => "PC_WaitFallback_MoodLow".Translate(name),
-                _                           => "PC_WaitFallback_Default".Translate(name)
+                "wait_condition_withdrawal"   => "PC_WaitFallback_Withdrawal".Translate(name),
+                "wait_condition_sobriety"     => "PC_WaitFallback_Sobriety".Translate(name),
+                "wait_condition_mood_low"     => "PC_WaitFallback_MoodLow".Translate(name),
+                "wait_condition_site_cleared" => "PC_WaitFallback_SiteCleared".Translate(name),
+                _                             => "PC_WaitFallback_Default".Translate(name)
             };
         }
 

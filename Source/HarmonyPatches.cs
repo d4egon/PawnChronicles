@@ -108,15 +108,27 @@ namespace PawnChronicles
             {
                 if (Find.Maps == null) return;
 
-                // Use ToList() to create a snapshot - prevents "Collection was modified" error
                 foreach (var map in Find.Maps.ToList())
                 {
                     foreach (var pawn in map.mapPawns.FreeColonists.ToList())
                     {
                         var comp = pawn.GetComp<CompPersonalChronicles>();
-                        if (comp == null || comp.hasActiveEpic) continue;
+                        if (comp == null || comp.chroniclesDisabled) continue;
 
-                        comp.EvaluateAndStartEpic();
+                        if (!comp.hasActiveEpic)
+                            comp.EvaluateAndStartEpic();
+
+                        // Retroactive addiction check: if the pawn has an addiction hediff
+                        // but no running arc, start the arc. Covers pawns already addicted
+                        // when this mod was installed or when a save is loaded mid-addiction.
+                        if (!comp.hasActiveEpic && pawn.health?.hediffSet != null)
+                        {
+                            var addiction = pawn.health.hediffSet.hediffs
+                                .OfType<Hediff_Addiction>()
+                                .FirstOrDefault();
+                            if (addiction != null)
+                                comp.TryStartAddictionArc(addiction.def);
+                        }
                     }
                 }
             }, "PawnChronicles_EvaluateOnLoad", false, null);

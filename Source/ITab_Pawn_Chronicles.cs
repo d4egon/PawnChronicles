@@ -654,6 +654,31 @@ namespace PawnChronicles
             Widgets.Label(new Rect(x, y, w, bh), entry.body ?? "");
             y += bh + 16f;
 
+            // ── CHOSEN PATH (grayed out, persists when revisiting past stages) ──
+            if (entry.playerAdvanced && entry.chosenIndex >= 0
+                && entry.choices != null && entry.choices.Count > entry.chosenIndex)
+            {
+                var chosen = entry.choices[entry.chosenIndex];
+                Widgets.DrawLineHorizontal(x, y, w, CR);
+                y += 10f;
+
+                Text.Font = GameFont.Tiny;
+                GUI.color = new Color(0.50f, 0.50f, 0.50f);
+                Widgets.Label(new Rect(x, y, w, 18f), "Chose: " + chosen.actionLabel);
+                y += 18f;
+
+                if (!string.IsNullOrWhiteSpace(chosen.mechanicalHint))
+                {
+                    GUI.color = new Color(0.40f, 0.40f, 0.40f);
+                    float hh = Text.CalcHeight(chosen.mechanicalHint, w - 10f);
+                    Widgets.Label(new Rect(x + 10f, y, w - 10f, hh), chosen.mechanicalHint);
+                    y += hh;
+                }
+                GUI.color = Color.white;
+                Text.Font = GameFont.Small;
+                y += 10f;
+            }
+
             // ── MECHANICAL FAILURE REASON (visible stats) ─────────────────────
             if (entry.stageRole == "failure" && !string.IsNullOrEmpty(entry.mechanicalFailureReason))
             {
@@ -1017,6 +1042,60 @@ namespace PawnChronicles
                         }
                         ty += TagRowH + 2f;
                     }
+                    // ── CHOICE HISTORY - appended inside the same scroll ─────
+                    var resolvedChoices = comp.arcEntries
+                        .Where(e => e.playerAdvanced && e.chosenIndex >= 0
+                                 && e.choices != null && e.choices.Count > e.chosenIndex)
+                        .ToList();
+
+                    if (resolvedChoices.Count > 0)
+                    {
+                        ty += 6f;
+                        GUI.color = new Color(0.45f, 0.45f, 0.45f);
+                        Widgets.DrawLineHorizontal(0f, ty, viewRect.width, CR);
+                        ty += 8f;
+
+                        Text.Font = GameFont.Tiny;
+                        GUI.color = CD;
+                        Widgets.Label(new Rect(6f, ty, viewRect.width - 12f, 16f), "CHOICE HISTORY");
+                        ty += 18f;
+
+                        foreach (var ce in resolvedChoices)
+                        {
+                            var ch = ce.choices![ce.chosenIndex];
+
+                            // Stage label dim
+                            GUI.color = new Color(0.38f, 0.38f, 0.38f);
+                            Widgets.Label(new Rect(6f, ty, viewRect.width - 12f, 14f),
+                                ce.title ?? ce.stageRole);
+                            ty += 14f;
+
+                            // Chose line
+                            GUI.color = new Color(0.55f, 0.55f, 0.55f);
+                            float cl = Text.CalcHeight("  " + ch.actionLabel, viewRect.width - 18f);
+                            Widgets.Label(new Rect(16f, ty, viewRect.width - 18f, cl),
+                                "  " + ch.actionLabel);
+                            ty += cl;
+
+                            // Effects hint
+                            if (!string.IsNullOrWhiteSpace(ch.mechanicalHint))
+                            {
+                                GUI.color = new Color(0.40f, 0.40f, 0.40f);
+                                float hl = Text.CalcHeight("    " + ch.mechanicalHint, viewRect.width - 22f);
+                                Widgets.Label(new Rect(22f, ty, viewRect.width - 24f, hl),
+                                    "    " + ch.mechanicalHint);
+                                ty += hl;
+                            }
+                            ty += 4f;
+                        }
+
+                        GUI.color = Color.white;
+                        Text.Font = GameFont.Small;
+
+                        // Update viewRect height to fit the extra content
+                        viewRect = new Rect(viewRect.x, viewRect.y, viewRect.width, Mathf.Max(ty, viewRect.height));
+                    }
+
                     Widgets.EndScrollView();
                 }
             }

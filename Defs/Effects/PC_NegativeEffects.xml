@@ -19,7 +19,7 @@
     <isPositive>false</isPositive>
     <tags><li>general</li><li>addiction</li></tags>
     <skillLevelDef>Social</skillLevelDef>
-    <skillLevel>-1</skillLevel>
+    <skillLevel>-2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -29,7 +29,7 @@
     <isPositive>false</isPositive>
     <tags><li>general</li><li>dependency</li></tags>
     <skillLevelDef>Medicine</skillLevelDef>
-    <skillLevel>-1</skillLevel>
+    <skillLevel>-2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -39,7 +39,7 @@
     <isPositive>false</isPositive>
     <tags><li>general</li><li>alcohol</li><li>withdrawal</li></tags>
     <skillLevelDef>Intellectual</skillLevelDef>
-    <skillLevel>-1</skillLevel>
+    <skillLevel>-2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -49,7 +49,7 @@
     <isPositive>false</isPositive>
     <tags><li>general</li><li>withdrawal</li><li>alcohol</li></tags>
     <skillLevelDef>Crafting</skillLevelDef>
-    <skillLevel>-1</skillLevel>
+    <skillLevel>-2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -59,7 +59,7 @@
     <isPositive>false</isPositive>
     <tags><li>violence</li><li>duty</li><li>survival</li></tags>
     <skillLevelDef>Melee</skillLevelDef>
-    <skillLevel>-1</skillLevel>
+    <skillLevel>-2</skillLevel>
   </PawnChronicles.EffectEntryDef>
 
   <!-- ── Skill XP losses ────────────────────────────────────────────────── -->
@@ -71,7 +71,7 @@
     <isPositive>false</isPositive>
     <tags><li>general</li><li>social</li><li>crisis</li></tags>
     <skillXpDef>Social</skillXpDef>
-    <skillXP>-6000</skillXP>
+    <skillXP>-60000</skillXP>
   </PawnChronicles.EffectEntryDef>
 
   <PawnChronicles.EffectEntryDef>
@@ -81,7 +81,7 @@
     <isPositive>false</isPositive>
     <tags><li>general</li><li>dependency</li><li>alcohol</li><li>psychite</li></tags>
     <skillXpDef>Intellectual</skillXpDef>
-    <skillXP>-6000</skillXP>
+    <skillXP>-60000</skillXP>
   </PawnChronicles.EffectEntryDef>
 
   <!-- ── Passion losses ─────────────────────────────────────────────────── -->
@@ -233,6 +233,48 @@
     <isPositive>false</isPositive>
     <tags><li>crisis</li><li>underworld</li><li>alcohol</li><li>psychite</li></tags>
     <raidPoints>500</raidPoints>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Luciferium supply costs (paired with PC_Effect_Pos_LuciferiumSupply) ─ -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LucCost_DrawHeat</defName>
+    <label>draw heat from the wrong people (raid incoming)</label>
+    <consequence>draw heat from the wrong people (raid incoming)</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_supply_cost</li></tags>
+    <raidPoints>500</raidPoints>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LucCost_BurnBridge</defName>
+    <label>burn the bridge that got you there (-50 opinion, -3 Social)</label>
+    <consequence>burn the bridge that got you there (-50 opinion, -3 Social)</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_supply_cost</li></tags>
+    <socialOpinion>-50</socialOpinion>
+    <skillLevelDef>Social</skillLevelDef>
+    <skillLevel>-3</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LucCost_LoseControl</defName>
+    <label>lose control and status (berserk, -40 opinion)</label>
+    <consequence>lose control and status (berserk, -40 opinion)</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_supply_cost</li></tags>
+    <mentalStateDef>Berserk</mentalStateDef>
+    <socialOpinion>-40</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_LucCost_PayInFull</defName>
+    <label>pay what it actually costs (raid incoming, -30 mood for 3 days)</label>
+    <consequence>pay what it actually costs (raid incoming, -30 mood for 3 days)</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>luciferium_supply_cost</li></tags>
+    <raidPoints>400</raidPoints>
+    <moodThoughtDef>PC_Thought_LuciferiumDecline</moodThoughtDef>
   </PawnChronicles.EffectEntryDef>
 
 </Defs>

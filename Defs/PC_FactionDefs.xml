@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    LUCIFER'S CARTEL
+    A black market syndicate. Neutral by default. Industrial-spacer tech.
+    Operators use cover names. Settlements don't officially exist.
+    Used by PC_Quest_LuciferiumExpedition as the faction populating the warehouse.
+  -->
+
+  <FactionDef ParentName="OutlanderFactionBase">
+    <defName>PC_Faction_LucifersCartel</defName>
+    
+    <label>Lucifer's Cartel</label>
+    <pawnSingular>operator</pawnSingular>
+    <pawnsPlural>operators</pawnsPlural>
+    <leaderTitle>Handler</leaderTitle>
+
+    <description>A black market syndicate operating under the name Lucifer's Cartel. They move luciferium, restricted weapons, and medical contraband across faction lines with a professionalism that makes them hard to hate and harder to refuse. Their operators use cover names. Their settlements don't officially exist. Their prices are non-negotiable.\n\nThey are not your enemy unless you make them one. The distinction matters less than most people expect.</description>
+
+    <!-- Texture needed: World/WorldObjects/Expanding/PC_LucifersCartel -->
+    <factionIconPath>World/WorldObjects/Expanding/AncientMercenaries</factionIconPath>
+
+    <factionNameMaker>NamerFactionOutlander</factionNameMaker>
+    <settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
+
+    <!-- Lock to cartel culture so operators always generate with the correct names and appearance -->
+    <allowedCultures>
+      <li>PC_Culture_LuciferCartel</li>
+    </allowedCultures>
+
+    <!-- Dark, professional color palette: charcoal / blood-red / cold steel / deep amber -->
+    <colorSpectrum>
+      <li>(0.18, 0.18, 0.20)</li>
+      <li>(0.68, 0.08, 0.08)</li>
+      <li>(0.52, 0.55, 0.60)</li>
+      <li>(0.75, 0.50, 0.06)</li>
+      <li>(0.22, 0.10, 0.30)</li>
+    </colorSpectrum>
+
+    <!-- Neutral - not permanently hostile, can be traded with and allied -->
+    <naturalEnemy>false</naturalEnemy>
+    <permanentEnemy>false</permanentEnemy>
+    <mustStartOneEnemy>false</mustStartOneEnemy>
+    <!-- classicIdeo prevents random ideology generation so Supremacist can never be rolled -->
+    <classicIdeo>true</classicIdeo>
+    <canSiege>true</canSiege>
+    <canStageAttacks>true</canStageAttacks>
+    <canUseAvoidGrid>true</canUseAvoidGrid>
+    <humanlikeFaction>true</humanlikeFaction>
+    <autoFlee>false</autoFlee>
+
+    <techLevel>Industrial</techLevel>
+
+    <!-- They generate settlements but don't spam the map -->
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <maxCountAtGameStart>2</maxCountAtGameStart>
+
+    <!-- Outlander / offworld backstories - cosmopolitan criminal class -->
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>PC_LuciferCartel</li>
+        </categories>
+        <commonality>10</commonality>
+      </li>
+      <li>
+        <categories>
+          <li>Offworld</li>
+          <li>Outlander</li>
+        </categories>
+        <commonality>0.1</commonality>
+      </li>
+    </backstoryFilters>
+
+    <!-- Mixed xenotype pool - they recruit from everywhere -->
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <Baseliner>0.55</Baseliner>
+        <Hussar>0.12</Hussar>
+        <Genie>0.08</Genie>
+        <Waster>0.06</Waster>
+        <Pigskin>0.05</Pigskin>
+        <Neanderthal>0.04</Neanderthal>
+        <Yttakin>0.04</Yttakin>
+        <Impid>0.03</Impid>
+        <Starjack MayRequire="Ludeon.RimWorld.Odyssey">0.03</Starjack>
+      </xenotypeChances>
+    </xenotypeSet>
+
+    <!-- No apparel precepts - they dress in whatever works -->
+    <disallowedPrecepts>
+      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Strong_Subordinate</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Soft_Subordinate</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Male_Mandatory</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_Mandatory</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Male_CoveringAnythingButGroinDisapproved</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_CoveringAnythingButGroinDisapproved</li>
+    </disallowedPrecepts>
+
+    <pawnGroupMakers Inherit="False">
+
+      <!-- ── COMBAT: standard ops - operators with marksmen and enforcers ── -->
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>100</commonality>
+        <options>
+          <PC_Cartel_Operator>10</PC_Cartel_Operator>
+          <PC_Cartel_Enforcer>5</PC_Cartel_Enforcer>
+          <PC_Cartel_Marksman>6</PC_Cartel_Marksman>
+          <PC_Cartel_Handler>3</PC_Cartel_Handler>
+        </options>
+      </li>
+
+      <!-- ── COMBAT: enforcement squad - enforcers only, close-quarters ── -->
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>25</commonality>
+        <disallowedStrategies>
+          <li>Siege</li>
+        </disallowedStrategies>
+        <options>
+          <PC_Cartel_Enforcer>10</PC_Cartel_Enforcer>
+          <PC_Cartel_Handler>3</PC_Cartel_Handler>
+        </options>
+      </li>
+
+      <!-- ── COMBAT: precision team - marksmen led by a handler ── -->
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>15</commonality>
+        <options>
+          <PC_Cartel_Marksman>10</PC_Cartel_Marksman>
+          <PC_Cartel_Operator>4</PC_Cartel_Operator>
+          <PC_Cartel_Handler>2</PC_Cartel_Handler>
+        </options>
+      </li>
+
+      <!-- ── PEACEFUL: civilians and light operatives ── -->
+      <li>
+        <kindDef>Peaceful</kindDef>
+        <options>
+          <PC_Cartel_Civilian>10</PC_Cartel_Civilian>
+          <PC_Cartel_Operator>5</PC_Cartel_Operator>
+        </options>
+      </li>
+
+      <!-- ── TRADER: broker caravan, heavily guarded ── -->
+      <li>
+        <kindDef>Trader</kindDef>
+        <traders>
+          <PC_Cartel_Broker>1</PC_Cartel_Broker>
+        </traders>
+        <carriers>
+          <Elephant>1</Elephant>
+        </carriers>
+        <guards>
+          <PC_Cartel_Operator>8</PC_Cartel_Operator>
+          <PC_Cartel_Enforcer>4</PC_Cartel_Enforcer>
+          <PC_Cartel_Marksman>3</PC_Cartel_Marksman>
+          <PC_Cartel_Handler>2</PC_Cartel_Handler>
+          <Warg>4</Warg>
+        </guards>
+      </li>
+
+      <!-- ── SETTLEMENT: full professional roster ── -->
+      <li>
+        <kindDef>Settlement</kindDef>
+        <options>
+          <PC_Cartel_Civilian>5</PC_Cartel_Civilian>
+          <PC_Cartel_Operator>10</PC_Cartel_Operator>
+          <PC_Cartel_Enforcer>6</PC_Cartel_Enforcer>
+          <PC_Cartel_Marksman>8</PC_Cartel_Marksman>
+          <PC_Cartel_Handler>5</PC_Cartel_Handler>
+        </options>
+      </li>
+
+      <li MayRequire="Ludeon.RimWorld.Ideology">
+        <kindDef>Miners</kindDef>
+        <commonality>1</commonality>
+        <options>
+          <Miner>1</Miner>
+        </options>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">
+        <kindDef>Hunters</kindDef>
+        <commonality>1</commonality>
+        <options>
+          <Hunter>1</Hunter>
+        </options>
+      </li>
+
+    </pawnGroupMakers>
+  </FactionDef>
+
+
+  <!--
+    LUCIFER'S CARTEL - HOSTILE GARRISON VARIANT
+    Permanent enemy. Never spawns on the world map. Used exclusively by
+    SitePartWorker_CartelFacility so the garrison defenders are always hostile
+    regardless of the player's standing with the main cartel faction.
+    Identical combat roster to PC_Faction_LucifersCartel.
+  -->
+
+  <FactionDef ParentName="OutlanderFactionBase">
+    <defName>PC_Faction_LucifersCartelHostile</defName>
+
+    <label>Lucifer's Cartel</label>
+    <pawnSingular>operator</pawnSingular>
+    <pawnsPlural>operators</pawnsPlural>
+    <leaderTitle>Handler</leaderTitle>
+
+    <description>Armed operators of Lucifer's Cartel holding a secure facility.</description>
+
+    <factionIconPath>World/WorldObjects/Expanding/AncientMercenaries</factionIconPath>
+    <factionNameMaker>NamerFactionOutlander</factionNameMaker>
+
+    <allowedCultures>
+      <li>PC_Culture_LuciferCartel</li>
+    </allowedCultures>
+
+    <colorSpectrum>
+      <li>(0.18, 0.18, 0.20)</li>
+      <li>(0.68, 0.08, 0.08)</li>
+      <li>(0.52, 0.55, 0.60)</li>
+      <li>(0.75, 0.50, 0.06)</li>
+      <li>(0.22, 0.10, 0.30)</li>
+    </colorSpectrum>
+
+    <!-- Always hostile - this is what makes them fight on sight -->
+    <naturalEnemy>true</naturalEnemy>
+    <permanentEnemy>true</permanentEnemy>
+    <mustStartOneEnemy>false</mustStartOneEnemy>
+
+    <!-- Always instantiated but never spawns settlements - like the Ancients faction -->
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <maxCountAtGameStart>1</maxCountAtGameStart>
+    <canMakeRandomly>false</canMakeRandomly>
+    <hidden>true</hidden>
+
+    <classicIdeo>true</classicIdeo>
+    <canSiege>false</canSiege>
+    <canStageAttacks>false</canStageAttacks>
+    <canUseAvoidGrid>true</canUseAvoidGrid>
+    <humanlikeFaction>true</humanlikeFaction>
+    <autoFlee>false</autoFlee>
+    <techLevel>Industrial</techLevel>
+
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>PC_LuciferCartel</li>
+        </categories>
+        <commonality>10</commonality>
+      </li>
+      <li>
+        <categories>
+          <li>Offworld</li>
+          <li>Outlander</li>
+        </categories>
+        <commonality>0.1</commonality>
+      </li>
+    </backstoryFilters>
+
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <Baseliner>0.55</Baseliner>
+        <Hussar>0.12</Hussar>
+        <Genie>0.08</Genie>
+        <Waster>0.06</Waster>
+        <Pigskin>0.05</Pigskin>
+        <Neanderthal>0.04</Neanderthal>
+        <Yttakin>0.04</Yttakin>
+        <Impid>0.03</Impid>
+        <Starjack MayRequire="Ludeon.RimWorld.Odyssey">0.03</Starjack>
+      </xenotypeChances>
+    </xenotypeSet>
+
+    <disallowedPrecepts>
+      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Strong_Subordinate</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">ApparelDesired_Soft_Subordinate</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Male_Mandatory</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_Mandatory</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Male_CoveringAnythingButGroinDisapproved</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_CoveringAnythingButGroinDisapproved</li>
+    </disallowedPrecepts>
+
+    <pawnGroupMakers Inherit="False">
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>100</commonality>
+        <options>
+          <PC_Cartel_Operator>10</PC_Cartel_Operator>
+          <PC_Cartel_Enforcer>5</PC_Cartel_Enforcer>
+          <PC_Cartel_Marksman>6</PC_Cartel_Marksman>
+          <PC_Cartel_Handler>3</PC_Cartel_Handler>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>25</commonality>
+        <options>
+          <PC_Cartel_Enforcer>10</PC_Cartel_Enforcer>
+          <PC_Cartel_Handler>3</PC_Cartel_Handler>
+        </options>
+      </li>
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>15</commonality>
+        <options>
+          <PC_Cartel_Marksman>10</PC_Cartel_Marksman>
+          <PC_Cartel_Operator>4</PC_Cartel_Operator>
+          <PC_Cartel_Handler>2</PC_Cartel_Handler>
+        </options>
+      </li>
+    </pawnGroupMakers>
+  </FactionDef>
+
+</Defs>

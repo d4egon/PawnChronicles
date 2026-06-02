@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Lucifer's Cartel pawn name generator.
+    r_name is the key the pawnNameMaker system reads.
+    Full names - cover identities mixed with chosen operator aliases.
+  -->
+
+  <RulePackDef>
+    <defName>PC_NamerPawn_LuciferCartel</defName>
+    <rulePack>
+      <rulesStrings>
+
+        <!-- Cover names - deliberately ordinary, high weight -->
+        <li>r_name(p=3)->John Smith</li>
+        <li>r_name(p=3)->John Doe</li>
+        <li>r_name(p=3)->Jane Doe</li>
+        <li>r_name(p=3)->Richard Roe</li>
+        <li>r_name(p=3)->Jane Smith</li>
+        <li>r_name(p=3)->Robert Brown</li>
+        <li>r_name(p=3)->Michael Johnson</li>
+        <li>r_name(p=3)->David Williams</li>
+        <li>r_name(p=3)->James Anderson</li>
+        <li>r_name(p=3)->William Taylor</li>
+        <li>r_name(p=3)->Thomas Moore</li>
+        <li>r_name(p=3)->Charles Martin</li>
+        <li>r_name(p=3)->Daniel Clark</li>
+        <li>r_name(p=3)->Matthew Lewis</li>
+        <li>r_name(p=3)->Anthony Walker</li>
+        <li>r_name(p=3)->Christopher Hall</li>
+        <li>r_name(p=3)->Andrew Young</li>
+        <li>r_name(p=3)->Joseph King</li>
+        <li>r_name(p=3)->Ryan Scott</li>
+        <li>r_name(p=3)->Kevin Green</li>
+        <li>r_name(p=3)->George Harris</li>
+        <li>r_name(p=3)->Mark Davis</li>
+        <li>r_name(p=3)->Paul Wilson</li>
+        <li>r_name(p=3)->Steven Thomas</li>
+        <li>r_name(p=3)->Brian White</li>
+        <li>r_name(p=3)->Kenneth Jackson</li>
+        <li>r_name(p=3)->Donald Lee</li>
+        <li>r_name(p=3)->Edward Harris</li>
+        <li>r_name(p=3)->Ronald Martin</li>
+        <li>r_name(p=3)->Timothy Thompson</li>
+        <li>r_name(p=3)->Mary Johnson</li>
+        <li>r_name(p=3)->Linda Williams</li>
+        <li>r_name(p=3)->Barbara Jones</li>
+        <li>r_name(p=3)->Susan Brown</li>
+        <li>r_name(p=3)->Karen Davis</li>
+        <li>r_name(p=3)->Nancy Wilson</li>
+        <li>r_name(p=3)->Betty Moore</li>
+        <li>r_name(p=3)->Margaret Taylor</li>
+        <li>r_name(p=3)->Sandra Anderson</li>
+        <li>r_name(p=3)->Dorothy Thomas</li>
+
+        <!-- Operator aliases - chosen, harder -->
+        <li>r_name->Dick Tracy</li>
+        <li>r_name->Jack Steele</li>
+        <li>r_name->Max Hunter</li>
+        <li>r_name->Sam Archer</li>
+        <li>r_name->Frank Morgan</li>
+        <li>r_name->Ray Donovan</li>
+        <li>r_name->Nick Steele</li>
+        <li>r_name->Cole Bennett</li>
+        <li>r_name->Blake Carson</li>
+        <li>r_name->Vince Harlan</li>
+        <li>r_name->Alan Cross</li>
+        <li>r_name->Derek Vance</li>
+        <li>r_name->Marcus Reed</li>
+        <li>r_name->Victor Kane</li>
+        <li>r_name->Lucas Drake</li>
+        <li>r_name->Ethan Wolfe</li>
+        <li>r_name->Ryan Black</li>
+        <li>r_name->Jason Crowe</li>
+        <li>r_name->Scott Harlan</li>
+        <li>r_name->Paul Maddox</li>
+        <li>r_name->Grant Hollis</li>
+        <li>r_name->Wade Cortez</li>
+        <li>r_name->Leon Marsh</li>
+        <li>r_name->Clay Rourke</li>
+        <li>r_name->Holt Brennan</li>
+        <li>r_name->Cade Mercer</li>
+        <li>r_name->Rex Colton</li>
+        <li>r_name->Nate Forde</li>
+        <li>r_name->Trey Novak</li>
+        <li>r_name->Dean Calloway</li>
+        <li>r_name->Miles Garrett</li>
+        <li>r_name->Owen Briggs</li>
+        <li>r_name->Kurt Ashford</li>
+        <li>r_name->Reid Sloane</li>
+        <li>r_name->Bram Holden</li>
+        <li>r_name->Cord Wilder</li>
+        <li>r_name->Ash Fallon</li>
+        <li>r_name->Tate Drummond</li>
+        <li>r_name->Zane Beckett</li>
+        <li>r_name->Flynn Cutter</li>
+
+        <!-- Female operators -->
+        <li>r_name->Jane Black</li>
+        <li>r_name->Sarah Kane</li>
+        <li>r_name->Emily Cross</li>
+        <li>r_name->Anna Reed</li>
+        <li>r_name->Laura Vance</li>
+        <li>r_name->Rachel Stone</li>
+        <li>r_name->Sophia Drake</li>
+        <li>r_name->Olivia Wolfe</li>
+        <li>r_name->Mia Harper</li>
+        <li>r_name->Elena Voss</li>
+        <li>r_name->Cara Hollis</li>
+        <li>r_name->Nora Beckett</li>
+        <li>r_name->Jade Cutter</li>
+        <li>r_name->Vera Marsh</li>
+        <li>r_name->Quinn Rourke</li>
+        <li>r_name->Lexa Colton</li>
+        <li>r_name->Blair Garrett</li>
+        <li>r_name->Skye Ashford</li>
+        <li>r_name->Dana Wilder</li>
+        <li>r_name->Tara Sloane</li>
+
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+
+  <!--
+    Lucifer's Cartel culture.
+    Locks the faction to this name generator and appearance style.
+  -->
+
+  <CultureDef>
+    <defName>PC_Culture_LuciferCartel</defName>
+    <label>cartel</label>
+    <description>The operational culture of Lucifer's Cartel. Controlled, professional, and deliberately unremarkable until they aren't.</description>
+    <pawnNameMaker>PC_NamerPawn_LuciferCartel</pawnNameMaker>
+    <ideoNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerIdeoKriminul</ideoNameMaker>
+    <deityNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerDeityRustican</deityNameMaker>
+    <leaderTitleMaker MayRequire="Ludeon.RimWorld.Ideology">LeaderTitleMaker_Kriminul</leaderTitleMaker>
+    <festivalNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerFestivalKriminul</festivalNameMaker>
+    <allowedPlaceTags>
+      <li>OriginSpacer</li>
+    </allowedPlaceTags>
+    <iconPath>World/WorldObjects/Expanding/AncientMercenaries</iconPath>
+    <styleItemTags>
+      <li>
+        <tag>Urban</tag>
+        <baseWeight>1</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+      <li>
+        <tag>NoBeard</tag>
+        <baseWeight>6</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+      <li>
+        <tag>BeardUrban</tag>
+        <baseWeight>0.3</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+      <li>
+        <tag>NoTattoo</tag>
+        <baseWeight>1</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+      <li>
+        <tag>TattooFacePunk</tag>
+        <baseWeight>0.2</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+      <li>
+        <tag>TattooBodyPunk</tag>
+        <baseWeight>0.4</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+    </styleItemTags>
+  </CultureDef>
+
+</Defs>

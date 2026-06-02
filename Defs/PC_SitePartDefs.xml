@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <SitePartDef>
+    <defName>PC_SitePart_LuciferiumMeeting</defName>
+    <label>cartel meeting room</label>
+    <description>A secured meeting location prepared by Lucifer's Cartel. A broker is waiting inside.</description>
+    <workerClass>PawnChronicles.SitePartWorker_LuciferiumMeeting</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/AncientMercenaries</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>6</forceExitAndRemoveMapCountdownDurationDays>
+    <requiresFaction>true</requiresFaction>
+    <handlesWorldObjectTimeoutInspectString>true</handlesWorldObjectTimeoutInspectString>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>PC_GenStep_LuciferiumMeeting</defName>
+    <linkWithSite>PC_SitePart_LuciferiumMeeting</linkWithSite>
+    <order>700</order>
+    <genStep Class="PawnChronicles.GenStep_LuciferiumMeeting"/>
+  </GenStepDef>
+
+  <SitePartDef ParentName="AncientStructureSiteBase">
+    <defName>PC_SitePart_CartelFacility</defName>
+    <label>cartel facility</label>
+    <description>An ancient structure seized by Lucifer's Cartel. Armed personnel are stationed throughout. Intel suggests a healer mech serum is stored inside.</description>
+    <workerClass>PawnChronicles.SitePartWorker_CartelFacility</workerClass>
+    <requiresFaction>true</requiresFaction>
+    <forceExitAndRemoveMapCountdownDurationDays>5</forceExitAndRemoveMapCountdownDurationDays>
+  </SitePartDef>
+
+  <SitePartDef ParentName="AncientStructureSiteBase">
+    <defName>PC_SitePart_LuciferiumStash</defName>
+    <label>luciferium stash</label>
+    <description>An abandoned warehouse rumoured to contain a cache of luciferium. Ancient security systems are still active inside.</description>
+    <workerClass>PawnChronicles.SitePartWorker_LuciferiumStash</workerClass>
+    <forceExitAndRemoveMapCountdownDurationDays>3</forceExitAndRemoveMapCountdownDurationDays>
+  </SitePartDef>
+
+</Defs>
