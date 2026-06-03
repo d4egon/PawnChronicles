@@ -3,7 +3,17 @@ PawnChronicles — Changelog
 
 [Unreleased]
 ------------
+BALANCING
+  - Added various balancing changes across the board on NarrativeTagScoring.
+  - Traumer has had the amount of scoring gained from permanent injuries reduced abit
+  - Heatstroke severities removed from Trauma -> inserted into Survival instead.
+  - Especially notable is the survival which has recieved scoring for malnutrition,
+    bloodloss, hypothermia and heatstroke hediff severities.
+
 ADDED
+  - Luciferium addiction arc: 13 stages, 3 world quests, dealing with and fighting
+    new faction Lucifers Cartel - black dressed, high combat skilled faction.
+    Possible outcome is to gain a healer mech to save yourself from the addiction.
   - Addiction arc system: 7 dedicated arcs (alcohol, ambrosia, go-juice, psychite,
     wake-up, smokeleaf, chemical fallback). Each arc is a 6-stage fixed sequence
     triggered when a colonist gains the matching addiction hediff. Successful

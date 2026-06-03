@@ -20,7 +20,7 @@ namespace PawnChronicles
         // ─────────────────────────────────────────────────────────────────────
         // SAVE VERSIONING
         // ─────────────────────────────────────────────────────────────────────
-        private const int CurrentSaveVersion = 4;
+        private const int CurrentSaveVersion = 5;
         private int _saveVersion = 0;
 
         // One-time migration log - static so it fires once per game session,
@@ -98,6 +98,8 @@ namespace PawnChronicles
         public static long PeakTickUs  = 0;
 
         public string? PendingSignal = null;
+        /// <summary>Skill summary from the last completed arc outcome. Used when archiving to completedArcHistory.</summary>
+        private string _lastOutcomeSkillSummary = "";
         public int activeQuestId = -1;
         /// <summary>World map tile of the luciferium quest site (ancient garrison, stage 12).</summary>
         public PlanetTile lucifSiteTile = default;
@@ -116,6 +118,15 @@ namespace PawnChronicles
         private bool _pendingRetryClimaxResolved = false; // true = retry was triggered post-skill-check
 
         private List<string> completedEpicDefNames = new();
+
+        /// <summary>Archived completed arc entries for history display in the Chronicles tab.</summary>
+        public List<CompletedArcRecord> completedArcHistory = new();
+
+        /// <summary>
+        /// Running total of XP applied to each skill from arc outcomes.
+        /// Key = SkillDef.defName, Value = cumulative XP applied.
+        /// </summary>
+        public Dictionary<string, int> accumulatedSkillXP = new();
 
         /// <summary>
         /// The tagDefName picked at the opening (seed) stage.
@@ -294,6 +305,15 @@ namespace PawnChronicles
                 Scribe_Values.Look(ref _firstSpawnTick, "firstSpawnTick", -1);
             }
 
+            // Completed arc history + accumulated stats (version 5+)
+            if (_saveVersion >= 5)
+            {
+                try { Scribe_Collections.Look(ref completedArcHistory, "completedArcHistory", LookMode.Deep); }
+                catch { completedArcHistory = null; }
+                Scribe_Collections.Look(ref accumulatedSkillXP, "accumulatedSkillXP",
+                    LookMode.Value, LookMode.Value);
+            }
+
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 completedEpicDefNames ??= new List<string>();
@@ -302,6 +322,8 @@ namespace PawnChronicles
                 _chronicleEntries     ??= new List<string>();
                 _tagCooldowns         ??= new Dictionary<string, int>();
                 activeEmbers          ??= new List<ActiveEmber>();
+                completedArcHistory   ??= new List<CompletedArcRecord>();
+                accumulatedSkillXP    ??= new Dictionary<string, int>();
 
                 // ── Migration ──────────────────────────────────────────────
                 // v0 -> v2: tag cooldowns didn't exist; just initialise empty.
@@ -583,7 +605,52 @@ namespace PawnChronicles
             PawnNarrativeProfile profile, string pathTag)
         {
             if (epic == null) return;
-            _narrativeEpithet        = success ? epic.redeemedEpithet : epic.corruptedEpithet;
+
+            // Dynamic prefix+noun system: if the arc defines arcTitleNoun,
+            // resolve a random prefix from PC_ArcTitlePrefixes and compose the title.
+            if (!string.IsNullOrEmpty(epic.arcTitleNoun))
+            {
+                var pack = DefDatabase<RulePackDef>.GetNamedSilentFail("PC_ArcTitlePrefixes");
+                if (pack != null)
+                {
+                    string ruleKey = success ? "successPrefix" : "failurePrefix";
+                    var req = new Verse.Grammar.GrammarRequest();
+                    req.Rules.AddRange(pack.RulesImmediate);
+                    string prefix = Verse.Grammar.GrammarResolver.Resolve(ruleKey, req, null, false);
+
+                    // Try to resolve arcTitleNoun as a grammar rule key for dynamic noun pools.
+                    // Falls back to the literal string if no matching rule exists in the pack.
+                    string noun = Verse.Grammar.GrammarResolver.Resolve(epic.arcTitleNoun, req, null, false);
+                    if (string.IsNullOrEmpty(noun) || noun == epic.arcTitleNoun)
+                        noun = epic.arcTitleNoun;
+
+                    string title = (string.IsNullOrEmpty(prefix) || prefix == "NONE") ? noun : $"{prefix} {noun}";
+
+                    if (epic.arcUseSuffix)
+                    {
+                        // Use outcome-specific suffix pool if defined, fall back to shared titleSuffix.
+                        string suffixKey = success ? "successSuffix" : "failureSuffix";
+                        string suffix = Verse.Grammar.GrammarResolver.Resolve(suffixKey, req, null, false);
+                        if (string.IsNullOrEmpty(suffix) || suffix == suffixKey)
+                            suffix = Verse.Grammar.GrammarResolver.Resolve("titleSuffix", req, null, false);
+                        if (!string.IsNullOrEmpty(suffix) && suffix != "NONE")
+                            title = $"{title} {suffix}";
+                    }
+
+                    _narrativeEpithet = title;
+                }
+                else
+                {
+                    // Pack missing - fall back to static epithets
+                    _narrativeEpithet = success ? epic.redeemedEpithet : epic.corruptedEpithet;
+                    Log.Warning("[PawnChronicles] PC_ArcTitlePrefixes RulePackDef not found - falling back to static epithet.");
+                }
+            }
+            else
+            {
+                _narrativeEpithet = success ? epic.redeemedEpithet : epic.corruptedEpithet;
+            }
+
             _narrativeEpithetDesc    = epic.label ?? "";
             _narrativeEpithetSuccess = success;
         }
@@ -1164,11 +1231,35 @@ namespace PawnChronicles
             {
                 if (isClimax)
                 {
+                    // "To be continued" climax: single close button, resolves immediately as success.
                     // Luciferium climax: "use the serum" vs "accept the end".
                     // Standard addiction climax: hard road (sobriety) vs easy out.
-                    var choices = currentEpic.isLuciferiumArc
-                        ? StageWaitCondition.BuildLuciferiumClimaxDoors(pawn)
-                        : StageWaitCondition.BuildAddictionClimaxDoors(pawn);
+                    List<StageChoice> choices;
+                    if (stage.isToBeContinued)
+                    {
+                        choices = new List<StageChoice>
+                        {
+                            new StageChoice
+                            {
+                                tagDefName     = "",
+                                actionLabel    = "PC_Luc_CloseArc".Translate(),
+                                mechanicalHint = "",
+                                conditionKey   = "time",
+                                conditionLabel = "PC_Luc_CloseArc".Translate(),
+                                baseline       = Find.TickManager.TicksGame,
+                                targetDelta    = 0,
+                                effects        = new List<ChoiceEffect>(),
+                                isHardRoad     = true,
+                                isEasyOut      = false
+                            }
+                        };
+                    }
+                    else
+                    {
+                        choices = currentEpic.isLuciferiumArc
+                            ? StageWaitCondition.BuildLuciferiumClimaxDoors(pawn)
+                            : StageWaitCondition.BuildAddictionClimaxDoors(pawn);
+                    }
                     entry = new ArcStageEntry(
                         title, body, role,
                         waitConditionLabel: "PC_Wait_ChoosePathForward".Translate(),
@@ -1388,6 +1479,53 @@ namespace PawnChronicles
             }
         }
 
+        /// <summary>
+        /// Adds the skill XP from an outcome to the running accumulated total.
+        /// Returns a pre-formatted summary string, e.g. "Social +20000 xp, Melee +20000 xp".
+        /// Call this after EpicOutcomeApplicator.Apply so numbers match what was actually applied.
+        /// </summary>
+        public string AccumulateStats(EpicOutcome outcome, bool success)
+        {
+            if (outcome == null) return "";
+
+            var parts = new System.Collections.Generic.List<string>();
+
+            if (outcome.skillGains != null)
+            {
+                foreach (var gain in outcome.skillGains)
+                {
+                    if (string.IsNullOrEmpty(gain.skill) || gain.xp <= 0) continue;
+                    var def = DefDatabase<SkillDef>.GetNamedSilentFail(gain.skill);
+                    if (def == null) continue;
+
+                    if (!accumulatedSkillXP.ContainsKey(gain.skill))
+                        accumulatedSkillXP[gain.skill] = 0;
+                    accumulatedSkillXP[gain.skill] += gain.xp;
+
+                    parts.Add($"{def.label.CapitalizeFirst()} +{gain.xp:N0} xp");
+                }
+            }
+
+            if (outcome.bestSkillXP > 0)
+            {
+                var pawn = parent as Pawn;
+                var best = pawn?.skills?.skills
+                    .Where(s => !s.TotallyDisabled)
+                    .OrderByDescending(s => s.Level)
+                    .FirstOrDefault();
+                if (best != null)
+                {
+                    if (!accumulatedSkillXP.ContainsKey(best.def.defName))
+                        accumulatedSkillXP[best.def.defName] = 0;
+                    accumulatedSkillXP[best.def.defName] += outcome.bestSkillXP;
+
+                    parts.Add($"{best.def.label.CapitalizeFirst()} +{outcome.bestSkillXP:N0} xp (best)");
+                }
+            }
+
+            return parts.Count > 0 ? string.Join(", ", parts) : "";
+        }
+
         public void CompleteEpic(bool success)
         {
             if (currentEpic == null) return;
@@ -1410,11 +1548,16 @@ namespace PawnChronicles
             currentProfile?.ApplyStageOutcome(success, lastStage);
 
             // Apply mechanical outcome (mood, items, hediffs, skills)
+            string outcomeSkillSummary = "";
             if (lastStage != null)
             {
                 var outcome = success ? lastStage.successOutcome : lastStage.failureOutcome;
                 if (outcome != null)
+                {
                     EpicOutcomeApplicator.Apply(pawn, outcome, success);
+                    outcomeSkillSummary = AccumulateStats(outcome, success);
+                    _lastOutcomeSkillSummary = outcomeSkillSummary;
+                }
             }
 
             // Luciferium arc: does NOT auto-cure addiction. Healing requires HealerMechSerum used in gameplay.
@@ -1436,6 +1579,16 @@ namespace PawnChronicles
                             pawn, MessageTypeDefOf.PositiveEvent, true);
                     }
                 }
+            }
+
+            // Archive to history immediately on completion
+            if (arcEntries.Count > 0)
+            {
+                string label = epic.label ?? epic.defName;
+                var record = new CompletedArcRecord(
+                    label, epic.defName, success,
+                    Find.TickManager?.TicksGame ?? 0, _lastOutcomeSkillSummary, arcEntries);
+                completedArcHistory.Add(record);
             }
 
             // Capture BEFORE clearing

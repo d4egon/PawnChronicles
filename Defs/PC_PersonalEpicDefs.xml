@@ -361,6 +361,8 @@
     <stageCount>3</stageCount>
     <redeemedEpithet>The Enlightened</redeemedEpithet>
     <corruptedEpithet>The Broken Scholar</corruptedEpithet>
+    <arcTitleNoun>Scholar</arcTitleNoun>
+    <arcUseSuffix>true</arcUseSuffix>
     <generationWeight>50</generationWeight>
     <dynamicProfile>true</dynamicProfile>
   </PawnChronicles.PersonalEpicDef>
@@ -604,6 +606,8 @@
     <stageCount>3</stageCount>
     <redeemedEpithet>The Reformed</redeemedEpithet>
     <corruptedEpithet>The Shadowed</corruptedEpithet>
+    <arcTitleNoun>Rogue</arcTitleNoun>
+    <arcUseSuffix>true</arcUseSuffix>
     <generationWeight>50</generationWeight>
     <dynamicProfile>true</dynamicProfile>
   </PawnChronicles.PersonalEpicDef>
@@ -685,6 +689,8 @@
     <stageCount>3</stageCount>
     <redeemedEpithet>The Restored</redeemedEpithet>
     <corruptedEpithet>The Bitter Exile</corruptedEpithet>
+    <arcTitleNoun>Noble</arcTitleNoun>
+    <arcUseSuffix>true</arcUseSuffix>
     <generationWeight>50</generationWeight>
     <dynamicProfile>true</dynamicProfile>
   </PawnChronicles.PersonalEpicDef>
@@ -1009,6 +1015,8 @@
     <stageCount>3</stageCount>
     <redeemedEpithet>The True Healer</redeemedEpithet>
     <corruptedEpithet>The Tormented</corruptedEpithet>
+    <arcTitleNoun>Healer</arcTitleNoun>
+    <arcUseSuffix>true</arcUseSuffix>
     <generationWeight>50</generationWeight>
     <dynamicProfile>true</dynamicProfile>
   </PawnChronicles.PersonalEpicDef>
@@ -1171,6 +1179,8 @@
     <stageCount>3</stageCount>
     <redeemedEpithet>The Bonded</redeemedEpithet>
     <corruptedEpithet>The Broken Handler</corruptedEpithet>
+    <arcTitleNoun>Handler</arcTitleNoun>
+    <arcUseSuffix>true</arcUseSuffix>
     <generationWeight>50</generationWeight>
     <dynamicProfile>true</dynamicProfile>
   </PawnChronicles.PersonalEpicDef>
@@ -1252,6 +1262,8 @@
     <stageCount>3</stageCount>
     <redeemedEpithet>The Reformed Pacifist</redeemedEpithet>
     <corruptedEpithet>The Shattered</corruptedEpithet>
+    <arcTitleNoun>Pacifist</arcTitleNoun>
+    <arcUseSuffix>true</arcUseSuffix>
     <generationWeight>50</generationWeight>
     <dynamicProfile>true</dynamicProfile>
   </PawnChronicles.PersonalEpicDef>

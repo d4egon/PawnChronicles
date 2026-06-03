@@ -173,6 +173,16 @@ namespace PawnChronicles
             }
         }
 
+        // Picks the ThoughtDef whose baseOpinionOffset best matches the requested delta.
+        private static string SelectSocialThoughtName(int delta)
+        {
+            if (delta > 0)
+                return delta <= 20 ? "PC_Thought_SocialBond_Small" : "PC_Thought_SocialBond";
+            return delta >= -20 ? "PC_Thought_SocialConflict_Minor"
+                 : delta >= -40 ? "PC_Thought_SocialConflict"
+                 :                "PC_Thought_SocialConflict_Major";
+        }
+
         private void TryApplySocialOpinion(Pawn pawn)
         {
             if (socialOpinion == 0) return;
@@ -185,7 +195,7 @@ namespace PawnChronicles
                 .FirstOrDefault();
             if (target == null) return;
 
-            string thoughtName = socialOpinion > 0 ? "PC_Thought_SocialBond" : "PC_Thought_SocialConflict";
+            string thoughtName = SelectSocialThoughtName(socialOpinion);
             ThoughtDef td = DefDatabase<ThoughtDef>.GetNamedSilentFail(thoughtName);
             if (td == null || !td.IsSocial)
             {
@@ -320,14 +330,10 @@ namespace PawnChronicles
                 }
                 if (socialOpinion != 0)
                 {
-                    // Read the actual opinion offset from the thought so the hint matches the social tab
-                    string thoughtName = socialOpinion > 0 ? "PC_Thought_SocialBond" : "PC_Thought_SocialConflict";
-                    var tDef = DefDatabase<ThoughtDef>.GetNamedSilentFail(thoughtName);
+                    var tDef = DefDatabase<ThoughtDef>.GetNamedSilentFail(SelectSocialThoughtName(socialOpinion));
                     int opinionVal = (int)(tDef?.stages?[0]?.baseOpinionOffset ?? socialOpinion);
                     string sign = opinionVal > 0 ? "+" : "";
-                    string key = opinionVal > 0
-                        ? "PC_Effect_Display_OpinionPos"
-                        : "PC_Effect_Display_OpinionNeg";
+                    string key = opinionVal > 0 ? "PC_Effect_Display_OpinionPos" : "PC_Effect_Display_OpinionNeg";
                     return key.Translate($"{sign}{opinionVal}");
                 }
                 if (!string.IsNullOrEmpty(mentalBreakDef))
@@ -394,8 +400,7 @@ namespace PawnChronicles
             // socialOpinion: name the actual closest ally
             if (socialOpinion != 0 && pawn.MapHeld != null)
             {
-                string thoughtName = socialOpinion > 0 ? "PC_Thought_SocialBond" : "PC_Thought_SocialConflict";
-                var tDef = DefDatabase<ThoughtDef>.GetNamedSilentFail(thoughtName);
+                var tDef = DefDatabase<ThoughtDef>.GetNamedSilentFail(SelectSocialThoughtName(socialOpinion));
                 int opinionVal = (int)(tDef?.stages?[0]?.baseOpinionOffset ?? socialOpinion);
                 string sign = opinionVal > 0 ? "+" : "";
 

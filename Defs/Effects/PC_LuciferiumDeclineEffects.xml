@@ -140,8 +140,8 @@
 
   <PawnChronicles.EffectEntryDef>
     <defName>PC_LucDecline_Sev_BerserkAndOpinion</defName>
-    <label>go crazy</label>
-    <consequence>go crazy</consequence>
+    <label>go berserk in front of everyone</label>
+    <consequence>go berserk in front of everyone</consequence>
     <isPositive>false</isPositive>
     <tags><li>luciferium_decline_severe</li></tags>
     <mentalStateDef>Berserk</mentalStateDef>

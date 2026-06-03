@@ -283,7 +283,7 @@ namespace PawnChronicles
     public class SitePartWorker_CartelFacility : SitePartWorker_AncientComplex
     {
         private const string CartelFactionDef  = "PC_Faction_LucifersCartelHostile";
-        private const string SerumDefName      = "MechSerumHealer";
+        private const string SerumDefName      = "PC_Item_FakeHealerSerum";
         private const int    MinCartelPawns    = 20;
         private const int    MaxCartelPawns    = 30;
 

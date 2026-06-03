@@ -347,6 +347,16 @@ namespace PawnChronicles
             ls.Label("PC_Settings_TagRowHeight".Translate(s.uiTagRowH.ToString("F0")));
             s.uiTagRowH = Mathf.Round(ls.Slider(s.uiTagRowH, 14f, 36f));
 
+            ls.Label("PC_Settings_HistoryRowHeight".Translate(s.uiHistoryRowH.ToString("F0")));
+            s.uiHistoryRowH = Mathf.Round(ls.Slider(s.uiHistoryRowH, 36f, 80f));
+
+            ls.Label("PC_Settings_HistoryLineGap".Translate(s.uiHistoryLineGap.ToString("F0")));
+            s.uiHistoryLineGap = Mathf.Round(ls.Slider(s.uiHistoryLineGap, 16f, 48f));
+
+            // ── Visibility ────────────────────────────────────────────────────
+            SectionHeader(ls, "PC_Settings_Section_Visibility".Translate());
+            ls.CheckboxLabeled("PC_Settings_ShowChoiceHistory".Translate(), ref s.showChoiceHistory);
+
             // ── Typography ────────────────────────────────────────────────────
             SectionHeader(ls, "PC_Settings_Section_Typography".Translate());
             ls.Label("PC_Settings_BodyFontLabel".Translate());

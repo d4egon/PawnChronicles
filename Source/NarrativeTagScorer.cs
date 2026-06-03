@@ -36,14 +36,12 @@ namespace PawnChronicles
             foreach (var hediff in pawn.health.hediffSet.hediffs)
             {
                 if (hediff is Hediff_MissingPart)
-                    score += 30f;
+                    score += 20f;
                 else if (hediff.IsPermanent() && hediff.Severity > 0.1f)
-                    score += hediff.Severity * 20f;
-                else if (hediff.def == HediffDefOf.Heatstroke && hediff.Severity > 0.3f)
-                    score += 15f;
+                    score += hediff.Severity * 5f;
             }
-            if (pawn.health.hediffSet.PainTotal > 0.2f)
-                score += pawn.health.hediffSet.PainTotal * 25f;
+            if (pawn.health.hediffSet.PainTotal > 0.1f)
+                score += pawn.health.hediffSet.PainTotal * 15f;
             return score;
         }
     }
@@ -63,11 +61,11 @@ namespace PawnChronicles
             {
                 if (rel.otherPawn?.Dead == true)
                 {
-                    if      (rel.def == PawnRelationDefOf.Spouse)  score += 45f;
-                    else if (rel.def == PawnRelationDefOf.Child)   score += 35f;
-                    else if (rel.def == PawnRelationDefOf.Parent)  score += 25f;
-                    else if (rel.def == PawnRelationDefOf.Sibling) score += 20f;
-                    else                                           score += 10f;
+                    if      (rel.def == PawnRelationDefOf.Spouse)  score += 65f;
+                    else if (rel.def == PawnRelationDefOf.Child)   score += 45f;
+                    else if (rel.def == PawnRelationDefOf.Parent)  score += 35f;
+                    else if (rel.def == PawnRelationDefOf.Sibling) score += 25f;
+                    else                                           score += 15f;
                 }
             }
             return score;
@@ -165,7 +163,7 @@ namespace PawnChronicles
             if (pawn.story?.Adulthood != null)
                 foreach (var tag in DutyTags)
                     if (pawn.story.Adulthood.title?.IndexOf(tag, StringComparison.OrdinalIgnoreCase) >= 0)
-                        score += 30f;
+                        score += 60f;
 
             // Royal title requires Royalty DLC
             if (ModLister.RoyaltyInstalled)
@@ -196,7 +194,7 @@ namespace PawnChronicles
                 if (psyLevel > 0) score += psyLevel * 20f;
 
                 var title = pawn.royalty?.MostSeniorTitle;
-                if (title != null) score += 15f + (title.def.seniority * 0.3f);
+                if (title != null) score += 35f + (title.def.seniority * 0.3f);
             }
 
             // Gauranlen/anima bond requires Ideology DLC
@@ -223,7 +221,7 @@ namespace PawnChronicles
         {
             if (!ModLister.IdeologyInstalled || pawn.ideo == null) return 0f;
 
-            float score = pawn.ideo.Certainty * 60f;
+            float score = pawn.ideo.Certainty * 30f;
             if (pawn.ideo.Ideo?.GetRole(pawn) != null) score += 25f;
             return score;
         }
@@ -241,9 +239,17 @@ namespace PawnChronicles
 
             foreach (var hediff in pawn.health.hediffSet.hediffs)
             {
-                if (hediff.def.IsAddiction) score += 25f;
+                if (hediff.def.IsAddiction) score += 35f;
                 if (hediff.def.defName.Contains("Dementia") ||
-                    hediff.def.defName.Contains("Alzheimer")) score += 35f;
+                    hediff.def.defName.Contains("Alzheimer") ||
+                    hediff.def.defName.Contains("GeneticDrugNeed") ||
+                    hediff.def.defName.Contains("SmokeleafTolerance") ||
+                    hediff.def.defName.Contains("AlcoholTolerance") ||
+                    hediff.def.defName.Contains("AmbrosiaTolerance") ||
+                    hediff.def.defName.Contains("PsychiteTolerance") ||
+                    hediff.def.defName.Contains("GoJuiceTolerance") ||
+                    hediff.def.defName.Contains("WakeUpTolerance") ||
+                    hediff.def.defName.Contains("PsilocapTolerance")) score += 55f;
                 if (hediff.def == HediffDefOf.DrugOverdose) score += 20f;
             }
 
@@ -294,6 +300,20 @@ namespace PawnChronicles
         public override float Score(Pawn pawn)
         {
             float score = 0f;
+
+            foreach (var hediff in pawn.health.hediffSet.hediffs){
+                    if (hediff.def == HediffDefOf.Heatstroke && hediff.Severity > 0.2f)
+                    score += 10f;
+                    
+                    else if (hediff.def == HediffDefOf.Hypothermia && hediff.Severity > 0.2)
+                    score += 10f;
+
+                    else if (hediff.def == HediffDefOf.Malnutrition && hediff.Severity >0.2)
+                    score +=10f;
+
+                    else if (hediff.def == HediffDefOf.BloodLoss && hediff.Severity >0.2)
+                    score +=10f;
+                    }
 
             var hunger = pawn.needs?.food;
             if (hunger != null && hunger.CurCategory <= HungerCategory.UrgentlyHungry)
@@ -420,9 +440,12 @@ namespace PawnChronicles
             if (pawn.skills == null) return 0f;
 
             int intellectual = pawn.skills.GetSkill(SkillDefOf.Intellectual)?.Level ?? 0;
-            score += intellectual * 5f;
+            score += intellectual * 7.5f;
 
             int burningPassions = pawn.skills.skills.Count(s => s.passion == Passion.Major);
+            score += burningPassions * 20f;
+
+            int minorPassions = pawn.skills.skills.Count(s => s.passion == Passion.Minor);
             score += burningPassions * 10f;
 
             return score;
@@ -614,11 +637,11 @@ namespace PawnChronicles
             if (pawn.story?.Adulthood != null)
                 foreach (var tag in BetrayalTags)
                     if (pawn.story.Adulthood.title?.IndexOf(tag, StringComparison.OrdinalIgnoreCase) >= 0)
-                        score += 30f;
+                        score += 80f;
 
             // Psychopath trait can indicate willingness to betray
             if (pawn.story?.traits?.HasTrait(TraitDefOf.Psychopath) == true)
-                score += 20f;
+                score += 35f;
 
             return score;
         }
@@ -740,7 +763,7 @@ namespace PawnChronicles
             if (pawn.skills == null) return 0f;
 
             int artistic = pawn.skills.GetSkill(SkillDefOf.Artistic)?.Level ?? 0;
-            score += artistic * 5f;
+            score += artistic * 10f;
 
             if (pawn.skills.GetSkill(SkillDefOf.Artistic)?.passion == Passion.Major)
                 score += 25f;

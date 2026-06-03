@@ -101,13 +101,18 @@ namespace PawnChronicles
         public float revelationDelayDaysMin = 3f;
         public float revelationDelayDaysMax = 7f;
 
+        // ── UI - Visibility toggles ───────────────────────────────────────────
+        public bool showChoiceHistory = true;
+
         // ── UI - Layout ───────────────────────────────────────────────────────
         public float uiPadding    = 12f;   // inner margin inside each pane
         public float uiPaneSplit  = 8f;    // gap between left and right pane
         public float uiLeftRatio  = 0.34f; // fraction of width given to left pane
-        public float uiArcRowH    = 54f;   // height of an arc chapter row
-        public float uiDiaryRowH  = 28f;   // height of a diary row
-        public float uiTagRowH    = 22f;   // height of a narrative tag row
+        public float uiArcRowH     = 54f;   // height of an arc chapter row
+        public float uiDiaryRowH   = 28f;   // height of a diary row
+        public float uiTagRowH     = 22f;   // height of a narrative tag row
+        public float uiHistoryRowH      = 59f;   // height of a history arc row
+        public float uiHistoryLineGap   = 28f;   // px between title and subtitle in history rows
 
         // ── UI - Typography ───────────────────────────────────────────────────
         /// <summary>0 = Tiny, 1 = Small. Controls body / narrative text size.</summary>
@@ -206,13 +211,17 @@ namespace PawnChronicles
             Scribe_Values.Look(ref chroniclesWindowWidth,  "chroniclesWindowWidth",  1020f);
             Scribe_Values.Look(ref chroniclesWindowHeight, "chroniclesWindowHeight", 650f);
 
+            Scribe_Values.Look(ref showChoiceHistory, "showChoiceHistory", true);
+
             // UI
             Scribe_Values.Look(ref uiPadding,   "uiPadding",   12f);
             Scribe_Values.Look(ref uiPaneSplit, "uiPaneSplit", 8f);
             Scribe_Values.Look(ref uiLeftRatio, "uiLeftRatio", 0.34f);
-            Scribe_Values.Look(ref uiArcRowH,   "uiArcRowH",   54f);
-            Scribe_Values.Look(ref uiDiaryRowH, "uiDiaryRowH", 28f);
-            Scribe_Values.Look(ref uiTagRowH,   "uiTagRowH",   22f);
+            Scribe_Values.Look(ref uiArcRowH,     "uiArcRowH",     54f);
+            Scribe_Values.Look(ref uiDiaryRowH,   "uiDiaryRowH",   28f);
+            Scribe_Values.Look(ref uiTagRowH,     "uiTagRowH",     22f);
+            Scribe_Values.Look(ref uiHistoryRowH,    "uiHistoryRowH",    59f);
+            Scribe_Values.Look(ref uiHistoryLineGap, "uiHistoryLineGap", 28f);
             Scribe_Values.Look(ref uiBodyFont,  "uiBodyFont",  1);
 
             Scribe_Values.Look(ref uiGoldR,  "uiGoldR",  0.95f); Scribe_Values.Look(ref uiGoldG,  "uiGoldG",  0.82f); Scribe_Values.Look(ref uiGoldB,  "uiGoldB",  0.55f);

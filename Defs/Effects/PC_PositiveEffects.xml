@@ -238,6 +238,49 @@
     <spawnCount>1</spawnCount>
   </PawnChronicles.EffectEntryDef>
 
+  <!-- ── Smokeleaf ─────────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_SmokeleafRoutine</defName>
+    <label>roll one and get back to work</label>
+    <consequence>roll one and get back to work</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>smokeleaf</li></tags>
+    <skillLevelDef>Crafting</skillLevelDef>
+    <skillLevel>2</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_SmokeleafCalm</defName>
+    <label>use the calm to reach someone</label>
+    <consequence>use the calm to reach someone</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>smokeleaf</li></tags>
+    <socialOpinion>20</socialOpinion>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Ambrosia ───────────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_AmbrosiaModeration</defName>
+    <label>eat just enough to stay sharp</label>
+    <consequence>eat just enough to stay sharp</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>ambrosia</li></tags>
+    <skillLevelDef>Medicine</skillLevelDef>
+    <skillLevel>2</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Pos_AmbrosiaClarity</defName>
+    <label>let the sweetness clear your head</label>
+    <consequence>let the sweetness clear your head</consequence>
+    <isPositive>true</isPositive>
+    <tags><li>ambrosia</li></tags>
+    <skillXpDef>Intellectual</skillXpDef>
+    <skillXP>80000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
   <!-- ── Luciferium supply (guaranteed choice in luciferium arc) ──────── -->
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Pos_LuciferiumSupply</defName>

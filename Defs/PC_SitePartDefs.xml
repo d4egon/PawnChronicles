@@ -20,6 +20,17 @@
     <genStep Class="PawnChronicles.GenStep_LuciferiumMeeting"/>
   </GenStepDef>
 
+  <GenStepDef>
+    <defName>PC_GenStep_ScatterLuciferiumCrates</defName>
+    <linkWithSite>PC_SitePart_CartelFacility</linkWithSite>
+    <order>710</order>
+    <genStep Class="PawnChronicles.GenStep_ScatterLuciferiumCrates">
+      <crateCount>20</crateCount>
+      <minPerCrate>1</minPerCrate>
+      <maxPerCrate>3</maxPerCrate>
+    </genStep>
+  </GenStepDef>
+
   <SitePartDef ParentName="AncientStructureSiteBase">
     <defName>PC_SitePart_CartelFacility</defName>
     <label>cartel facility</label>

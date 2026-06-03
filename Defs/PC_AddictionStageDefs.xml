@@ -444,11 +444,12 @@
   <!-- Stage 13: climax -->
   <PawnChronicles.QuestStageDef>
     <defName>PC_LucStage_Resolution</defName>
-    <label>Returning / Forever Indebted</label>
+    <label>To Be Continued</label>
     <isOpening>false</isOpening>
     <isMiddle>false</isMiddle>
     <isClimax>true</isClimax>
     <outcomeSetsSuccess>true</outcomeSetsSuccess>
+    <isToBeContinued>true</isToBeContinued>
     <grammarRoleOverride>addiction_luciferium_resolution</grammarRoleOverride>
   </PawnChronicles.QuestStageDef>
 

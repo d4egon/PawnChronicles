@@ -76,8 +76,8 @@
 
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Neg_IntellectualXPLoss</defName>
-    <label>let your mind go soft</label>
-    <consequence>let your mind go soft</consequence>
+    <label>let the study slide</label>
+    <consequence>let the study slide</consequence>
     <isPositive>false</isPositive>
     <tags><li>general</li><li>dependency</li><li>alcohol</li><li>psychite</li></tags>
     <skillXpDef>Intellectual</skillXpDef>
@@ -88,8 +88,8 @@
 
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Neg_LosePassion</defName>
-    <label>let something dim inside</label>
-    <consequence>let something dim inside</consequence>
+    <label>let a passion die</label>
+    <consequence>let a passion die</consequence>
     <isPositive>false</isPositive>
     <tags><li>general</li><li>crisis</li><li>addiction</li></tags>
     <anyPassion>-1</anyPassion>
@@ -97,8 +97,8 @@
 
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Neg_LosePassion_Social</defName>
-    <label>let people become noise</label>
-    <consequence>let people become noise</consequence>
+    <label>stop trying to connect</label>
+    <consequence>stop trying to connect</consequence>
     <isPositive>false</isPositive>
     <tags><li>social</li><li>addiction</li><li>dependency</li></tags>
     <passionSkillDef>Social</passionSkillDef>
@@ -107,8 +107,8 @@
 
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Neg_LosePassion_Craft</defName>
-    <label>let the work lose its meaning</label>
-    <consequence>let the work lose its meaning</consequence>
+    <label>put the craft down for good</label>
+    <consequence>put the craft down for good</consequence>
     <isPositive>false</isPositive>
     <tags><li>craft</li><li>artist</li><li>withdrawal</li></tags>
     <passionSkillDef>Crafting</passionSkillDef>
@@ -180,7 +180,7 @@
     <label>pay for it the next morning</label>
     <consequence>pay for it the next morning</consequence>
     <isPositive>false</isPositive>
-    <tags><li>alcohol</li><li>dependency</li><li>general</li></tags>
+    <tags><li>alcohol</li><li>dependency</li></tags>
     <hediffDef>Hangover</hediffDef>
     <hediffSeverity>0.6</hediffSeverity>
   </PawnChronicles.EffectEntryDef>
@@ -200,7 +200,7 @@
     <label>let the toxins accumulate</label>
     <consequence>let the toxins accumulate</consequence>
     <isPositive>false</isPositive>
-    <tags><li>addiction</li><li>psychite</li><li>wakeup</li><li>gojuice</li><li>dependency</li></tags>
+    <tags><li>addiction</li><li>psychite</li><li>wakeup</li><li>gojuice</li><li>smokeleaf</li><li>dependency</li></tags>
     <hediffDef>ToxicBuildup</hediffDef>
     <hediffSeverity>0.25</hediffSeverity>
   </PawnChronicles.EffectEntryDef>
@@ -235,12 +235,55 @@
     <raidPoints>500</raidPoints>
   </PawnChronicles.EffectEntryDef>
 
+  <!-- ── Smokeleaf ─────────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_SmokeleafFog</defName>
+    <label>smoke until the thinking stops</label>
+    <consequence>smoke until the thinking stops</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>smokeleaf</li></tags>
+    <skillLevelDef>Intellectual</skillLevelDef>
+    <skillLevel>-2</skillLevel>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_SmokeleafDrift</defName>
+    <label>let the day disappear into smoke</label>
+    <consequence>let the day disappear into smoke</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>smokeleaf</li></tags>
+    <skillXpDef>Crafting</skillXpDef>
+    <skillXP>-60000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
+  <!-- ── Ambrosia ───────────────────────────────────────────────────────── -->
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_AmbrosiaIndulgence</defName>
+    <label>eat past the point of reason</label>
+    <consequence>eat past the point of reason</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>ambrosia</li></tags>
+    <anyPassion>-1</anyPassion>
+  </PawnChronicles.EffectEntryDef>
+
+  <PawnChronicles.EffectEntryDef>
+    <defName>PC_Effect_Neg_AmbrosiaWaiting</defName>
+    <label>spend the day waiting for more</label>
+    <consequence>spend the day waiting for more</consequence>
+    <isPositive>false</isPositive>
+    <tags><li>ambrosia</li></tags>
+    <skillXpDef>Intellectual</skillXpDef>
+    <skillXP>-60000</skillXP>
+  </PawnChronicles.EffectEntryDef>
+
   <!-- ── Luciferium supply costs (paired with PC_Effect_Pos_LuciferiumSupply) ─ -->
 
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Neg_LucCost_DrawHeat</defName>
-    <label>draw heat from the wrong people (raid incoming)</label>
-    <consequence>draw heat from the wrong people (raid incoming)</consequence>
+    <label>draw heat from the wrong people</label>
+    <consequence>draw heat from the wrong people</consequence>
     <isPositive>false</isPositive>
     <tags><li>luciferium_supply_cost</li></tags>
     <raidPoints>500</raidPoints>
@@ -248,8 +291,8 @@
 
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Neg_LucCost_BurnBridge</defName>
-    <label>burn the bridge that got you there (-50 opinion, -3 Social)</label>
-    <consequence>burn the bridge that got you there (-50 opinion, -3 Social)</consequence>
+    <label>burn the bridge that got you there</label>
+    <consequence>burn the bridge that got you there</consequence>
     <isPositive>false</isPositive>
     <tags><li>luciferium_supply_cost</li></tags>
     <socialOpinion>-50</socialOpinion>
@@ -259,8 +302,8 @@
 
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Neg_LucCost_LoseControl</defName>
-    <label>lose control and status (berserk, -40 opinion)</label>
-    <consequence>lose control and status (berserk, -40 opinion)</consequence>
+    <label>lose control in front of everyone</label>
+    <consequence>lose control in front of everyone</consequence>
     <isPositive>false</isPositive>
     <tags><li>luciferium_supply_cost</li></tags>
     <mentalStateDef>Berserk</mentalStateDef>
@@ -269,8 +312,8 @@
 
   <PawnChronicles.EffectEntryDef>
     <defName>PC_Effect_Neg_LucCost_PayInFull</defName>
-    <label>pay what it actually costs (raid incoming, -30 mood for 3 days)</label>
-    <consequence>pay what it actually costs (raid incoming, -30 mood for 3 days)</consequence>
+    <label>pay what it actually costs</label>
+    <consequence>pay what it actually costs</consequence>
     <isPositive>false</isPositive>
     <tags><li>luciferium_supply_cost</li></tags>
     <raidPoints>400</raidPoints>

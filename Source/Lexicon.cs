@@ -39,7 +39,7 @@ namespace PawnChronicles
 
             EmitDemeanor(pawn, rules);
             EmitMoralState(pawn, rules);
-            EmitMoodPhrase(pawn, rules);
+            EmitMoodPhrase(pawn, profile, rules);
             EmitWoundSummary(pawn, rules);
             EmitCombatPosture(pawn, rules);
             EmitSocialAnchor(pawn, rules);
@@ -116,24 +116,120 @@ namespace PawnChronicles
         //  MOOD PHRASE - alternate short phrase from mood float
         // ===================================================================
 
-        private static void EmitMoodPhrase(Pawn pawn, List<Rule> rules)
+        private static void EmitMoodPhrase(Pawn pawn, PawnNarrativeProfile profile, List<Rule> rules)
         {
             if (pawn.needs?.mood == null)
             {
-                Emit(rules, "pc_lex_mood_phrase", "unreadable");
+                Emit(rules, "pc_lex_mood_phrase", "with a feeling of being unreadable");
                 return;
             }
 
             float mood = pawn.needs.mood.CurLevelPercentage;
-            string phrase = mood switch
+            string dominant = profile?.GetDominantTags()?.FirstOrDefault()?.defName?.ToLowerInvariant() ?? "";
+
+            string adj = dominant switch
             {
-                > 0.85f => "mostly at peace with it",
-                > 0.65f => "carrying on without complaint",
-                > 0.45f => "quieter than usual",
-                > 0.25f => "worn down",
-                _       => "not doing well"
+                var t when t.Contains("violence") || t.Contains("survival") => mood switch
+                {
+                    > 0.7f  => "sharp",
+                    > 0.3f  => "hardened",
+                    > 0.1f  => "worn",
+                    _       => "broken"
+                },
+                var t when t.Contains("duty") => mood switch
+                {
+                    > 0.7f  => "steady",
+                    > 0.3f  => "resolute",
+                    > 0.1f  => "strained",
+                    _       => "shaken"
+                },
+                var t when t.Contains("trauma") => mood switch
+                {
+                    > 0.7f  => "settled",
+                    > 0.3f  => "contained",
+                    > 0.1f  => "guarded",
+                    _       => "fractured"
+                },
+                var t when t.Contains("grief") || t.Contains("loss") => mood switch
+                {
+                    > 0.7f  => "muted",
+                    > 0.3f  => "subdued",
+                    > 0.1f  => "hollow",
+                    _       => "undone"
+                },
+                var t when t.Contains("craft") => mood switch
+                {
+                    > 0.7f  => "certain",
+                    > 0.3f  => "focused",
+                    > 0.1f  => "distracted",
+                    _       => "scattered"
+                },
+                var t when t.Contains("scholar") || t.Contains("curiosity") => mood switch
+                {
+                    > 0.7f  => "sharp",
+                    > 0.3f  => "attentive",
+                    > 0.1f  => "unsettled",
+                    _       => "overwhelmed"
+                },
+                var t when t.Contains("social") || t.Contains("kinship") || t.Contains("nurture") => mood switch
+                {
+                    > 0.7f  => "open",
+                    > 0.3f  => "present",
+                    > 0.1f  => "withdrawn",
+                    _       => "isolated"
+                },
+                var t when t.Contains("addiction") => mood switch
+                {
+                    > 0.7f  => "level",
+                    > 0.3f  => "functional",
+                    > 0.1f  => "unsteady",
+                    _       => "unravelled"
+                },
+                var t when t.Contains("underworld") || t.Contains("betrayal") => mood switch
+                {
+                    > 0.7f  => "composed",
+                    > 0.3f  => "careful",
+                    > 0.1f  => "tense",
+                    _       => "exposed"
+                },
+                var t when t.Contains("faith") || t.Contains("devotion") => mood switch
+                {
+                    > 0.7f  => "certain",
+                    > 0.3f  => "composed",
+                    > 0.1f  => "troubled",
+                    _       => "unmoored"
+                },
+                var t when t.Contains("isolation") || t.Contains("wandering") => mood switch
+                {
+                    > 0.7f  => "peaceful",
+                    > 0.3f  => "distant",
+                    > 0.1f  => "adrift",
+                    _       => "lost"
+                },
+                var t when t.Contains("power") || t.Contains("leadership") || t.Contains("noble") => mood switch
+                {
+                    > 0.7f  => "assured",
+                    > 0.3f  => "measured",
+                    > 0.1f  => "strained",
+                    _       => "cracked"
+                },
+                var t when t.Contains("augmentation") => mood switch
+                {
+                    > 0.7f  => "calibrated",
+                    > 0.3f  => "precise",
+                    > 0.1f  => "uncertain",
+                    _       => "failing"
+                },
+                _ => mood switch
+                {
+                    > 0.7f  => "steady",
+                    > 0.3f  => "quiet",
+                    > 0.1f  => "tired",
+                    _       => "frayed"
+                }
             };
-            Emit(rules, "pc_lex_mood_phrase", phrase);
+
+            Emit(rules, "pc_lex_mood_phrase", $"with a feeling of being {adj}");
         }
 
         // ===================================================================
