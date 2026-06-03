@@ -143,6 +143,13 @@ namespace PawnChronicles
         {
             return branchTags != null && branchTags.Contains(tag);
         }
+        /// <summary>
+        /// When true on a climax stage, replaces the two-door Hard Road / Easy Out UI
+        /// with a single "Close the arc" button that resolves immediately as success.
+        /// Used for cliffhanger stages where the arc ends open rather than resolved.
+        /// </summary>
+        public bool isToBeContinued = false;
+
         // ── Scoring ───────────────────────────────────────────────────────────
 
         /// <summary>

@@ -26,6 +26,8 @@
   <PC_Settings_Section_Chronicle>Chronicle</PC_Settings_Section_Chronicle>
   <PC_Settings_Section_WindowSize>Window Size</PC_Settings_Section_WindowSize>
   <PC_Settings_Section_Layout>Layout</PC_Settings_Section_Layout>
+  <PC_Settings_Section_Visibility>Visibility</PC_Settings_Section_Visibility>
+  <PC_Settings_ShowChoiceHistory>Show choice history in profile panel</PC_Settings_ShowChoiceHistory>
   <PC_Settings_Section_Typography>Typography</PC_Settings_Section_Typography>
   <PC_Settings_Section_Colors>Colors</PC_Settings_Section_Colors>
   <PC_Settings_EnableSparks>Enable sparks</PC_Settings_EnableSparks>
@@ -89,6 +91,8 @@
   <PC_Settings_ArcRowHeight>Arc row height:   {0} px</PC_Settings_ArcRowHeight>
   <PC_Settings_DiaryRowHeight>Diary row height: {0} px</PC_Settings_DiaryRowHeight>
   <PC_Settings_TagRowHeight>Tag row height:   {0} px</PC_Settings_TagRowHeight>
+  <PC_Settings_HistoryRowHeight>History row height:   {0} px</PC_Settings_HistoryRowHeight>
+  <PC_Settings_HistoryLineGap>History line gap:   {0} px</PC_Settings_HistoryLineGap>
   <PC_Settings_BodyFontLabel>Body / narrative text size:</PC_Settings_BodyFontLabel>
   <PC_Settings_FontTiny>Tiny  - compact, fits more on screen</PC_Settings_FontTiny>
   <PC_Settings_FontSmall>Small - default, easier to read</PC_Settings_FontSmall>
@@ -98,10 +102,10 @@
   <PC_Settings_ColorDiary>Diary / spark entries</PC_Settings_ColorDiary>
   <PC_Settings_ColorBg>Pane background  (lower alpha = more transparent)</PC_Settings_ColorBg>
   <PC_Settings_ResetUI>Reset UI to defaults</PC_Settings_ResetUI>
-  <PC_Debug_SelectPrompt>Select a colonist and click [R] Refresh</PC_Debug_SelectPrompt>
+  <PC_Debug_SelectPrompt>Select a colonist and click Refresh</PC_Debug_SelectPrompt>
   <PC_Debug_NoPawnSelected>No pawn selected - click to pick</PC_Debug_NoPawnSelected>
-  <PC_Debug_Refresh>[R] Refresh</PC_Debug_Refresh>
-  <PC_Debug_ExportCSV>[v] Export CSV</PC_Debug_ExportCSV>
+  <PC_Debug_Refresh>Refresh</PC_Debug_Refresh>
+  <PC_Debug_ExportCSV>Export CSV</PC_Debug_ExportCSV>
   <PC_Debug_FilterPlaceholder>Filter symbols...</PC_Debug_FilterPlaceholder>
   <PC_Debug_SymbolCount>{0} / {1} symbols</PC_Debug_SymbolCount>
   <PC_Debug_ArcLabel>Arc:</PC_Debug_ArcLabel>
@@ -160,28 +164,28 @@
   <PC_ITab_ArcFinalTip>This is the final stage of the arc. Advancing will resolve it permanently.</PC_ITab_ArcFinalTip>
   <PC_ITab_DevNext>Dev: Next</PC_ITab_DevNext>
   <PC_ITab_DevSkip>Dev: Skip</PC_ITab_DevSkip>
-  <PC_ITab_ChoosePathClimax>[!]  THE ARC REACHES ITS END - CHOOSE:</PC_ITab_ChoosePathClimax>
+  <PC_ITab_ChoosePathClimax>THE ARC REACHES ITS END - CHOOSE:</PC_ITab_ChoosePathClimax>
   <PC_ITab_ChoosePath>CHOOSE A PATH:</PC_ITab_ChoosePath>
   <PC_ITab_ThisPawn>This pawn</PC_ITab_ThisPawn>
-  <PC_ITab_HardRoadTip>The Hard Road: commit to the confrontation. A narrative event fires.</PC_ITab_HardRoadTip>
+  <PC_ITab_HardRoadTip>The Hard Road: face the consequence listed above. A narrative event fires immediately, then the arc resolves as a success and the redeemed backstory is applied.</PC_ITab_HardRoadTip>
   <PC_ITab_EasyOutTip>The Easy Out: take the corrupted backstory now. No event fires. The arc closes immediately.</PC_ITab_EasyOutTip>
   <PC_ITab_EffectsNow>Choosing this path applies these changes immediately:</PC_ITab_EffectsNow>
   <PC_ITab_EffectsDirection>Choosing this path sets the arc direction.</PC_ITab_EffectsDirection>
-  <PC_ITab_FinalStake>[!]  FINAL STAGE - THE ARC RESOLVES HERE</PC_ITab_FinalStake>
+  <PC_ITab_FinalStake>FINAL STAGE - THE ARC RESOLVES HERE</PC_ITab_FinalStake>
   <PC_ITab_WhatAtStake>WHAT'S AT STAKE</PC_ITab_WhatAtStake>
-  <PC_ITab_Success>SUCCESS -&gt;</PC_ITab_Success>
-  <PC_ITab_Failure>FAILURE / ABANDON -&gt;</PC_ITab_Failure>                                                                                      
+  <PC_ITab_Success>SUCCESS</PC_ITab_Success>
+  <PC_ITab_Failure>FAILURE / ABANDON</PC_ITab_Failure>                                                                                      
   <PC_ITab_ReadyNext>Ready - click Next to continue</PC_ITab_ReadyNext>
-  <PC_ITab_WaitingLabel>...  WAITING...</PC_ITab_WaitingLabel>
+  <PC_ITab_WaitingLabel>WAITING...</PC_ITab_WaitingLabel>
   <PC_ITab_DaysRemaining>{0} days remaining</PC_ITab_DaysRemaining>
-  <PC_ITab_DaysRemainingPrepare>[t]  {0} days remaining to prepare</PC_ITab_DaysRemainingPrepare>
-  <PC_ITab_TimeExpired>[t]  Time has expired</PC_ITab_TimeExpired>
-  <PC_ITab_ChroniclesActive>[y] Active</PC_ITab_ChroniclesActive>
-  <PC_ITab_ChroniclesInactive>[x] Disabled</PC_ITab_ChroniclesInactive>
+  <PC_ITab_DaysRemainingPrepare>{0} days remaining to prepare</PC_ITab_DaysRemainingPrepare>
+  <PC_ITab_TimeExpired>Time has expired</PC_ITab_TimeExpired>
+  <PC_ITab_ChroniclesActive>Active</PC_ITab_ChroniclesActive>
+  <PC_ITab_ChroniclesInactive>Disabled</PC_ITab_ChroniclesInactive>
   <PC_ITab_ChroniclesActive_Tip>Chronicles are active for this pawn. Click to disable.</PC_ITab_ChroniclesActive_Tip>
   <PC_ITab_ChroniclesInactive_Tip>Chronicles are disabled for this pawn. Click to re-enable.</PC_ITab_ChroniclesInactive_Tip>
   <PC_ITab_ChroniclesDisabledBody>Chronicles are disabled for this pawn. Click the toggle above to re-enable.</PC_ITab_ChroniclesDisabledBody>
-  <PC_ITab_AbandonArc>Abandon Arc  [x]</PC_ITab_AbandonArc>
+  <PC_ITab_AbandonArc>Abandon Arc</PC_ITab_AbandonArc>
   <PC_ITab_ResolveArcTip>The pawn has proven themselves. Resolve the arc in success.</PC_ITab_ResolveArcTip>
   <PC_Wait_ChoosePathBegin>Choose a path to begin</PC_Wait_ChoosePathBegin>
   <PC_Wait_ChoosePathForward>Choose your path forward</PC_Wait_ChoosePathForward>
@@ -403,6 +407,7 @@
   <PC_Luciferium_BrokerDead_Desc>The broker is dead. The deal is off.</PC_Luciferium_BrokerDead_Desc>
   <PC_Luciferium_ContactPaid_Label>Deal done</PC_Luciferium_ContactPaid_Label>
   <PC_Luciferium_ContactPaid_Desc>The broker took the silver and handed over the goods. The arc continues.</PC_Luciferium_ContactPaid_Desc>
+  <PC_Luc_CloseArc>Close the arc</PC_Luc_CloseArc>
   <PC_Luciferium_HardRoad_Label>Use the serum</PC_Luciferium_HardRoad_Label>
   <PC_Luciferium_HardRoad_Hint>Use the healer mech serum to end the luciferium dependency. There is no guarantee it works cleanly.</PC_Luciferium_HardRoad_Hint>
   <PC_Luciferium_EasyOut_Label>Accept the dependency</PC_Luciferium_EasyOut_Label>
@@ -412,10 +417,10 @@
   <PC_LucQuest_Delving_Label>The Warehouse</PC_LucQuest_Delving_Label>
   <PC_LucQuest_Delving_Desc>{0} has located an abandoned warehouse rumoured to contain a cache of luciferium. Ancient security systems are still active inside.</PC_LucQuest_Delving_Desc>
   <PC_WaitFallback_SiteCleared>waiting for {0} to clear the site</PC_WaitFallback_SiteCleared>
-  <PC_Climax_Consequence_SmallRaid>a final confrontation is coming</PC_Climax_Consequence_SmallRaid>
-  <PC_Climax_Consequence_MentalBreak>a breaking point is near</PC_Climax_Consequence_MentalBreak>
-  <PC_Climax_Consequence_FriendlyArrives>someone unexpected may appear</PC_Climax_Consequence_FriendlyArrives>
-  <PC_Climax_Consequence_HostileArrives>something hostile is inbound</PC_Climax_Consequence_HostileArrives>
-  <PC_Climax_Consequence_Default>something will happen</PC_Climax_Consequence_Default>
+  <PC_Climax_Consequence_SmallRaid>a raider attack will arrive at the colony</PC_Climax_Consequence_SmallRaid>
+  <PC_Climax_Consequence_MentalBreak>this pawn will suffer a mental break</PC_Climax_Consequence_MentalBreak>
+  <PC_Climax_Consequence_FriendlyArrives>allied reinforcements will arrive at the colony</PC_Climax_Consequence_FriendlyArrives>
+  <PC_Climax_Consequence_HostileArrives>a hostile force will arrive at the colony</PC_Climax_Consequence_HostileArrives>
+  <PC_Climax_Consequence_Default>a narrative event will fire</PC_Climax_Consequence_Default>
   <PC_Climax_HintFormat>{0} path - {1}</PC_Climax_HintFormat>
 </LanguageData>

@@ -78,6 +78,22 @@ namespace PawnChronicles
         public string? corruptedEpithet;
 
         /// <summary>
+        /// When true and arcTitleNoun is set, a random suffix from PC_ArcTitlePrefixes
+        /// is also resolved and appended. e.g. "Restored Scholar of the Rim".
+        /// Suffix pool includes NONE entries so a suffix fires only sometimes.
+        /// </summary>
+        public bool arcUseSuffix = false;
+
+        /// <summary>
+        /// When set, the arc outcome title is composed dynamically:
+        ///   success -> random successPrefix from PC_ArcTitlePrefixes + " " + arcTitleNoun
+        ///   failure -> random failurePrefix from PC_ArcTitlePrefixes + " " + arcTitleNoun
+        /// Leave null to use redeemedEpithet / corruptedEpithet as-is.
+        /// Example: arcTitleNoun = "Scholar" produces "Restored Scholar" or "Hollow Scholar".
+        /// </summary>
+        public string? arcTitleNoun;
+
+        /// <summary>
         /// Tag-keyed epithet pool for dynamic outcome selection.
         /// Takes priority over redeemedEpithet/corruptedEpithet when
         /// the pawn's dominant tag matches an entry.

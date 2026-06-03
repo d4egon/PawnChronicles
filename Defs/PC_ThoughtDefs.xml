@@ -19,7 +19,7 @@
     <stages>
       <li>
         <label>something lifted</label>
-        <description>Something that had been weighing on me for a long time has finally been resolved. I feel lighter than I have in a while.</description>
+        <description>I feel so light!</description>
         <baseMoodEffect>15</baseMoodEffect>
       </li>
     </stages>
@@ -33,7 +33,7 @@
     <stages>
       <li>
         <label>an old wound healed</label>
-        <description>Something I had been carrying for years has finally been put to rest. I didn't know how much it weighed until it was gone.</description>
+        <description>I finally have less pain than I used to.</description>
         <baseMoodEffect>20</baseMoodEffect>
       </li>
     </stages>
@@ -47,7 +47,7 @@
     <stages>
       <li>
         <label>found what I was looking for</label>
-        <description>The thing I went looking for - I found it. It isn't exactly what I expected. But it's real, and it's mine.</description>
+        <description>That had been bugging me for a while! Finally it's back where it belongs!</description>
         <baseMoodEffect>18</baseMoodEffect>
       </li>
     </stages>
@@ -61,7 +61,7 @@
     <stages>
       <li>
         <label>made something I'm genuinely proud of</label>
-        <description>I built something that works - not just technically, but in the way that matters. Something that will outlast the circumstances it came out of.</description>
+        <description>Couldn't have done that better myself! .. - Oh wait, that's just what I did..!</description>
         <baseMoodEffect>20</baseMoodEffect>
       </li>
     </stages>
@@ -75,7 +75,7 @@
     <stages>
       <li>
         <label>uncovered the truth</label>
-        <description>The question I had been pulling at finally gave way. What I found changes the shape of what I understood before.</description>
+        <description>I hate lies. That's why the truth is what we all need!</description>
         <baseMoodEffect>12</baseMoodEffect>
       </li>
     </stages>
@@ -89,7 +89,7 @@
     <stages>
       <li>
         <label>clear of old debts</label>
-        <description>The arrangement is done. I walked out of it with what I came for and nothing extra trailing behind me. That's as good as it gets.</description>
+        <description>My debt was paid!</description>
         <baseMoodEffect>15</baseMoodEffect>
       </li>
     </stages>
@@ -110,7 +110,7 @@
     <stages>
       <li>
         <label>paid a heavy price</label>
-        <description>The path I chose demanded something real. I came through it - but not unchanged, and not without cost. The weight of it will take a few days to settle.</description>
+        <description>Surely it can't get any worse now... Surely.</description>
         <baseMoodEffect>-15</baseMoodEffect>
       </li>
     </stages>
@@ -128,7 +128,7 @@
     <stages>
       <li>
         <label>tried something, but it went wrong</label>
-        <description>It didn't go the way I needed it to. I came out the other side, but not unchanged, and not with what I went for.</description>
+        <description>I feel like a failure.</description>
         <baseMoodEffect>-12</baseMoodEffect>
       </li>
     </stages>
@@ -142,7 +142,7 @@
     <stages>
       <li>
         <label>was too late</label>
-        <description>There was nothing left to find. Or the trail had gone cold long before I got there. Either way - I was too late. That is the specific weight of it.</description>
+        <description>By the time I got there, there was nothing left. I was just too slow.</description>
         <baseMoodEffect>-25</baseMoodEffect>
       </li>
     </stages>
@@ -156,7 +156,7 @@
     <stages>
       <li>
         <label>still carrying it</label>
-        <description>The thing I went to settle is still there. The weight hasn't shifted. I came back, which counts for something. But it doesn't count for that.</description>
+        <description>I still haven't found what I'm looking for.</description>
         <baseMoodEffect>-15</baseMoodEffect>
       </li>
     </stages>
@@ -170,7 +170,7 @@
     <stages>
       <li>
         <label>made things worse, not better</label>
-        <description>The arrangement went sideways. I came out of it, which is something. But whatever I went in to resolve is now more complicated, not less.</description>
+        <description>Whatever I went in to fix is in worse shape than when I found it.</description>
         <baseMoodEffect>-20</baseMoodEffect>
       </li>
     </stages>
@@ -198,7 +198,7 @@
     <stages>
       <li>
         <label>the debt is still there</label>
-        <description>I couldn't clear it. The debt is still there, attached to me, specific and heavy. I don't know yet what that costs going forward.</description>
+        <description>I hate being in red.. I HATE IT!</description>
         <baseMoodEffect>-18</baseMoodEffect>
       </li>
     </stages>
@@ -232,38 +232,38 @@
     <stages>
       <!-- 0: violence -->
       <li>
-        <label>was surprise</label>
-        <description>Booh! I was surprised. Woah, my body is almost spinning! Who would DO such a thing?</description>
+        <label>a moment of unexpected quiet</label>
+        <description>A brief pause between demands. Nothing worth recording. But it was there, and it registered.</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
       <!-- 1: social / nurture / healer -->
       <li>
-        <label>something was needed</label>
-        <description>A small thing was asked for and I gave it away without much thought. It left a trace in my heart.</description>
+        <label>a small thing needed</label>
+        <description>Someone needed something minor and it was given without much thought. The exchange lasted about thirty seconds. Both parties moved on.</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
       <!-- 2: craft -->
       <li>
-        <label>the hands knew what they had to do</label>
-        <description>It felt good to do something practical today!</description>
+        <label>the hands knew what to do</label>
+        <description>A familiar motion landed correctly on the first attempt. Small enough that no one else would notice. The kind of thing that only matters if you were the one doing it.</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
       <!-- 3: curiosity / intellectual -->
       <li>
         <label>a thread came loose</label>
-        <description>There was a thought in the back of my head today - It didn't solve, but I had a little breakthrough.</description>
+        <description>A question that had been sitting unanswered resolved itself while doing something else entirely. Not worth documenting. Worth noting.</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
       <!-- 4: wilderness / animal -->
       <li>
         <label>the world was quiet for a moment</label>
-        <description>A small animal crossed my path. I stopped. It didn't. But for a moment all the noise was gone!</description>
+        <description>Something moved at the edge of the field and kept going. Everything paused briefly. Then it didn't.</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
       <!-- 5: generic fallback -->
       <li>
-        <label>a breath of wind passed through</label>
-        <description>Huh?.. What was that?!</description>
+        <label>a breath passed through</label>
+        <description>Nothing specific. A brief lull in the day's demands. It registered and then it didn't.</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
     </stages>
@@ -277,38 +277,38 @@
     <stages>
       <!-- 0: violence -->
       <li>
-        <label>earned peace</label>
-        <description>The aftermath of a hard day settled in - peace at last! Standing in that quiet, this place felt briefly survivable.</description>
+        <label>earned quiet</label>
+        <description>The day had been hard and then it ended. Standing in the aftermath, the colony felt briefly survivable. That feeling doesn't last. It doesn't need to.</description>
         <baseMoodEffect>6</baseMoodEffect>
       </li>
       <!-- 1: social / nurture / healer -->
       <li>
-        <label>not alone</label>
-        <description>Someone leaned on them today - or they leaned on someone else. Either way, the weight was shared for a moment. That kind of thing doesn't last, but it doesn't need to. It did what it needed to do.</description>
+        <label>not alone in it</label>
+        <description>Someone leaned on them, or they leaned on someone else. The weight was shared for a moment. It didn't fix anything. But a shared problem is a different thing from a solitary one.</description>
         <baseMoodEffect>6</baseMoodEffect>
       </li>
       <!-- 2: craft -->
       <li>
         <label>made something that holds</label>
-        <description>They stood back and looked at what they'd made. Not for long. Long enough to know it was solid. Something finished and working right is its own argument against everything the Rim throws.</description>
+        <description>They stepped back and looked at what they had built. It was solid. Something finished and working correctly is its own argument against everything the Rim throws at a person.</description>
         <baseMoodEffect>6</baseMoodEffect>
       </li>
       <!-- 3: curiosity / intellectual -->
       <li>
         <label>something clicked</label>
-        <description>I had an issue, but then the old question answered itself. Didn't see that one coming!</description>
+        <description>A question that had been sitting at the back of the mind answered itself, quietly, while doing something unrelated. It was written down before it could leave.</description>
         <baseMoodEffect>6</baseMoodEffect>
       </li>
       <!-- 4: wilderness / animal -->
       <li>
         <label>the land gave something back</label>
-        <description>Time spent away from home, or just a moment where the land and the sky were the only things in the frame. This place is indifferent to everything, which is sometimes exactly what I need.</description>
+        <description>Time away from the colony, or just a moment where the sky was the only thing in the frame. This place is indifferent to everything. Sometimes that is exactly what is needed.</description>
         <baseMoodEffect>6</baseMoodEffect>
       </li>
       <!-- 5: generic fallback -->
       <li>
         <label>a moment of stillness</label>
-        <description>I had moment of quiet clarity today. It felt good.</description>
+        <description>The day paused. Nothing required. Nothing asked for. It lasted long enough to matter and then the colony needed something and the moment was over.</description>
         <baseMoodEffect>6</baseMoodEffect>
       </li>
     </stages>
@@ -510,7 +510,7 @@
     <stages>
       <li>
         <label>the price of it</label>
-        <description>The luciferium is running whatever it wants now. Three days of weight that nothing shifts.</description>
+        <description>The devil's pact is weighing heavily.</description>
         <baseMoodEffect>-30</baseMoodEffect>
       </li>
     </stages>
@@ -521,6 +521,19 @@
        Applied by EffectEntryDef.TryApplySocialOpinion between pawn
        and their closest ally. Thought_MemorySocial affects opinion.
   ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThoughtDef>
+    <defName>PC_Thought_SocialBond_Small</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>shared something real</label>
+        <baseOpinionOffset>15</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
 
   <ThoughtDef>
     <defName>PC_Thought_SocialBond</defName>
@@ -536,6 +549,19 @@
   </ThoughtDef>
 
   <ThoughtDef>
+    <defName>PC_Thought_SocialConflict_Minor</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>let the mask slip</label>
+        <baseOpinionOffset>-12</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
     <defName>PC_Thought_SocialConflict</defName>
     <thoughtClass>Thought_MemorySocial</thoughtClass>
     <durationDays>10</durationDays>
@@ -544,6 +570,19 @@
       <li>
         <label>made things harder</label>
         <baseOpinionOffset>-30</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>PC_Thought_SocialConflict_Major</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>started a fight</label>
+        <baseOpinionOffset>-50</baseOpinionOffset>
       </li>
     </stages>
   </ThoughtDef>

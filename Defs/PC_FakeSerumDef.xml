@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--
+    PC_Item_FakeHealerSerum
+    Visually identical to MechSerumHealer. Completely inert - no comps, no use effect.
+    Placed in the cartel facility by SitePartWorker_CartelFacility (stage 12).
+    The player clears the garrison, finds this, and gets the "I got here first -G" note.
+    Texture: same as MechSerumHealer - verify path against vanilla if it shows as missing.
+  -->
+  <ThingDef ParentName="MechSerumBase">
+    <defName>PC_Item_FakeHealerSerum</defName>
+    <label>fake healer mech serum</label>
+    <description>At first glance this is just a Healer Mech Serum injector. But when attempting to use it, nothing happens.\n\nTurning the thing around reveals a sticky note slapped on the back.\n\nIt reads: "I got here first -G"</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Item/Special/MechSerumHealer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>0</MarketValue>
+      <Mass>0.5</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <stackLimit>1</stackLimit>
+    <tradeTags />
+    <comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>Use {0_label}</useLabel>
+        <useDuration>600</useDuration>
+        <showUseGizmo>true</showUseGizmo>
+        <useMessage>Using the Healer Mech Serum caused the following effect: Nothing. Read the Item description.</useMessage>
+      </li>
+      <li Class="CompProperties_UseEffectPlaySound">
+        <soundOnUsed>MechSerumUsed</soundOnUsed>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

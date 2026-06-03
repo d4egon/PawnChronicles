@@ -445,21 +445,15 @@ namespace PawnChronicles
             if (!string.IsNullOrEmpty(comp.NarrativeEpithetDesc))
                 sb.AppendLine(comp.NarrativeEpithetDesc);
 
-            // Skill delta summary - re-derive from adulthood skillGains + outcome
-            var adulthood = pawn.story?.Adulthood;
-            if (adulthood?.skillGains != null && adulthood.skillGains.Count > 0)
+            // Skill delta summary - read from actual accumulated arc XP
+            if (comp.accumulatedSkillXP != null && comp.accumulatedSkillXP.Count > 0)
             {
                 sb.AppendLine();
-                bool success = comp.NarrativeEpithetSuccess;
-                foreach (var gain in adulthood.skillGains)
+                foreach (var kv in comp.accumulatedSkillXP.OrderByDescending(k => k.Value))
                 {
-                    if (gain.skill == null || gain.amount <= 0) continue;
-                    // Mirror ApplyBackstorySkillDelta: +12000 xp/pt success, -10000 xp/pt failure
-                    // Express as a signed level-equivalent (one level ≈ 1000 xp mid-game)
-                    int delta = success ? gain.amount : -gain.amount / 4;
-                    if (delta == 0) continue;
-                    string sign = delta > 0 ? "+" : "";
-                    sb.AppendLine($"{gain.skill.skillLabel.CapitalizeFirst()}:   {sign}{delta * 100} xp");
+                    var def = DefDatabase<SkillDef>.GetNamedSilentFail(kv.Key);
+                    string skillLabel = def != null ? def.label.CapitalizeFirst() : kv.Key;
+                    sb.AppendLine($"{skillLabel}:   +{kv.Value:N0} xp");
                 }
             }
 

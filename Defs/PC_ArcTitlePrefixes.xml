@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Arc outcome title composition pools.
+    Each rule key maps to one word or phrase. Multiple rules with the same key
+    form a random pool - vanilla GrammarResolver picks one each time.
+    Nouns support nesting: [ConceptBadass] etc. all resolve normally.
+
+    successPrefix : word before the noun on success
+    failurePrefix : word before the noun on failure
+    <NounKey>     : one entry per arc - key matches arcTitleNoun in the epic def
+    successSuffix : phrase after the noun on success  (arcUseSuffix = true)
+    failureSuffix : phrase after the noun on failure  (arcUseSuffix = true)
+    titleSuffix   : shared fallback suffix if outcome pools have no entries
+
+    To add a word: add another <li>key->word</li> entry.
+    To remove a word: delete the line.
+    No rebuild required - XML-only change.
+  -->
+
+  <RulePackDef>
+    <defName>PC_ArcTitlePrefixes</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>successPrefix->NONE</li>
+        <li>successPrefix->NONE</li>
+        <li>successPrefix->NONE</li>
+        <li>successPrefix->NONE</li>
+        <li>successPrefix->NONE</li>
+        <li>successPrefix->NONE</li>
+        <li>successPrefix->NONE</li>
+        <li>successPrefix->NONE</li>
+        <li>successPrefix->Redeemed</li>
+        <li>successPrefix->Restored</li>
+        <li>successPrefix->Reconciled</li>
+        <li>successPrefix->Reformed</li>
+        <li>successPrefix->Awakened</li>
+        <li>successPrefix->Vindicated</li>
+        <li>successPrefix->Triumphant</li>
+        <li>successPrefix->Renewed</li>
+        <li>successPrefix->Enlightened</li>
+
+        <li>failurePrefix->NONE</li>
+        <li>failurePrefix->NONE</li>
+        <li>failurePrefix->NONE</li>
+        <li>failurePrefix->NONE</li>
+        <li>failurePrefix->NONE</li>
+        <li>failurePrefix->NONE</li>
+        <li>failurePrefix->NONE</li>
+        <li>failurePrefix->NONE</li>
+        <li>failurePrefix->Broken</li>
+        <li>failurePrefix->Scarred</li>
+        <li>failurePrefix->Hollow</li>
+        <li>failurePrefix->Shattered</li>
+        <li>failurePrefix->Fallen</li>
+        <li>failurePrefix->Corrupted</li>
+        <li>failurePrefix->Forsaken</li>
+        <li>failurePrefix->Lost</li>
+        <li>failurePrefix->Ruined</li>
+
+        <li>Scholar->Scholar</li>
+        <li>Scholar->Thinker</li>
+        <li>Scholar->Seeker</li>
+        <li>Scholar->Sage</li>
+        <li>Scholar->Archivist</li>
+        <li>Scholar->Savant</li>
+
+        <li>Healer->Healer</li>
+        <li>Healer->Mender</li>
+        <li>Healer->Medic</li>
+        <li>Healer->Surgeon</li>
+        <li>Healer->Lifesaver</li>
+        <li>Healer->Shaman</li>
+
+        <li>Rogue->Rogue</li>
+        <li>Rogue->Outlaw</li>
+        <li>Rogue->Drifter</li>
+        <li>Rogue->Scoundrel</li>
+        <li>Rogue->Vagabond</li>
+        <li>Rogue->Exile</li>
+
+        <li>Noble->Noble</li>
+        <li>Noble->Lord</li>
+        <li>Noble->Heir</li>
+        <li>Noble->Aristocrat</li>
+        <li>Noble->Sovereign</li>
+        <li>Noble->Paragon</li>
+
+        <li>Handler->Handler</li>
+        <li>Handler->Beastmaster</li>
+        <li>Handler->Keeper</li>
+        <li>Handler->Tamer</li>
+        <li>Handler->Shepherd</li>
+        <li>Handler->Warden</li>
+
+        <li>Pacifist->Pacifist</li>
+        <li>Pacifist->Peacewalker</li>
+        <li>Pacifist->Witness</li>
+        <li>Pacifist->Martyr</li>
+        <li>Pacifist->Saint</li>
+        <li>Pacifist->Anchor</li>
+
+        <li>Trauma->Casualty</li>
+        <li>Trauma->Sufferer</li>
+        <li>Trauma->Patient</li>
+        <li>Trauma->Victim</li>
+
+        <li>Loss->Orphan</li>
+        <li>Loss->Bereaved</li>
+        <li>Loss->Outcast</li>
+        <li>Loss->Prodigal</li>
+
+        <li>Grief->Mourner</li>
+        <li>Grief->Lamenter</li>
+        <li>Grief->Weeper</li>
+        <li>Grief->Sorrower</li>
+
+        <li>Decay->Husk</li>
+        <li>Decay->Wretch</li>
+        <li>Decay->Degenerate</li>
+        <li>Decay->Relic</li>
+
+        <li>Isolation->Hermit</li>
+        <li>Isolation->Recluse</li>
+        <li>Isolation->Solitary</li>
+        <li>Isolation->Loner</li>
+
+        <li>Violence->Enforcer</li>
+        <li>Violence->Warmonger</li>
+        <li>Violence->Slayer</li>
+        <li>Violence->Brute</li>
+
+        <li>Betrayal->Traitor</li>
+        <li>Betrayal->Turncoat</li>
+        <li>Betrayal->Deceiver</li>
+        <li>Betrayal->Betrayer</li>
+
+        <li>Augmentation->Cyborg</li>
+        <li>Augmentation->Transhumanist</li>
+        <li>Augmentation->Construct</li>
+        <li>Augmentation->Bionic</li>
+
+        <li>Power->Overlord</li>
+        <li>Power->Captain</li>
+        <li>Power->Potentate</li>
+        <li>Power->Ruler</li>
+        <li>Power->Admiral</li>
+
+        <li>Duty->Sentinel</li>
+        <li>Duty->Vanguard</li>
+        <li>Duty->Guardian</li>
+        <li>Duty->Soldier</li>
+
+        <li>Devotion->Devotee</li>
+        <li>Devotion->Disciple</li>
+        <li>Devotion->Follower</li>
+        <li>Devotion->Adherent</li>
+        <li>Devotion->Worshipper</li>
+
+        <li>Faith->Believer</li>
+        <li>Faith->Zealot</li>
+        <li>Faith->Prophet</li>
+        <li>Faith->Priest</li>
+
+        <li>Leadership->Leader</li>
+        <li>Leadership->Commander</li>
+        <li>Leadership->Captain</li>
+        <li>Leadership->Chieftain</li>
+
+        <li>Survival->Survivor</li>
+        <li>Survival->Endurer</li>
+        <li>Survival->Scavenger</li>
+        <li>Survival->Ranger</li>
+
+        <li>Wandering->Wanderer</li>
+        <li>Wandering->Nomad</li>
+        <li>Wandering->Wayfarer</li>
+        <li>Wandering->Pilgrim</li>
+
+        <li>Refugee->Refugee</li>
+        <li>Refugee->Exile</li>
+        <li>Refugee->Fugitive</li>
+        <li>Refugee->Castaway</li>
+
+        <li>Kinship->Kinsman</li>
+        <li>Kinship->Brother</li>
+        <li>Kinship->Ally</li>
+        <li>Kinship->Comrade</li>
+
+        <li>Craft->Artisan</li>
+        <li>Craft->Smith</li>
+        <li>Craft->Builder</li>
+        <li>Craft->Craftsman</li>
+
+        <li>Curiosity->Inquirer</li>
+        <li>Curiosity->Seeker</li>
+        <li>Curiosity->Explorer</li>
+        <li>Curiosity->Scout</li>
+
+        <li>Nurture->Guardian</li>
+        <li>Nurture->Caretaker</li>
+        <li>Nurture->Provider</li>
+        <li>Nurture->Nurturer</li>
+
+        <li>Resilience->Stalwart</li>
+        <li>Resilience->Bastion</li>
+        <li>Resilience->Defender</li>
+        <li>Resilience->Titan</li>
+
+        <li>Artist->Artist</li>
+        <li>Artist->Creator</li>
+        <li>Artist->Weaver</li>
+        <li>Artist->Bard</li>
+
+        <li>successSuffix->NONE</li>
+        <li>successSuffix->NONE</li>
+        <li>successSuffix->NONE</li>
+        <li>successSuffix->NONE</li>
+        <li>successSuffix->NONE</li>
+        <li>successSuffix->NONE</li>
+        <li>successSuffix->NONE</li>
+        <li>successSuffix->NONE</li>
+        <li>successSuffix->of the Rim</li>
+        <li>successSuffix->of the Road</li>
+        <li>successSuffix->the Returned</li>
+        <li>successSuffix->at Last</li>
+        <li>successSuffix->the Victorious</li>
+        <li>successSuffix->the Unbound</li>
+        <li>successSuffix->of the Stars</li>
+
+        <li>failureSuffix->NONE</li>
+        <li>failureSuffix->NONE</li>
+        <li>failureSuffix->NONE</li>
+        <li>failureSuffix->NONE</li>
+        <li>failureSuffix->NONE</li>
+        <li>failureSuffix->NONE</li>
+        <li>failureSuffix->NONE</li>
+        <li>failureSuffix->of the Wastes</li>
+        <li>failureSuffix->Who Was Left Behind</li>
+        <li>failureSuffix->Who Was Without End</li>
+        <li>failureSuffix->Who Came Too Late</li>
+        <li>failureSuffix->in Ruins</li>
+        <li>failureSuffix->the Forgotten</li>
+        <li>failureSuffix->in the Dust</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+</Defs>

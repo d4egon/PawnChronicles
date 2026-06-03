@@ -970,7 +970,7 @@ namespace PawnChronicles
                 else if (weatherLabel.Contains("clear") || weatherLabel.Contains("sunny") || weatherLabel.Contains("fair"))
                     atmosphere = "the sky was open and clear";
                 else if (weatherLabel.Contains("cold") || weatherLabel.Contains("freez"))
-                    atmosphere = "bitter cold crept in at the edges";
+                    atmosphere = "the bitter cold crept in at the edges";
                 else if (weatherLabel.Contains("dry"))
                     atmosphere = "the air was dry and very still";
                 else

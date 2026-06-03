@@ -19,9 +19,11 @@ namespace PawnChronicles
         private static float Pad       => PawnChroniclesMod.Settings.uiPadding;
         private static float LeftRatio => PawnChroniclesMod.Settings.uiLeftRatio;
         private static float PaneSplit => PawnChroniclesMod.Settings.uiPaneSplit;
-        private static float ArcRowH   => PawnChroniclesMod.Settings.uiArcRowH;
-        private static float DiaryRowH => PawnChroniclesMod.Settings.uiDiaryRowH;
-        private static float TagRowH   => PawnChroniclesMod.Settings.uiTagRowH;
+        private static float ArcRowH     => PawnChroniclesMod.Settings.uiArcRowH;
+        private static float DiaryRowH   => PawnChroniclesMod.Settings.uiDiaryRowH;
+        private static float TagRowH     => PawnChroniclesMod.Settings.uiTagRowH;
+        private static float HistoryRowH    => PawnChroniclesMod.Settings.uiHistoryRowH;
+        private static float HistoryLineGap => PawnChroniclesMod.Settings.uiHistoryLineGap;
         private const  float PortraitW = 118f;
         private const  float PortraitH = 148f;
 
@@ -34,9 +36,14 @@ namespace PawnChronicles
         private const           float   EdgeHit     = 12f;
 
         // ── Scroll ────────────────────────────────────────────────────────────
-        private Vector2 _leftScroll = Vector2.zero;
-        private Vector2 _tagScroll  = Vector2.zero;
-        private Vector2 _snapScroll = Vector2.zero;
+        private Vector2 _leftScroll    = Vector2.zero;
+        private Vector2 _tagScroll     = Vector2.zero;
+        private Vector2 _snapScroll    = Vector2.zero;
+        private Vector2 _historyScroll = Vector2.zero;
+
+        // ── History pane ──────────────────────────────────────────────────────
+        /// <summary>Tracks which completed arc records are expanded in the history pane.</summary>
+        private HashSet<int> _expandedHistoryIndices = new HashSet<int>();
 
         // ── Selection ─────────────────────────────────────────────────────────
         private ArcStageEntry?   _selEntry       = null;
@@ -212,15 +219,12 @@ namespace PawnChronicles
 
             Widgets.DrawLineHorizontal(Pad, 38f, pane.width - Pad * 2f, CR);
 
-            // Scrollable content
-            Rect scrollOuter = new Rect(0f, 44f, pane.width, pane.height - 44f);
-
             // Short-circuit if chronicles are disabled for this pawn
             if (comp.chroniclesDisabled)
             {
                 GUI.color = CD;
                 Text.Font = GameFont.Tiny;
-                Widgets.Label(new Rect(Pad, scrollOuter.y + 12f, pane.width - Pad * 2f, 40f),
+                Widgets.Label(new Rect(Pad, 56f, pane.width - Pad * 2f, 40f),
                     "PC_ITab_ChroniclesDisabledBody".Translate());
                 GUI.color = Color.white;
                 Text.Font = GameFont.Small;
@@ -231,6 +235,22 @@ namespace PawnChronicles
             var diary       = GetDiary(comp);
             var sharedArc   = comp.GetEntangledArc();
             var sharedEntries = sharedArc?.sharedEntries ?? new List<ArcStageEntry>();
+            var history     = comp.completedArcHistory ?? new List<CompletedArcRecord>();
+
+            // History content height - computed separately, gets its own scroll
+            float historyContentH = history.Count > 0 ? 28f : 0f;
+            for (int i = 0; i < history.Count; i++)
+            {
+                historyContentH += HistoryRowH;
+                if (_expandedHistoryIndices.Contains(i))
+                    historyContentH += history[i].entries.Count * HistoryRowH;
+            }
+            // History scroll region: expands with content, capped at half the pane height
+            float historyRegionH = history.Count > 0
+                ? Mathf.Min(historyContentH + 8f, pane.height * 0.5f)
+                : 0f;
+
+            Rect scrollOuter = new Rect(0f, 44f, pane.width, pane.height - 44f - historyRegionH);
 
             float contentH =
                 (sharedEntries.Count > 0 ? 22f + sharedEntries.Count * ArcRowH + 6f : 0f) +
@@ -274,6 +294,28 @@ namespace PawnChronicles
             }
 
             Widgets.EndScrollView();
+
+            // ── History - own scroll region at bottom of left pane ────────────
+            if (history.Count > 0 && historyRegionH > 0f)
+            {
+                float hy = scrollOuter.y + scrollOuter.height;
+                Widgets.DrawBoxSolid(new Rect(0f, hy, pane.width, historyRegionH), CBg);
+                Widgets.DrawLineHorizontal(0f, hy, pane.width, CR);
+                hy += 4f;
+
+                float labelH = 22f;
+                DrawSectionLabel(ref hy, pane.width, "HISTORY", new Color(0.40f, 0.40f, 0.42f));
+
+                Rect histOuter  = new Rect(0f, hy, pane.width, historyRegionH - labelH - 4f);
+                Rect histView   = new Rect(0f, 0f, histOuter.width - 16f,
+                    Mathf.Max(historyContentH, histOuter.height));
+
+                Widgets.BeginScrollView(histOuter, ref _historyScroll, histView);
+                float ry = 0f;
+                for (int i = 0; i < history.Count; i++)
+                    DrawHistoryArcRow(ref ry, histView.width, history[i], i);
+                Widgets.EndScrollView();
+            }
         }
 
         private void DrawArcRow(ref float y, float w,
@@ -349,6 +391,90 @@ namespace PawnChronicles
             }
 
             y += DiaryRowH;
+        }
+
+        private void DrawHistoryArcRow(ref float y, float w, CompletedArcRecord record, int index)
+        {
+            bool expanded = _expandedHistoryIndices.Contains(index);
+
+            // ── Header row ────────────────────────────────────────────────────
+            Rect row = new Rect(0f, y, w, HistoryRowH);
+            if (Mouse.IsOver(row)) Widgets.DrawHighlight(row);
+
+            // Outcome colour strip
+            Color stripCol = record.wasSuccess
+                ? new Color(0.35f, 0.55f, 0.35f, 0.55f)
+                : new Color(0.55f, 0.35f, 0.35f, 0.55f);
+            Widgets.DrawBoxSolid(new Rect(0f, y + 2f, 3f, HistoryRowH - 4f), stripCol);
+
+            // Expand/collapse chevron
+            Text.Font = GameFont.Tiny;
+            GUI.color  = new Color(0.45f, 0.45f, 0.47f);
+            Widgets.Label(new Rect(6f, y + 6f, 14f, 18f), expanded ? "▾" : "▸");
+
+            // Arc label
+            GUI.color  = new Color(0.52f, 0.52f, 0.54f);
+            Text.Font  = GameFont.Small;
+            Widgets.Label(new Rect(20f, y + 6f, w - 24f, 22f), record.arcLabel);
+            GUI.color  = Color.white;
+
+            // Skill summary on the subtitle line
+            Text.Font  = GameFont.Tiny;
+            GUI.color  = new Color(0.38f, 0.38f, 0.40f);
+            string sub = record.wasSuccess ? "✓  " : "✗  ";
+            sub += $"Day {record.completedTick / 60000}";
+            if (!string.IsNullOrEmpty(record.skillSummary))
+                sub += $"  ·  {record.skillSummary}";
+            Widgets.Label(new Rect(20f, y + 6f + HistoryLineGap, w - 24f, 18f), sub);
+            GUI.color = Color.white;
+            Text.Font = GameFont.Small;
+
+            if (Widgets.ButtonInvisible(row))
+            {
+                if (expanded) _expandedHistoryIndices.Remove(index);
+                else          _expandedHistoryIndices.Add(index);
+            }
+
+            y += ArcRowH;
+
+            // ── Expanded entries ──────────────────────────────────────────────
+            if (!expanded) return;
+
+            foreach (var entry in record.entries)
+            {
+                Rect eRow = new Rect(12f, y, w - 12f, HistoryRowH);
+                bool isSel = _selEntry == entry;
+
+                if (isSel) Widgets.DrawBoxSolid(eRow, CBgSel);
+                else if (Mouse.IsOver(eRow)) Widgets.DrawHighlight(eRow);
+
+                Widgets.DrawBoxSolid(new Rect(12f, y + 2f, 3f, HistoryRowH - 4f),
+                    new Color(RoleColor(entry.stageRole).r * 0.6f,
+                              RoleColor(entry.stageRole).g * 0.6f,
+                              RoleColor(entry.stageRole).b * 0.6f));
+
+                Text.Font = GameFont.Small;
+                GUI.color  = isSel ? new Color(0.70f, 0.70f, 0.72f) : new Color(0.40f, 0.40f, 0.42f);
+                Widgets.Label(new Rect(22f, y + 6f, w - 26f, 22f),
+                    entry.title ?? "PC_ITab_DefaultChapter".Translate());
+
+                Text.Font = GameFont.Tiny;
+                GUI.color  = new Color(0.30f, 0.30f, 0.32f);
+                Widgets.Label(new Rect(22f, y + 6f + HistoryLineGap, w - 26f, 18f),
+                    "PC_ITab_DayStage".Translate(entry.writtenAtTick / 60000, entry.stageRole.ToUpper()));
+                GUI.color = Color.white;
+                Text.Font = GameFont.Small;
+
+                if (Widgets.ButtonInvisible(eRow))
+                {
+                    _selEntry       = entry;
+                    _selSharedEntry = null;
+                    _selDiary       = null;
+                    _selTag         = null;
+                }
+
+                y += HistoryRowH;
+            }
         }
 
         // ─────────────────────────────────────────────────────────────────
@@ -728,6 +854,43 @@ namespace PawnChronicles
                 y = DrawBackstoryStakes(x, y, w, redTitle, corTitle, redDesc, corDesc, entry.isClimax);
             }
 
+            // ── ARC OUTCOME BANNER (resolved climax only) ─────────────────────
+            if (entry.isClimax && entry.IsResolved)
+            {
+                Widgets.DrawLineHorizontal(x, y, w, CR);
+                y += 10f;
+
+                bool arcSuccess = entry.stageRole == "success"
+                    || (entry.chosenIndex >= 0 && entry.choices != null
+                        && entry.chosenIndex < entry.choices.Count
+                        && entry.choices[entry.chosenIndex].isHardRoad);
+
+                Color bannerBg   = arcSuccess ? new Color(0.06f, 0.15f, 0.08f) : new Color(0.17f, 0.06f, 0.06f);
+                Color bannerEdge = arcSuccess ? new Color(0.35f, 0.72f, 0.42f) : new Color(0.75f, 0.28f, 0.28f);
+                Color bannerText = arcSuccess ? COk : CFail;
+
+                Rect banner = new Rect(x, y, w, 46f);
+                Widgets.DrawBoxSolid(banner, bannerBg);
+                Widgets.DrawBoxSolid(new Rect(x, y, w, 2f), bannerEdge);
+
+                Text.Font = GameFont.Tiny;
+                GUI.color  = bannerText;
+                Widgets.Label(new Rect(x + 8f, y + 6f, w - 16f, 18f),
+                    arcSuccess ? "ARC CONCLUDED - SUCCESS" : "ARC CONCLUDED - FAILURE");
+
+                string epithet = comp.NarrativeEpithet;
+                if (!string.IsNullOrEmpty(epithet))
+                {
+                    GUI.color = arcSuccess ? new Color(0.85f, 0.95f, 0.85f) : new Color(0.95f, 0.78f, 0.78f);
+                    Text.Font = GameFont.Small;
+                    Widgets.Label(new Rect(x + 8f, y + 24f, w - 16f, 20f), epithet);
+                }
+
+                GUI.color = Color.white;
+                Text.Font = GameFont.Small;
+                y += 54f;
+            }
+
             // Wait condition / choice / advance (only for current active stage)
             if (comp.CurrentEntry == entry && !entry.IsResolved)
             {
@@ -991,8 +1154,31 @@ namespace PawnChronicles
                 }
                 else
                 {
+                    // Pre-calculate choice history height so viewRect is tall enough to scroll
+                    var resolvedChoices = PawnChroniclesMod.Settings.showChoiceHistory
+                        ? comp.arcEntries
+                            .Where(e => e.playerAdvanced && e.chosenIndex >= 0
+                                     && e.choices != null && e.choices.Count > e.chosenIndex)
+                            .ToList()
+                        : null;
+
+                    float choiceHistoryH = 0f;
+                    if (resolvedChoices != null && resolvedChoices.Count > 0)
+                    {
+                        choiceHistoryH += 30f; // divider + "CHOICE HISTORY" label
+                        foreach (var ce in resolvedChoices)
+                        {
+                            var ch = ce.choices![ce.chosenIndex];
+                            choiceHistoryH += 14f; // stage label
+                            choiceHistoryH += Text.CalcHeight("  " + ch.actionLabel, (pane.width - Pad * 2f) - 34f);
+                            if (!string.IsNullOrWhiteSpace(ch.mechanicalHint))
+                                choiceHistoryH += Text.CalcHeight("    " + ch.mechanicalHint, (pane.width - Pad * 2f) - 38f);
+                            choiceHistoryH += 4f;
+                        }
+                    }
+
                     Rect  listOuter = new Rect(x, y, pane.width - Pad * 2f, listH);
-                    float viewH     = sorted.Count * (TagRowH + 2f);
+                    float viewH     = sorted.Count * (TagRowH + 2f) + choiceHistoryH;
                     Rect  viewRect  = new Rect(0f, 0f,
                         listOuter.width - 16f, Mathf.Max(viewH, listH));
 
@@ -1043,12 +1229,7 @@ namespace PawnChronicles
                         ty += TagRowH + 2f;
                     }
                     // ── CHOICE HISTORY - appended inside the same scroll ─────
-                    var resolvedChoices = comp.arcEntries
-                        .Where(e => e.playerAdvanced && e.chosenIndex >= 0
-                                 && e.choices != null && e.choices.Count > e.chosenIndex)
-                        .ToList();
-
-                    if (resolvedChoices.Count > 0)
+                    if (resolvedChoices != null && resolvedChoices.Count > 0)
                     {
                         ty += 6f;
                         GUI.color = new Color(0.45f, 0.45f, 0.45f);
@@ -1092,8 +1273,6 @@ namespace PawnChronicles
                         GUI.color = Color.white;
                         Text.Font = GameFont.Small;
 
-                        // Update viewRect height to fit the extra content
-                        viewRect = new Rect(viewRect.x, viewRect.y, viewRect.width, Mathf.Max(ty, viewRect.height));
                     }
 
                     Widgets.EndScrollView();
